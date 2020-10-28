@@ -143,6 +143,7 @@ export default [
     type: 'secondary',
     icon: 'assets/traits/Aphrodite_05_Large.png',
     god: 'Aphrodite',
+    prereqs: { Aphrodite: ['Passion Dash', 'Crush Shot', 'Heartbreak Strike', 'Heartbreak Flourish'] },
     rarity: 0,
     description: (stats) =>
       '<div>Your<b>Weak</b>effects have a longer duration.</div>' +
@@ -156,6 +157,7 @@ export default [
     type: 'secondary',
     icon: 'assets/traits/Aphrodite_06_Large.png',
     god: 'Aphrodite',
+    prereqs: { Aphrodite: ['Passion Dash', 'Crush Shot', 'Heartbreak Strike', 'Heartbreak Flourish'] },
     rarity: 0,
     description: (stats) =>
       '<div><b>Weak</b>afflicted foes are also more susceptible to damage.</div>' +
@@ -173,10 +175,7 @@ export default [
     god: 'Aphrodite',
     rarity: 0,
     level: 1,
-    prereqs: {
-      Aphrodite: ['Passion Dash', 'Crush Shot', 'Heartbreak Strike', 'Heartbreak Flourish']
-    },
-    threshold: 1,
+    prereqs: { Aphrodite: ['Passion Dash', 'Crush Shot', 'Heartbreak Strike', 'Heartbreak Flourish'] },
     description: (stats) =>
       '<div>Your<b>Weak</b>effects are more potent.</div>' +
       `<div>▶ Weak Damage Reduction:<div><span>+${fp(stats.reduction, null, 1)}%</span></div></div>`,
@@ -201,9 +200,7 @@ export default [
     icon: 'assets/traits/Aphrodite_13_Large.png',
     god: 'Aphrodite',
     rarity: 0,
-    prereqs: {
-      Aphrodite: ['Crush Shot']
-    },
+    prereqs: { Aphrodite: ['Crush Shot'] },
     threshold: 1,
     description: (stats) =>
       '<div>Your<b>Cast</b>shoots farther and is stronger against undamaged foes.</div>' +
@@ -219,6 +216,10 @@ export default [
     type: 'secondary',
     icon: 'assets/traits/Aphrodite_10_Large.png',
     god: 'Aphrodite',
+    prereqs: {
+      ability: ['Passion Dash', 'Crush Shot', 'Heartbreak Strike', 'Heartbreak Flourish'],
+      secondary: ['Empty Inside', 'Sweet Surrender', 'Broken Resolve'],
+    },
     rarity: 4,
     description: (stats) =>
       `<div>Your<b>Weak</b>effects also have a<span>${ fp(0.15) }%</span>chance to<b>Charm</b>foes.</div>` +

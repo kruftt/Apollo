@@ -1,25 +1,25 @@
 <template>
-  <HadesHeader></HadesHeader>
-  <div id="hades_calc">
-    <div class="hades_calc__spacer" />
+  <ApolloHeader></ApolloHeader>
+  <div id="apollo_calc">
+    <div class="apollo_calc__spacer" />
     <TraitPanel id="trait_panel" />
-    <div id="hades_calc__stats">
+    <div id="apollo_calc__stats">
       <StatPanel />
       <TraitInfoBar v-if="validHover" :trait="store.hover" id="tool_tip" />
     </div>
     <TraitSelector v-if="store.selected !== null" />
-    <div class="hades_calc__spacer" />
+    <div class="apollo_calc__spacer" />
   </div>
 </template>
 
 <style>
-#hades_calc {
+#apollo_calc {
   display: flex;
   position: relative;
   max-height: 39.5em;
 }
 
-.hades_calc__spacer {
+.apollo_calc__spacer {
   flex: 1 1;
 }
 
@@ -31,7 +31,7 @@
   flex: 0 0;
 }
 
-#hades_calc__stats {
+#apollo_calc__stats {
   position: relative;
   top: 0;
   left: 0;
@@ -49,7 +49,7 @@
 </style>
 
 <script>
-import HadesHeader from './HadesHeader.vue'
+import ApolloHeader from './ApolloHeader.vue'
 import StatPanel from './StatPanel.vue'
 import TraitInfoBar from './TraitInfoBar.vue'
 import TraitPanel from './TraitPanel.vue'
@@ -60,7 +60,7 @@ const store = useStore()
 
 export default {
   components: {
-    HadesHeader,
+    ApolloHeader,
     StatPanel,
     TraitInfoBar,
     TraitPanel,

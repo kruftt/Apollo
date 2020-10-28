@@ -10,7 +10,7 @@ export default [
     name: 'Deadly Flourish',
     description: (stats) =>
       '<div>Your<b>Special</b>has a<span>20%</span>chance to do <b>critical</b> damage.</div>' +
-      `<div>▶ Special Damage:<div><span>+${fp(stats.min, stats.max)}%<span></div></div>`,
+      `<div>▶ Special Damage:<div><span>+${fp(stats.mult_min, stats.mult_max)}%<span></div></div>`,
     type: 'special',
     icon: 'assets/traits/Artemis_02_Large.png',
     god: 'Artemis',
