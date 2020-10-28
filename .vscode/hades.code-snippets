@@ -1,0 +1,79 @@
+{
+	// Place your hades workspace snippets here. Each snippet is defined under a snippet name and has a scope, prefix, body and
+	// description. Add comma separated ids of the languages where the snippet is applicable in the scope field. If scope
+	// is left empty or omitted, the snippet gets applied to all languages. The prefix is what is
+	// used to trigger the snippet and the body will be expanded and inserted. Possible variables are:
+	// $1, $2 for tab stops, $0 for the final cursor position, and ${1:label}, ${2:another} for placeholders.
+	// Placeholders with the same ids are connected.
+	// Example:
+	// "Print to console": {
+	// 	"scope": "javascript,typescript",
+	// 	"prefix": "log",
+	// 	"body": [
+	// 		"console.log('$1');",
+	// 		"$2"
+	// 	],
+	// 	"description": "Log output to console"
+	// }
+	"Trait": {
+		"scope": "javascript,typescript,vue",
+		"prefix": "trait",
+		"body": [
+			"{",
+			"\tname: '$1',",
+			"\ttype: '$2',",
+			"\ticon: 'assets/$3',",
+			"\tgod: '$4',",
+			"\trarity: ${5:0},",
+			"\tlevel: $6,",
+			"\tdescription: (stats) =>",
+			"\t\t'<div>Your<b></b><b></b>.</div>' +",
+      "\t\t`<div>▶ <div><span>${ fv() }</span></div></div>`,",
+			"\tabilities: [ $8 ],",
+			"\teffects: [ $9 ],",
+			"\tmods: [ $0 ],",
+			"},",
+		]
+	},
+	"Weapon": {
+		"scope": "javascript,typescript,vue",
+		"prefix": "weapon",
+		"body": [
+			"{",
+			"\tname: '$1',",
+			"\ttype: 'weapon',",
+			"\ticon: 'assets/$2',",
+			"\trarity: ${3:0},",
+			"\tabilities: { $4 },",
+			"\teffects: { $5 },",
+			"\tmods: { $6 },",
+			"\taspects: [ $0 ],",
+			"},",
+		]
+	},
+	"Effect": {
+		"scope": "javascript,typescript,vue",
+		"prefix": "effect",
+		"body": [
+			"{",
+			"\tname: '$1',",
+			"\ttype: '$2'",
+			"\ttrigger: '$3'",
+			"\tstats: { $0 }" ,
+			"},",
+		]
+	},
+	"Mod": {
+		"scope": "javascript,typescript,vue",
+		"prefix": "mod",
+		"body": [
+			"{",
+			"\tname: '$1',",
+			"\ttype: '$2',", // What
+			"\ttarget: '$3',", // What
+			"\tstats: { $0 }",
+			"},",
+		]
+	},
+
+}

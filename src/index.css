@@ -1,0 +1,12 @@
+body { margin: 0; background-color: #080808; }
+#hades_app {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #d5e7db;
+  margin: 0;
+
+  display: flex;
+  flex-flow: column nowrap;
+}

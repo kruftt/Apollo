@@ -1,0 +1,95 @@
+<template>
+  <div class="trait_info">
+    <TraitIconInterface
+      class="trait_info__icon"
+      :trait="trait"
+      :cb="noop"
+    />
+    <div class="trait_info__text">
+      <h3 class="trait_info__name">{{ trait.name }}</h3>
+      <div class="trait_info__description" v-html="trait.description"></div>
+    </div>
+  </div>
+</template>
+
+
+<style>
+.trait_info {
+  display: flex;
+  padding: 1em 1.5em;
+  width: 42em;
+  background-color: #080808;
+}
+.trait_info:hover {
+  background-color: #111;
+}
+
+.trait_info__icon {
+  position: relative;
+  top: 0;
+  left: 0;
+}
+
+.trait_info__text {
+  width: 100%;
+  text-align: left;
+  margin: 0 0 0 2em;
+  font-weight: 100;
+}
+
+.trait_info__name {
+  margin: 0 0 0.5em 0;
+  font-weight: 100;
+  font-size: 140%;
+}
+
+.trait_info__description {}
+.trait_info__description span,
+.trait_info__description b {
+  padding: 0 0.3em;
+}
+.trait_info__description span {
+  color: #4d4;
+  font-weight: bold;
+}
+
+.trait_info__description > div {
+  display: flex;
+  /* align-items: baseline; */
+}
+
+.trait_info__description > div + div {
+  margin: 0.4em 0 0 0;
+  justify-content: space-between;
+}
+
+.trait_info__description > div > div {
+  width: 14em;
+}
+
+.trait_info__trait_prereqs {
+  position: absolute;
+  left: 42em;
+  top: 0;
+}
+</style>
+
+
+<script>
+import { computed } from 'vue'
+import TraitIconInterface from './TraitIconInterface.vue'
+
+export default {
+  components: {
+    TraitIconInterface,
+  },
+  props: {
+    trait: Object
+  },
+  setup(props) {
+    return {
+      noop: () => 0,
+    }
+  }
+}
+</script>
