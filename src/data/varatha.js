@@ -6,7 +6,7 @@ export default [
   {
     name: 'Varatha',
     description: 'The Eternal Spear.',
-    icon: '/assets/weapons/spear_base_icon.png',
+    icon: 'assets/weapons/spear_base_icon.png',
     type: 'weapon',
     rarity: -4,
     abilities: [
@@ -25,7 +25,7 @@ export default [
     name: 'Varatha - Aspect of Zagreus',
     type: 'aspect',
     weapon: 'Varatha',
-    icon: '/assets/weapons/spear_base_icon.png',
+    icon: 'assets/weapons/spear_base_icon.png',
     rarity: 4,
     description: (stats) =>
       `<div>The form in which the eternal spear first revealed itself.</div>` +
@@ -48,7 +48,7 @@ export default [
     name: 'Varatha - Aspect of Achilles',
     type: 'aspect',
     weapon: 'Varatha',
-    icon: '/assets/weapons/spear_enchantment_1.png',
+    icon: 'assets/weapons/spear_enchantment_1.png',
     rarity: 4,
     description: (stats) =>
       `<div>After your<b>Special,</b>you can retrieve your Spear with<b>Raging Rush.</b></div>` +
@@ -66,7 +66,7 @@ export default [
     name: 'Varatha - Aspect of Hades',
     type: 'aspect',
     weapon: 'Varatha',
-    icon: '/assets/weapons/spear_enchantment_2.png',
+    icon: 'assets/weapons/spear_enchantment_2.png',
     rarity: 4,
     description: (stats) =>
       `<div>Your<b>Spin Attack</b>becomes<b>Punishing Sweep.</b></div>` +
@@ -84,7 +84,7 @@ export default [
     name: 'Varatha - Aspect of Guan Yu',
     type: 'aspect',
     weapon: 'Varatha',
-    icon: '/assets/weapons/spear_enchantment_2.png',
+    icon: 'assets/weapons/spear_enchantment_2.png',
     rarity: 4,
     description: (stats) =>
       `<div>You have the<b>Frost Fair Blade,</b>but your life and healing are reduced.</div>` +
@@ -114,7 +114,7 @@ export default [
   {
     name: 'Extending Jab',
     type: 'hammer',
-    icon: '/assets/weapons/spear_extended_thrust_03.png',
+    icon: 'assets/weapons/spear_extended_thrust_03.png',
     god: 'Daedalus',
     weapon: 'Varatha',
     rarity: -3,
@@ -130,7 +130,7 @@ export default [
   {
     name: 'Chain Skewer',
     type: 'hammer',
-    icon: '/assets/weapons/spear_trick_throw_04.png',
+    icon: 'assets/weapons/spear_trick_throw_04.png',
     god: 'Daedalus',
     weapon: 'Varatha',
     rarity: -3,
@@ -148,7 +148,7 @@ export default [
   {
     name: 'Breaching Skewer',
     type: 'hammer',
-    icon: '/assets/weapons/spear_mighty_throw_05.png',
+    icon: 'assets/weapons/spear_mighty_throw_05.png',
     god: 'Daedalus',
     weapon: 'Varatha',
     rarity: -3,
@@ -165,7 +165,7 @@ export default [
   {
     name: 'Vicious Skewer',
     type: 'hammer',
-    icon: '/assets/weapons/spear_absorbing_throw_06.png',
+    icon: 'assets/weapons/spear_absorbing_throw_06.png',
     god: 'Daedalus',
     weapon: 'Varatha',
     rarity: -3,
@@ -189,7 +189,7 @@ export default [
   {
     name: 'Exploding Launcher',
     type: 'hammer',
-    icon: '/assets/weapons/spear_explosive_throw_09.png',
+    icon: 'assets/weapons/spear_explosive_throw_09.png',
     god: 'Daedalus',
     weapon: 'Varatha',
     rarity: -3,
@@ -205,7 +205,7 @@ export default [
   {
     name: 'Massive Spin',
     type: 'hammer',
-    icon: '/assets/weapons/spear_massive_spin_07.png',
+    icon: 'assets/weapons/spear_massive_spin_07.png',
     god: 'Daedalus',
     weapon: 'Varatha',
     rarity: -3,
@@ -221,7 +221,7 @@ export default [
   {
     name: 'Quick Spin',
     type: 'hammer',
-    icon: '/assets/weapons/spear_deft_spin_08.png',
+    icon: 'assets/weapons/spear_deft_spin_08.png',
     god: 'Daedalus',
     weapon: 'Varatha',
     rarity: -3,
@@ -237,7 +237,7 @@ export default [
   {
     name: 'Flurry Jab',
     type: 'hammer',
-    icon: '/assets/weapons/spear_flurry_thrust_01.png',
+    icon: 'assets/weapons/spear_flurry_thrust_01.png',
     god: 'Daedalus',
     weapon: 'Varatha',
     rarity: -3,
@@ -251,7 +251,7 @@ export default [
   {
     name: 'Charged Skewer',
     type: 'hammer',
-    icon: '/assets/weapons/spear_long_throw_02.png',
+    icon: 'assets/weapons/spear_long_throw_02.png',
     god: 'Daedalus',
     weapon: 'Varatha',
     rarity: -3,
@@ -267,7 +267,7 @@ export default [
   {
     name: 'Serrated Point',
     type: 'hammer',
-    icon: '/assets/weapons/spear_dash_multistrike_10.png',
+    icon: 'assets/weapons/spear_dash_multistrike_10.png',
     god: 'Daedalus',
     weapon: 'Varatha',
     rarity: -3,
@@ -283,7 +283,7 @@ export default [
   {
     name: 'Flaring Spin',
     type: 'hammer',
-    icon: '/assets/weapons/spear_flare_11.png',
+    icon: 'assets/weapons/spear_flare_11.png',
     god: 'Daedalus',
     weapon: 'Varatha',
     rarity: -3,
@@ -314,7 +314,7 @@ export default [
   {
     name: 'Triple Jab',
     type: 'hammer',
-    icon: '/assets/weapons/spear_triple_13.png',
+    icon: 'assets/weapons/spear_triple_13.png',
     god: 'Daedalus',
     weapon: 'Varatha',
     rarity: -3,
@@ -330,7 +330,7 @@ export default [
   {
     name: 'Winged Serpent',
     type: 'hammer',
-    icon: '/assets/weapons/spear_guanyu.png',
+    icon: 'assets/weapons/spear_guanyu.png',
     god: 'Daedalus',
     weapon: 'Varatha',
     rarity: -3,

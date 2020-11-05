@@ -4,7 +4,7 @@ export default [
   {
     name: 'Zeus',
     type: 'god',
-    icon: '/assets/gods/Zeus.png',
+    icon: 'assets/gods/Zeus.png',
   },
 
   {
@@ -14,7 +14,7 @@ export default [
       `<div>Lightning Damage:<div><span>${fv(stats.min)}</span></div></div>`,
     type: 'attack',
     god: 'Zeus',
-    icon: '/assets/traits/Zeus_04_Large.png',
+    icon: 'assets/traits/Zeus_04_Large.png',
     rarity: 0,
     level: 1,
     effects: [
@@ -30,7 +30,7 @@ export default [
   {
     name: 'Thunder Flourish',
     type: 'special',
-    icon: '/assets/traits/Zeus_secondary_attack.png',
+    icon: 'assets/traits/Zeus_secondary_attack.png',
     god: 'Zeus',
     rarity: 0,
     level: 1,
@@ -48,7 +48,7 @@ export default [
   {
     name: 'Electric Shot',
     type: 'cast',
-    icon: '/assets/traits/Zeus_05_Large.png',
+    icon: 'assets/traits/Zeus_05_Large.png',
     god: 'Zeus',
     rarity: 0,
     level: 1,
@@ -66,7 +66,7 @@ export default [
   {
     name: 'Thunder Dash',
     type: 'dash',
-    icon: '/assets/traits/Zeus_06_Large.png',
+    icon: 'assets/traits/Zeus_06_Large.png',
     god: 'Zeus',
     rarity: 0,
     level: 1,
@@ -84,7 +84,7 @@ export default [
   {
     name: "Zeus' Aid",
     type: 'call',
-    icon: '/assets/traits/Zeus_07_Large.png',
+    icon: 'assets/traits/Zeus_07_Large.png',
     god: 'Zeus',
     rarity: 0,
     level: 1,
@@ -102,7 +102,7 @@ export default [
   {
     name: "Heaven's Vengeance",
     type: 'revenge',
-    icon: '/assets/traits/Zeus_01_Large.png',
+    icon: 'assets/traits/Zeus_01_Large.png',
     god: 'Zeus',
     rarity: 0,
     level: 1,
@@ -120,7 +120,7 @@ export default [
   {
     name: 'Lightning Reflexes',
     type: 'secondary',
-    icon: '/assets/traits/Zeus_15_Large.png',
+    icon: 'assets/traits/Zeus_15_Large.png',
     god: 'Zeus',
     rarity: 0,
     level: 1,
@@ -138,7 +138,7 @@ export default [
   {
     name: 'Storm Lightning',
     type: 'secondary',
-    icon: '/assets/traits/Zeus_03_Large.png',
+    icon: 'assets/traits/Zeus_03_Large.png',
     god: 'Zeus',
     rarity: 0,
     prereqs: { Zeus: ['Electric Shot', 'Lightning Strike']},
@@ -155,7 +155,7 @@ export default [
   {
     name: 'High Voltage',
     type: 'secondary',
-    icon: '/assets/traits/Zeus_10_Large.png',
+    icon: 'assets/traits/Zeus_10_Large.png',
     god: 'Zeus',
     rarity: 0,
     level: 1,
@@ -174,7 +174,7 @@ export default [
   {
     name: 'Static Discharge',
     type: 'secondary',
-    icon: '/assets/traits/Zeus_12_Large.png',
+    icon: 'assets/traits/Zeus_12_Large.png',
     god: 'Zeus',
     rarity: 0,
     level: 1,
@@ -198,7 +198,7 @@ export default [
   {
     name: 'Clouded Judgment',
     type: 'secondary',
-    icon: '/assets/traits/Zeus_09_Large.png',
+    icon: 'assets/traits/Zeus_09_Large.png',
     god: 'Zeus',
     rarity: 0,
     level: 1,
@@ -217,7 +217,7 @@ export default [
   {
     name: 'Billowing Strength',
     type: 'secondary',
-    icon: '/assets/traits/Zeus_13_Large.png',
+    icon: 'assets/traits/Zeus_13_Large.png',
     god: 'Zeus',
     rarity: 0,
     level: 1,
@@ -237,7 +237,7 @@ export default [
   {
     name: 'Splitting Bolt',
     type: 'secondary',
-    icon: '/assets/traits/Zeus_02_Large.png',
+    icon: 'assets/traits/Zeus_02_Large.png',
     god: 'Zeus',
     rarity: 4,
     prereqs: { Zeus: ['Double Strike', 'High Voltage', 'Storm Lightning'] },

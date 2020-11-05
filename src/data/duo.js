@@ -4,7 +4,7 @@ export default [
   {
     name: 'Curse of Longing',
     type: 'secondary',
-    icon: '/assets/traits/Ares_Aphrodite_01.png',
+    icon: 'assets/traits/Ares_Aphrodite_01.png',
     god: ['Ares', 'Aphrodite'],
     rarity: 5,
     prereqs: {
@@ -23,7 +23,7 @@ export default [
   {
     name: 'Deadly Reversal',
     type: 'secondary',
-    icon: '/assets/traits/Artemis_Athena_01.png',
+    icon: 'assets/traits/Artemis_Athena_01.png',
     god: ['Artemis', 'Athena'],
     rarity: 5,
     prereqs: {
@@ -44,7 +44,7 @@ export default [
   {
     name: 'Exclusive Access',
     type: 'secondary',
-    icon: '/assets/traits/Dionysus_Poseidon_01.png',
+    icon: 'assets/traits/Dionysus_Poseidon_01.png',
     god: ['Dionysus', 'Poseidon'],
     rarity: 5,
     prereqs: {
@@ -58,7 +58,7 @@ export default [
   {
     name: 'Heart Rend',
     type: 'secondary',
-    icon: '/assets/traits/Artemis_Aphrodite_01.png',
+    icon: 'assets/traits/Artemis_Aphrodite_01.png',
     god: ['Artemis', 'Aphrodite'],
     rarity: 5,
     prereqs: {
@@ -79,7 +79,7 @@ export default [
   {
     name: 'Hunting Blades',
     type: 'secondary',
-    icon: '/assets/traits/Artemis_Ares_01.png',
+    icon: 'assets/traits/Artemis_Ares_01.png',
     god: ['Ares', 'Artemis'],
     rarity: 5,
     prereqs: {
@@ -100,7 +100,7 @@ export default [
   {
     name: 'Lightning Rod',
     type: 'secondary',
-    icon: '/assets/traits/Artemis_Zeus_01.png',
+    icon: 'assets/traits/Artemis_Zeus_01.png',
     god: ['Artemis', 'Zeus'],
     rarity: 5,
     prereqs: {
@@ -120,7 +120,7 @@ export default [
   {
     name: 'Lightning Phalanx',
     type: 'secondary',
-    icon: '/assets/traits/Athena_Zeus_01.png',
+    icon: 'assets/traits/Athena_Zeus_01.png',
     god: ['Athena', 'Zeus'],
     rarity: 5,
     prereqs: {
@@ -140,7 +140,7 @@ export default [
   {
     name: 'Low Tolerance',
     type: 'secondary',
-    icon: '/assets/traits/Dionysus_Aphrodite_01.png',
+    icon: 'assets/traits/Dionysus_Aphrodite_01.png',
     god: ['Dionysus', 'Aphrodite'],
     rarity: 5,
     prereqs: {
@@ -161,7 +161,7 @@ export default [
   {
     name: 'Merciful End',
     type: 'secondary',
-    icon: '/assets/traits/Athena_Ares_01.png',
+    icon: 'assets/traits/Athena_Ares_01.png',
     god: ['Ares', 'Athena'],
     rarity: 5,
     prereqs: {
@@ -181,7 +181,7 @@ export default [
   {
     name: 'Scintillating Feast',
     type: 'secondary',
-    icon: '/assets/traits/Zeus_Dionysus_01.png',
+    icon: 'assets/traits/Zeus_Dionysus_01.png',
     god: ['Dionysus', 'Zeus'],
     rarity: 5,
     prereqs: {
@@ -201,7 +201,7 @@ export default [
   {
     name: 'Parting Shot',
     type: 'secondary',
-    icon: '/assets/traits/Aphrodite_Athena_01.png',
+    icon: 'assets/traits/Aphrodite_Athena_01.png',
     god: ['Aphrodite', 'Athena'],
     rarity: 5,
     prereqs: {
@@ -221,7 +221,7 @@ export default [
   {
     name: 'Sweet Nectar',
     type: 'secondary',
-    icon: '/assets/traits/Aphrodite_Poseidon_01.png',
+    icon: 'assets/traits/Aphrodite_Poseidon_01.png',
     god: ['Aphrodite', 'Poseidon'],
     rarity: 5,
     prereqs: {
@@ -235,7 +235,7 @@ export default [
   {
     name: 'Sea Storm',
     type: 'secondary',
-    icon: '/assets/traits/Poseidon_Zeus_01.png',
+    icon: 'assets/traits/Poseidon_Zeus_01.png',
     god: ['Poseidon', 'Zeus'],
     rarity: 5,
     prereqs: {
@@ -255,7 +255,7 @@ export default [
   {
     name: 'Vengeful Mood',
     type: 'secondary',
-    icon: '/assets/traits/Zeus_Ares_01.png',
+    icon: 'assets/traits/Zeus_Ares_01.png',
     god: ['Ares', 'Zeus'],
     rarity: 5,
     prereqs: {
@@ -270,7 +270,7 @@ export default [
   {
     name: 'Ice Wine',
     type: 'secondary',
-    icon: '/assets/traits/Demeter_Dionysus_01.png',
+    icon: 'assets/traits/Demeter_Dionysus_01.png',
     god: ['Demeter', 'Dionysus'],
     rarity: 5,
     prereqs: {
@@ -291,7 +291,7 @@ export default [
   {
     name: 'Crystal Clarity',
     type: 'secondary',
-    icon: '/assets/traits/Demeter_Artemis_01.png',
+    icon: 'assets/traits/Demeter_Artemis_01.png',
     god: ['Demeter', 'Artemis'],
     rarity: 5,
     prereqs: {
@@ -315,7 +315,7 @@ export default [
   {
     name: 'Blizzard Shot',
     type: 'secondary',
-    icon: '/assets/traits/Poseidon_Demeter_01.png',
+    icon: 'assets/traits/Poseidon_Demeter_01.png',
     god: ['Poseidon', 'Demeter'],
     rarity: 5,
     prereqs: {
@@ -341,7 +341,7 @@ export default [
   {
     name: 'Cold Fusion',
     type: 'secondary',
-    icon: '/assets/traits/Demeter_Zeus_01.png',
+    icon: 'assets/traits/Demeter_Zeus_01.png',
     god: ['Demeter', 'Zeus'],
     rarity: 5,
     prereqs: {
@@ -355,7 +355,7 @@ export default [
   {
     name: 'Unshakable Mettle',
     type: 'secondary',
-    icon: '/assets/traits/Poseidon_Athena_01.png',
+    icon: 'assets/traits/Poseidon_Athena_01.png',
     god: ['Poseidon', 'Athena'],
     rarity: 5,
     prereqs: {
@@ -376,7 +376,7 @@ export default [
   {
     name: 'Mirage Shot',
     type: 'secondary',
-    icon: '/assets/traits/Poseidon_Artemis_01.png',
+    icon: 'assets/traits/Poseidon_Artemis_01.png',
     god: ['Poseidon', 'Artemis'],
     rarity: 5,
     prereqs: {
@@ -395,7 +395,7 @@ export default [
   {
     name: 'Curse of Drowning',
     type: 'secondary',
-    icon: '/assets/traits/Poseidon_Ares_01.png',
+    icon: 'assets/traits/Poseidon_Ares_01.png',
     god: ['Poseidon', 'Ares'],
     rarity: 5,
     prereqs: {
@@ -415,7 +415,7 @@ export default [
   {
     name: 'Stubborn Roots',
     type: 'secondary',
-    icon: '/assets/traits/Demeter_Athena_01.png',
+    icon: 'assets/traits/Demeter_Athena_01.png',
     god: ['Demeter', 'Athena'],
     rarity: 5,
     prereqs: {
@@ -429,7 +429,7 @@ export default [
   {
     name: 'Cold Embrace',
     type: 'secondary',
-    icon: '/assets/traits/Aphrodite_Demeter_01.png',
+    icon: 'assets/traits/Aphrodite_Demeter_01.png',
     god: ['Aphrodite', 'Demeter'],
     rarity: 5,
     prereqs: {
@@ -449,7 +449,7 @@ export default [
   {
     name: 'Smoldering Air',
     type: 'secondary',
-    icon: '/assets/traits/Zeus_Aphrodite_01.png',
+    icon: 'assets/traits/Zeus_Aphrodite_01.png',
     god: ['Aphrodite', 'Zeus'],
     rarity: 5,
     prereqs: {
@@ -463,7 +463,7 @@ export default [
   {
     name: 'Curse of Nausea',
     type: 'secondary',
-    icon: '/assets/traits/Dionysus_Ares_01.png',
+    icon: 'assets/traits/Dionysus_Ares_01.png',
     god: ['Dionysus', 'Ares'],
     rarity: 5,
     prereqs: {
@@ -483,7 +483,7 @@ export default [
   {
     name: 'Calculated Risk',
     type: 'secondary',
-    icon: '/assets/traits/Dionysus_Athena_01.png',
+    icon: 'assets/traits/Dionysus_Athena_01.png',
     god: ['Athena', 'Dionysus'],
     rarity: 5,
     prereqs: {
@@ -503,7 +503,7 @@ export default [
   {
     name: 'Freezing Vortex',
     type: 'secondary',
-    icon: '/assets/traits/Ares_Demeter_01.png',
+    icon: 'assets/traits/Ares_Demeter_01.png',
     god: ['Ares', 'Demeter'],
     rarity: 5,
     exclude: ['Hunting Blades'],
@@ -525,7 +525,7 @@ export default [
   {
     name: 'Splitting Headache',
     type: 'secondary',
-    icon: '/assets/traits/Dionyuss_Artemis_01.png',
+    icon: 'assets/traits/Dionyuss_Artemis_01.png',
     god: ['Dionysus', 'Artemis'],
     rarity: 5,
     prereqs: {
