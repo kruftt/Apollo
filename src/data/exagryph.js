@@ -6,7 +6,7 @@ export default [
   {
     name: 'Exagryph',
     description: 'The Adamant Rail.',
-    icon: 'assets/weapons/gun_base_icon.png',
+    icon: '/assets/weapons/gun_base_icon.png',
     type: 'weapon',
     rarity: -4,
     abilities: [
@@ -20,7 +20,7 @@ export default [
     name: 'Exagryph - Aspect of Zagreus',
     type: 'aspect',
     weapon: 'Exagryph',
-    icon: 'assets/weapons/gun_base_icon.png',
+    icon: '/assets/weapons/gun_base_icon.png',
     rarity: 4,
     description: (stats) =>
       `<div>The form in which the Adamant Rail first revealed itself.</div>` +
@@ -32,7 +32,7 @@ export default [
     name: 'Exagryph - Aspect of Eris',
     type: 'aspect',
     weapon: 'Exagryph',
-    icon: 'assets/weapons/gun_enchantment_1.png',
+    icon: '/assets/weapons/gun_enchantment_1.png',
     rarity: 4,
     description: (stats) =>
       `<div>For 8 Seconds after absorbing your<b>Special's</b>blast, deal more damage.</div>` +
@@ -50,7 +50,7 @@ export default [
     name: 'Exagryph - Aspect of Hestia',
     type: 'aspect',
     weapon: 'Exagryph',
-    icon: 'assets/weapons/gun_enchantment_2.png',
+    icon: '/assets/weapons/gun_enchantment_2.png',
     rarity: 4,
     description: (stats) =>
       `<div>After you manually<b>Reload,</b>your next shot is empowered.</div>` +
@@ -65,7 +65,7 @@ export default [
     name: 'Exagryph - Aspect of Lucifer',
     type: 'aspect',
     weapon: 'Exagryph',
-    icon: 'assets/weapons/gun_enchantment_3.png',
+    icon: '/assets/weapons/gun_enchantment_3.png',
     rarity: 4,
     description: (stats) =>
       `<div>You have<b>Igneus Eden,</b>which launches volatile<b>Hellfire.</b></div>` +
@@ -99,7 +99,7 @@ export default [
   {
     name: 'Flurry Fire',
     type: 'hammer',
-    icon: 'assets/weapons/gun_minigun_trait_01.png',
+    icon: '/assets/weapons/gun_minigun_trait_01.png',
     god: 'Daedalus',
     weapon: 'Aegis',
     rarity: -3,
@@ -115,7 +115,7 @@ export default [
   {
     name: 'Ricochet Fire',
     type: 'hammer',
-    icon: 'assets/weapons/gun_richochet_14.png',
+    icon: '/assets/weapons/gun_richochet_14.png',
     god: 'Daedalus',
     weapon: 'Aegis',
     rarity: -3,
@@ -130,7 +130,7 @@ export default [
   {
     name: 'Spread Fire',
     type: 'hammer',
-    icon: 'assets/weapons/gun_shotgun_trait_02.png',
+    icon: '/assets/weapons/gun_shotgun_trait_02.png',
     god: 'Daedalus',
     weapon: 'Aegis',
     rarity: -3,
@@ -143,7 +143,7 @@ export default [
   {
     name: 'Explosive Fire',
     type: 'hammer',
-    icon: 'assets/weapons/gun_dash_ammo_trait_04.png',
+    icon: '/assets/weapons/gun_dash_ammo_trait_04.png',
     god: 'Daedalus',
     weapon: 'Aegis',
     rarity: -3,
@@ -159,7 +159,7 @@ export default [
   {
     name: 'Delta Chamber',
     type: 'hammer',
-    icon: 'assets/weapons/gun_infinite_ammo_trait_09.png',
+    icon: '/assets/weapons/gun_infinite_ammo_trait_09.png',
     god: 'Daedalus',
     weapon: 'Aegis',
     rarity: -3,
@@ -175,7 +175,7 @@ export default [
   {
     name: 'Piercing Fire',
     type: 'hammer',
-    icon: 'assets/weapons/gun_grenade_drop_trait_12.png',
+    icon: '/assets/weapons/gun_grenade_drop_trait_12.png',
     god: 'Daedalus',
     weapon: 'Aegis',
     rarity: -3,
@@ -200,7 +200,7 @@ export default [
   {
     name: 'Triple Bomb',
     type: 'hammer',
-    icon: 'assets/weapons/gun_grenade_fast_trait_07.png',
+    icon: '/assets/weapons/gun_grenade_fast_trait_07.png',
     god: 'Daedalus',
     weapon: 'Aegis',
     rarity: -3,
@@ -216,7 +216,7 @@ export default [
   {
     name: 'Rocket Bomb',
     type: 'hammer',
-    icon: 'assets/weapons/gun_armor_penetration_trait_08.png',
+    icon: '/assets/weapons/gun_armor_penetration_trait_08.png',
     god: 'Daedalus',
     weapon: 'Aegis',
     rarity: -3,
@@ -229,7 +229,7 @@ export default [
   {
     name: 'Targeting System',
     type: 'hammer',
-    icon: 'assets/weapons/gun_homing_bullet_trait_10.png',
+    icon: '/assets/weapons/gun_homing_bullet_trait_10.png',
     god: 'Daedalus',
     weapon: 'Aegis',
     rarity: -3,
@@ -246,7 +246,7 @@ export default [
   {
     name: 'Hazard Bomb',
     type: 'hammer',
-    icon: 'assets/weapons/gun_grenade_drop_trait_06.png',
+    icon: '/assets/weapons/gun_grenade_drop_trait_06.png',
     god: 'Daedalus',
     weapon: 'Aegis',
     rarity: -3,
@@ -262,7 +262,7 @@ export default [
   {
     name: 'Cluster Bomb',
     type: 'hammer',
-    icon: 'assets/weapons/gun_grenade_cluster_trait_05.png',
+    icon: '/assets/weapons/gun_grenade_cluster_trait_05.png',
     god: 'Daedalus',
     weapon: 'Aegis',
     rarity: -3,
@@ -278,7 +278,7 @@ export default [
   {
     name: 'Concentrated Fire',
     type: 'hammer',
-    icon: 'assets/weapons/gun_consecutive_fire_trait_11.png',
+    icon: '/assets/weapons/gun_consecutive_fire_trait_11.png',
     god: 'Daedalus',
     weapon: 'Aegis',
     rarity: -3,
@@ -296,7 +296,7 @@ export default [
   {
     name: 'Seeking Fire',
     type: 'hammer',
-    icon: 'assets/weapons/gun_homing_bullet_trait_10.png',
+    icon: '/assets/weapons/gun_homing_bullet_trait_10.png',
     god: 'Daedalus',
     weapon: 'Aegis',
     rarity: -3,
@@ -312,7 +312,7 @@ export default [
   {
     name: 'Concentrated Beam',
     type: 'hammer',
-    icon: 'assets/weapons/gun_lucifer_04.png',
+    icon: '/assets/weapons/gun_lucifer_04.png',
     god: 'Daedalus',
     weapon: 'Aegis',
     rarity: -3,
@@ -330,7 +330,7 @@ export default [
   {
     name: 'Flash Fire',
     type: 'hammer',
-    icon: 'assets/weapons/gun_lucifer_05.png',
+    icon: '/assets/weapons/gun_lucifer_05.png',
     god: 'Daedalus',
     weapon: 'Aegis',
     rarity: -3,
@@ -340,7 +340,7 @@ export default [
   {
     name: 'Triple Beam',
     type: 'hammer',
-    icon: 'assets/weapons/gun_lucifer_02.png',
+    icon: '/assets/weapons/gun_lucifer_02.png',
     god: 'Daedalus',
     weapon: 'Aegis',
     rarity: -3,
@@ -350,7 +350,7 @@ export default [
   {
     name: 'Eternal Chamber',
     type: 'hammer',
-    icon: 'assets/weapons/gun_lucifer_03.png',
+    icon: '/assets/weapons/gun_lucifer_03.png',
     god: 'Daedalus',
     weapon: 'Aegis',
     rarity: -3,
@@ -369,7 +369,7 @@ export default [
   {
     name: 'Greater Inferno',
     type: 'hammer',
-    icon: 'assets/weapons/gun_lucifer_01.png',
+    icon: '/assets/weapons/gun_lucifer_01.png',
     god: 'Daedalus',
     weapon: 'Aegis',
     rarity: -3,

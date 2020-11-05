@@ -6,7 +6,7 @@ export default [
   {
     name: 'Malphon',
     description: 'The Twin Fists of Malphon.',
-    icon: 'assets/weapons/fist_base_icon.png',
+    icon: '/assets/weapons/fist_base_icon.png',
     type: 'weapon',
     rarity: -4,
     abilities: [
@@ -20,7 +20,7 @@ export default [
     name: 'Malphon - Aspect of Zagreus',
     type: 'aspect',
     weapon: 'Malphon',
-    icon: 'assets/weapons/fist_base_icon.png',
+    icon: '/assets/weapons/fist_base_icon.png',
     rarity: 4,
     description: (stats) =>
       `<div>The form in which the Twin Fists first revealed themselves.</div>` +
@@ -39,7 +39,7 @@ export default [
     name: 'Malphon - Aspect of Talos',
     type: 'aspect',
     weapon: 'Malphon',
-    icon: 'assets/weapons/fist_enchantment_2.png',
+    icon: '/assets/weapons/fist_enchantment_2.png',
     rarity: 4,
     description: (stats) =>
       `<div>Your<b>Special</b>becomes<b>Magnetic Cutter;</b>its pull deals<b>20</b>damage.</div>` +
@@ -67,7 +67,7 @@ export default [
     name: 'Malphon - Aspect of Demeter',
     type: 'aspect',
     weapon: 'Malphon',
-    icon: 'assets/weapons/fist_enchantment_1.png',
+    icon: '/assets/weapons/fist_enchantment_1.png',
     rarity: 4,
     description: (stats) =>
       `<div>After landing<b>12</b>strikes, your next<b>Special</b>hits more times.</div>` +
@@ -81,7 +81,7 @@ export default [
     name: 'Malphon - Aspect of Gilgamesh',
     type: 'aspect',
     weapon: 'Malphon',
-    icon: 'assets/weapons/fist_enchantment_3.png',
+    icon: '/assets/weapons/fist_enchantment_3.png',
     rarity: 4,
     description: (stats) =>
       `<div>You have the<b>Claws of Enkidu,</b>whose<b>Dash-Upper</b>can<b>Maim</b>foes.</div>` +
@@ -106,7 +106,7 @@ export default [
   {
     name: 'Breaching Cross',
     type: 'hammer',
-    icon: 'assets/weapons/fist_armor_break_01.png',
+    icon: '/assets/weapons/fist_armor_break_01.png',
     god: 'Daedalus',
     weapon: 'Malphon',
     rarity: -3,
@@ -131,7 +131,7 @@ export default [
   {
     name: 'Rolling Knuckle',
     type: 'hammer',
-    icon: 'assets/weapons/fist_reaching_punch_08.png',
+    icon: '/assets/weapons/fist_reaching_punch_08.png',
     god: 'Daedalus',
     weapon: 'Malphon',
     rarity: -3,
@@ -149,7 +149,7 @@ export default [
   {
     name: 'Long Knuckle',
     type: 'hammer',
-    icon: 'assets/weapons/fist_light_punch_07.png',
+    icon: '/assets/weapons/fist_light_punch_07.png',
     god: 'Daedalus',
     weapon: 'Malphon',
     rarity: -3,
@@ -167,7 +167,7 @@ export default [
   {
     name: 'Draining Cutter',
     type: 'hammer',
-    icon: 'assets/weapons/fist_killing_nova_06.png',
+    icon: '/assets/weapons/fist_killing_nova_06.png',
     god: 'Daedalus',
     weapon: 'Malphon',
     rarity: -3,
@@ -177,7 +177,7 @@ export default [
   {
     name: 'Concentrated Knuckle',
     type: 'hammer',
-    icon: 'assets/weapons/fist_teleport_special_09.png',
+    icon: '/assets/weapons/fist_teleport_special_09.png',
     god: 'Daedalus',
     weapon: 'Malphon',
     rarity: -3,
@@ -197,7 +197,7 @@ export default [
   {
     name: 'Explosive Upper',
     type: 'hammer',
-    icon: 'assets/weapons/fist_double_special_03.png',
+    icon: '/assets/weapons/fist_double_special_03.png',
     god: 'Daedalus',
     weapon: 'Malphon',
     rarity: -3,
@@ -215,7 +215,7 @@ export default [
   {
     name: 'Flying Cutter',
     type: 'hammer',
-    icon: 'assets/weapons/fist_uppercut_special_11.png',
+    icon: '/assets/weapons/fist_uppercut_special_11.png',
     god: 'Daedalus',
     weapon: 'Malphon',
     rarity: -3,
@@ -228,7 +228,7 @@ export default [
   {
     name: 'Rush Kick',
     type: 'hammer',
-    icon: 'assets/weapons/fist_kicking_special_05.png',
+    icon: '/assets/weapons/fist_kicking_special_05.png',
     god: 'Daedalus',
     weapon: 'Malphon',
     rarity: -3,
@@ -242,7 +242,7 @@ export default [
   {
     name: 'Quake Cutter',
     type: 'hammer',
-    icon: 'assets/weapons/fist_vacuum_special_12.png',
+    icon: '/assets/weapons/fist_vacuum_special_12.png',
     god: 'Daedalus',
     weapon: 'Malphon',
     rarity: -3,
@@ -256,7 +256,7 @@ export default [
   {
     name: 'Kinetic Launcher',
     type: 'hammer',
-    icon: 'assets/weapons/fist_throwing_special_10.png',
+    icon: '/assets/weapons/fist_throwing_special_10.png',
     god: 'Daedalus',
     weapon: 'Malphon',
     rarity: -3,
@@ -270,7 +270,7 @@ export default [
   {
     name: 'Heavy Knuckle',
     type: 'hammer',
-    icon: 'assets/weapons/fist_knuckle_13.png',
+    icon: '/assets/weapons/fist_knuckle_13.png',
     god: 'Daedalus',
     weapon: 'Malphon',
     rarity: -3,
@@ -283,7 +283,7 @@ export default [
   {
     name: 'Colossus Knuckle',
     type: 'hammer',
-    icon: 'assets/weapons/fist_armor_knuckle_14.png',
+    icon: '/assets/weapons/fist_armor_knuckle_14.png',
     god: 'Daedalus',
     weapon: 'Malphon',
     rarity: -3,
@@ -306,7 +306,7 @@ export default [
   {
     name: 'Rending Claws',
     type: 'hammer',
-    icon: 'assets/weapons/fist_gilgamesh_02.png',
+    icon: '/assets/weapons/fist_gilgamesh_02.png',
     god: 'Daedalus',
     weapon: 'Malphon',
     rarity: -3,

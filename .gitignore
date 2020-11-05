@@ -3,5 +3,6 @@ node_modules
 *.local
 public
 extractedGUI
-*assets
+src/assets
 tools
+public - Copy

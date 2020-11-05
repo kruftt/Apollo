@@ -17,9 +17,9 @@
         <div class="character_panel__status_name">{{ firstToUpper(status_key) }}</div>
         <template v-if="character[`max_${status_key}`]">
           <div class="character_panel__value_container" @click.stop="">
-            <img class="character_panel__button button__value_arrow" src="assets/Arrow_Left.png" @click.stop="stepDown(status_key)" />
+            <img class="character_panel__button button__value_arrow" src="/assets/Arrow_Left.png" @click.stop="stepDown(status_key)" />
             <div :id="`${status_key}_numbers`" class="character_panel__number">{{ Number(character.status[status_key]) }}</div>
-            <img class="character_panel__button button__value_arrow" src="assets/Arrow_Right.png" @click.stop="stepUp(status_key)" />
+            <img class="character_panel__button button__value_arrow" src="/assets/Arrow_Right.png" @click.stop="stepUp(status_key)" />
           </div>
         </template>
         <template v-else>
@@ -115,13 +115,13 @@
   width: 1.6em;
   display: inline-block;
   padding: 0;
-  background-image: url('/assets/RadioButton_Unselected.png');
+  background-image: url('/public/assets/RadioButton_Unselected.png');
   background-size: 1.6em;
 }
 
 
 .character_panel__checkbox:checked + .character_panel__checkbox_image {
-  background-image: url('/assets/RadioButton_Selected.png');
+  background-image: url('/public/assets/RadioButton_Selected.png');
 }
 </style>
 

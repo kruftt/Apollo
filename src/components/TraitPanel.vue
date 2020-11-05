@@ -1,7 +1,7 @@
 <template>
 <div>
   <div id="trait_panel__backing" />
-  <img id="trait_panel__primary_backing" src="assets/PrimaryBoonBacking_6.png" />
+  <img id="trait_panel__primary_backing" src="/assets/PrimaryBoonBacking_6.png" />
   <div id="trait_panel__columns">
     <TraitPanelColumn
       v-for="n in slicedTraits.length"

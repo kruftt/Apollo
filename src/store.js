@@ -261,7 +261,6 @@ function applyStatus(build, effect_or_mod, status) {
   build_char.status[name] = null  // signal to initialize to 0 or maintain current value
 
   const stacks = status.stacks
-  console.log(name, target, stacks)
   if (typeof stacks === 'number') {
     build_char[`max_${name}`] = stacks
   }

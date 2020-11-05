@@ -4,12 +4,12 @@ export default [
   {
     name: 'Artemis',
     type: 'god',
-    icon: 'assets/gods/Artemis.png',
+    icon: '/assets/gods/Artemis.png',
   },
   {
     name: 'Deadly Strike',
     type: 'attack',
-    icon: 'assets/traits/Artemis_01_Large.png',
+    icon: '/assets/traits/Artemis_01_Large.png',
     god: 'Artemis',
     rarity: 0,
     level: 1,
@@ -30,7 +30,7 @@ export default [
       '<div>Your<b>Special</b>has a<span>20%</span>chance to do <b>critical</b> damage.</div>' +
       `<div>▶ Special Damage:<div><span>+${fp(stats.mult_min, stats.mult_max)}%<span></div></div>`,
     type: 'special',
-    icon: 'assets/traits/Artemis_secondary_attack.png',
+    icon: '/assets/traits/Artemis_secondary_attack.png',
     god: 'Artemis',
     rarity: 0,
     level: 1,
@@ -49,7 +49,7 @@ export default [
   {
     name: 'True Shot',
     type: 'cast',
-    icon: 'assets/traits/Artemis_02_Large.png',
+    icon: '/assets/traits/Artemis_02_Large.png',
     god: 'Artemis',
     rarity: 0,
     level: 1,
@@ -67,7 +67,7 @@ export default [
   {
     name: 'Hunter Dash',
     type: 'dash',
-    icon: 'assets/traits/Artemis_03_Large.png',
+    icon: '/assets/traits/Artemis_03_Large.png',
     god: 'Artemis',
     rarity: 0,
     level: 1,
@@ -85,7 +85,7 @@ export default [
   {
     name: "Artemis' Aid",
     type: 'call',
-    icon: 'assets/traits/Artemis_04_Large.png',
+    icon: '/assets/traits/Artemis_04_Large.png',
     god: 'Artemis',
     rarity: 0,
     level: 1,
@@ -103,7 +103,7 @@ export default [
   {
     name: 'Pressure Points',
     type: 'secondary',
-    icon: 'assets/traits/Artemis_08_Large.png',
+    icon: '/assets/traits/Artemis_08_Large.png',
     god: 'Artemis',
     rarity: 0,
     level: 1,
@@ -121,7 +121,7 @@ export default [
   {
     name: 'Exit Wounds',
     type: 'secondary',
-    icon: 'assets/traits/Artemis_10_Large.png',
+    icon: '/assets/traits/Artemis_10_Large.png',
     god: 'Artemis',
     rarity: 0,
     level: 1,
@@ -140,7 +140,7 @@ export default [
   {
     name: 'Hide Breaker',
     type: 'secondary',
-    icon: 'assets/traits/Artemis_09_Large.png',
+    icon: '/assets/traits/Artemis_09_Large.png',
     god: 'Artemis',
     rarity: 0,
     level: 1,
@@ -160,7 +160,7 @@ export default [
   {
     name: 'Clean Kill',
     type: 'secondary',
-    icon: 'assets/traits/Artemis_05_Large.png',
+    icon: '/assets/traits/Artemis_05_Large.png',
     god: 'Artemis',
     rarity: 0,
     level: 1,
@@ -179,7 +179,7 @@ export default [
   {
     name: 'Hunter Instinct',
     type: 'secondary',
-    icon: 'assets/traits/Artemis_13_Large.png',
+    icon: '/assets/traits/Artemis_13_Large.png',
     god: 'Artemis',
     rarity: 0,
     level: 1,
@@ -198,7 +198,7 @@ export default [
   {
     name: "Hunter's Mark",
     type: 'secondary',
-    icon: 'assets/traits/Artemis_14_Large.png',
+    icon: '/assets/traits/Artemis_14_Large.png',
     god: 'Artemis',
     rarity: 0,
     level: 1,
@@ -219,7 +219,7 @@ export default [
   {
     name: 'Support Fire',
     type: 'secondary',
-    icon: 'assets/traits/Artemis_12_Large.png',
+    icon: '/assets/traits/Artemis_12_Large.png',
     god: 'Artemis',
     rarity: 0,
     level: 1,
@@ -237,7 +237,7 @@ export default [
   {
     name: 'Fully Loaded',
     type: 'secondary',
-    icon: 'assets/traits/Artemis_07_Large.png',
+    icon: '/assets/traits/Artemis_07_Large.png',
     god: 'Artemis',
     rarity: 4,
     prereqs: { Artemis: ['Exit Wounds', 'Pressure Points', 'Support Fire'] },

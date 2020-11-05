@@ -15,12 +15,12 @@ export default [
   {
     name: 'Dionysus',
     type: 'god',
-    icon: 'assets/gods/Dionysus.png',
+    icon: '/assets/gods/Dionysus.png',
   },
   {
     name: 'Drunken Strike',
     type: 'attack',
-    icon: 'assets/traits/Dionysus_01_Large.png',
+    icon: '/assets/traits/Dionysus_01_Large.png',
     god: 'Dionysus',
     rarity: 0,
     level: 1,
@@ -32,7 +32,7 @@ export default [
   {
     name: 'Drunken Flourish',
     type: 'special',
-    icon: 'assets/traits/Dionysus_secondary_attack.png',
+    icon: '/assets/traits/Dionysus_secondary_attack.png',
     god: 'Dionysus',
     rarity: 0,
     level: 1,
@@ -44,7 +44,7 @@ export default [
   {
     name: 'Trippy Shot',
     type: 'cast',
-    icon: 'assets/traits/Dionysus_02_Large.png',
+    icon: '/assets/traits/Dionysus_02_Large.png',
     god: 'Dionysus',
     rarity: 0,
     level: 1,
@@ -68,7 +68,7 @@ export default [
   {
     name: 'Drunken Dash',
     type: 'dash',
-    icon: 'assets/traits/Dionysus_03_Large.png',
+    icon: '/assets/traits/Dionysus_03_Large.png',
     god: 'Dionysus',
     rarity: 0,
     level: 1,
@@ -85,7 +85,7 @@ export default [
   {
     name: "Dionysus' Aid",
     type: 'call',
-    icon: 'assets/traits/Dionysus_04_Large.png',
+    icon: '/assets/traits/Dionysus_04_Large.png',
     god: 'Dionysus',
     rarity: 0,
     level: 1,
@@ -103,7 +103,7 @@ export default [
   {
     name: 'After Party',
     type: 'secondary',
-    icon: 'assets/traits/Dionysus_10_Large.png',
+    icon: '/assets/traits/Dionysus_10_Large.png',
     god: 'Dionysus',
     rarity: 0,
     description: (stats) =>
@@ -120,7 +120,7 @@ export default [
   {
     name: 'Positive Outlook',
     type: 'secondary',
-    icon: 'assets/traits/Dionysus_12_Large.png',
+    icon: '/assets/traits/Dionysus_12_Large.png',
     god: 'Dionysus',
     rarity: 0,
     level: 1,
@@ -139,7 +139,7 @@ export default [
   {
     name: 'Premium Vintage',
     type: 'secondary',
-    icon: 'assets/traits/Dionysus_05_Large.png',
+    icon: '/assets/traits/Dionysus_05_Large.png',
     god: 'Dionysus',
     rarity: 0,
     level: 1,
@@ -157,7 +157,7 @@ export default [
   {
     name: 'Strong Drink',
     type: 'secondary',
-    icon: 'assets/traits/Dionysus_13_Large.png',
+    icon: '/assets/traits/Dionysus_13_Large.png',
     god: 'Dionysus',
     rarity: 0,
     level: 1,
@@ -175,7 +175,7 @@ export default [
   {
     name: 'Bad Influence',
     type: 'secondary',
-    icon: 'assets/traits/Dionysus_09_Large.png',
+    icon: '/assets/traits/Dionysus_09_Large.png',
     god: 'Dionysus',
     rarity: 0,
     level: 1,
@@ -196,7 +196,7 @@ export default [
   {
     name: 'Numbing Sensation',
     type: 'secondary',
-    icon: 'assets/traits/Dionysus_06_Large.png',
+    icon: '/assets/traits/Dionysus_06_Large.png',
     god: 'Dionysus',
     rarity: 0,
     level: 1,
@@ -216,7 +216,7 @@ export default [
   {
     name: 'Peer Pressure',
     type: 'secondary',
-    icon: 'assets/traits/Dionysus_07_Large.png',
+    icon: '/assets/traits/Dionysus_07_Large.png',
     god: 'Dionysus',
     rarity: 0,
     level: 1,
@@ -235,7 +235,7 @@ export default [
   {
     name: 'High Tolerance',
     type: 'secondary',
-    icon: 'assets/traits/Dionysus_11_Large.png',
+    icon: '/assets/traits/Dionysus_11_Large.png',
     god: 'Dionysus',
     rarity: 0,
     level: 1,
@@ -255,7 +255,7 @@ export default [
   {
     name: 'Black Out',
     type: 'secondary',
-    icon: 'assets/traits/Dionysus_08_Large.png',
+    icon: '/assets/traits/Dionysus_08_Large.png',
     god: 'Dionysus',
     rarity: 4,
     prereqs: { Trippy: ['Trippy Shot'], Dionysus: ["Dionysus' Aid", 'Drunken Flourish', "Drunken Strike"] },

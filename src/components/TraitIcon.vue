@@ -38,16 +38,16 @@ export default {
       const r = props.trait.rarity
       if (r !== undefined) {
         switch (r) {
-          case -3: return 'assets/frames/special_hammer.png'
-          case -2: return 'assets/frames/Keepsake_Backing_Edit.png'
-          case -1: return 'assets/frames/primary.png'
+          case -3: return '/assets/frames/special_hammer.png'
+          case -2: return '/assets/frames/Keepsake_Backing_Edit.png'
+          case -1: return '/assets/frames/primary.png'
           case -4:
-          case 0: return 'assets/frames/common.png'
-          case 1: return 'assets/frames/rare.png'
-          case 2: return 'assets/frames/epic.png'
-          case 3: return 'assets/frames/heroic.png'
-          case 4: return 'assets/frames/legendary.png'
-          case 5: return 'assets/frames/duo.png'
+          case 0: return '/assets/frames/common.png'
+          case 1: return '/assets/frames/rare.png'
+          case 2: return '/assets/frames/epic.png'
+          case 3: return '/assets/frames/heroic.png'
+          case 4: return '/assets/frames/legendary.png'
+          case 5: return '/assets/frames/duo.png'
           default: return null
         }
       }

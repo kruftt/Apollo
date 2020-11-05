@@ -10,12 +10,12 @@ export default [
   {
     name: 'Athena',
     type: 'god',
-    icon: 'assets/gods/Athena.png',
+    icon: '/assets/gods/Athena.png',
   },
   {
     name: 'Divine Strike',
     type: 'attack',
-    icon: 'assets/traits/Athena_01_Large.png',
+    icon: '/assets/traits/Athena_01_Large.png',
     god: 'Athena',
     rarity: 0,
     level: 1,
@@ -34,7 +34,7 @@ export default [
   {
     name: 'Divine Flourish',
     type: 'special',
-    icon: 'assets/traits/Athena_secondary_attack.png',
+    icon: '/assets/traits/Athena_secondary_attack.png',
     god: 'Athena',
     rarity: 0,
     level: 1,
@@ -53,7 +53,7 @@ export default [
   {
     name: 'Phalanx Shot',
     type: 'cast',
-    icon: 'assets/traits/Athena_02_Large.png',
+    icon: '/assets/traits/Athena_02_Large.png',
     god: 'Athena',
     rarity: 0,
     level: 1,
@@ -72,7 +72,7 @@ export default [
   {
     name: 'Divine Dash',
     type: 'dash',
-    icon: 'assets/traits/Athena_03_Large.png',
+    icon: '/assets/traits/Athena_03_Large.png',
     god: 'Athena',
     rarity: 0,
     level: 1,
@@ -91,7 +91,7 @@ export default [
   {
     name: "Athena's Aid",
     type: 'call',
-    icon: 'assets/traits/Athena_04_Large.png',
+    icon: '/assets/traits/Athena_04_Large.png',
     god: 'Athena',
     rarity: 0,
     level: 1,
@@ -110,7 +110,7 @@ export default [
   {
     name: 'Holy Shield',
     type: 'secondary',
-    icon: 'assets/traits/Athena_08_Large.png',
+    icon: '/assets/traits/Athena_08_Large.png',
     god: 'Athena',
     rarity: 0,
     level: 1,
@@ -128,7 +128,7 @@ export default [
   {
     name: 'Bronze Skin',
     type: 'secondary',
-    icon: 'assets/traits/Athena_06_Large.png',
+    icon: '/assets/traits/Athena_06_Large.png',
     god: 'Athena',
     rarity: 0,
     level: 1,
@@ -146,7 +146,7 @@ export default [
   {
     name: 'Sure Footing',
     type: 'secondary',
-    icon: 'assets/traits/Athena_07_Large.png',
+    icon: '/assets/traits/Athena_07_Large.png',
     god: 'Athena',
     rarity: 0,
     level: 1,
@@ -165,7 +165,7 @@ export default [
   {
     name: 'Proud Bearing',
     type: 'secondary',
-    icon: 'assets/traits/Athena_13_Large.png',
+    icon: '/assets/traits/Athena_13_Large.png',
     god: 'Athena',
     rarity: 0,
     level: 1,
@@ -180,7 +180,7 @@ export default [
   {
     name: 'Blinding Flash',
     type: 'secondary',
-    icon: 'assets/traits/Athena_14_Large.png',
+    icon: '/assets/traits/Athena_14_Large.png',
     god: 'Athena',
     rarity: 0,
     level: 1,
@@ -202,7 +202,7 @@ export default [
   {
     name: 'Brilliant Reposte',
     type: 'secondary',
-    icon: 'assets/traits/Athena_05_Large.png',
+    icon: '/assets/traits/Athena_05_Large.png',
     god: 'Athena',
     rarity: 0,
     level: 1,
@@ -221,7 +221,7 @@ export default [
   {
     name: 'Deathless Stand',
     type: 'secondary',
-    icon: 'assets/traits/Athena_11_Large.png',
+    icon: '/assets/traits/Athena_11_Large.png',
     god: 'Athena',
     rarity: 0,
     level: 1,
@@ -239,7 +239,7 @@ export default [
   {
     name: 'Last Stand',
     type: 'secondary',
-    icon: 'assets/traits/Athena_12_Large.png',
+    icon: '/assets/traits/Athena_12_Large.png',
     god: 'Athena',
     rarity: 0,
     description: (stats) =>
@@ -255,7 +255,7 @@ export default [
   {
     name: 'Divine Protection',
     type: 'secondary',
-    icon: 'assets/traits/Athena_10_Large.png',
+    icon: '/assets/traits/Athena_10_Large.png',
     god: 'Athena',
     rarity: 4,
     prereqs: { Athena: ['Brilliant Riposte'] },

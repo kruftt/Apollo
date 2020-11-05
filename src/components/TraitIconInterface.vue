@@ -30,9 +30,9 @@
       </template>
 
       <div v-if="trait.level" class="trait_icon__level_container" @click.stop="">
-        <img class="trait_icon__button button__level_arrow" src="assets/Arrow_Left.png" @click.stop="decreaseLevel" />
+        <img class="trait_icon__button button__level_arrow" src="/assets/Arrow_Left.png" @click.stop="decreaseLevel" />
         <div class="trait_icon__level_text">Lv.{{ trait.level }}</div>
-        <img class="trait_icon__button button__level_arrow" src="assets/Arrow_Right.png" @click.stop="increaseLevel" />
+        <img class="trait_icon__button button__level_arrow" src="/assets/Arrow_Right.png" @click.stop="increaseLevel" />
       </div>
     </template>
   </div>

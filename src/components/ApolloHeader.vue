@@ -1,6 +1,6 @@
 <template>
   <div id="header_bar">
-    <img id="header_bar__image" src="assets/gods/Apollo.png" />
+    <img id="header_bar__image" src="/assets/gods/Apollo.png" />
     <h2 id="header_bar__title">
       Apollo <span class="alpha">&nbsp;alpha&nbsp;</span>
     </h2>

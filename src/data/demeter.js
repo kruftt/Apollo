@@ -19,12 +19,12 @@ export default [
   {
     name: 'Demeter',
     type: 'god',
-    icon: 'assets/gods/Demeter.png',
+    icon: '/assets/gods/Demeter.png',
   },
   {
     name: 'Frost Strike',
     type: 'attack',
-    icon: 'assets/traits/Demeter_01_Large.png',
+    icon: '/assets/traits/Demeter_01_Large.png',
     god: 'Demeter',
     rarity: 0,
     level: 1,
@@ -43,7 +43,7 @@ export default [
   {
     name: 'Frost Flourish',
     type: 'special',
-  icon: 'assets/traits/Demeter_secondary_attack.png',
+  icon: '/assets/traits/Demeter_secondary_attack.png',
     god: 'Demeter',
     rarity: 0,
     level: 1,
@@ -62,7 +62,7 @@ export default [
   {
     name: 'Crystal Beam',
     type: 'cast',
-    icon: 'assets/traits/Demeter_02_Large.png',
+    icon: '/assets/traits/Demeter_02_Large.png',
     god: 'Demeter',
     rarity: 0,
     level: 1,
@@ -82,7 +82,7 @@ export default [
   {
     name: 'Mistral Dash',
     type: 'dash',
-    icon: 'assets/traits/Demeter_03_Large.png',
+    icon: '/assets/traits/Demeter_03_Large.png',
     god: 'Demeter',
     rarity: 0,
     level: 1,
@@ -101,7 +101,7 @@ export default [
   {
     name: "Demeter's Aid",
     type: 'call',
-    icon: 'assets/traits/Demeter_04_Large.png',
+    icon: '/assets/traits/Demeter_04_Large.png',
     god: 'Demeter',
     rarity: 0,
     level: 1,
@@ -120,7 +120,7 @@ export default [
   {
     name: 'Frozen Touch',
     type: 'secondary',
-    icon: 'assets/traits/Demeter_13_Large.png',
+    icon: '/assets/traits/Demeter_13_Large.png',
     god: 'Demeter',
     rarity: 0,
     level: 1,
@@ -143,7 +143,7 @@ export default [
   {
     name: 'Rare Crop',
     type: 'secondary',
-    icon: 'assets/traits/Demeter_08_Large.png',
+    icon: '/assets/traits/Demeter_08_Large.png',
     god: 'Demeter',
     rarity: 0,
     description: (stats) =>
@@ -159,7 +159,7 @@ export default [
   {
     name: 'Ravenous Will',
     type: 'secondary',
-    icon: 'assets/traits/Demeter_11_Large.png',
+    icon: '/assets/traits/Demeter_11_Large.png',
     god: 'Demeter',
     rarity: 0,
     description: (stats) =>
@@ -178,7 +178,7 @@ export default [
   {
     name: 'Nourished Soul',
     type: 'secondary',
-    icon: 'assets/traits/Demeter_09_Large.png',
+    icon: '/assets/traits/Demeter_09_Large.png',
     god: 'Demeter',
     rarity: 0,
     level: 1,
@@ -198,7 +198,7 @@ export default [
   {
     name: 'Snow Burst',
     type: 'secondary',
-    icon: 'assets/traits/Demeter_05_Large.png',
+    icon: '/assets/traits/Demeter_05_Large.png',
     god: 'Demeter',
     rarity: 0,
     level: 1,
@@ -221,7 +221,7 @@ export default [
   {
     name: 'Arctic Blast',
     type: 'secondary',
-    icon: 'assets/traits/Demeter_07_Large.png',
+    icon: '/assets/traits/Demeter_07_Large.png',
     god: 'Demeter',
     rarity: 0,
     prereqs: { Demeter: ["Demeter's Aid", "Frost Flourish", "Frost Strike", "Mistral Dash", "Snow Burst"] },
@@ -239,7 +239,7 @@ export default [
   {
     name: 'Killing Freeze',
     type: 'secondary',
-    icon: 'assets/traits/Demeter_12_Large.png',
+    icon: '/assets/traits/Demeter_12_Large.png',
     god: 'Demeter',
     rarity: 0,
     prereqs: { Demeter: ["Demeter's Aid", "Frost Flourish", "Frost Strike", "Mistral Dash", "Snow Burst"] },
@@ -265,7 +265,7 @@ export default [
   {
     name: 'Glacial Glare',
     type: 'secondary',
-    icon: 'assets/traits/Demeter_14_Large.png',
+    icon: '/assets/traits/Demeter_14_Large.png',
     god: 'Demeter',
     rarity: 0,
     level: 1,
@@ -285,7 +285,7 @@ export default [
   {
     name: 'Winter Harvest',
     type: 'secondary',
-    icon: 'assets/traits/Demeter_10_Large.png',
+    icon: '/assets/traits/Demeter_10_Large.png',
     god: 'Demeter',
     rarity: 4,
     level: 1,

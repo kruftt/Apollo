@@ -39,21 +39,21 @@ export const data =
     attack: {
       name: 'base',
       type: 'attack',
-      icon: 'assets/traits/SlotIcon_Attack.png',
+      icon: '/assets/traits/SlotIcon_Attack.png',
       rarity: -1,
     },
 
     special: {
       name: 'base',
       type: 'special',
-      icon: 'assets/traits/SlotIcon_Secondary.png',
+      icon: '/assets/traits/SlotIcon_Secondary.png',
       rarity: -1,
     },
 
     cast: {
       name: 'base',
       type: 'cast',
-      icon: 'assets/traits/SlotIcon_Ranged.png',
+      icon: '/assets/traits/SlotIcon_Ranged.png',
       rarity: -1,
       abilities: [
         { name: 'Cast', type: 'damage', trigger: 'cast', stats: { min: 50, max: 50, lodge: true } },
@@ -63,14 +63,14 @@ export const data =
     dash: {
       name: 'base',
       type: 'dash',
-      icon: 'assets/traits/SlotIcon_Dash.png',
+      icon: '/assets/traits/SlotIcon_Dash.png',
       rarity: -1,
     },
 
     call: {
       name: 'base',
       type: 'call',
-      icon: 'assets/traits/SlotIcon_Wrath.png',
+      icon: '/assets/traits/SlotIcon_Wrath.png',
       rarity: -1,
     },
 
@@ -163,7 +163,7 @@ export const data =
     {
       name: 'Daedalus',
       type: 'god',
-      icon: 'assets/gods/Hammer.png',
+      icon: '/assets/gods/Hammer.png',
     },
 
     ...stygius,

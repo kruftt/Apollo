@@ -6,7 +6,7 @@ export default [
   {
     name: 'Coronacht',
     description: 'The Heart-Seeking Bow.',
-    icon: 'assets/weapons/bow_base_icon.png',
+    icon: '/assets/weapons/bow_base_icon.png',
     type: 'weapon',
     rarity: -4,
     abilities: [
@@ -21,7 +21,7 @@ export default [
     name: 'Coronacht - Aspect of Zagreus',
     type: 'aspect',
     weapon: 'Coronacht',
-    icon: 'assets/weapons/bow_base_icon.png',
+    icon: '/assets/weapons/bow_base_icon.png',
     rarity: 4,
     description: (stats) =>
       `<div>The form in which the heart-seeking bow first revealed itself.</div>` +
@@ -42,7 +42,7 @@ export default [
     name: 'Coronacht - Aspect of Chiron',
     type: 'aspect',
     weapon: 'Coronacht',
-    icon: 'assets/weapons/bow_echantment_1.png',
+    icon: '/assets/weapons/bow_echantment_1.png',
     rarity: 4,
     description: (stats) =>
     `<div>Your <b>Special</b> automatically seeks the foe last struck by your <b>Attack</b>.</div>` +
@@ -56,7 +56,7 @@ export default [
     name: 'Coronacht - Aspect of Hera',
     type: 'aspect',
     weapon: 'Coronacht',
-    icon: 'assets/weapons/bow_echantment_2.png',
+    icon: '/assets/weapons/bow_echantment_2.png',
     rarity: 4,
     description: (stats) =>
     `<div>Your <b>Cast</b> loads <b>Ammo</b> into your next <b>Attack</b>, firing on impact.</div>` +
@@ -73,7 +73,7 @@ export default [
     name: 'Coronacht - Aspect of Rama',
     type: 'aspect',
     weapon: 'Coronacht',
-    icon: 'assets/weapons/bow_enchantment_3.png',
+    icon: '/assets/weapons/bow_enchantment_3.png',
     rarity: 4,
     description: (stats) =>
     `<div>You have <b>Celestial Sharanga</b>, which can cause <b>Shared Suffering</b>.</div>` +
@@ -104,7 +104,7 @@ export default [
   {
     name: 'Twin Shot',
     type: 'hammer',
-    icon: 'assets/weapons/bow_double_shot_08.png',
+    icon: '/assets/weapons/bow_double_shot_08.png',
     god: 'Daedalus',
     weapon: 'Coronacht',
     rarity: -3,
@@ -120,7 +120,7 @@ export default [
   {
     name: 'Sniper Shot',
     type: 'hammer',
-    icon: 'assets/weapons/bow_sniper_shot_02.png',
+    icon: '/assets/weapons/bow_sniper_shot_02.png',
     god: 'Daedalus',
     weapon: 'Coronacht',
     rarity: -3,
@@ -136,7 +136,7 @@ export default [
   {
     name: 'Explosive Shot',
     type: 'hammer',
-    icon: 'assets/weapons/bow_heavy_charge_03.png',
+    icon: '/assets/weapons/bow_heavy_charge_03.png',
     god: 'Daedalus',
     weapon: 'Coronacht',
     rarity: -3,
@@ -152,7 +152,7 @@ export default [
   {
     name: 'Flurry Shot',
     type: 'hammer',
-    icon: 'assets/weapons/bow_second_shot_15.png',
+    icon: '/assets/weapons/bow_second_shot_15.png',
     god: 'Daedalus',
     weapon: 'Coronacht',
     rarity: -3,
@@ -167,7 +167,7 @@ export default [
   {
     name: 'Piercing Volley',
     type: 'hammer',
-    icon: 'assets/weapons/bow_penetrating_shot_05.png',
+    icon: '/assets/weapons/bow_penetrating_shot_05.png',
     god: 'Daedalus',
     weapon: 'Coronacht',
     rarity: -3,
@@ -192,7 +192,7 @@ export default [
   {
     name: 'Perfect Shot',
     type: 'hammer',
-    icon: 'assets/weapons/bow_perfect_shot_06.png',
+    icon: '/assets/weapons/bow_perfect_shot_06.png',
     god: 'Daedalus',
     weapon: 'Coronacht',
     rarity: -3,
@@ -208,7 +208,7 @@ export default [
   {
     name: 'Relentless Volley',
     type: 'hammer',
-    icon: 'assets/weapons/bow_arrow_storm_07.png',
+    icon: '/assets/weapons/bow_arrow_storm_07.png',
     god: 'Daedalus',
     weapon: 'Coronacht',
     rarity: -3,
@@ -224,7 +224,7 @@ export default [
   {
     name: 'Triple Shot',
     type: 'hammer',
-    icon: 'assets/weapons/bow_fan_shot_09.png',
+    icon: '/assets/weapons/bow_fan_shot_09.png',
     god: 'Daedalus',
     weapon: 'Coronacht',
     rarity: -3,
@@ -240,7 +240,7 @@ export default [
   {
     name: 'Charged Volley',
     type: 'hammer',
-    icon: 'assets/weapons/bow_secondary_charge_trait_11.png',
+    icon: '/assets/weapons/bow_secondary_charge_trait_11.png',
     god: 'Daedalus',
     weapon: 'Coronacht',
     rarity: -3,
@@ -256,7 +256,7 @@ export default [
   {
     name: 'Chain Shot',
     type: 'hammer',
-    icon: 'assets/weapons/bow_chain_shot_trait_10.png',
+    icon: '/assets/weapons/bow_chain_shot_trait_10.png',
     god: 'Daedalus',
     weapon: 'Coronacht',
     rarity: -3,
@@ -274,7 +274,7 @@ export default [
   {
     name: 'Point-Blank Shot',
     type: 'hammer',
-    icon: 'assets/weapons/bow_point_blank_16.png',
+    icon: '/assets/weapons/bow_point_blank_16.png',
     god: 'Daedalus',
     weapon: 'Coronacht',
     rarity: -3,
@@ -291,7 +291,7 @@ export default [
   {
     name: 'Concentrated Volley',
     type: 'hammer',
-    icon: 'assets/weapons/bow_consecutive_barrage_13.png',
+    icon: '/assets/weapons/bow_consecutive_barrage_13.png',
     god: 'Daedalus',
     weapon: 'Coronacht',
     rarity: -3,
@@ -309,7 +309,7 @@ export default [
   {
     name: 'Repulse Shot',
     type: 'hammer',
-    icon: 'assets/weapons/bow_rama_14.png',
+    icon: '/assets/weapons/bow_rama_14.png',
     god: 'Daedalus',
     weapon: 'Coronacht',
     rarity: -3,

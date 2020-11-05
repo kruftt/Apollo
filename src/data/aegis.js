@@ -7,7 +7,7 @@ export default [
     name: 'Aegis',
     description: 'The Shield of Chaos.',
     type: 'weapon',
-    icon: 'assets/weapons/shield_base_icon.png',
+    icon: '/assets/weapons/shield_base_icon.png',
     rarity: -4,
     abilities: [
       { type: 'damage', trigger: 'attack', name: 'Bash', stats: {backstab:true, min: 25} },
@@ -20,7 +20,7 @@ export default [
     name: 'Aegis - Aspect of Zagreus',
     type: 'aspect',
     weapon: 'Aegis',
-    icon: 'assets/weapons/shield_base_icon.png',
+    icon: '/assets/weapons/shield_base_icon.png',
     rarity: 4,
     description: (stats) =>
       `<div>The form in which the shield of chaos first revealed itself.</div>` +
@@ -34,7 +34,7 @@ export default [
     name: 'Aegis - Aspect of Chaos',
     type: 'aspect',
     weapon: 'Aegis',
-    icon: 'assets/weapons/shield_enchantment_2.png',
+    icon: '/assets/weapons/shield_enchantment_2.png',
     rarity: 4,
     description: (stats) =>
       `<div>After you <b>Bull Rush</b> your next <b>Special</b> throws multiple shields.</div>` +
@@ -48,7 +48,7 @@ export default [
     name: 'Aegis - Aspect of Zeus',
     type: 'aspect',
     weapon: 'Aegis',
-    icon: 'assets/weapons/shield_enchantment_1.png',
+    icon: '/assets/weapons/shield_enchantment_1.png',
     rarity: 4,
     description: (stats) =>
       `<div>Your <b>Special</b> is replaced with the <b>Blitz Disc.</b></div>` +
@@ -62,7 +62,7 @@ export default [
     name: 'Aegis - Aspect of Beowolf',
     type: 'aspect',
     weapon: 'Aegis',
-    icon: 'assets/weapons/shield_enchantment_3.png',
+    icon: '/assets/weapons/shield_enchantment_3.png',
     rarity: 4,
     description: (stats) =>
       `<div>You have <b>Naegling's Board</b> but take +10% damage.</b></div>` +
@@ -85,7 +85,7 @@ export default [
   {
     name: 'Dread Flight',
     type: 'hammer',
-    icon: 'assets/weapons/shield_deadly_return_04.png',
+    icon: '/assets/weapons/shield_deadly_return_04.png',
     god: 'Daedalus',
     weapon: 'Aegis',
     rarity: -3,
@@ -101,7 +101,7 @@ export default [
   {
     name: 'Sudden Rush',
     type: 'hammer',
-    icon: 'assets/weapons/shield_swift_rush_05.png',
+    icon: '/assets/weapons/shield_swift_rush_05.png',
     god: 'Daedalus',
     weapon: 'Aegis',
     rarity: -3,
@@ -117,7 +117,7 @@ export default [
   {
     name: 'Pulverizing Blow',
     type: 'hammer',
-    icon: 'assets/weapons/shield_shatter_strike_06.png',
+    icon: '/assets/weapons/shield_shatter_strike_06.png',
     god: 'Daedalus',
     weapon: 'Aegis',
     rarity: -3,
@@ -133,7 +133,7 @@ export default [
   {
     name: 'Dashing Wallop',
     type: 'hammer',
-    icon: 'assets/weapons/shield_iron_skin_01.png',
+    icon: '/assets/weapons/shield_iron_skin_01.png',
     god: 'Daedalus',
     weapon: 'Aegis',
     rarity: -3,
@@ -149,7 +149,7 @@ export default [
   {
     name: 'Explosive Return',
     type: 'hammer',
-    icon: 'assets/weapons/shield_superior_retaliation_07.png',
+    icon: '/assets/weapons/shield_superior_retaliation_07.png',
     god: 'Daedalus',
     weapon: 'Aegis',
     rarity: -3,
@@ -165,7 +165,7 @@ export default [
   {
     name: 'Minotaur Rush',
     type: 'hammer',
-    icon: 'assets/weapons/shield_minotaur_rush_08.png',
+    icon: '/assets/weapons/shield_minotaur_rush_08.png',
     god: 'Daedalus',
     weapon: 'Aegis',
     rarity: -3,
@@ -179,7 +179,7 @@ export default [
   {
     name: 'Breaching Rush',
     type: 'hammer',
-    icon: 'assets/weapons/shield_divine_immunity_02.png',
+    icon: '/assets/weapons/shield_divine_immunity_02.png',
     god: 'Daedalus',
     weapon: 'Aegis',
     rarity: -3,
@@ -196,7 +196,7 @@ export default [
   {
     name: 'Charged Shot',
     type: 'hammer',
-    icon: 'assets/weapons/shield_vicious_throw_09.png',
+    icon: '/assets/weapons/shield_vicious_throw_09.png',
     god: 'Daedalus',
     weapon: 'Aegis',
     rarity: -3,
@@ -209,7 +209,7 @@ export default [
   {
     name: 'Charged Flight',
     type: 'hammer',
-    icon: 'assets/weapons/shield_throw_elective_charge_12.png',
+    icon: '/assets/weapons/shield_throw_elective_charge_12.png',
     god: 'Daedalus',
     weapon: 'Aegis',
     rarity: -3,
@@ -227,7 +227,7 @@ export default [
   {
     name: 'Empowering Flight',
     type: 'hammer',
-    icon: 'assets/weapons/shield_empower_throw_13.png',
+    icon: '/assets/weapons/shield_empower_throw_13.png',
     god: 'Daedalus',
     weapon: 'Aegis',
     rarity: -3,
@@ -245,7 +245,7 @@ export default [
   {
     name: 'Dashing Flight',
     type: 'hammer',
-    icon: 'assets/weapons/shield_dash_throw_16.png',
+    icon: '/assets/weapons/shield_dash_throw_16.png',
     god: 'Daedalus',
     weapon: 'Aegis',
     rarity: -3,
@@ -262,7 +262,7 @@ export default [
   {
     name: 'Ferocious Guard',
     type: 'hammer',
-    icon: 'assets/weapons/shield_empower_block_14.png',
+    icon: '/assets/weapons/shield_empower_block_14.png',
     god: 'Daedalus',
     weapon: 'Aegis',
     rarity: -3,
@@ -279,7 +279,7 @@ export default [
   {
     name: 'Unyielding Defense',
     type: 'hammer',
-    icon: 'assets/weapons/shield_beowulf.png',
+    icon: '/assets/weapons/shield_beowulf.png',
     god: 'Daedalus',
     weapon: 'Aegis',
     rarity: -3,

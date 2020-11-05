@@ -6,12 +6,12 @@ export default [
   {
     name: 'Ares',
     type: 'god',
-    icon: 'assets/gods/Ares.png',
+    icon: '/assets/gods/Ares.png',
   },
   {
     name: 'Curse of Agony',
     type: 'attack',
-    icon: 'assets/traits/Ares_01_Large.png',
+    icon: '/assets/traits/Ares_01_Large.png',
     god: 'Ares',
     rarity: 0,
     level: 1,
@@ -32,7 +32,7 @@ export default [
   {
     name: 'Curse of Pain',
     type: 'special',
-    icon: 'assets/traits/Ares_secondary_attack.png',
+    icon: '/assets/traits/Ares_secondary_attack.png',
     god: 'Ares',
     rarity: 0,
     level: 1,
@@ -51,7 +51,7 @@ export default [
   {
     name: 'Slicing Shot',
     type: 'cast',
-    icon: 'assets/traits/Ares_02_Large.png',
+    icon: '/assets/traits/Ares_02_Large.png',
     god: 'Ares',
     rarity: 0,
     level: 1,
@@ -69,7 +69,7 @@ export default [
   {
     name: 'Blade Dash',
     type: 'dash',
-    icon: 'assets/traits/Ares_03_Large.png',
+    icon: '/assets/traits/Ares_03_Large.png',
     god: 'Ares',
     rarity: 0,
     level: 1,
@@ -81,7 +81,7 @@ export default [
   {
     name: "Ares' Aid",
     type: 'call',
-    icon: 'assets/traits/Ares_04_Large.png',
+    icon: '/assets/traits/Ares_04_Large.png',
     god: 'Ares',
     rarity: 0,
     level: 1,
@@ -99,7 +99,7 @@ export default [
   {
     name: 'Curse of Vengeance',
     type: 'secondary',
-    icon: 'assets/traits/Ares_05_Large.png',
+    icon: '/assets/traits/Ares_05_Large.png',
     god: 'Ares',
     rarity: 0,
     level: 1,
@@ -118,7 +118,7 @@ export default [
   {
     name: 'Urge to Kill',
     type: 'secondary',
-    icon: 'assets/traits/Ares_06_Large.png',
+    icon: '/assets/traits/Ares_06_Large.png',
     god: 'Ares',
     rarity: 0,
     level: 1,
@@ -145,7 +145,7 @@ export default [
   {
     name: 'Battle Rage',
     type: 'secondary',
-    icon: 'assets/traits/Ares_12_Large.png',
+    icon: '/assets/traits/Ares_12_Large.png',
     god: 'Ares',
     rarity: 0,
     level: 1,
@@ -166,7 +166,7 @@ export default [
   {
     name: 'Blood Frenzy',
     type: 'secondary',
-    icon: 'assets/traits/Ares_14_Large.png',
+    icon: '/assets/traits/Ares_14_Large.png',
     god: 'Ares',
     rarity: 0,
     level: 1,
@@ -187,7 +187,7 @@ export default [
   {
     name: 'Black Metal',
     type: 'secondary',
-    icon: 'assets/traits/Ares_07_Large.png',
+    icon: '/assets/traits/Ares_07_Large.png',
     god: 'Ares',
     rarity: 0,
     level: 1,
@@ -206,7 +206,7 @@ export default [
   {
     name: 'Engulfing Vortex',
     type: 'secondary',
-    icon: 'assets/traits/Ares_08_Large.png',
+    icon: '/assets/traits/Ares_08_Large.png',
     god: 'Ares',
     rarity: 0,
     prereqs: { Ares: ["Ares' Aid", 'Blade Dash', 'Slicing Flare', 'Slicing Shot'] },
@@ -223,7 +223,7 @@ export default [
   {
     name: 'Dire Misfortune',
     type: 'secondary',
-    icon: 'assets/traits/Ares_11_Large.png',
+    icon: '/assets/traits/Ares_11_Large.png',
     god: 'Ares',
     rarity: 0,
     prereqs: { Ares: [ 'Curse of Agony', 'Curse of Pain' ] },
@@ -242,7 +242,7 @@ export default [
   {
     name: 'Impending Doom',
     type: 'secondary',
-    icon: 'assets/traits/Ares_13_Large.png',
+    icon: '/assets/traits/Ares_13_Large.png',
     god: 'Ares',
     rarity: 0,
     level: 1,
@@ -261,7 +261,7 @@ export default [
   {
     name: 'Vicious Cycle',
     type: 'secondary',
-    icon: 'assets/traits/Ares_09_Large.png',
+    icon: '/assets/traits/Ares_09_Large.png',
     god: 'Ares',
     rarity: 4,
     prereqs: { Ares: ['Black Metal', 'Engulfing Vortex'] },

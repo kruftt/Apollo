@@ -4,12 +4,12 @@ export default [
   {
     name: 'Poseidon',
     type: 'god',
-    icon: 'assets/gods/Poseidon.png',
+    icon: '/assets/gods/Poseidon.png',
   },
   {
     name: 'Tempest Strike',
     type: 'attack',
-    icon: 'assets/traits/Poseidon_01_Large.png',
+    icon: '/assets/traits/Poseidon_01_Large.png',
     god: 'Poseidon',
     rarity: 0,
     level: 1,
@@ -27,7 +27,7 @@ export default [
   {
     name: 'Tempest Flourish',
     type: 'special',
-    icon: 'assets/traits/Poseidon_secondary_attack.png',
+    icon: '/assets/traits/Poseidon_secondary_attack.png',
     god: 'Poseidon',
     rarity: 0,
     level: 1,
@@ -45,7 +45,7 @@ export default [
   {
     name: 'Flood Shot',
     type: 'cast',
-    icon: 'assets/traits/Poseidon_02_Large.png',
+    icon: '/assets/traits/Poseidon_02_Large.png',
     god: 'Poseidon',
     rarity: 0,
     level: 1,
@@ -57,7 +57,7 @@ export default [
   {
     name: 'Tidal Dash',
     type: 'dash',
-    icon: 'assets/traits/Poseidon_03_Large.png',
+    icon: '/assets/traits/Poseidon_03_Large.png',
     god: 'Poseidon',
     rarity: 0,
     level: 1,
@@ -75,7 +75,7 @@ export default [
   {
     name: "Poseidon's Aid",
     type: 'call',
-    icon: 'assets/traits/Poseidon_04_Large.png',
+    icon: '/assets/traits/Poseidon_04_Large.png',
     god: 'Poseidon',
     rarity: 0,
     level: 1,
@@ -93,7 +93,7 @@ export default [
   {
     name: "Typhoon's Fury",
     type: 'secondary',
-    icon: 'assets/traits/Poseidon_05_Large.png',
+    icon: '/assets/traits/Poseidon_05_Large.png',
     god: 'Poseidon',
     rarity: 0,
     level: 1,
@@ -112,7 +112,7 @@ export default [
   {
     name: 'Hydraulic Might',
     type: 'secondary',
-    icon: 'assets/traits/Poseidon_14_Large.png',
+    icon: '/assets/traits/Poseidon_14_Large.png',
     god: 'Poseidon',
     rarity: 0,
     level: 1,
@@ -131,7 +131,7 @@ export default [
   {
     name: "Ocean's Bounty",
     type: 'secondary',
-    icon: 'assets/traits/Poseidon_09_Large.png',
+    icon: '/assets/traits/Poseidon_09_Large.png',
     god: 'Poseidon',
     rarity: 0,
     level: 1,
@@ -149,7 +149,7 @@ export default [
   {
     name: 'Sunken Treasure',
     type: 'secondary',
-    icon: 'assets/traits/Poseidon_06_Large.png',
+    icon: '/assets/traits/Poseidon_06_Large.png',
     god: 'Poseidon',
     rarity: 0,
     description: (stats) =>
@@ -158,7 +158,7 @@ export default [
   {
     name: 'Razor Shoals',
     type: 'secondary',
-    icon: 'assets/traits/Poseidon_11_Large.png',
+    icon: '/assets/traits/Poseidon_11_Large.png',
     god: 'Poseidon',
     rarity: 0,
     level: 1,
@@ -177,7 +177,7 @@ export default [
   {
     name: 'Boiling Point',
     type: 'secondary',
-    icon: 'assets/traits/Poseidon_10_Large.png',
+    icon: '/assets/traits/Poseidon_10_Large.png',
     god: 'Poseidon',
     rarity: 0,
     level: 1,
@@ -196,7 +196,7 @@ export default [
   {
     name: 'Breaking Wave',
     type: 'secondary',
-    icon: 'assets/traits/Poseidon_08_Large.png',
+    icon: '/assets/traits/Poseidon_08_Large.png',
     god: 'Poseidon',
     rarity: 0,
     level: 1,
@@ -215,7 +215,7 @@ export default [
   {
     name: 'Wave Pounding',
     type: 'secondary',
-    icon: 'assets/traits/Poseidon_12_Large.png',
+    icon: '/assets/traits/Poseidon_12_Large.png',
     god: 'Poseidon',
     rarity: 0,
     level: 1,
@@ -237,7 +237,7 @@ export default [
   {
     name: 'Rip Current',
     type: 'secondary',
-    icon: 'assets/traits/Poseidon_15_Large.png',
+    icon: '/assets/traits/Poseidon_15_Large.png',
     god: 'Poseidon',
     rarity: 0,
     level: 1,
@@ -257,7 +257,7 @@ export default [
   {
     name: 'Huge Catch',
     type: 'secondary',
-    icon: 'assets/traits/Poseidon_13_Large.png',
+    icon: '/assets/traits/Poseidon_13_Large.png',
     god: 'Poseidon',
     rarity: 4,
     prereqs: { Poseidon: ["Ocean's Bounty", 'Sunken Treasure'] },
@@ -275,7 +275,7 @@ export default [
   {
     name: 'Second Wave',
     type: 'secondary',
-    icon: 'assets/traits/Poseidon_07_Large.png',
+    icon: '/assets/traits/Poseidon_07_Large.png',
     god: 'Poseidon',
     rarity: 4,
     prereqs: { Secondary: ['Breaking Wave', "Typhoon's Fury"], Primary: ['Flood Shot', "Poseidon's Aid", 'Tempest Flourish', 'Tempest Strike', 'Tidal Dash'] },

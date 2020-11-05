@@ -15,7 +15,7 @@ export default [
   {
     name: 'Aphrodite',
     type: 'god',
-    icon: 'assets/gods/Aphrodite.png',
+    icon: '/assets/gods/Aphrodite.png',
   },
   {
     name: 'Heartbreak Strike',
@@ -23,7 +23,7 @@ export default [
       '<div>Your<b>Attack</b>deals more damage and inflicts<b>Weak</b>.</div>' +
       `<div>▶ Attack Damage:<div><span>${fp(stats.mult_min, stats.mult_max)}%</span></div></div>`,
     type: 'attack',
-    icon: 'assets/traits/Aphrodite_01_Large.png',
+    icon: '/assets/traits/Aphrodite_01_Large.png',
     god: 'Aphrodite',
     rarity: 0,
     level: 1,
@@ -39,7 +39,7 @@ export default [
   {
     name: 'Heartbreak Flourish',
     type: 'special',
-    icon: 'assets/traits/Aphrodite_secondary_attack.png',
+    icon: '/assets/traits/Aphrodite_secondary_attack.png',
     god: 'Aphrodite',
     rarity: 0,
     level: 1,
@@ -58,7 +58,7 @@ export default [
   {
     name: 'Crush Shot',
     type: 'cast',
-    icon: 'assets/traits/Aphrodite_02_Large.png',
+    icon: '/assets/traits/Aphrodite_02_Large.png',
     god: 'Aphrodite',
     rarity: 0,
     level: 1,
@@ -73,7 +73,7 @@ export default [
   {
     name: 'Passion Dash',
     type: 'dash',
-    icon: 'assets/traits/Aphrodite_03_Large.png',
+    icon: '/assets/traits/Aphrodite_03_Large.png',
     god: 'Aphrodite',
     rarity: 0,
     level: 1,
@@ -88,7 +88,7 @@ export default [
   {
     name: "Aphrodite's Aid",
     type: 'call',
-    icon: 'assets/traits/Aphrodite_04_Large.png',
+    icon: '/assets/traits/Aphrodite_04_Large.png',
     god: 'Aphrodite',
     rarity: 0,
     level: 1,
@@ -101,7 +101,7 @@ export default [
   {
     name: "Dying Lament",
     type: 'secondary',
-    icon: 'assets/traits/Aphrodite_08_Large.png',
+    icon: '/assets/traits/Aphrodite_08_Large.png',
     god: 'Aphrodite',
     rarity: 0,
     level: 1,
@@ -116,7 +116,7 @@ export default [
   {
     name: "Wave of Despair",
     type: 'secondary',
-    icon: 'assets/traits/Aphrodite_09_Large.png',
+    icon: '/assets/traits/Aphrodite_09_Large.png',
     god: 'Aphrodite',
     rarity: 0,
     level: 1,
@@ -131,7 +131,7 @@ export default [
   {
     name: "Different League",
     type: 'secondary',
-    icon: 'assets/traits/Aphrodite_07_Large.png',
+    icon: '/assets/traits/Aphrodite_07_Large.png',
     god: 'Aphrodite',
     rarity: 0,
     level: 1,
@@ -145,7 +145,7 @@ export default [
   {
     name: 'Empty Inside',
     type: 'secondary',
-    icon: 'assets/traits/Aphrodite_05_Large.png',
+    icon: '/assets/traits/Aphrodite_05_Large.png',
     god: 'Aphrodite',
     prereqs: { Aphrodite: ['Passion Dash', 'Crush Shot', 'Heartbreak Strike', 'Heartbreak Flourish'] },
     rarity: 0,
@@ -159,7 +159,7 @@ export default [
   {
     name: 'Sweet Surrender',
     type: 'secondary',
-    icon: 'assets/traits/Aphrodite_06_Large.png',
+    icon: '/assets/traits/Aphrodite_06_Large.png',
     god: 'Aphrodite',
     prereqs: { Aphrodite: ['Passion Dash', 'Crush Shot', 'Heartbreak Strike', 'Heartbreak Flourish'] },
     rarity: 0,
@@ -176,7 +176,7 @@ export default [
   {
     name: 'Broken Resolve',
     type: 'secondary',
-    icon: 'assets/traits/Aphrodite_12_Large.png',
+    icon: '/assets/traits/Aphrodite_12_Large.png',
     god: 'Aphrodite',
     rarity: 0,
     level: 1,
@@ -202,7 +202,7 @@ export default [
   {
     name: 'Blown Kiss',
     type: 'secondary',
-    icon: 'assets/traits/Aphrodite_13_Large.png',
+    icon: '/assets/traits/Aphrodite_13_Large.png',
     god: 'Aphrodite',
     rarity: 0,
     prereqs: { Aphrodite: ['Crush Shot'] },
@@ -218,7 +218,7 @@ export default [
   {
     name: 'Unhealthy Fixation',
     type: 'secondary',
-    icon: 'assets/traits/Aphrodite_10_Large.png',
+    icon: '/assets/traits/Aphrodite_10_Large.png',
     god: 'Aphrodite',
     prereqs: {
       ability: ['Passion Dash', 'Crush Shot', 'Heartbreak Strike', 'Heartbreak Flourish'],
