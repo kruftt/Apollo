@@ -1,18 +1,18 @@
 <template>
 <div>
-  <div :class="[ 'effect_data', effect.triggers ? effect.triggers : effect.type, effect.damage_max ? 'data--bold': '', ]">
-    <div class="effect_data__name">{{ effect.name }}</div>
+  <div :class="[ 'effect_data', effect.type, effect.damage_max ? 'data--bold': '', ]">
+    <div class="effect_data__name">{{ effect.name + ((effect.stats.count) ? ` (x${effect.stats.count})`: '') }}</div>
+    <div v-if="effect.stats.duration"
+      class="effect_data__duration" >
+      {{ fv(effect.stats.duration, null, 1) }}s
+    </div>
     <div v-if="effect.stats.reduction"
       class="effect_data__reduction" >
       {{ `-${Math.round(1000*(effect.stats.reduction))/10}% dmg` }}
     </div>
     <div v-if="effect.stats.chance"
-      class="effect_data__reduction" >
-      {{ Math.round(100*effect.stats.chance) }}%
-    </div>
-    <div v-if="effect.stats.duration"
-      class="effect_data__duration" >
-      {{ effect.stats.duration }}s
+      class="effect_data__chance" >
+      {{ Math.round(100*effect.stats.chance) }}% chance
     </div>
     <div class="effect_data__spacer" />
     <div v-if="effect.damage_max"
@@ -24,7 +24,7 @@
   <template v-if="effect.crit_chance">
     <div class="crit_data">
       <div class="crit_data__label">
-        critical&nbsp;&nbsp;{{ `${Math.round(100*effect.crit_chance)}%` }}
+        critical&nbsp;&nbsp;{{ `${Math.round(1000*effect.crit_chance)/10}%` }}
       </div>
       <div class="crit_data__value">{{ effect.crit_damage }}</div>
     </div>
@@ -37,7 +37,16 @@
     </div>
   </template>
 
-  <div v-if="effect.stats.knockback" class="knockback_data">Knockback</div>
+  <div v-if="effect.dot_damage" :class="['dot_data', effect.type ]">
+    <div class="dot_data__interval">&nbsp;Every {{ effect.stats.interval }} Sec.</div>
+    <div :class="['dot_data__damage', dmg_mag(effect.dot_damage) ]">{{ effect.dot_damage }}</div>
+  </div>
+
+  <div v-if="effect.slam" :class="['knockback_data', effect.slam.type]">
+    Knockback
+    <div class="slam_data">Slam</div>
+    <div class="slam_damage">{{ effect.slam.damage_min }}</div>
+  </div>
 
   <div v-if="effect.effects.length > 0" class="secondary_data">
     <div class="secondary_data__spacer" />
@@ -59,19 +68,26 @@
   text-align: left;
   color: #ccc;
   display: flex;
-  align-items:baseline;
+  align-items: baseline;
 }
 
 .effect_data__name {}
 
 .effect_data__duration {
-  text-align: left;
+  text-align: right;
   margin-left: 1em;
+  flex: 1 0 auto;
 }
 .effect_data__reduction {
   text-align: left;
   font-size: 80%;
   margin-left: 1.25em;
+}
+
+.effect_data__chance {
+  text-align: left;
+  font-size: 80%;
+  margin-left: 1em;
 }
 
 .effect_data__spacer {
@@ -108,12 +124,38 @@
 }
 .avg_data__value { }
 
+.dot_data {
+  display: flex;
+  font-size: 95%;
+  align-items: baseline;
+}
+.dot_data__interval {
+
+}
+.dot_data__damage {
+  flex: 1;
+  text-align: right;
+}
 
 .knockback_data {
   font-size: 90%;
   font-weight: 500;
   text-align:left;
   color: #aaa;
+  display: flex;
+  flex-flow: row nowrap;
+}
+
+.slam_data {
+  flex: 2 0;
+  text-align: right;
+  font-weight: bold;
+}
+
+.slam_damage {
+  flex: 1 0;
+  text-align: right;
+  font-weight: bold;
 }
 
 
@@ -151,18 +193,21 @@
   font-size: 130%;
 }
 
-.lightning, .jolt, .jolted {
-  color: #cc4;
-}
-
-.weak, .charm {
-  color: #d7d;
-}
+.bolt, .chain, .jolt, .jolted, .spark { color: #cc4; }
+.weak, .charm, .crush, .love { color: rgb(219, 88, 219); }
+.doom, .rift { color: #d55; }
+.arrow, .exit { color: #6b6; }
+.deflect, .shield { color: #baa968; }
+.arctic, .chill, .snow, .frozen, .freeze, .shatter, .beam, .vortex { color: rgb(177, 203, 255); }
+.hangover, .pressure, .trippy, .festive { color: rgb(146, 122, 255); }
+.wave, .rupture, .flood, .surge, .typhoon, .watery { color: rgb(122, 195, 255) }
+.shared { color: #bbf; }
 </style>
 
 
 <script>
 import { computed } from 'vue'
+import { fp, fv } from '../data/util'
 import useStore from '../store'
 const store = useStore()
 
@@ -188,6 +233,7 @@ export default {
 
     return {
       dmg_mag,
+      fp, fv,
     }
   }
 }

@@ -7,9 +7,9 @@
       <StatPanel />
       <TraitInfoBar v-if="validHover" :trait="store.hover" id="tool_tip" />
     </div>
-    <TraitSelector v-if="store.selected !== null" />
     <div class="apollo_calc__spacer" />
   </div>
+  <TraitSelector v-if="store.selected !== null" id="apollo__trait_selector" />
 </template>
 
 <style>
@@ -45,6 +45,13 @@
   left: 1em;
   border: 4px ridge #762;
   font-size: 85%;
+}
+
+#apollo__trait_selector {
+  position: absolute;
+  width: 100%;
+  height: calc(100% - 8em);
+  padding: 8em 0 0 0;
 }
 </style>
 

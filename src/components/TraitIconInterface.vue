@@ -16,7 +16,7 @@
         @click.stop="remove"
       />
 
-      <template v-if="trait.rarity > -1 && trait.rarity < 4">
+      <template v-if="showRarity">
         <div
           v-if="prevRarity"
           :class="`trait_icon__button button__rarity button__rarity--decrease button__rarity--${ prevRarity }`"
@@ -198,7 +198,11 @@ export default {
           break
       }
     }
-
+    const showRarity = computed(() => {
+      const rarity = props.trait.rarity
+      const _type = props.trait.type
+      return (rarity > -1) && ((rarity < 4) || (_type === 'aspect' && rarity < 5))
+    })
     const prevRarity = computed(() => {
       return `${ props.trait.rarity > 0 ? props.trait.rarity - 1 : 'none' }`
     })
@@ -225,6 +229,7 @@ export default {
 
     return {
       remove,
+      showRarity,
       prevRarity,
       nextRarity,
       decreaseRarity,

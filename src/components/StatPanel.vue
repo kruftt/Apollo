@@ -1,12 +1,19 @@
 <template>
   <div class="stat_panel">
-    <template v-for="ability of abilities">
-      <StatPanelEffectData v-for="effect of ability" :effect="effect" class="stat_panel__effect_data" />
+    <template v-for="name, key of ability_names">
+      <template v-if="store.build.abilities[key]">
+        <div class="stat_panel__name_bar">
+          <div class="name_bar__spacer" />
+          <div class="name_bar__name">{{ name }}</div>
+          <div class="name_bar__spacer" />
+        </div>
+        <StatPanelEffectData v-for="effect of store.build.abilities[key]" :effect="effect" class="stat_panel__effect_data" />
+      </template>
     </template>
   </div>
-  <div>
-    <StatPanelCharacterData class="stat_panel" :character="store.player" />
-    <StatPanelCharacterData class="stat_panel" :character="store.foe" />
+  <div class="stat_panel">
+    <StatPanelCharacterData class="stat_panel__char_data" :character="store.player" />
+    <StatPanelCharacterData class="stat_panel__char_data" :character="store.foe" />
   </div>
 </template>
 
@@ -37,11 +44,38 @@
   margin: 0em;
 }
 
+.stat_panel__name_bar {
+  height: 1.5em;
+  margin: 0 1em 0.1em 0;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+}
+.name_bar__spacer {
+  flex: 1 1;
+  background-color: #444;
+  height: 0.05em;
+}
+.name_bar__name {
+  color: #444;
+  margin: 0 0.25em;
+  font-weight: bold;
+}
+
+.stat_panel__effect_data + .stat_panel__name_bar {
+  margin-top: 2em;
+}
+
 .stat_panel__effect_data {
   margin: 0 1em 0 0;
+  color: #bbb;
 }
 .stat_panel__effect_data + .stat_panel__effect_data {
-  margin-top: 1em;
+  margin-top: 1.0em;
+}
+
+.stat_panel__char_data {
+  margin: 0 0 2em 0;
 }
 </style>
 
@@ -52,7 +86,19 @@ import StatPanelCharacterData from './StatPanelCharacterData.vue'
 import StatPanelEffectData from './StatPanelEffectData.vue'
 import useStore from '../store'
 const store = useStore()
-const ability_types = ['attack','chargeAttack','dashAttack','special','chargeSpecial','dashSpecial','dash','cast','call','revenge','slain']
+const ability_names = {
+  attack: 'Attack',
+  chargeAttack: 'Charge Attack',
+  dashAttack: 'Dash Attack',
+  special: 'Special',
+  chargeSpecial: 'Charge Special',
+  dashSpecial: 'Dash Special',
+  dash: 'Dash',
+  cast: 'Cast',
+  call: 'Call',
+  revenge: 'Revenge',
+  slain: 'On Enemy Slain'
+}
 
 export default {
   components: {
@@ -61,18 +107,8 @@ export default {
     StatPanelEffectData,
   },
   setup () {
-    const abilities = computed(() => {
-      const abilities = store.build.abilities
-      const result = []
-      for (const akey of ability_types) {
-        const v = abilities[akey]
-        if (v) result.push(v)
-      }
-      return result
-    })
-
     return {
-      abilities,
+      ability_names,
       store,
     }
   }

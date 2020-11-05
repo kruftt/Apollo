@@ -43,19 +43,28 @@
   font-size: 140%;
 }
 
-.trait_info__description {}
+.trait_info__description {
+  white-space: nowrap;
+}
 .trait_info__description span,
 .trait_info__description b {
+  padding: 0 0.3em;
+}
+.trait_info__description b + span {
   padding: 0 0.3em;
 }
 .trait_info__description span {
   color: #4d4;
   font-weight: bold;
 }
+.trait_info__description .bad_effect {
+  color: #f44;
+}
 
 .trait_info__description > div {
   display: flex;
-  /* align-items: baseline; */
+  flex-flow: row wrap;
+  align-items: baseline;
 }
 
 .trait_info__description > div + div {
@@ -71,6 +80,10 @@
   position: absolute;
   left: 42em;
   top: 0;
+}
+
+.epic {
+  color: rgb(94, 4, 211);
 }
 </style>
 

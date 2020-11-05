@@ -2,12 +2,16 @@ import aphrodite from './aphrodite'
 import ares from './ares'
 import artemis from './artemis'
 import athena from './athena'
+import coronacht from './coronacht'
 import demeter from './demeter'
 import dionysus from './dionysus'
+import exagryph from './exagryph'
 import hermes from './hermes'
+import malphon from './malphon'
 import poseidon from './poseidon'
 import stygius from './stygius'
 import varatha from './varatha'
+import aegis from './aegis'
 import zeus from './zeus'
 import duo from './duo'
 
@@ -52,7 +56,7 @@ export const data =
       icon: 'assets/traits/SlotIcon_Ranged.png',
       rarity: -1,
       abilities: [
-        { name: 'Cast', type: 'cast', stats: { min: 50, max: 50, lodge: true } },
+        { name: 'Cast', type: 'damage', trigger: 'cast', stats: { min: 50, max: 50, lodge: true } },
       ],
     },
 
@@ -78,27 +82,42 @@ export const data =
 
     shadow: {
       name: 'Shadow Presence',
-      type: 'stat',
+      type: 'effect',
       target: 'coefficients',
-      stats: {
-        backstab: 0.5,
-      },
-      status: true,
+      stats: { backstab: 0.5 },
+      status: { target: 'player', name: 'Shadow Presence' },
     },
 
     crit: {
       name: 'Crit',
-      type: 'crit',
+      type: 'damage',
+      trigger: 'crit',
       stats: {
-        multiplier: 3,
+        mult_base: 3,
       },
+    },
+
+    chill: {
+      name: 'Chill',
+      type: 'chill',
+      target: 'foe',
+      stats: { speed: -0.04 },
+      status: { name: 'chill', target: 'foe' },
+      stacks: true,
     },
 
     weak: {
       name: 'Weak',
-      type: 'stat',
+      type: 'effect',
       target: 'coefficients',
       stats: { reduction: 0.3 }
+    },
+
+    slam: {
+      name: 'Slam',
+      type: 'slam',
+      trigger: 'knockback',
+      stats: { min: 20 },
     },
 
     player: {
@@ -107,6 +126,7 @@ export const data =
         health: 50,
         dodge: 0,
         speed: 1,
+        ammo: 2,
       },
       status: {
         'Backstab': null,
@@ -118,22 +138,24 @@ export const data =
       name: 'Foe',
       stats: {
         health: 100,
+        speed: 1,
       },
       status: {
-        boss: null,
-        armored: null,
         undamaged: null,
       },
     },
 
     coefficients: {
-      multiplier: 0,
+      mult_base: 0,
       mult_min: 0,
       mult_max: 0,
       first: 0,
       backstab: 0,
-      crit: 0,
+      crit: 0,  // Chance
+      crit_min: 0,  // Chance
+      crit_max: 0,  // Chance
       reduction: 0,
+      restoration: 0,
     },
   },
 
@@ -146,6 +168,10 @@ export const data =
 
     ...stygius,
     ...varatha,
+    ...aegis,
+    ...coronacht,
+    ...malphon,
+    ...exagryph,
 
     ...aphrodite,
     ...ares,

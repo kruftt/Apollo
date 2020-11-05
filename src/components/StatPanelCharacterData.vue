@@ -15,11 +15,19 @@
         class="character_panel__status_row"
       >
         <div class="character_panel__status_name">{{ firstToUpper(status_key) }}</div>
-        <input :id="status_key" v-model="character.status[status_key]" type="checkbox" class="character_panel__checkbox" />
-        <div class="character_panel__checkbox_image" />
+        <template v-if="character[`max_${status_key}`]">
+          <div class="character_panel__value_container" @click.stop="">
+            <img class="character_panel__button button__value_arrow" src="assets/Arrow_Left.png" @click.stop="stepDown(status_key)" />
+            <div :id="`${status_key}_numbers`" class="character_panel__number">{{ Number(character.status[status_key]) }}</div>
+            <img class="character_panel__button button__value_arrow" src="assets/Arrow_Right.png" @click.stop="stepUp(status_key)" />
+          </div>
+        </template>
+        <template v-else>
+          <input :id="status_key" v-model="character.status[status_key]" type="checkbox" :checked="character.status[status_key]" class="character_panel__checkbox" />
+          <div class="character_panel__checkbox_image" />
+        </template>
       </label>
     </div>
-
   </div>
 </template>
 
@@ -56,6 +64,7 @@
 .character_panel__status_row {
   display: flex;
   margin-top: 0.2em;
+  height: 1.5em;
 }
 
 .character_panel__status_name {
@@ -65,6 +74,37 @@
 .character_panel__status_row:hover > .character_panel__status_name {
   font-size: 105%;
 }
+
+.character_panel__value_container {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.character_panel__button {
+  height: 1em;
+}
+
+.button__value_arrow {
+
+}
+
+.character_panel__number {
+  /* -webkit-appearance: textfield;
+  -moz-appearance: textfield;
+  appearance: textfield; */
+  text-align: center;
+  background-color: #111;
+  color: #ddd;
+  padding: 0 0.3em;
+  /* border: none; */
+  /* width: 1.5em; */
+}
+/* .character_panel__number::-webkit-inner-spin-button,
+.character_panel__number::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+} */
 
 .character_panel__checkbox {
   display: none;
@@ -87,11 +127,13 @@
 
 
 <script>
+// import { computed } from 'vue'
+
 function firstToUpper(str) {
   return str[0].toUpperCase() + str.slice(1)
 }
 function formatStatValue(n, v) {
-  if (n === 'health') return v
+  if (n === 'health' || n === 'ammo') return v
   return `${ Math.round(1000*v)/10 }%`
 }
 
@@ -99,8 +141,14 @@ export default {
   props: {
     character: Object,
   },
-  setup() {
+  setup(props) {
+    const character = props.character
     return {
+      // max_stacks: computed(() => character[`max_${status_key}`]),
+      // stepDown: (status_key) => document.getElementById(status_key).stepDown(),
+      // stepUp: (status_key) => document.getElementById(status_key).stepUp(),
+      stepDown: (status_key) => character.status[status_key] -= (character.status[status_key] > 0) ? 1 : 0,
+      stepUp: (status_key) => character.status[status_key] += (character.status[status_key] < character[`max_${status_key}`]) ? 1 : 0,
       formatStatValue,
       firstToUpper,
     }

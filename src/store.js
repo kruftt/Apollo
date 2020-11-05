@@ -1,7 +1,7 @@
 import { reactive, watch, ref, computed } from 'vue'
 import { data } from './data/index.js'
 
-const status_curses = [ 'jolted', 'hangover', 'weak' ]
+const status_curses = [ 'jolted', 'hangover', 'weak', 'marked' ]
 
 const include = reactive({})
 const exclude = reactive({})
@@ -83,7 +83,7 @@ function getStatsContext(trait) {
 
 function _pom() { return 0 }
 function extractStats (effect, rarity, level) {
-  const target = effect.status || effect.stats || {}
+  const target = effect.stats || {}
   const pom = (level && effect.pom)
     ? effect.pom
     : _pom
@@ -92,9 +92,10 @@ function extractStats (effect, rarity, level) {
     const v = target[k]
     extracted[k] = (Array.isArray(v))
       ? v[rarity] + pom(level, v[0])
-      : (typeof v === 'number')
-        ? v + pom(level, v)
-        : v
+      : v
+      // : (typeof v === 'number')
+      //   ? v + pom(level, v)
+      //   : v
     return extracted
   }, {})
 }
@@ -156,29 +157,54 @@ const store = reactive({
   foe,
 })
 
-let triggers = {}
 
-function extractTraitData(data, buildData, rarity, level, overwrite) {
-  if (data === undefined) return  // data = abilties[] / effects[] / mods[]
+function extractTraitData(build, trait_data, build_data, rarity, level, overwrite) {
+  if (trait_data === undefined) return  // trait_data = abilties[] / effects[] / mods[]
 
-  const extracted = data.reduce((acc, v) => {
-    const type = v.type
+  const extracted = trait_data.reduce((acc, v) => {
+    const key = v.trigger || v.type
+    if (v.type === null) {
+      acc[key] = null
+      return acc
+    }
     const effect = Object.create(v)
-    const trigger = v.trigger
-    if (trigger) triggers[trigger]
-      ? triggers[trigger].push(effect)
-      : triggers[trigger] = [effect]
     effect.stats = extractStats(v, rarity, level)
+    effect.status = (effect.status) ? Object.create(effect.status) : null
+
+    // const status = effect.status
+    // if (status) {
+    //   const name = status.name
+    //   const target = status.target
+    //   const build_char = build[target]
+    //   build_char.status[name] = null  // signal to initialize to 0 or maintain current value
+
+    //   const stacks = status.stacks
+    //   if (typeof stacks === 'number') {
+    //     build_char[`max_${name}`] = stacks
+    //   } else {
+    //     // stacks === true .. default to target count? inherit?
+    //     // This should all be done at mod/effect application time
+    //     // in a helper method used by both applyStatus(...)
+    //   }
+
+    //   // filter out the effect entirely if the status not checked.
+    //   // Don't want to filter the effects.. just the mods
+    //   // if (!store[target].status[name]) return acc
+    // }
+
     effect.effects = []
-    if (acc[type] === undefined) acc[type] = [effect]
-    else acc[type].push(effect)
+    if (acc[key] === undefined) acc[key] = [effect]
+    else acc[key].push(effect)
     return acc
   }, {})
 
+  // overwrite or merge trigger_dir
   for (let k in extracted) {
-    buildData[k] = ((buildData[k] === undefined) || overwrite)
-      ? extracted[k]
-      : [ ...buildData[k], ...extracted[k] ]
+    const v = extracted[k]
+    if (v === null) delete build_data[k]
+    else build_data[k] = ((build_data[k] === undefined) || overwrite)
+      ? v
+      : [ ...build_data[k], ...v ]
   }
 }
 
@@ -193,46 +219,119 @@ function extractTrait(trait, build) {
   const exclude = trait.exclude
   exclude && exclude.reduce((a, v) => {
     build.exclude[v] = true
-  })
+  }, null)
 
-  trait.god && (build.gods[trait.god] = true)
+  const god = trait.god
+  if (Array.isArray(god)) {
+    for (const g in god) build.gods[g] = true
+  } else {
+    build.gods[god] = true
+  }
 
   // extract stats data
-  extractTraitData(trait.abilities, build.abilities, rarity, level, true)
-  extractTraitData(trait.effects, build.effects, rarity, level)
-  extractTraitData(trait.mods, build.mods, rarity, level)
+  extractTraitData(build, trait.abilities, build.abilities, rarity, level, true)
+  extractTraitData(build, trait.effects, build.effects, rarity, level)
+  extractTraitData(build, trait.mods, build.mods, rarity, level)
+}
+
+function createDirectories(trigger_dir, initial) {
+  return Object.keys(trigger_dir).reduce(
+    (acc, trigger) => {
+      const n = acc.name
+      const t = acc.type
+      const effects = trigger_dir[trigger]
+      for (let effect of effects) {
+        ;(t[effect.type])
+          ? t[effect.type].push(effect)
+          : t[effect.type] = [effect]
+        ;(n[effect.name])
+          ? n[effect.name].push(effect)
+          : n[effect.name] = [effect]
+      }
+      return acc
+    }, initial
+  )
+}
+
+// initialize signal, false if no status, multiply if stacks,
+function applyStatus(build, effect_or_mod, status) {
+  const name = status.name
+  const target = status.target
+  const build_char = build[target]
+  build_char.status[name] = null  // signal to initialize to 0 or maintain current value
+
+  const stacks = status.stacks
+  console.log(name, target, stacks)
+  if (typeof stacks === 'number') {
+    build_char[`max_${name}`] = stacks
+  }
+
+  const status_value = store[target].status[name] || 0
+  if (!status_value) return false
+
+  if (effect_or_mod.stacks) {
+    const stats = effect_or_mod.stats
+    for (const key in stats) {
+      stats[key] *= status_value
+    }
+  }
+
+  return true
+}
+
+function applyMetaMods(build, meta_mods) {
+  const effect_mods = build.mods.effect
+  let targets, target, target_stats, meta_stats
+  for (let meta_mod of meta_mods) {
+
+    const status = meta_mod.status
+    if (status)
+      if (!applyStatus(build, meta_mod, status)) continue
+    // if (status) {
+    //   const status_value = store[status.target].status[status.name]
+    //   if (!status_value) continue
+      // if (meta_mod.stacks) {
+      //   const stats = meta_mod.stats
+      //   for (const key in stats) {
+      //     stats[key] *= status_value
+      //   }
+      // }
+    // }
+
+    targets = meta_mod.target // mod name
+    targets = Array.isArray(targets) ? targets : [targets]
+    for (target of targets) {
+      target = filterObjects(effect_mods, { name: target })[0]
+      if (!target) continue
+      target_stats = target.stats
+      meta_stats = meta_mod.stats
+      for (let k in meta_stats) {
+        switch (k) {
+          case 'reduction':
+          case 'mult_base':
+          case 'mult_min':
+          case 'mult_max':
+            const v = target_stats[k]
+            target_stats[k] = (v || 0) + meta_stats[k]
+            break
+          case 'min':
+          case 'max':
+            target_stats[k] = meta_stats[k]
+            break
+        }
+      }
+    }
+  }
 }
 
 function applyCharacterMod(store_character, build_character, mod) {
-  if (mod.status) {
-    // This is e.g. how shadow presence works
-    build_character.status[mod.name] = null
-    if (!store_character.status[mod.name]) return
-  }
-
   const mod_stats = mod.stats
   const build_stats = build_character.stats
 
   let k
   for (k in mod_stats) {
     switch (k) {
-      case 'reduction':
-        const cr = build_character[k]
-        const mr = mod_stats[k]
-        build_character[k] = cr + mr - (cr * mr)
-        break
-
-      case 'mult_min':
-      case 'mult_max':
-      case 'backstab':
-        build_character[k] += mod_stats[k]
-        break
-
-      case 'multiplier':
-        const v = mod_stats[k]
-        build_character.mult_min += v
-        build_character.mult_max += v
-
+      case 'ammo':
       case 'speed':
         build_stats[k] += mod_stats[k]
         break
@@ -242,190 +341,297 @@ function applyCharacterMod(store_character, build_character, mod) {
       case 'health_multiply':
         build_stats.health *= mod_stats[k]
         break
+      case 'speed_projectile':
+        build_stats['Projectile Speed'] = (build_stats['Projectile Speed'] || 1) + mod_stats[k]
+        break
     }
   }
 }
 
-function applyCoefficientMod(coefficients, mod) {
+function applyCoefficientMod(build, mod) {
+  const coefficients = build.coefficients
   const mod_stats = mod.stats
   for (let k in mod_stats) {
-    coefficients[k] += mod_stats[k]
-  }
-}
-
-function applyAbilityMod(effect, mod) {
-  const mod_stats = mod.stats
-  const effect_stats = effect.stats
-  let k
-  for (k in mod_stats) {
     switch (k) {
-      case 'backstab':
-      case 'dislodge':
-      case 'lodge':
-      case 'knockback':
-        effect_stats[k] = mod_stats[k]
+      case 'reduction':
+        const cr = coefficients[k]
+        const mr = mod_stats[k]
+        coefficients[k] = cr + mr - (cr * mr)
         break
-      case 'min':
-      case 'max':
+
+      case 'crit':
       case 'mult_min':
       case 'mult_max':
-      case 'crit':
-      case 'first':
-      case 'speed':
-      case 'duration':
-      case 'range':
-        effect_stats[k] = (effect_stats[k])
-          ? effect_stats[k] + mod_stats[k]
-          : mod_stats[k]
+      case 'backstab':
+        coefficients[k] += mod_stats[k]
         break
-      case 'chargeAttack':
-      case 'chargeSpecial':
-      default:
+
+      case 'mult_base':
+        const v = mod_stats[k]
+        coefficients.mult_min += v
+        coefficients.mult_max += v
         break
     }
   }
 }
 
-function applyEffectMod(effect, mod) {
+function applyAbilityMod(build, ability_effects, mod) {
+  if (ability_effects === undefined) return
   const mod_stats = mod.stats
-  const effect_stats = effect.stats
-  let k
-  for (k in mod_stats) {
-    switch (k) {
-      default:
-        effect_stats[k] += mod_stats[k]
-        break
-    }
-  }
-}
-
-function applyMetaMods(build, meta_mods) {
-  const stat_mods = build.mods.stat
-  let name, target, target_stats, meta_stats
-  for (let meta_mod of meta_mods) {
-    name = meta_mod.target // mod name
-    target = filterObjects(stat_mods, { name: name })[0]
-    if (!target) continue
-    target_stats = target.stats
-    meta_stats = meta_mod.stats
-    for (let k in meta_stats) {
+  for (const effect of ability_effects) {
+    const effect_stats = effect.stats
+    let k
+    for (k in mod_stats) {
       switch (k) {
-        case 'reduction':
-        case 'multiplier':
+        case 'multiply_min':
+          if (effect_stats.min)
+            effect_stats.min *= mod_stats[k]
+          break
+        case 'multiply_max':
+          if (effect_stats.max)
+            effect_stats.max *= mod_stats[k]
+          else if (effect_stats.min)
+            effect_stats.max = effect_stats.min * mod_stats[k]
+          break
+        case 'multiply_base':
+          effect_stats.min && (effect_stats.min *= mod_stats[k])
+          effect_stats.max && (effect_stats.max *= mod_stats[k])
+          break
+        case 'multiply_duration':
+          effect_stats.duration && (effect_stats.duration *= mod_stats[k])
+          break
+
+        case 'type':
+          effect.type = mod_stats[k]
+          break
+        case 'backstab':
+        case 'dislodge':
+        case 'lodge':
+        case 'knockback':
+          effect_stats[k] = mod_stats[k]
+          break
+        case 'min':
+        case 'max':
+        case 'mult_base':
         case 'mult_min':
         case 'mult_max':
-          const v = target_stats[k]
-          target_stats[k] = (v)
-            ? v + meta_stats[k]
-            : meta_stats[k]
+        case 'crit':
+        case 'count':
+        case 'first':
+        case 'speed':
+        case 'duration':
+        case 'range':
+          effect_stats[k] = (effect_stats[k])
+            ? effect_stats[k] + mod_stats[k]
+            : mod_stats[k]
+          break
+        case 'chargeAttack':
+        case 'chargeSpecial':
+        default:
           break
       }
     }
   }
 }
 
-function applyStatMods(build, mods) {
-  for (const mod of mods) {
-    const target = mod.target
-    switch(target) {
-      case 'player':
-        applyCharacterMod(player, build.player, mod)
-        break
-      case 'foe':
-        applyCharacterMod(foe, build.foe, mod)
-        break
-      case 'coefficients':
-        applyCoefficientMod(build.coefficients, mod)
-        break
-      case 'attack':
-      case 'special':
-      case 'dash':
-      case 'cast':
-      case 'call':
-        const target_abilities = build.abilities[target]
-        if (target_abilities === undefined) return
-        for (const effect of target_abilities)
-          applyAbilityMod(effect, mod)
-        break
-      default:
-        const target_effects = build.effects[target]
-        if (target_effects === undefined) return
-        for (const effect of target_effects)
-          applyEffectMod(effect, mod)
-        break
+function applyEffectMod(build, target, mod) {
+  let effect_stats, k
+  const mod_stats = mod.stats
+  const target_effects = build.directory.type[target] || build.directory.name[target]
+  if (target_effects === undefined) return
+  for (const effect of target_effects) {
+    effect_stats = effect.stats
+    for (k in mod_stats) {
+      switch (k) {
+        case 'name':
+        case 'type':
+        case 'knockback':
+          effect[k] = mod_stats[k]
+          break
+        case 'stacks':
+          effect.status[k] = (effect.status[k] || 0) + mod_stats[k]
+          break
+        default:
+          effect_stats[k] = (effect_stats[k] || 0) + mod_stats[k]
+          break
+      }
     }
   }
 }
 
-function buildEffects(build, data) {
-  const build_player = build.player
-  const build_foe = build.foe
-  const _triggers = triggers
-  for (let key in data) {
-    const effects = data[key]
-    if (!effects) continue // Abilities may have been overwritten
-    for (let effect of effects) {
-      const type = effect.type
-      // Toggle curses on the UI
-      if (status_curses.indexOf(type) !== -1)
-        build_foe.status[type] = null
+function applyEffectMods(build, mods) {
+  let targets, target
 
-      // check what the type triggers
-      let target_effects = _triggers[type]
-      if (target_effects)
-        effect.effects.push(...target_effects)
+  for (const mod of mods) {
+    targets = Array.isArray(mod.target)
+      ? mod.target
+      : [mod.target]
+
+    const status = mod.status
+    if (status)
+      if (!applyStatus(build, mod, status)) continue
+
+    // const status = mod.status
+    // if (status) {
+    //   const status_value = store[status.target].status[status.name] // HERE
+    //   if (!status_value) continue
+    //   if (mod.stacks) {
+    //     // build_char[`max_${name}`] = stacks
+    //     const stats = mod.stats
+    //     for (const key in stats) {
+    //       stats[key] *= status_value
+    //     }
+    //   }
+    // }
+
+    for (target of targets) {
+      switch(target) {
+        case 'player':
+          applyCharacterMod(player, build.player, mod)
+          break
+        case 'foe':
+          applyCharacterMod(foe, build.foe, mod)
+          break
+        case 'coefficients':
+          applyCoefficientMod(build, mod)
+          break
+        // THESE NEED TO BE PROPERLY MAPPED, E.G. attack -> abilities.attack/dashAttack
+        case 'attack':
+          applyAbilityMod(build, build.abilities.attack, mod)
+          applyAbilityMod(build, build.abilities.dashAttack, mod)
+          if (mod.name === 'Punishing Sweep') break
+        case 'chargeAttack':
+          applyAbilityMod(build, build.abilities.chargeAttack, mod)
+          break
+
+        case 'special':
+          applyAbilityMod(build, build.abilities.special, mod)
+          applyAbilityMod(build, build.abilities.dashSpecial, mod)
+          applyAbilityMod(build, build.abilities.chargeSpecial, mod)
+          break
+        case 'dash':
+          applyAbilityMod(build, build.abilities.dash, mod)
+          break
+        case 'dashAttack':
+          applyAbilityMod(build, build.abilities.dashAttack, mod)
+          applyAbilityMod(build, build.abilities.dashSpecial, mod)
+          break
+        case 'cast':
+          applyAbilityMod(build, build.abilities.cast, mod)
+          break
+        case 'call':
+          applyAbilityMod(build, build.abilities.call, mod)
+          break
+        default:
+          applyEffectMod(build, target, mod)
+          break
+      }
+    }
+  }
+}
+
+// effect_data = build.abilities, build.effects = { trigger: [ effect, ... ] }
+// > effect directories indexed by trigger
+// 1. Build type directory
+// 2. For each effect
+  // 3.
+function linkEffects(build, effect_data, is_ability_data = false) {
+  const b_effects = build.effects // by trigger
+
+  for (let trigger in effect_data) {
+    const effects = effect_data[trigger]
+    // if (!effects) continue // Abilities may have been overwritten
+
+    for (let effect of effects) {
+      const status = effect.status
+      if (status)
+        applyStatus(build, effect, status)
+      // Toggle curses on the UI
+      const type = effect.type
+      let secondary_effects
 
       // add triggers from stat names (e.g. backstab)
       const stats = effect.stats
       for (let k in stats) {
-        target_effects = _triggers[k]
-        if (target_effects)
-          effect.effects.push(...target_effects)
+        secondary_effects = b_effects[k]
+        if (secondary_effects)
+          effect.effects.push(...secondary_effects)
       }
 
-      const min = stats.min
-      if (min) {
-        const max = stats.max || min
-        const coefficients = build.coefficients
-        const base_multiplier = 1 + coefficients.multiplier
-          + (player.status.Backstab ? coefficients.backstab : 0)
-          + (foe.status.undamaged ? coefficients.first + (stats.first || 0) : 0)
-        const min_multiplier = base_multiplier + coefficients.mult_min + (stats.mult_min || 0)
-        const max_multiplier = base_multiplier + coefficients.mult_max + (stats.mult_max || 0)
-        const crit_multiplier = build.effects.crit[0].stats.multiplier
-        // TODO: crit min and crit max ?
-
-        effect.damage_min = min * min_multiplier
-        effect.damage_max = max * max_multiplier
-        effect.damage = (effect.damage_min === effect.damage_max)
-          ? `${ Math.round(effect.damage_min) }`
-          : `${ Math.round(effect.damage_min) }-${ Math.round(effect.damage_max) }`
-        effect.crit_chance = coefficients.crit + (stats.crit || 0)
-        effect.crit_min = effect.damage_min * crit_multiplier
-        effect.crit_max = effect.damage_max * crit_multiplier
-        effect.crit_damage = (effect.damage_min === effect.damage_max)
-            ? `${ Math.round(effect.crit_min) }`
-            : `${ Math.round(effect.crit_min) }-${ Math.round(effect.crit_max) }`
-
-        const damage_avg = (effect.damage_min + effect.damage_max) / 2
-        const crit_avg = (effect.crit_min + effect.crit_max) / 2
-        effect.avg_damage = Math.round(damage_avg + (effect.crit_chance * (crit_avg - damage_avg)))
+      // if ability, add the ability-triggered effects as well
+      if (is_ability_data) {
+        secondary_effects = b_effects[trigger]
+        if (secondary_effects)
+          effect.effects.push(...secondary_effects)
       }
+
+      // check what the type triggers
+      secondary_effects = b_effects[type]
+      if (secondary_effects)
+        effect.effects.push(...secondary_effects)
+
+      computeDamageValues(build, effect)
+    }
+  }
+  computeDamageValues(build, build.slam)
+}
+
+function computeDamageValues(build, effect) {
+  const stats = effect.stats
+  if (stats.knockback) effect.slam = build.slam
+  const min = stats.min
+  if (min) {
+    const max = stats.max || min
+    const coefficients = build.coefficients
+    // const backstab_mult = + ((stats.backstab && player.status.Backstab) ? (stats.mult_backstab || 1) * ((coefficients.backstab || 0) + (typeof stats.backstab === 'number' ? stats.backstab : 0)): 0)
+    const base_multiplier = 1 + coefficients.mult_base + (stats.mult_base || 0)
+      + ((stats.backstab && player.status.Backstab) ? (coefficients.backstab || 0) + (typeof stats.backstab === 'number' ? stats.backstab : 0): 0)
+      + (foe.status.undamaged ? coefficients.first + (stats.first || 0) : 0)
+    const min_multiplier = base_multiplier + coefficients.mult_min + (stats.mult_min || 0)
+    const max_multiplier = base_multiplier + coefficients.mult_max + (stats.mult_max || 0)
+    const crit_stats = build.crit.stats
+    const crit_mult_base = crit_stats.mult_base
+    const crit_mult_min = crit_mult_base + (crit_stats.mult_min || 0)
+    const crit_mult_max = crit_mult_base + (crit_stats.mult_max || 0)
+
+    effect.damage_min = min * min_multiplier
+    effect.damage_max = max * max_multiplier
+    effect.damage = (effect.damage_min === effect.damage_max)
+      ? `${ Math.round(effect.damage_min) }`
+      : `${ Math.round(effect.damage_min) }-${ Math.round(effect.damage_max) }`
+    effect.crit_chance = coefficients.crit + (stats.crit || 0) + (0.5 * (coefficients.crit_min + coefficients.crit_max))
+    effect.crit_min = effect.damage_min * crit_mult_min
+    effect.crit_max = effect.damage_max * crit_mult_max
+    effect.crit_damage = (effect.damage_min === effect.damage_max)
+        ? `${ Math.round(effect.crit_min) }`
+        : `${ Math.round(effect.crit_min) }-${ Math.round(effect.crit_max) }`
+
+    const damage_avg = (effect.damage_min + effect.damage_max) / 2
+    const crit_avg = (effect.crit_min + effect.crit_max) / 2
+    effect.avg_damage = Math.round(damage_avg + (effect.crit_chance * (crit_avg - damage_avg)))
+
+    const interval = stats.interval
+    if (interval) {
+      effect.dot_damage = (effect.avg_damage || effect.damage_min) * Math.round(stats.duration / interval)
     }
   }
 }
+
 // e.g. target: store.player, source: build.player
 function syncObjectChanges(target, source) {
   let key
   for (key in source) {
     const svalue = source[key]
     const tvalue = target[key]
-    if (typeof tvalue === 'object') syncObjectChanges(tvalue, svalue)
-    else if (svalue === null) {
-      if (tvalue === undefined) target[key] = false
+    // null is object, have to check for object on target
+    if (typeof tvalue === 'object') {
+      syncObjectChanges(tvalue, svalue)
+    } else if (svalue === null) {
+      if (tvalue === undefined) target[key] = 0
       else continue
+    } else if (tvalue !== svalue) {
+      target[key] = svalue
     }
-    else if (tvalue !== svalue) target[key] = svalue
   }
   for (key in target) {
     if (source[key] === undefined) delete target[key]
@@ -433,13 +639,16 @@ function syncObjectChanges(target, source) {
 }
 
 // const mod_types = ['ability', 'reduction', 'base', 'percent', 'effect']
-const mod_types = ['meta', 'stat']
+const mod_types = ['meta', 'effect']
 function compileBuild() {
-  const crit = Object.create(data.base.crit)
+  const data_base = data.base
+  const crit = Object.create(data_base.crit)
   crit.stats = { ...crit.stats }
   crit.effects = []
-  triggers = {}
-  const data_base = data.base
+  const slam = Object.create(data_base.slam)
+  slam.stats = {...slam.stats }
+  slam.effects = []
+  const chill = data_base.chill
 
   const build = {
     player: {
@@ -453,34 +662,40 @@ function compileBuild() {
       status: { ...data_base.foe.status },
     },
     coefficients: { ...data_base.coefficients },
+    crit,
+    slam,
+    gods: {},
     abilities: {
-      revenge: [{name: "Revenge", type: 'revenge', stats: {}, effects: []}],
-      slain: [{name: "Enemy Slain", type: 'slain', stats: {}, effects: []}],
+      revenge: [{name: "Damage Taken", type: 'game event', trigger: 'revenge', stats: {}, effects: []}],
+      slain: [{name: "Enemy Death", type: 'game event', trigger: 'slain', stats: {}, effects: []}],
     },
     mods: {
       meta: [],
-      stat: [],
+      effect: [data_base.shadow, {...chill, stats: { ...chill.stats }}],
     },
-    effects: { crit: [ crit ] },
-    gods: {},
+    effects: {
+      // knockback: [{...data_base.slam, stats: {...data_base.slam.stats}, effects: []}],
+      lodge: [{name: 'Dislodge', type: 'dislodge', stats: {duration: 15}, effects: []}],
+    },
     include: {},
     exclude: {},
   }
 
   if (foe.status.weak) {
     const weak = data_base.weak
-    build.mods.stat.push({...weak, stats: { ...weak.stats }})
+    build.mods.effect.push({...weak, stats: { ...weak.stats }})
   }
-  if (player.status['Shadow Presence']) {
-    const shadow = data_base.shadow
-    build.mods.stat.push(shadow)
-  }
+  // if (foe.status.chill) {
+  //   const chill = data_base.chill
+  //   build.mods.effect.push({...chill, stats: { ...chill.stats }})
+  // }
 
   for (const trait_list of [
     [ store.weapon ],
+    filterObjects(traits, { type: 'cast' }),
     filterObjects(traits, { type: 'aspect' }),
     filterObjects(traits, { type: 'hammer' }),
-    filterObjects(traits, { type: 'attack|special|dash|cast|call|keepsake' }),
+    filterObjects(traits, { type: 'attack|special|dash|call|keepsake' }),
     filterObjects(traits, { type: 'primary' }),
     filterObjects(traits, { type: 'secondary' }),
   ]) {
@@ -490,23 +705,20 @@ function compileBuild() {
     }
   }
 
+  // build effects_by_type index for mod application
+  // build.effects[trigger] = [ effect, ... ]
+  build.directory = createDirectories(build.effects,
+    createDirectories(build.abilities,
+      { type: {crit: [crit], slam: [slam]}, name: { Crit: [crit], Slam: [slam] }}
+    ))
+
   // Modify the abilities and effects
   applyMetaMods(build, build.mods.meta)
-  applyStatMods(build, build.mods.stat)
-  // for (const mod_type of mod_types) {
-  //   const mods = build.mods[mod_type] // Effect[] || undefined
-  //   if (mods === undefined) continue
-  //   applyMods(build, mods, mod_type)
-  // }
+  applyEffectMods(build, build.mods.effect)
 
-  // Populate the effect arrays
-  // linkEffects(build, build.abilities)
-  // linkEffects(build, build.effects)
-
-  // LINK AND CALCULATE
-  buildEffects(build, build.abilities)
-  buildEffects(build, build.effects)
-
+  // Link and Calculate
+  linkEffects(build, build.abilities, true)
+  linkEffects(build, build.effects)
 
   // Sync include/exclude
   syncObjectChanges(include, build.include)
@@ -529,7 +741,13 @@ function filterTraits(props) {
     name = trait.name
     if (exclude[name]) continue
     for (let k in props) {
-      if (props[k].indexOf(trait[k]) === -1) {
+      //
+      const trait_value = trait[k]
+      const props_value = props[k]
+      if (Array.isArray(trait_value)) {
+        if (trait_value.reduce((acc, v) => acc && (props_value.indexOf(v) === -1), true))
+          continue traitLoop
+      } else if (props_value.indexOf(trait[k]) === -1) {
         continue traitLoop
       }
     }
