@@ -72,9 +72,9 @@ export default [
     description: (stats) =>
       `<div>After landing<b>12</b>strikes, your next<b>Special</b>hits more times.</div>` +
       `<div><i>They were a natural fit; her power to bring life, their power to take it.</i></div>` +
-      `<div><div>Bonus Special Hits:</div><div><span>${ fp(stats.count) - 2 }</span></div></div>`,
+      `<div><div>Bonus Special Hits:</div><div><span>${ fv(stats.count) }</span></div></div>`,
     mods: [
-      { name: 'Rising Cutter', type: 'effect', target: 'special', stats: {count: [3, 4, 5, 6, 7]} },
+      { name: 'Rising Cutter', type: 'effect', target: 'special', stats: {count: [1, 2, 3, 4, 5]}, status: {target: 'player', name: 'Giga Cutter'}},
     ],
   },
   {

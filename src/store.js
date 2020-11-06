@@ -670,7 +670,7 @@ function compileBuild() {
     },
     mods: {
       meta: [],
-      effect: [data_base.shadow, {...chill, stats: { ...chill.stats }}],
+      effect: [data_base.shadow],
     },
     effects: {
       // knockback: [{...data_base.slam, stats: {...data_base.slam.stats}, effects: []}],
@@ -684,10 +684,10 @@ function compileBuild() {
     const weak = data_base.weak
     build.mods.effect.push({...weak, stats: { ...weak.stats }})
   }
-  // if (foe.status.chill) {
-  //   const chill = data_base.chill
-  //   build.mods.effect.push({...chill, stats: { ...chill.stats }})
-  // }
+  if (foe.status.chill) {
+    const chill = data_base.chill
+    build.mods.effect.push({...chill, stats: { ...chill.stats }})
+  }
 
   for (const trait_list of [
     [ store.weapon ],

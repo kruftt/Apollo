@@ -3,6 +3,7 @@ import ares from './ares'
 import artemis from './artemis'
 import athena from './athena'
 import coronacht from './coronacht'
+import chaos from './chaos'
 import demeter from './demeter'
 import dionysus from './dionysus'
 import exagryph from './exagryph'
@@ -160,12 +161,6 @@ export const data =
   },
 
   traits : [
-    {
-      name: 'Daedalus',
-      type: 'god',
-      icon: 'assets/gods/Hammer.png',
-    },
-
     ...stygius,
     ...varatha,
     ...aegis,
@@ -177,13 +172,19 @@ export const data =
     ...ares,
     ...artemis,
     ...athena,
+    ...chaos,
     ...demeter,
     ...dionysus,
     ...hermes,
     ...poseidon,
     ...zeus,
-
     ...duo,
+
+    {
+      name: 'Daedalus',
+      type: 'god',
+      icon: 'assets/gods/Hammer.png',
+    },
   ]
 }
 

@@ -35,6 +35,9 @@
   text-align: left;
   margin: 0 0 0 2em;
   font-weight: 100;
+  display:flex;
+  flex-flow: column nowrap;
+  justify-content: center;
 }
 
 .trait_info__name {
@@ -82,6 +85,9 @@
   top: 0;
 }
 
+.rare {
+  color: rgb(10, 75, 255);
+}
 .epic {
   color: rgb(94, 4, 211);
 }

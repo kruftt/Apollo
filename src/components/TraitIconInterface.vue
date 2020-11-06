@@ -207,7 +207,7 @@ export default {
       return `${ props.trait.rarity > 0 ? props.trait.rarity - 1 : 'none' }`
     })
     const nextRarity = computed(() => {
-      const max = props.trait.type === 'aspect' ? 4 : 3
+      const max = props.trait.type === 'aspect' ? 4 : (props.trait.god === 'Chaos' ? 2 : 3)
       return `${ props.trait.rarity < max ? props.trait.rarity + 1 : 'none' }`
     })
     const decreaseRarity = () => {
@@ -215,7 +215,7 @@ export default {
         props.trait.rarity -= 1
     }
     const increaseRarity = () => {
-      const max = props.trait.type === 'aspect' ? 4 : 3
+      const max = props.trait.type === 'aspect' ? 4 : (props.trait.god === 'Chaos' ? 2 : 3)
       if (props.trait.rarity > -1 && props.trait.rarity < max)
         props.trait.rarity += 1
     }
