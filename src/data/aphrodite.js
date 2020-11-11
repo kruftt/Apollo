@@ -184,7 +184,7 @@ export default [
     god: 'Aphrodite',
     rarity: 0,
     description: (stats) =>
-      `<div>Any&nbsp;<img src="/assets/LifeUp_Small.png" />&nbsp;or&nbsp;<img src="/assets/LifeRestore_Small.png" />&nbsp;chamber rewards are worth more.</div>` +
+      `<div>Any&nbsp;<img src="/Apollo/assets/LifeUp_Small.png" />&nbsp;or&nbsp;<img src="/Apollo/assets/LifeRestore_Small.png" />&nbsp;chamber rewards are worth more.</div>` +
       `<div>▶ Reward Value:<div><span>+${fp(stats.life_bonus, null, 1)}%</span></div></div>`,
     mods: [{
       name: 'Life Affirmation',
