@@ -374,7 +374,6 @@ function applyEffectMod(effects, mod) {
         case 'type':
           effect[k] = mod_stats[k]
           break
-        case 'knockback':
         case 'backstab':
         case 'dislodge':
         case 'lodge':
