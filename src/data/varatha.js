@@ -1,4 +1,4 @@
-import { fv, fp } from './util'
+import { fv, fp, beowolf_traits } from './util'
 
 const varatha_exclusions = [ 'Stygius', 'Aegis', 'Coronacht', 'Exagryph', 'Malphon' ]
 
@@ -8,6 +8,7 @@ export default [
     description: 'The Eternal Spear.',
     icon: 'assets/weapons/spear_base_icon.png',
     type: 'weapon',
+    exclude: beowolf_traits,
     rarity: -4,
     abilities: [
       { name: 'Strike 1', type: 'damage', trigger: 'attack', stats: {min: 25, max: 25} },

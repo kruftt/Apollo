@@ -1,10 +1,11 @@
-import { fv, fp } from './util'
+import { fv, fp, beowolf_traits } from './util'
 
 export default [
   {
     name: 'Stygius',
     description: 'The Blade of the Underworld.',
     type: 'weapon',
+    exclude: beowolf_traits,
     icon: 'assets/weapons/sword_base_icon.png',
     rarity: -4,
     abilities: [
@@ -78,7 +79,7 @@ export default [
       { type: 'damage', trigger: 'special', name: 'Hallowed Ground', stats: {min: 70, max: 70} },
     ],
     mods: [
-      { target: 'player', type: 'effect', name: 'Aspect of Arthur', stats: { health_add: [ 50, 50, 50, 50, 50 ] } },
+      { target: 'player', type: 'effect', name: 'Aspect of Arthur', stats: { health: [ 50, 50, 50, 50, 50 ] } },
       { target: 'coefficients', type: 'effect', name: 'Consecration', stats: {reduction: [0.2, 0.25, 0.3, 0.35, 0.4]}, status: { name: 'Consecration', target: 'player' } },
     ],
     effects: [

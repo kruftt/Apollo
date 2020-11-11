@@ -1,4 +1,4 @@
-import { fp, fv } from './util'
+import { fp, fv, beowolf_exclusions, beowolf_traits } from './util'
 
 const aegis_exclusions = [ 'Stygius', 'Malphon', 'Varatha', 'Exagryph', 'Coronacht' ]
 
@@ -11,8 +11,8 @@ export default [
     rarity: -4,
     abilities: [
       { type: 'damage', trigger: 'attack', name: 'Bash', stats: {backstab:true, min: 25} },
-      { type: 'damage', trigger: 'chargeAttack', name: 'Bull Rush', stats: {backstab:true, min: 20, max:40, duration: 2, defend: true} },
-      { type: 'damage', trigger: 'dashAttack', name: 'Dash-Strike', stats: {backstab:true, min: 25} },
+      { type: 'damage', trigger: 'chargeAttack', name: 'Bull Rush', stats: {backstab:true, min: 20, max:40, duration: 2, defend: true, attack: true} },
+      { type: 'damage', trigger: 'dashAttack', name: 'Dash-Strike', stats: {backstab:true, min: 25, attack: true} },
       { type: 'damage', trigger: 'special', name: 'Throw', stats: {min: 15, backstab: true} },
     ],
   },
@@ -22,6 +22,7 @@ export default [
     weapon: 'Aegis',
     icon: 'assets/weapons/shield_base_icon.png',
     rarity: 4,
+    exclude: beowolf_traits,
     description: (stats) =>
       `<div>The form in which the shield of chaos first revealed itself.</div>` +
       `<div><i>Sometimes the bone-etched visage shudders as though it means to speak.</i></div>` +
@@ -36,6 +37,7 @@ export default [
     weapon: 'Aegis',
     icon: 'assets/weapons/shield_enchantment_2.png',
     rarity: 4,
+    exclude: beowolf_traits,
     description: (stats) =>
       `<div>After you <b>Bull Rush</b> your next <b>Special</b> throws multiple shields.</div>` +
       `<div><i>All sprang from the primordial depths; only one artifact bore witness.</i></div>` +
@@ -50,6 +52,7 @@ export default [
     weapon: 'Aegis',
     icon: 'assets/weapons/shield_enchantment_1.png',
     rarity: 4,
+    exclude: beowolf_traits,
     description: (stats) =>
       `<div>Your <b>Special</b> is replaced with the <b>Blitz Disc.</b></div>` +
       `<div><i>Once he became king of the Olympians, he truly had nothing left to fear.</i></div>` +
@@ -64,6 +67,7 @@ export default [
     weapon: 'Aegis',
     icon: 'assets/weapons/shield_enchantment_3.png',
     rarity: 4,
+    exclude: beowolf_exclusions,
     description: (stats) =>
       `<div>You have <b>Naegling's Board</b> but take +10% damage.</b></div>` +
       `<div><i>Would that the stalwart warrior-king's sword offered similar protection.</i></div>` +

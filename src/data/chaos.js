@@ -152,12 +152,12 @@ export default [
     god: 'Chaos',
     rarity: 0,
     description: (stats) =>
-      `<div>Gain<span>+${ stats.health_add }</span>hp.</div>`,
+      `<div>Gain<span>+${ stats.health }</span>hp.</div>`,
     mods: [{
       name: 'Soul',
       type: 'effect',
       target: 'player',
-      stats: { health_add: [40, 60, 80] },
+      stats: { health: [40, 60, 80] },
     }],
   },
   {

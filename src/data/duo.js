@@ -12,8 +12,9 @@ export default [
       Ares: ['Curse of Agony', 'Curse of Pain'],
     },
     description: (stats) =>
-      `<div>Your Doom effects continuously strike Weak foes.</div>` +
+      `<div>Your<b>Doom</b>effects continuously strike<b>Weak</b>foes.</div>` +
       `<div>▶ Successive Hit Damage:<div><span>+50%</span></div></div>`,
+    feature: (stats) => `<div>Your <b>Doom</b> effects continuously strike <b>Weak</b> foes.</div>`,
     effects: [{
       name: 'Curse of Longing',
       type: 'longing',
@@ -169,7 +170,7 @@ export default [
       Ares: ['Curse of Agony', 'Curse of Pain'],
     },
     description: (stats) =>
-      `<div>Merciful End	Your attacks that can Deflect immediately activate Doom effects.</div>` +
+      `<div>Your attacks that can Deflect immediately activate Doom effects.</div>` +
       `<div>▶ Doom Combo Damage:<div><span>40</span></div></div>`,
     effects: [{
       name: 'Merciful End',

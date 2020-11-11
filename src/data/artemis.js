@@ -205,14 +205,15 @@ export default [
     prereqs: { Artemis: ["Artemis' Aid", "Deadly Flourish", 'Deadly Strike', 'Hunter Dash', 'Pressure Points', 'True Shot'] },
     description: (stats) =>
       '<div>After you deal<b>Critical</b>damage to a foe, a foe near it is<b>Marked</b>.</div>' +
-      `<div>▶ Bonus Crit Chance:<div><span>${ fp(stats.crit_min, stats.crit_max) }</span></div></div>`,
+      `<div>▶ Bonus Crit Chance:<div><span>+${ fp(stats.crit_min, stats.crit_max) }%</span></div></div>`,
     mods: [
       {
         name: 'Marked',
         type: 'effect',
         target: 'coefficients',
-        stats: { crit_min: [0.3, 0.39, 0.6, 0.75], crit_max: [0.3, 0.45, 0.75, 0.81], pom: pom_4 },
+        stats: { crit_min: [0.3, 0.39, 0.6, 0.75], crit_max: [0.3, 0.45, 0.75, 0.81]},
         status: { target: 'foe', name: 'marked' },
+        pom: pom_4,
       }
     ],
   },

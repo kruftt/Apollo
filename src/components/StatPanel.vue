@@ -14,13 +14,19 @@
   <div class="stat_panel">
     <StatPanelCharacterData class="stat_panel__char_data" :character="store.player" />
     <StatPanelCharacterData class="stat_panel__char_data" :character="store.foe" />
+    <div class="build_features">
+      <template v-for="feature in store.build.features">
+        <img class="build_features__bullet" src="/assets/Bullet.png" />
+        <div class="build_features__feature" v-html="feature" />
+      </template>
+    </div>
   </div>
 </template>
 
 <style>
 .stat_panel {
   background-color: #080808;
-  width: 17em;
+  width: 20em;
   margin: 1em 1em 1em 1em;
   background-color: #181818;
   border: 1em solid #181818;
@@ -67,7 +73,7 @@
 }
 
 .stat_panel__effect_data {
-  margin: 0 1em 0 0;
+  margin: 0 1.25em 0 0.25em;
   color: #bbb;
 }
 .stat_panel__effect_data + .stat_panel__effect_data {
@@ -75,7 +81,29 @@
 }
 
 .stat_panel__char_data {
-  margin: 0 0 2em 0;
+  margin: 0 0.5em 2em 0.5em;
+}
+
+.build_features {
+  text-align: left;
+  color: #bbb;
+  font-size: 95%;
+  display: flex;
+  flex-flow: row nowrap;
+}
+.build_features__bullet {
+  display: inline-block;
+  height: 1em;
+  margin-right: 0.2em;
+}
+.build_features__feature {
+
+}
+.build_features__feature span {
+  color: #4c4;
+}
+.build_features__feature img {
+  height: 1.0em;
 }
 </style>
 
@@ -93,8 +121,8 @@ const ability_names = {
   special: 'Special',
   chargeSpecial: 'Charge Special',
   dashSpecial: 'Dash Special',
-  dash: 'Dash',
   cast: 'Cast',
+  dash: 'Dash',
   call: 'Call',
   revenge: 'Revenge',
   slain: 'On Enemy Slain'

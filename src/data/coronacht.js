@@ -1,4 +1,4 @@
-import { fv, fp } from './util'
+import { fv, fp, beowolf_traits } from './util'
 
 const coronacht_exclusions = [ 'Stygius', 'Aegis', 'Varatha', 'Exagryph', 'Malphon' ]
 
@@ -8,6 +8,7 @@ export default [
     description: 'The Heart-Seeking Bow.',
     icon: 'assets/weapons/bow_base_icon.png',
     type: 'weapon',
+    exclude: beowolf_traits,
     rarity: -4,
     abilities: [
       { name: 'Fire', type: 'shot', trigger: 'attack', stats: {min: 20, max: 60, pierce: true} },

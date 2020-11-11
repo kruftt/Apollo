@@ -76,7 +76,7 @@ export default [
     description: (stats) =>
       '<div>Your<b>Dash</b>creates a<b>Blade Rift</b>where you started.</div>' +
       `<div>▶ Rift Damage per Hit:<div><span>${ fv(stats.min) }</span></div></div>`,
-    abilities: [{ name: 'Blade Dash', type: 'rift', trigger: 'dash', stats: {min:[10,12,14,16], duration: 0.7, interval: 0.1, size:150}, pom: pom(0.6, 0.2) }],
+    mods: [{ name: 'Blade Dash', type: 'effect', target: 'dash', stats: {name: 'Blade Dash', type: 'rift', min:[10,12,14,16], duration: 0.7, interval: 0.1, radius:150}, pom: pom(0.6, 0.2) }],
   },
   {
     name: "Ares' Aid",

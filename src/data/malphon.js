@@ -1,4 +1,4 @@
-import { fv, fp } from './util'
+import { fv, fp, beowolf_traits } from './util'
 
 const malphon_exclusions = [ 'Stygius', 'Aegis', 'Varatha', 'Exagryph', 'Coronacht' ]
 
@@ -8,6 +8,7 @@ export default [
     description: 'The Twin Fists of Malphon.',
     icon: 'assets/weapons/fist_base_icon.png',
     type: 'weapon',
+    exclude: beowolf_traits,
     rarity: -4,
     abilities: [
       { name: 'Pummel', type: 'damage', trigger: 'attack', stats: {min: 15, count: 5} },

@@ -118,7 +118,7 @@ export const data =
       name: 'Slam',
       type: 'slam',
       trigger: 'knockback',
-      stats: { min: 20 },
+      stats: { mult_base: 1 },
     },
 
     player: {
@@ -141,9 +141,7 @@ export const data =
         health: 100,
         speed: 1,
       },
-      status: {
-        undamaged: null,
-      },
+      status: {  },
     },
 
     coefficients: {

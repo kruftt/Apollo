@@ -4,7 +4,7 @@ const _hangover = {
   name: 'Hangover',
   type: 'hangover',
   stats: { duration: 4, interval: 0.5 },
-  status: { name: 'hangover', target: 'foe', stacks: 5 },
+  status: { name: 'Hangover', target: 'foe', stacks: 5 },
 }
 
 function hangover(trigger, min, pom) {
@@ -55,14 +55,14 @@ export default [
       name: 'Trippy Shot',
       type: 'trippy',
       trigger: 'cast',
-      stats: { min: [100,120,140,160] },
+      stats: { min: [100,120,140,160], radius: 400 },
       pom: pom_6,
     },],
     effects: [{
       name: 'Festive Fog',
       type: 'festive',
       trigger: 'trippy',
-      stats: { duration: 5, interval: 0.25, stun: true },
+      stats: { duration: 5, interval: 0.25, radius: 400, stun: true },
     },],
   },
   {
@@ -145,12 +145,12 @@ export default [
     level: 1,
     description: (stats) =>
       '<div>Gain <b><3</b>when you pick up<b>Nectar.</b>Receive <span>1 Nectar</span> now.</div>' +
-      `<div>▶ Life Gain:<div><span>${ fv(stats.health_add) }</span></div></div>`,
+      `<div>▶ Life Gain:<div><span>${ fv(stats.health) }</span></div></div>`,
     mods: [{
       name: 'Premium Vintage',
       type: 'effect',
       target: 'player',
-      stats: { health_add: [20, 25, 30, 35] },
+      stats: { health: [20, 25, 30, 35] },
       pom: pom_4,
     }],
   },
@@ -203,7 +203,7 @@ export default [
     prereqs: { Dionysus: ["Dionysus' Aid", "Drunken Dash", 'Drunken Flourish', 'Drunken Strike'] },
     description: (stats) =>
       '<div>Your<b>Hangover</b>effects also make foes move slower.</div>' +
-      `<div>▶ Speed Reduction<div><span>-${ fp(stats.speed) }%</span></div></div>`,
+      `<div>▶ Speed Reduction<div><span>${ fp(stats.speed) }%</span></div></div>`,
     mods: [{
       name: 'hangover',
       type: 'effect',
@@ -262,12 +262,28 @@ export default [
     description: (stats) =>
       '<div><b>Hangover</b>afflicted foes take bonus damage in <b>Festive Fog</b>.</div>' +
       `<div>▶ Bonus Damage:<div><span>+${ fp(stats.mult_base) }%</span></div></div>`,
-    mods: [{
-      name: 'Black Out',
-      type: 'effect',
-      target: 'coefficients',
-      stats: { mult_base: 0.6 },
-      status: { target: 'foe', name: 'Festive Fog' },
-    }],
+    mods: [
+      {
+        name: 'Black Out',
+        type: 'effect',
+        target: 'coefficients',
+        status: { target: 'foe', name: 'Hangover' },
+      },
+      {
+        name: 'Black Out',
+        type: 'meta',
+        target: 'Black Out',
+        stats: { mult_base: 0.6 },
+        status: { target: 'foe', name: 'Festive Fog' },
+      },
+    ],
+    effects: [
+      {
+        name: 'Hangover?',
+        type: 'hangover',
+        trigger: 'festive',
+        stats: { multiplier: 0.6 },
+      }
+    ]
   },
 ]

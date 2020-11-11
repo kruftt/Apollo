@@ -115,13 +115,13 @@
   width: 1.6em;
   display: inline-block;
   padding: 0;
-  background-image: url('/public/assets/RadioButton_Unselected.png');
+  background-image: url('/assets/RadioButton_Unselected.png');
   background-size: 1.6em;
 }
 
 
 .character_panel__checkbox:checked + .character_panel__checkbox_image {
-  background-image: url('/public/assets/RadioButton_Selected.png');
+  background-image: url('/assets/RadioButton_Selected.png');
 }
 </style>
 

@@ -49,12 +49,19 @@
 .trait_info__description {
   white-space: nowrap;
 }
-.trait_info__description span,
-.trait_info__description b {
-  padding: 0 0.3em;
+.trait_info__description span::before,
+.trait_info__description span::after,
+.trait_info__description b::before,
+.trait_info__description b::after,
+.trait_info__description b + span::before,
+.trait_info__description b + span::after
+{
+  content: '\00a0';
+  /* padding: 0 0.3em; */
 }
-.trait_info__description b + span {
-  padding: 0 0.3em;
+
+.trait_info__description img {
+  height: 1.0em;
 }
 .trait_info__description span {
   color: #4d4;

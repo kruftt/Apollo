@@ -1,4 +1,4 @@
-import { fv, fp } from './util'
+import { fv, fp, beowolf_traits } from './util'
 
 const exagryph_exclusions = [ 'Stygius', 'Malphon', 'Varatha', 'Aegis', 'Coronacht' ]
 
@@ -8,6 +8,7 @@ export default [
     description: 'The Adamant Rail.',
     icon: 'assets/weapons/gun_base_icon.png',
     type: 'weapon',
+    exclude: beowolf_traits,
     rarity: -4,
     abilities: [
       { name: 'Fire', type: 'damage', trigger: 'attack', stats: { min: 10, count: 12, backstab: true }},

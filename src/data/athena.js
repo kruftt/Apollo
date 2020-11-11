@@ -1,9 +1,18 @@
 import { fv, fp, pom, pom_4, pom_6, pom_8 } from './util'
 
-const deflect = {
-  name: 'Deflect',
-  type: 'deflect',
-  stats: { deflect: 1 }
+// const deflect = {
+//   name: 'Deflect',
+//   type: 'deflect',
+//   stats: { deflect: 1 }
+// }
+
+function deflect (trigger) {
+  return {
+    name: 'Deflect',
+    type: 'deflect',
+    trigger,
+    stats: { deflect: 1 },
+  }
 }
 
 export default [
@@ -20,7 +29,7 @@ export default [
     rarity: 0,
     level: 1,
     description: (stats) =>
-      '<div>Your<b>Attack</b>is stronger, and can<b>Deflect</b>.</div>' +
+      '<div>Your <b>Attack</b> is stronger, and can <b>Deflect.</b></div>' +
       `<div>▶ Attack Damage:<div><span>+${ fp(stats.mult_min, stats.mult_max ) }%</span></div></div>`,
     mods: [{
       name: 'Divine Strike',
@@ -29,7 +38,7 @@ export default [
       stats: { mult_min: [0.4,0.52,0.72,0.92], mult_max: [0.4,0.6,0.8,1] },
       pom: pom_4,
     }],
-    effects: [{ ...deflect, trigger: 'attack' }],
+    effects: [deflect('attack')],
   },
   {
     name: 'Divine Flourish',
@@ -39,9 +48,9 @@ export default [
     rarity: 0,
     level: 1,
     description: (stats) =>
-      '<div>Your<b>Special</b>is stronger, and can<b>Deflect</b>.</div>' +
+      '<div>Your<b>Special</b>is stronger, and can<b>Deflect.</b></div>' +
       `<div>▶ Special Damage:<div><span>+${ fp(stats.mult_min, stats.mult_max) }%</span></div></div>`,
-    effects: [{ ...deflect, trigger: 'attack' }],
+    effects: [deflect('special')],
     mods: [{
       name: 'Divine Flourish',
       type: 'effect',
@@ -58,7 +67,7 @@ export default [
     rarity: 0,
     level: 1,
     description: (stats) =>
-      '<div>Your<b>Cast</b>damages foes in a small area, and can <b>Deflect</b>.</div>' +
+      '<div>Your<b>Cast</b>damages foes in a small area, and can <b>Deflect.</b></div>' +
       `<div>▶ Cast Damage:<div><span>${ fv(stats.min) }</span></div></div>`,
     abilities: [{
       name: 'Phalanx Shot',
@@ -67,7 +76,26 @@ export default [
       stats: { min: [85, 102, 119, 136] },
       pom: pom_6,
     }],
-    effects: [{...deflect, trigger: 'phalanx'}],
+    effects: [deflect('phalanx')],
+  },
+  {
+    name: 'Phalanx Flare',
+    type: 'cast',
+    icon: 'assets/traits/Athena_02_Large.png',
+    god: 'Athena',
+    rarity: 0,
+    level: 1,
+    description: (stats) =>
+      '<div>Your<b>Cast</b>damages foes around you, and can <b>Deflect.</b></div>' +
+      `<div>▶ Cast Damage:<div><span>${ fv(stats.min) }</span></div></div>`,
+    abilities: [{
+      name: 'Phalanx Flare',
+      type: 'phalanx',
+      trigger: 'cast',
+      stats: { min: [80, 90, 100, 110] },
+      pom: pom_6,
+    }],
+    effects: [deflect('phalanx')],
   },
   {
     name: 'Divine Dash',
@@ -77,16 +105,16 @@ export default [
     rarity: 0,
     level: 1,
     description: (stats) =>
-      '<div>Your<b>Dash</b>deals damage and can<b>Deflect</b>.</div>' +
+      '<div>Your<b>Dash</b>deals damage and can<b>Deflect.</b></div>' +
       `<div>▶ Dash Damage:<div><span>${ fv(stats.min) }</span></div></div>`,
-    abilities: [{
+    mods: [{
       name: 'Divine Dash',
-      type: 'deflect',
-      trigger: 'dash',
-      stats: { min: [10, 12, 14, 16] },
+      type: 'effect', // deflect
+      target: 'dash',
+      stats: { name: 'Divine Dash', min: [10, 12, 14, 16] },
       pom: pom(0.6, 0.2),
     }],
-    effects: [{...deflect, trigger: 'dash'}],
+    effects: [deflect('dash')],
   },
   {
     name: "Athena's Aid",
@@ -98,14 +126,26 @@ export default [
     description: (stats) =>
       '<div>Your<b>Call</b>briefly makes you<b>Invulnerable</b>and<b>Deflect</b>all attacks.</div>' +
       `<div>▶ Effect Duration:<div><span>${ fv(stats.duration, null, 1) }</span></div></div>`,
-    abilities: [{
-      name: "Athena's Aid",
-      type: 'shield',
-      trigger: 'call',
-      stats: { duration: [1.5, 1.65, 1.8, 1.95] },
-      pom: pom(0.4, 0.2)
-    }],
-    effects: [{...deflect, trigger: 'call'}]
+    abilities: [
+      {
+        name: "Athena's Aid",
+        type: 'shield',
+        trigger: 'call',
+        stats: { duration: [1.5, 1.65, 1.8, 1.95] },
+        pom: pom(0.4, 0.2)
+      },
+      {
+        name: "Athena's Aid - Max",
+        type: 'shield',
+        trigger: 'call',
+        stats: { duration: [9, 9.9, 10.8, 11.7] },
+        pom: pom(0.4, 0.2)
+      },
+    ],
+    effects: [
+      { name: 'Invulnerable', type: 'deflect', trigger: 'call' },
+      deflect('call'),
+    ],
   },
   {
     name: 'Holy Shield',
@@ -115,15 +155,18 @@ export default [
     rarity: 0,
     level: 1,
     description: (stats) =>
-      '<div>After you take damage, damage nearby foes and briefly<b>Deflect</b>.</div>' +
+      '<div>After you take damage, damage nearby foes and briefly<b>Deflect.</b></div>' +
       `<div>▶ Revenge Damage:<div><span>${ fv(stats.min, stats.max) }</span></div></div>`,
-    effects: [{
-      name: 'Holy Shield',
-      type: 'shield',
-      trigger: 'revenge',
-      stats: { min: [30, 39, 54, 69 ], max: [30, 45, 60, 75] },
-      pom: pom_8,
-    }, {...deflect, trigger: 'revenge'}],
+    effects: [
+      {
+        name: 'Holy Shield',
+        type: 'shield',
+        trigger: 'revenge',
+        stats: { min: [30, 39, 54, 69 ], max: [30, 45, 60, 75], radius: 225 },
+        pom: pom_8,
+      },
+      deflect('shield'),
+    ],
   },
   {
     name: 'Bronze Skin',
@@ -140,7 +183,7 @@ export default [
       type: 'effect',
       target: 'coefficients',
       stats: { reduction: [0.05, 0.075, 0.1, 0.125] },
-      pom: pom(0.5, 0.5)
+      pom: pom(0.5, 0.5),
     }],
   },
   {
@@ -149,9 +192,8 @@ export default [
     icon: 'assets/traits/Athena_07_Large.png',
     god: 'Athena',
     rarity: 0,
-    level: 1,
     description: (stats) =>
-      '<div>Resist damage from<b>Traps</b>.</div>' +
+      '<div>Resist damage from<b>Traps.</b></div>' +
       `<div>▶ Reduced Trap Damage:<div><span>+${ fp(stats.reduction) }%</span></div></div>`,
     mods: [{
       name: 'Sure Footing',
@@ -186,7 +228,7 @@ export default [
     level: 1,
     prereqs: { Athena: ['Divine Strike', 'Phalanx Shot', 'Divine Dash', 'Divine Flourish'] },
     description: (stats) =>
-      '<div>Your abilities that can<b>Deflect</b>also make foes<span>Exposed</span>for <b>5 Sec</b>.</div>' +
+      '<div>Your abilities that can<b>Deflect</b>also make foes<span>Exposed</span>for <b>5 Sec.</b></div>' +
       `<div>▶ Bonus Backstab Damage:<div><span>+${ fp(stats.backstab) }%</span></div></div>`,
     mods: [
       {
