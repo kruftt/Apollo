@@ -89,6 +89,14 @@ export const data =
       status: { target: 'player', name: 'Shadow Presence' },
     },
 
+    sturdy: {
+      name: 'Sturdy',
+      type: 'effect',
+      target: 'coefficients',
+      stats: { reduction: 0.3 },
+      status: { target: 'player', name: 'Sturdy' },
+    },
+
     crit: {
       name: 'Crit',
       type: 'damage',

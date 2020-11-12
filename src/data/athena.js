@@ -35,7 +35,7 @@ export default [
       name: 'Divine Strike',
       type: 'effect',
       target: 'attack',
-      stats: { mult_min: [0.4,0.52,0.72,0.92], mult_max: [0.4,0.6,0.8,1] },
+      stats: { type: 'deflect', mult_min: [0.4,0.52,0.72,0.92], mult_max: [0.4,0.6,0.8,1] },
       pom: pom_4,
     }],
     effects: [deflect('attack')],
@@ -55,7 +55,7 @@ export default [
       name: 'Divine Flourish',
       type: 'effect',
       target: 'special',
-      stats: { mult_min: [0.6, 0.78, 1.08, 1.38], mult_max: [0.6, 0.9, 1.2, 1.5] },
+      stats: { type: 'deflect', mult_min: [0.6, 0.78, 1.08, 1.38], mult_max: [0.6, 0.9, 1.2, 1.5] },
       pom: pom_4,
     }],
   },
@@ -111,7 +111,7 @@ export default [
       name: 'Divine Dash',
       type: 'effect', // deflect
       target: 'dash',
-      stats: { name: 'Divine Dash', min: [10, 12, 14, 16] },
+      stats: { name: 'Divine Dash', type: 'deflect', min: [10, 12, 14, 16] },
       pom: pom(0.6, 0.2),
     }],
     effects: [deflect('dash')],
@@ -215,8 +215,9 @@ export default [
     description: (stats) =>
       '<div>You begin each<b>Encounter</b>with your<b>God Gauge</b>partly full.</div>' +
       `<div>▶ Starting Gauge:<div><span>+${ fp(stats.gauge_start) }%</span></div></div>`,
+    feature: (stats) => `Begin each <b>Encounter</b> with your <b>God Gauge</b> <span>${ fp(stats.gauge_start) }%</span> full.`,
     effects: [{
-      name: 'Proud Bearing', type: 'buff', trigger: 'start', stats: { gauge_start: [0.2, 0.25, 0.3, 0.4], pom: pom(0.5) }
+      name: 'Proud Bearing', type: 'buff', trigger: 'start', stats: { gauge_start: [0.2, 0.25, 0.3, 0.4] }, pom: pom(0.5),
     }],
   },
   {
@@ -242,7 +243,7 @@ export default [
     ],
   },
   {
-    name: 'Brilliant Reposte',
+    name: 'Brilliant Riposte',
     type: 'secondary',
     icon: 'assets/traits/Athena_05_Large.png',
     god: 'Athena',
@@ -252,8 +253,9 @@ export default [
     description: (stats) =>
       '<div>When you<b>Deflect</b>attacks, they deal more damage.</div>' +
       `<div>▶ Deflect Damage:<div><span>+${ fp(stats.deflect) }%</span></div></div>`,
+    feature: (stats) => `<b>Deflect</b> deals <span>+${ fp(stats.deflect) }%</span> damage.`,
     mods: [{
-      name: 'Brilliant Reposte',
+      name: 'Brilliant Riposte',
       type: 'effect',
       target: 'deflect',
       stats: { deflect: [0.8, 1.12, 1.8, 2] },
@@ -270,6 +272,7 @@ export default [
     description: (stats) =>
       '<div><b>Death Defiance</b>makes you <b>Impervious</b>longer. Replenish 1 charge now.</div>' +
       `<div>▶ Effect Duration:<div><span>+${ fv(stats.duration) } Sec.</span></div></div>`,
+    feature: (stats) => `<b>Death Defiance</b> makes you <b>Impervious</b> <span>${ fv(stats.duration) } Sec.</span> longer.`,
     mods: [{
       name: 'Deathless Stand',
       type: 'effect',
@@ -285,8 +288,9 @@ export default [
     god: 'Athena',
     rarity: 0,
     description: (stats) =>
-      '<div><b>Death Defiance</b>restores more <3 than usual. Replenish<b>1</b>charge now.</div>' +
+      `<div><b>Death Defiance</b>restores more &nbsp;<img src="/assets/LifeRestore_Small.png" />&nbsp; than usual. Replenish<b>1</b>charge now.</div>` +
       `<div>▶ Improved Restoration:<div><span>+${ fp(stats.restore) }%</span></div></div>`,
+    feature: (stats) => `<div><b>Death Defiance</b> restores <span>+${ fp(stats.restore) }%</span> more <img src="/assets/LifeRestore_Small.png" /> than usual.`,
     mods: [{
       name: 'Last Stand',
       type: 'effect',
@@ -304,5 +308,6 @@ export default [
     description: (stats) =>
       '<div>You have a barrier that negates incoming damage.</div>' +
       `<div>▶ Barrier Cooldown:<div><span>20 Sec.</span></div></div>`,
+    feature: (stats) => `<div><b>Divine Barrier</b> with <span>20 Sec.</span> cooldown.</div>`,
   },
 ]

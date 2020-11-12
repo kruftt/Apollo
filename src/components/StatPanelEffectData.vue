@@ -10,20 +10,27 @@
         <img src="/assets/SwordIcon.png" class="effect_data__icon" />
         &nbsp;{{ `-${fp(effect.stats.reduction, null, 1)}%` }}
       </div>
+      <div title="Defend"  v-if="effect.stats.defend" class="effect_data__info">
+        <img src="/assets/ShieldIcon.png" class="effect_data__icon" />
+      </div>
+      <div title="Charge"  v-if="effect.stats.charge" class="effect_data__info">
+        <img src="/assets/ChargeIcon.png" class="effect_data__icon effect_data__thin_icon" />
+        &nbsp;{{ fv(effect.stats.charge) }}s
+      </div>
       <div title="Increased Damage Taken" v-if="effect.stats.multiplier" class="effect_data__info" >
         <img src="/assets/ShieldIcon.png" class="effect_data__icon" />
         &nbsp;{{ `-${fp(effect.stats.multiplier)}%` }}
       </div>
       <div title="Range"  v-if="effect.stats.range" class="effect_data__info">
-        <img src="/assets/RangedIcon5.png" class="effect_data__range_icon" />
-        &nbsp;{{ effect.stats.range }}
+        <img src="/assets/RangeIcon.png" class="effect_data__icon effect_data__thin_icon" />
+        &nbsp;{{ (effect.stats.range > 0 ? '+' : '') + fp(effect.stats.range) }}%
       </div>
       <div title="Radius" v-if="effect.stats.radius" class="effect_data__info">
         <img src="/assets/RadiusIcon5.png" class="effect_data__icon" />
-        &nbsp;{{ effect.stats.radius }}
+        &nbsp;{{ fv(effect.stats.radius) }}
       </div>
       <div title="Duration" v-if="effect.stats.duration" class="effect_data__info" >
-        <img src="/assets/DurationIcon.png" class="effect_data__icon" />
+        <img src="/assets/DurationIcon.png" class="effect_data__duration_icon" />
         &nbsp;{{ fv(effect.stats.duration, null, 1) }}s
       </div>
       <template v-if="effect.damage_max">
@@ -34,8 +41,8 @@
     </div>
   </div>
 
-  <div title="Damage Over Time" v-if="effect.dot_damage" :class="['dot_data', effect.type ]">
-    <div title="Interval" v-if="effect.dot_damage" class="effect_data__interval">
+  <div title="Damage Over Time" v-if="effect.dot_damage !== undefined" :class="['dot_data', effect.type ]">
+    <div title="Interval" class="effect_data__interval">
       &nbsp;<b>{{ effect.damage }}</b> every <b>{{ effect.stats.interval }}</b> Sec.
     </div>
   </div>
@@ -110,10 +117,18 @@
 .effect_data__icon {
   height: 0.9em;
   width: 0.9em;
+  position: relative;
+  top: 0.05em;
 }
-.effect_data__range_icon {
-  height: 1em;
+.effect_data__thin_icon {
   width: 0.5em;
+}
+.effect_data__duration_icon {
+  height: 0.95em;
+  width: 0.95em;
+  position: relative;
+  top: 0.05em;
+  opacity: 0.8;
 }
 
 .effect_data__damage {
@@ -223,12 +238,13 @@
 .bolt, .chain, .jolt, .jolted, .spark { color: #cc4; }
 .heartbreak, .weak, .lament, .despair, .charm, .crush, .passion, .love { color: rgb(219, 88, 219); }
 .doom, .rift { color: #d55; }
-.arrow, .exit { color: #6b6; }
+.deadly, .hunters, .arrow, .exit { color: #6b6; }
 .deflect, .shield, .phalanx { color: #baa968; }
 .arctic, .chill, .snow, .frozen, .freeze, .shatter, .beam, .vortex { color: rgb(177, 203, 255); }
 .hangover, .pressure, .trippy, .festive { color: rgb(146, 122, 255); }
 .wave, .rupture, .flood, .surge, .typhoon, .watery { color: rgb(122, 195, 255) }
 .shared { color: #bbf; }
+.hammer { color: rgb(152, 156, 173); }
 </style>
 
 

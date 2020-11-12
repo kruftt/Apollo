@@ -15,10 +15,10 @@
     <StatPanelCharacterData class="stat_panel__char_data" :character="store.player" />
     <StatPanelCharacterData class="stat_panel__char_data" :character="store.foe" />
     <div class="build_features">
-      <template v-for="feature in store.build.features">
+      <div v-for="feature in store.build.features" class="build_features__feature">
         <img class="build_features__bullet" src="/assets/Bullet.png" />
-        <div class="build_features__feature" v-html="feature" />
-      </template>
+        <div class="build_features__content" v-html="feature" />
+      </div>
     </div>
   </div>
 </template>
@@ -89,17 +89,26 @@
   color: #bbb;
   font-size: 95%;
   display: flex;
-  flex-flow: row nowrap;
+  flex-flow: column nowrap;
 }
 .build_features__bullet {
   display: inline-block;
   height: 1em;
   margin-right: 0.2em;
 }
-.build_features__feature {
+.build_features__content {
 
 }
+.build_features__feature {
+  display: flex;
+
+}
+.build_features__feature + .build_features__feature {
+  margin-top: 0.5em;
+}
+
 .build_features__feature span {
+  font-weight: bold;
   color: #4c4;
 }
 .build_features__feature img {

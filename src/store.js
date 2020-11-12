@@ -16,14 +16,6 @@ const watchPrereqs = (prereqs) =>
 const trait_data = data.traits.map((t) => {
   const trait = reactive(t)
   const prereqs = t.prereqs
-  // trait.prereqs = (prereqs)
-  //   ? Array.isArray(prereqs)
-  //     ? watchPrereqs(prereqs)
-  //     : Object.keys(prereqs).reduce((a, v) => {
-  //       a[v] = watchPrereqs(prereqs[v])
-  //       return a
-  //     }, {})
-  //   : null
   trait.prereqs = (prereqs)
     ? Object.keys(prereqs).reduce((p, k) => {
         p[k] = watchPrereqs(prereqs[k])
@@ -32,7 +24,6 @@ const trait_data = data.traits.map((t) => {
     : null
 
   trait.active = computed(() => {
-    // if (exclude[trait.name]) return false
     if (prereqs) {
       const threshold = trait.threshold
       if (threshold) {
@@ -239,20 +230,33 @@ function applyStatus(build, effect_or_mod, status) {
   const name = status.name
   const target = status.target
   const build_char = build[target]
+  const stats = effect_or_mod.stats
   build_char.status[name] = null  // signal to initialize to 0 or maintain current value
 
-  const stacks = status.stacks
-  if (typeof stacks === 'number') {
-    build_char[`max_${name}`] = stacks
+  const max_stacks = (status.stacks || Math.floor(0.05 + (stats.duration/stats.interval)))
+  if (typeof max_stacks === 'number') {
+    const key = `max_${name}`
+    const current = build_char[key] || 0
+    build_char[key] = Math.max(current, max_stacks)
   }
 
   const status_value = store[target].status[name] || 0
   if (!status_value) return false
 
   if (effect_or_mod.stacks) {
-    const stats = effect_or_mod.stats
-    for (const key in stats) {
-      stats[key] *= status_value
+    const stacks = Math.min(status_value, max_stacks) // If max stacks is higher from a different ability
+    switch (effect_or_mod.target || effect_or_mod.type) {
+      case 'hangover':
+        stats.min *= stacks
+        stats.count = stacks
+        break
+      case 'chill':
+        stats.speed *= stacks
+        break
+
+      case 'rift':
+      case 'doom':
+        break
     }
   }
 
@@ -370,6 +374,9 @@ function applyEffectMod(effects, mod) {
         case 'multiply_duration':
           effect_stats.duration && (effect_stats.duration *= mod_stats[k])
           break
+        case 'multiply_radius':
+          effect_stats.radius && (effect_stats.radius *= (1 + mod_stats[k]))
+          break
         case 'name':
         case 'type':
           effect[k] = mod_stats[k]
@@ -383,6 +390,13 @@ function applyEffectMod(effects, mod) {
         case 'stacks':
           effect.status[k] = (effect.status[k] || 0) + mod_stats[k]
           break
+
+        case 'min':
+          const v = mod_stats[k]
+          if (!mod_stats.max) {
+            const max = effect_stats.max
+            if (max) effect_stats.max = max + v
+          }
         default:
           effect_stats[k] = (effect_stats[k] || 0) + mod_stats[k]
           break
@@ -482,6 +496,15 @@ function linkEffects(build, effect_data, is_ability_data = false) {
         secondary_effects = b_effects[trigger]
         if (secondary_effects)
           effect.effects.push(...secondary_effects)
+
+        if (trigger.indexOf('Attack') !== -1) {
+          secondary_effects = b_effects.attack
+          if (secondary_effects) effect.effects.push(...secondary_effects)
+        }
+        else if (trigger.indexOf('Special') !== -1) {
+          secondary_effects = b_effects.special
+          if (secondary_effects) effect.effects.push(...secondary_effects)
+        }
       }
 
       // check what the type triggers
@@ -521,9 +544,18 @@ function computeDamageValues(build, effect) {
 
     const interval = stats.interval
     if (interval) {
-      effect.dot_ticks = Math.floor(0.05 + (stats.duration / interval))
-      effect.dot_damage = effect.damage_min * effect.dot_ticks
-      // effect.dot_damage = (effect.avg_damage || effect.damage_min) * Math.round(stats.duration / interval)
+      const max_ticks = Math.floor(0.05 + (stats.duration / interval))
+      if (effect.type === 'rift') {
+        const num_hits = Math.min(max_ticks, (foe.status['Blade Rift Hits'] || 0))
+        effect.ticks = num_hits
+        stats.count = num_hits
+        effect.dot_damage = (stats.vicious_cycle)
+          ? (effect.damage_min + Math.max(num_hits - 1, 0)) * num_hits
+          : effect.damage_min * num_hits
+      } else {
+        effect.dot_damage = effect.damage_min * max_ticks
+        effect.ticks = max_ticks
+      }
     }
 
     effect.crit_chance = coefficients.crit + (stats.crit || 0) + (0.5 * (coefficients.crit_min + coefficients.crit_max))
@@ -565,9 +597,11 @@ function syncObjectChanges(target, source) {
   }
 }
 
+let stopWatch = () => null
 // const mod_types = ['ability', 'reduction', 'base', 'percent', 'effect']
 const mod_types = ['meta', 'effect']
 function compileBuild() {
+  stopWatch()
   const data_base = data.base
   const crit = Object.create(data_base.crit)
   crit.stats = { ...crit.stats }
@@ -592,7 +626,7 @@ function compileBuild() {
     slam,
     gods: {},
     abilities: {
-      dash: [{name: "Dash", type: 'ability', trigger: 'dash', stats: { range: 350, count: 2 }, effects: []}],
+      dash: [{name: "Dash", type: 'ability', trigger: 'dash', stats: { count: 2 }, effects: []}],
       revenge: [{name: "Damage Taken", type: 'event', trigger: 'revenge', stats: {}, effects: []}],
       slain: [{name: "Enemy Death", type: 'event', trigger: 'slain', stats: {}, effects: []}],
     },
@@ -616,6 +650,9 @@ function compileBuild() {
   if (foe.status.chill) {
     const chill = data_base.chill
     build.mods.effect.push({...chill, stats: { ...chill.stats }})
+  }
+  if (player.status.Sturdy) {
+    build.mods.effect.push(data_base.sturdy)
   }
 
   for (const trait_list of [
@@ -657,6 +694,10 @@ function compileBuild() {
   syncObjectChanges(player, build.player)
   syncObjectChanges(foe, build.foe)
 
+  stopWatch = watch([store.traits, store.player.status, store.foe.status],
+    () => { store.build = compileBuild() },
+    { deep: true }
+  )
   return build
 }
 
@@ -688,11 +729,6 @@ window.trait_data = trait_data
 window.store = store
 store.build = compileBuild()
 store.filterTraits = filterTraits
-
-watch([store.traits, store.player.status, store.foe.status],
-  () => { store.build = compileBuild() },
-  { deep: true }
-)
 
 export const useStore = () => store
 export default useStore

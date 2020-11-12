@@ -20,7 +20,7 @@ export default [
       name: 'Deadly Strike',
       type: 'effect',
       target: 'attack',
-      stats: { crit: 0.15, mult_min: [0.2,0.26,0.36,0.46], mult_max: [0.2,0.3,0.4,0.5] },
+      stats: { type: 'deadly', crit: 0.15, mult_min: [0.2,0.26,0.36,0.46], mult_max: [0.2,0.3,0.4,0.5] },
       pom: pom_4,
     }],
   },
@@ -39,6 +39,7 @@ export default [
       type: 'effect',
       target: 'special',
       stats: {
+        type: 'deadly',
         mult_min: [ 0.4, 0.52, 0.72, 0.92 ],
         mult_max: [ 0.4, 0.6, 0.8, 1.0 ],
         crit: [ 0.2, 0.2, 0.2, 0.2 ],
@@ -53,14 +54,33 @@ export default [
     god: 'Artemis',
     rarity: 0,
     level: 1,
+    exclude: [ 'Aegis - Aspect of Beowolf' ],
     description: (stats) =>
-      '<div>Your<b>Cast</b>seeks foes, with a 10% change to deal<b>Critical</b>damage.</div>' +
+      '<div>Your<b>Cast</b>seeks foes, with a 10% chance to deal<b>Critical</b>damage.</div>' +
       `<div>▶ Cast Damage:<div><span>${ fv(stats.min) }</span></div></div>`,
     abilities: [{
       name: 'True Shot',
       type: 'arrow',
       trigger: 'cast',
       stats: { min: [70, 80, 90, 100], lodge: true },
+      pom: pom_6,
+    }],
+  },
+  {
+    name: "Hunter's Flare",
+    type: 'cast',
+    icon: 'assets/traits/Artemis_02_Large.png',
+    god: 'Artemis',
+    rarity: 0,
+    level: 1,
+    description: (stats) =>
+    '<div>Your<b>Cast</b>damages foes around you, with a 10% <b>Critical</b> chance.</div>' +
+      `<div>▶ Cast Damage:<div><span>${ fv(stats.min) }</span></div></div>`,
+    abilities: [{
+      name: "Hunter's Flare",
+      type: 'hunters',
+      trigger: 'cast',
+      stats: { min: [55, 62.975, 70.95, 78.925], lodge: true },
       pom: pom_6,
     }],
   },
@@ -78,7 +98,7 @@ export default [
       name: 'Hunter Dash',
       type: 'effect',
       target: 'dashAttack',
-      stats: { mult_base: [0.5,0.8,1.1,1.4] },
+      stats: { type: 'hunters', mult_base: [0.5,0.8,1.1,1.4] },
       pom: pom_2,
     }],
   },
@@ -92,13 +112,22 @@ export default [
     description: (stats) =>
       '<div>Your<b>Call</b>fires a seeking arrow with +35%<b>Critical</b>chance.</div>' +
       `<div>▶ Base Damage:<div><span>${ fv(stats.min) }</span></div></div>`,
-    abilities: [{
-      name: "Artemis' Aid",
-      type: 'arrow',
-      trigger: 'call',
-      stats: { min: [100,110,120,130] },
-      pom: pom_4,
-    }],
+    abilities: [
+      {
+        name: "Artemis' Aid",
+        type: 'arrow',
+        trigger: 'call',
+        stats: { min: [100,110,120,130] },
+        pom: pom_4,
+      },
+      {
+        name: "Artemis' Aid - Max",
+        type: 'arrow',
+        trigger: 'call',
+        stats: { min: [100,110,120,130], count: 10 },
+        pom: pom_4,
+      },
+    ],
   },
   {
     name: 'Pressure Points',

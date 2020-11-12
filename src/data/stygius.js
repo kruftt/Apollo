@@ -12,7 +12,7 @@ export default [
       { type: 'damage', trigger: 'attack', name: 'Strike', stats: {backstab:true, min: 20, max: 20} },
       { type: 'damage', trigger: 'attack', name: 'Chop', stats: {backstab:true, min: 25, max: 25} },
       { type: 'damage', trigger: 'attack', name: 'Thrust', stats: {backstab:true, min: 30, max: 30, knockback: true} },
-      { type: 'damage', trigger: 'dashAttack', name: 'Dash-attack', stats: {min: 30, max: 30, attack: true, knockback: true} },
+      { type: 'damage', trigger: 'dashAttack', name: 'Dash-attack', stats: {backstab:true, min: 30, max: 30, knockback: true} },
       { type: 'damage', trigger: 'special', name: 'Nova Smash', stats: {min: 50, max: 50, knockback: true, no_backstab: true} },
     ],
   },

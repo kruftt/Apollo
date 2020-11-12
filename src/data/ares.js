@@ -55,6 +55,7 @@ export default [
     god: 'Ares',
     rarity: 0,
     level: 1,
+    exclude: [ 'Aegis - Aspect of Beowolf' ],
     description: (stats) =>
       '<div>Your<b>Cast</b>sends a<b>Blade Rift</b>hurling ahead.</div>' +
       `<div>▶ Rift Damage per Hit:<div><span>${ fv(stats.min) }</span></div></div>`,
@@ -62,8 +63,28 @@ export default [
       name: 'Slicing Shot',
       type: 'rift',
       trigger: 'cast',
-      stats: { min: [20,22,24,26], duration: 4, interval: 0.1 },
+      stats: { min: [20,22,24,26], duration: 4, interval: 0.1, radius: 150 },
+      status: { target: 'foe', name: 'Blade Rift Hits' },
       pom: pom(0.2, 0.1),
+    }],
+  },
+  {
+    name: 'Slicing Flare',
+    type: 'cast',
+    icon: 'assets/traits/Ares_02_Large.png',
+    god: 'Ares',
+    rarity: 0,
+    level: 1,
+    description: (stats) =>
+      '<div>Your<b>Cast</b>sends a large<b>Blade Rift</b>hurling ahead.</div>' +
+      `<div>▶ Rift Damage per Hit:<div><span>${ fv(stats.min) }</span></div></div>`,
+    effects: [{
+      name: 'Blade Rift',
+      type: 'rift',
+      trigger: 'dragon',
+      stats: { min: [30,36,42,48], duration: 4, interval: 0.1, radius: 200 },
+      status: { target: 'foe', name: 'Blade Rift Hits' },
+      pom: pom(0.2, 0.05),
     }],
   },
   {
@@ -76,7 +97,16 @@ export default [
     description: (stats) =>
       '<div>Your<b>Dash</b>creates a<b>Blade Rift</b>where you started.</div>' +
       `<div>▶ Rift Damage per Hit:<div><span>${ fv(stats.min) }</span></div></div>`,
-    mods: [{ name: 'Blade Dash', type: 'effect', target: 'dash', stats: {name: 'Blade Dash', type: 'rift', min:[10,12,14,16], duration: 0.7, interval: 0.1, radius:150}, pom: pom(0.6, 0.2) }],
+    effects: [
+      {
+        name: 'Blade Rift',
+        type: 'rift',
+        trigger: 'dash',
+        stats: { min:[10,12,14,16], duration: 0.7, interval: 0.1, radius:150 },
+        status: { target: 'foe', name: 'Blade Rift Hits' },
+        pom: pom(0.6, 0.2),
+      }
+    ],
   },
   {
     name: "Ares' Aid",
@@ -88,13 +118,24 @@ export default [
     description: (stats) =>
       `<div>Your<b>Call</b>turns you into an<b>Impervious Blade Rift</b>for <b>${fv(stats.duration)} Sec.</b></div>` +
       `<div>▶ Rift Damage per Hit:<div><span>${ fv(stats.min) }</span></div></div>`,
-    abilities: [{
-      name: "Ares' Aid",
-      type: 'rift',
-      trigger: 'call',
-      stats: { duration: 1.2, min: [ 30, 37.5, 45, 52.5], interval: 0.1 },
-      pom: pom(0.2, 0.05),
-    }],
+    abilities: [
+      {
+        name: "Ares' Aid",
+        type: 'rift',
+        trigger: 'call',
+        stats: { duration: 1.2, min: [ 30, 37.5, 45, 52.5], interval: 0.1, radius: 150 },
+        status: { target: 'foe', name: 'Blade Rift Hits' },
+        pom: pom(0.2, 0.05),
+      },
+      {
+        name: "Ares' Aid - Max",
+        type: 'rift',
+        trigger: 'call',
+        stats: { duration: 6, min: [ 30, 37.5, 45, 52.5], interval: 0.1, radius: 150 },
+        status: { target: 'foe', name: 'Blade Rift Hits' },
+        pom: pom(0.2, 0.05),
+      }
+    ],
   },
   {
     name: 'Curse of Vengeance',
@@ -194,12 +235,12 @@ export default [
     prereqs: { Ares: ["Ares' Aid", 'Blade Dash', 'Slicing Flare', 'Slicing Shot'] },
     description: (stats) =>
       '<div>Your<b>Blade Rift</b>powers deal damage in a wider area.</div>' +
-      `<div>▶ Bonus Area of Effect:<div><span>+${fp(stats.area)}%</span></div></div>`,
+      `<div>▶ Bonus Area of Effect:<div><span>+${fp(stats.multiply_radius)}%</span></div></div>`,
     mods: [{
       name: 'Black Metal',
       type: 'effect',
       target: 'rift',
-      stats: { area: [0.3, 0.33, 0.36, 0.39] },
+      stats: { multiply_radius: [0.3, 0.33, 0.36, 0.39] },
       pom: pom_4,
     }],
   },
@@ -213,6 +254,7 @@ export default [
     description: (stats) =>
       '<div>Your<b>Blade Rift</b>effects last longer and pull foes in.</div>' +
       `<div>▶ Rift Duration<div><span>+${fp(stats.duration)}%</span></div></div>`,
+    feature: (stats) => `<b class="rift">Blade Rifts</b> pull foes in.`,
     mods: [{
       name: 'Engulfing Vortex',
       type: 'effect',
@@ -267,12 +309,15 @@ export default [
     prereqs: { Ares: ['Black Metal', 'Engulfing Vortex'] },
     description: (stats) =>
       '<div>Your<b>Blade Rift</b>effects deal more damage for each consecutive hit.</div>' +
-      `<div>▶ Damage increase per hit:<div><span>${ fv(stats.min) }</span></div></div>`,
-    mods: [{
-      name: 'Vicious Cycle',
-      type: 'effect',
-      target: 'rift',
-      stats: { min: 2 }
-    }],
+      `<div>▶ Damage increase per hit:<div><span>2</span></div></div>`,
+    feature: (stats) => `<b class="rift">Blade Rifts</b> deal <span>+2</span> damage for each consecutive hit.`,
+    mods: [
+      {
+        name: 'Vicious Cycle',
+        type: 'effect',
+        target: 'rift',
+        stats: { vicious_cycle: true },
+      },
+    ],
   },
 ]

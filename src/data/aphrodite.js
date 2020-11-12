@@ -70,7 +70,7 @@ export default [
       name: 'Crush Shot',
       type: 'crush',
       trigger: 'cast',
-      stats: {min:[90,100,110,120], range: 300 },
+      stats: { min:[90,100,110,120] },
       pom: pom_6,
     }],
   },
@@ -84,14 +84,16 @@ export default [
     description: (stats) =>
       '<div>Your<b>Cast</b>damages foes around you and inflicts<b>Weak</b>.</div>' +
       `<div>▶ Cast Damage:<div><span>${fv(stats.min)}</span></div></div>`,
-    effects: [ weak('cast') ],
-    abilities: [{
-      name: 'Passion Flare',
-      type: 'crush',
-      trigger: 'cast',
-      stats: {min:[80, 96, 112, 128] },
-      pom: pom_6,
-    }],
+    effects: [
+      weak('crush'),
+      {
+        name: 'Passion Flare',
+        type: 'crush',
+        trigger: 'dragon',
+        stats: {min:[80, 96, 112, 128] },
+        pom: pom_6,
+      },
+    ],
   },
   {
     name: 'Passion Dash',
@@ -172,7 +174,7 @@ export default [
       target: 'coefficients',
       type: 'effect',
       name: 'Different League',
-      stats: {reduction: [0.1, 0.125, 0.15, 0.175], range: 400 },
+      stats: {reduction: [0.1, 0.125, 0.15, 0.175] },
       status: {target: 'foe', name: 'nearby'},
       pom: pom_4,
     }],
@@ -266,7 +268,7 @@ export default [
       {
         type: 'effect',
         target: 'cast',
-        stats: { range: 300 },
+        stats: { range: 1 },
       },
       {
         type: 'effect',

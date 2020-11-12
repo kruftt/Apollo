@@ -11,8 +11,8 @@ export default [
     rarity: -4,
     abilities: [
       { type: 'damage', trigger: 'attack', name: 'Bash', stats: {backstab:true, min: 25} },
-      { type: 'damage', trigger: 'chargeAttack', name: 'Bull Rush', stats: {backstab:true, min: 20, max:40, duration: 2, defend: true, attack: true} },
-      { type: 'damage', trigger: 'dashAttack', name: 'Dash-Strike', stats: {backstab:true, min: 25, attack: true} },
+      { type: 'damage', trigger: 'chargeAttack', name: 'Bull Rush', stats: {backstab:true, min: 20, max:40, charge: 2, defend: true} },
+      { type: 'damage', trigger: 'dashAttack', name: 'Dash-Strike', stats: {backstab:true, min: 25} },
       { type: 'damage', trigger: 'special', name: 'Throw', stats: {min: 15, backstab: true} },
     ],
   },
@@ -77,7 +77,7 @@ export default [
       { name: 'Bull Rush', type: 'bull', trigger: 'chargeAttack', stats: { min: 50, defend: true, backstab: true } },
       { name: 'Dragon Rush', type: 'dragon', trigger: 'chargeAttack', stats: { min: 50, defend: true, backstab: true } },
       { name: 'Heavy Throw', type: 'damage', trigger: 'special', stats: { min: 45, backstab: true } },
-      { type: null, trigger: 'cast' },
+      { name: 'Load Ammo', trigger: 'cast', type: 'load' },
     ],
     mods: [{
       name: 'Aspect of Beowolf',
@@ -115,7 +115,7 @@ export default [
       name: 'Sudden Rush',
       type: 'effect',
       target: 'chargeAttack',
-      stats: { duration: -1 },
+      stats: { charge: -1 },
     }],
   },
   {
@@ -161,7 +161,7 @@ export default [
     description: (stats) => `<div>Your<b>Special</b>deals<span>50</span>damage to nearby foes when you catch it.</div>`,
     effects: [{
       name: 'Explosive Return',
-      type: 'explosive',
+      type: 'hammer',
       trigger: 'special',
       stats: { min: 50 },
     }],
@@ -175,10 +175,10 @@ export default [
     rarity: -3,
     exclude: aegis_exclusions,
     description: (stats) => `<div>Your<b>Bull Rush</b>gains a Power Rush that does<span>+500%</span>damage.</div>`,
-    abilities: [
-      { type: 'damage', trigger: 'chargeAttack', name: 'Bull Rush', stats: {backstab:true, min: 20, max:40, duration: 2, defend: true} },
-      { type: 'damage', trigger: 'chargeAttack', name: 'Power Rush', stats: {backstab:true, min: 20, max:40, duration: 2, defend: true, mult_base: 5} },
-    ]
+    mods: [
+      { name: 'Minotaur Rush', type: 'effect', target: 'Bull Rush', stats: { name: 'Power Rush', mult_base: 5 }, status: { target: 'player', name: 'Power Rush'} },
+      { name: 'Minotaur Rush', type: 'effect', target: 'Dragon Rush', stats: { name: 'Power Dragon Rush', mult_base: 5 }, status: { target: 'player', name: 'Power Rush'} },
+    ],
   },
   {
     name: 'Breaching Rush',
@@ -288,12 +288,13 @@ export default [
     weapon: 'Aegis',
     rarity: -3,
     exclude: aegis_exclusions,
+    prereqs: { Beowolf: ['Aegis - Aspect of Beowolf'] },
     description: (stats) => `<div>After using your Naegling's Board Cast, you are<span>Sturdy</span>for<span>3 Sec.</span></div>`,
-    effect: [{
+    effects: [{
       name: 'Sturdy',
       type: 'effect',
-      trigger: 'attack',
-      status: { target: 'player', name: 'sturdy' }
+      trigger: 'dragon',
+      status: { target: 'player', name: 'Sturdy' },
     }],
   },
 ]
