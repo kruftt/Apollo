@@ -97,7 +97,7 @@ export default [
       name: "Dionysus' Aid",
       type: 'dio aid',
       trigger: 'call',
-      stats: { duration: 1.5, range: 600 },
+      stats: { duration: 1.5 },
     },],
     effects: [hangover('dio aid', [15,16.5,18,19.5], pom(0.4, 0.25))],
   },

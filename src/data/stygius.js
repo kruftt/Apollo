@@ -13,7 +13,7 @@ export default [
       { type: 'damage', trigger: 'attack', name: 'Chop', stats: {backstab:true, min: 25, max: 25} },
       { type: 'damage', trigger: 'attack', name: 'Thrust', stats: {backstab:true, min: 30, max: 30, knockback: true} },
       { type: 'damage', trigger: 'dashAttack', name: 'Dash-attack', stats: {backstab:true, min: 30, max: 30, knockback: true} },
-      { type: 'damage', trigger: 'special', name: 'Nova Smash', stats: {min: 50, max: 50, knockback: true, no_backstab: true} },
+      { type: 'damage', trigger: 'special', name: 'Nova Smash', stats: {min: 50, max: 50, knockback: true } },
     ],
   },
   {
@@ -73,9 +73,9 @@ export default [
       `<div><i>Peace and destruction await a kingdom governed by the rule of might.</i></div>` +
       `<div><div>Aura Damage Reduction:</div><div><span>+${ fp(stats.reduction) }%</span></div></div>`,
     abilities: [
-      { type: 'damage', trigger: 'attack', name: 'Slash', stats: {min: 60, max: 60} },
-      { type: 'damage', trigger: 'attack', name: 'Big Slash',  stats: {min: 80, max: 80} },
-      { type: 'damage', trigger: 'attack', name: 'Monster Slash', stats: {min: 200, max: 200} },
+      { type: 'damage', trigger: 'attack', name: 'Slash', stats: {backstab: true, min: 60, max: 60} },
+      { type: 'damage', trigger: 'attack', name: 'Big Slash',  stats: {backstab: true, min: 80, max: 80} },
+      { type: 'damage', trigger: 'attack', name: 'Monster Slash', stats: {backstab: true, min: 200, max: 200} },
       { type: 'damage', trigger: 'special', name: 'Hallowed Ground', stats: {min: 70, max: 70} },
     ],
     mods: [
@@ -153,7 +153,7 @@ export default [
       type: 'damage',
       trigger: 'special',
       name: 'Dash Nova',
-      stats: {min: 50, max: 50, knockback: true, no_backstab: true}
+      stats: {min: 50, max: 50, knockback: true }
     }],
     mods: [{
       name: 'Sturdy',
@@ -189,7 +189,7 @@ export default [
     rarity: -3,
     description: (stats) => `<div>Your<b>Special</b>hits twice but no longer knocks foes away.</div>`,
     abilities: [
-      { type: 'damage', trigger: 'special', name: 'Nova Smash', stats: {min: 50, max: 50, no_backstab: true, count: 2} },
+      { type: 'damage', trigger: 'special', name: 'Nova Smash', stats: {min: 50, max: 50, count: 2} },
     ],
   },
   {

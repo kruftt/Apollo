@@ -91,29 +91,41 @@
   display: flex;
   flex-flow: column nowrap;
 }
+.build_features__feature span {
+  font-weight: bold;
+  color: #4c4;
+}
 .build_features__bullet {
   display: inline-block;
   height: 1em;
   margin-right: 0.2em;
 }
 .build_features__content {
+  /* display: flex; */
+  /* align-content: center; */
+  /* text-align: center; */
+  /* vertical-align: middle; */
+}
+.build_features__content > b,
+.build_features__content > span {
+  /* margin: 0 0.2em; */
+}
 
+.build_features__content img {
+  position: relative;
+  top: 0.2em;
+  height: 1em;
+  transform: scale(1.4, 1.4);
+  margin: 0 0.1em;
 }
 .build_features__feature {
   display: flex;
-
+  align-items: center;
 }
 .build_features__feature + .build_features__feature {
-  margin-top: 0.5em;
+  margin-top: 0.6em;
 }
 
-.build_features__feature span {
-  font-weight: bold;
-  color: #4c4;
-}
-.build_features__feature img {
-  height: 1.0em;
-}
 </style>
 
 <script>

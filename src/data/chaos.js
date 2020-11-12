@@ -13,7 +13,8 @@ export default [
     god: 'Chaos',
     rarity: 0,
     description: (stats) =>
-      `<div>Any<b>Obols</b>you find are worth<span>+${ fp(stats.mult_obols_min, stats.mult_obols_max) }%.</span></div>`,
+      `<div>Any&nbsp;<img src="/assets/Currency_Small.png" />&nbsp;you find are worth<span>+${ fp(stats.mult_obols_min, stats.mult_obols_max) }%</span></div>`,
+    feature: (stats) => `Any <img src="/assets/Currency_Small.png" /> you find are worth <span>+${ fp(stats.mult_obols_min, stats.mult_obols_max) }%</span> </div>`,
     mods: [{
       name: 'Affluence',
       type: 'effect',
@@ -46,7 +47,7 @@ export default [
     rarity: 0,
     description: (stats) =>
       `<div>You deal<span>+${ fp(stats.first_min, stats.first_max) }%</span>damage striking<b>undamaged</b>foes.</div>` +
-      `<div>(requires fiery presence)</div>`,
+      `<div><div>Requires<b>Fiery Presence.</b></div></div>`,
     mods: [{
       name: 'Assault',
       type: 'effect',
@@ -62,7 +63,8 @@ export default [
     god: 'Chaos',
     rarity: 0,
     description: (stats) =>
-      `<div>Any<b>Darkness</b>and<b>Gemstones</b>you find are worth<span>+${ fp(stats.darkness_min, stats.darkness_max) }%.</span></div>`,
+      `<div>Any &nbsp;<img src="/assets/Darkness_Small.png" />&nbsp; and &nbsp;<img src="/assets/Gems_Small.png" />&nbsp; you find are worth<span>+${ fp(stats.darkness_min, stats.darkness_max) }%.</span></div>`,
+    feature: (stats) => `<img src="/assets/Darkness_Small.png" />&nbsp; and &nbsp;<img src="/assets/Gems_Small.png" />&nbsp; are worth <span>+${ fp(stats.darkness_min, stats.darkness_max) }%.</span>`,
     mods: [{
       name: 'Eclipse',
       type: 'effect',
@@ -77,7 +79,7 @@ export default [
     god: 'Chaos',
     rarity: 0,
     description: (stats) =>
-      `<div>Boons have<span>+${ fp(stats.rare_min, stats.rare_max) }%</span>chance to be<span class="rare">Rare</span>or better.</div>`,
+      `<div><b>Boons</b> have<span>+${ fp(stats.rare_min, stats.rare_max) }%</span>chance to be<span class="rare">Rare</span>or better.</div>`,
     mods: [{
       name: 'Favor',
       type: 'effect',
@@ -167,7 +169,7 @@ export default [
     god: 'Chaos',
     rarity: 0,
     description: (stats) =>
-      `<div>Your<b>Attack<b>deals<span>+${ fp(stats.mult_min, stats.mult_max) }%</span>damage.</div>`,
+      `<div>Your<b>Attack</b>deals<span>+${ fp(stats.mult_min, stats.mult_max) }%</span>damage.</div>`,
     mods: [{
       name: 'Strike',
       type: 'effect',
@@ -181,13 +183,13 @@ export default [
     icon: 'assets/chaos/blessing_death_defiance_08.png',
     god: 'Chaos',
     rarity: 0,
-    description: (stats) =>
-      `<div>Gain<span>+1</span><b>Death Defiance.</b></div>`,
+    description: (stats) => `<div>Gain<span>+1</span><b>Death Defiance.</b></div>`,
+    feature: (stats) => `<b><span>+1</span>Death Defiance.</b>`,
     mods: [{
       name: 'Defiance',
       type: 'effect',
       target: 'player',
-      stats: { defiance: 1 }
+      stats: { defiance: 1 },
     }],
   },
 ]

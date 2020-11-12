@@ -89,6 +89,14 @@ export const data =
       status: { target: 'player', name: 'Shadow Presence' },
     },
 
+    fiery: {
+      name: 'Fiery Presence',
+      type: 'effect',
+      target: 'coefficients',
+      stats: { first: 0.75 },
+      status: { target: 'player', name: 'Fiery Presence' },
+    },
+
     sturdy: {
       name: 'Sturdy',
       type: 'effect',
@@ -138,8 +146,8 @@ export const data =
         ammo: 2,
       },
       status: {
-        'Backstab': null,
-        'Shadow Presence': null,
+      //   'Fiery Presence': null,
+      //   'Shadow Presence': null,
       },
     },
 
@@ -149,7 +157,10 @@ export const data =
         health: 100,
         speed: 1,
       },
-      status: {  },
+      status: {
+        'Undamaged': null,
+        'Backstab': null,
+      },
     },
 
     coefficients: {
@@ -157,7 +168,11 @@ export const data =
       mult_min: 0,
       mult_max: 0,
       first: 0,
+      first_min: 0,
+      first_max: 0,
       backstab: 0,
+      backstab_min: 0,
+      backstab_max: 0,
       crit: 0,  // Chance
       crit_min: 0,  // Chance
       crit_max: 0,  // Chance

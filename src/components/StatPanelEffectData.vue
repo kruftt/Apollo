@@ -34,7 +34,7 @@
         &nbsp;{{ fv(effect.stats.duration, null, 1) }}s
       </div>
       <template v-if="effect.damage_max">
-        <div title="Damage" v-if="effect.damage_max" :class="[ 'effect_data__damage', effect.crit_chance ? '' : dmg_mag((effect.dot_damage || effect.damage)) ]">
+        <div title="Damage" v-if="effect.damage_max" :class="[ 'effect_data__damage', effect.crit_chance ? '' : dmg_mag((effect.dot_damage || effect.damage_max)) ]">
           {{ (effect.dot_damage || effect.damage) }}
         </div>
       </template>

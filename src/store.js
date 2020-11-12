@@ -113,11 +113,28 @@ function filterObjects(obj_arr, props) {
 }
 
 
+const fp = ref(false)
+const sp = ref(false)
+
 const player = reactive({
   ...data.base.player,
   stats: { ...data.base.player.stats },
-  status: { ...data.base.player.status },
+  status: {
+    ...data.base.player.status,
+    'Fiery Presence': fp,
+    'Shadow Presence': sp,
+  },
 })
+
+// link Fiery and Shadow
+watch(
+  [fp, sp],
+  ([fpv, spv], [ofpv, ospv]) => {
+    if (!fpv || !spv) return
+    if (ofpv) fp.value = false
+    else sp.value = false
+  }
+)
 
 const foe = reactive({
   ...data.base.foe,
@@ -524,13 +541,17 @@ function computeDamageValues(build, effect) {
   const min = stats.min
   if (min) {
     const max = stats.max || min
-    const coefficients = build.coefficients
+    const _co = build.coefficients
     // const backstab_mult = + ((stats.backstab && player.status.Backstab) ? (stats.mult_backstab || 1) * ((coefficients.backstab || 0) + (typeof stats.backstab === 'number' ? stats.backstab : 0)): 0)
-    const base_multiplier = 1 + coefficients.mult_base + (stats.mult_base || 0)
-      + ((stats.backstab && player.status.Backstab) ? (coefficients.backstab || 0) + (typeof stats.backstab === 'number' ? stats.backstab : 0): 0)
-      + (foe.status.Undamaged ? coefficients.first + (stats.first || 0) : 0)
-    const min_multiplier = base_multiplier + coefficients.mult_min + (stats.mult_min || 0)
-    const max_multiplier = base_multiplier + coefficients.mult_max + (stats.mult_max || 0)
+    const bs = foe.status.Backstab
+    const fh = foe.status.Undamaged
+
+    const base_multiplier = 1 + _co.mult_base + (stats.mult_base || 0)
+      + ((bs && stats.backstab) ? (_co.backstab || 0) + (typeof stats.backstab === 'number' ? stats.backstab : 0): 0)
+      + (foe.status.Undamaged ? _co.first + (stats.first || 0) : 0)
+
+    const min_multiplier = base_multiplier + _co.mult_min + (stats.mult_min || 0) + (bs ? _co.backstab_min : 0) + (fh ? _co.first_min : 0)
+    const max_multiplier = base_multiplier + _co.mult_max + (stats.mult_max || 0) + (bs ? _co.backstab_max : 0) + (fh ? _co.first_max : 0)
     const crit_stats = build.crit.stats
     const crit_mult_base = crit_stats.mult_base
     const crit_mult_min = crit_mult_base + (crit_stats.mult_min || 0)
@@ -558,7 +579,7 @@ function computeDamageValues(build, effect) {
       }
     }
 
-    effect.crit_chance = coefficients.crit + (stats.crit || 0) + (0.5 * (coefficients.crit_min + coefficients.crit_max))
+    effect.crit_chance = _co.crit + (stats.crit || 0) + (0.5 * (_co.crit_min + _co.crit_max))
 
     if (effect.crit_chance) {
       effect.crit_min = effect.damage_min * crit_mult_min
@@ -632,11 +653,11 @@ function compileBuild() {
     },
     mods: {
       meta: [],
-      effect: [data_base.shadow],
+      effect: [data_base.shadow, data_base.fiery],
     },
     effects: {
       // knockback: [{...data_base.slam, stats: {...data_base.slam.stats}, effects: []}],
-      lodge: [{name: 'Dislodge', type: 'dislodge', stats: {duration: 15}, effects: []}],
+      lodge: [{name: 'Dislodge', type: 'dislodge', trigger: 'lodge', stats: {duration: 15}, effects: []}],
     },
     features: [],
     include: {},
@@ -674,7 +695,7 @@ function compileBuild() {
   // build.effects[trigger] = [ effect, ... ]
   build.directory = createDirectories(build.effects,
     createDirectories(build.abilities,
-      { type: {crit: [crit], slam: [slam]}, name: { Crit: [crit], Slam: [slam] }}
+      { type: {crit: [crit], slam: [slam] }, name: { Crit: [crit], Slam: [slam] }}
     ))
 
   // Modify the abilities and effects

@@ -12,7 +12,7 @@ export default [
     rarity: -4,
     abilities: [
       { name: 'Fire', type: 'damage', trigger: 'attack', stats: { min: 10, count: 12, backstab: true }},
-      { name: 'Dash Fire', type: 'damage', trigger: 'dashAttack', stats: { min: 10, attack: true, backstab: true }},
+      { name: 'Dash Fire', type: 'damage', trigger: 'dashAttack', stats: { min: 10, backstab: true }},
       { name: 'Reload', type: 'action', trigger: 'reload' },
       { name: 'Bombard', type: 'damage', trigger: 'special', stats: { min: 60 }},
     ],

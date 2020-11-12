@@ -288,9 +288,9 @@ export default [
     god: 'Athena',
     rarity: 0,
     description: (stats) =>
-      `<div><b>Death Defiance</b>restores more &nbsp;<img src="/assets/LifeRestore_Small.png" />&nbsp; than usual. Replenish<b>1</b>charge now.</div>` +
+      `<div><b>Death Defiance</b>restores more &nbsp;<img src="/Apollo/assets/LifeRestore_Small.png" />&nbsp; than usual. Replenish<b>1</b>charge now.</div>` +
       `<div>▶ Improved Restoration:<div><span>+${ fp(stats.restore) }%</span></div></div>`,
-    feature: (stats) => `<div><b>Death Defiance</b> restores <span>+${ fp(stats.restore) }%</span> more <img src="/assets/LifeRestore_Small.png" /> than usual.`,
+    feature: (stats) => `<div><b>Death Defiance</b> restores <span>+${ fp(stats.restore) }%</span> more <img src="/Apollo/assets/LifeRestore_Small.png" /> than usual.`,
     mods: [{
       name: 'Last Stand',
       type: 'effect',

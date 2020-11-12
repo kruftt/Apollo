@@ -11,10 +11,10 @@ export default [
     exclude: beowolf_traits,
     rarity: -4,
     abilities: [
-      { name: 'Pummel', type: 'damage', trigger: 'attack', stats: {min: 15, count: 5} },
-      { name: 'Dash Strike', type: 'damage', trigger: 'dashAttack', stats: { min: 25, attack: true } },
-      { name: 'Rising Cutter', type: 'damage', trigger: 'special', stats: {min: 30, max: 30, count: 2} },
-      { name: 'Dash Upper', type: 'damage', trigger: 'dashSpecial', stats: { min: 40 } },
+      { name: 'Pummel', type: 'damage', trigger: 'attack', stats: {min: 15, count: 5, backstab: true } },
+      { name: 'Dash Strike', type: 'damage', trigger: 'dashAttack', stats: { min: 25, backstab: true } },
+      { name: 'Rising Cutter', type: 'damage', trigger: 'special', stats: {min: 30, max: 30, count: 2, backstab: true} },
+      { name: 'Dash Upper', type: 'damage', trigger: 'dashSpecial', stats: { min: 40, backstab: true } },
     ],
   },
   {
@@ -89,10 +89,10 @@ export default [
       `<div><i>The god-king inherited the furry-man's savage strength and stout heart.</i></div>` +
       `<div><div>Maim Damage:</div><div><span>${ 1.25*fv(stats.min) }</span></div></div>`,
     abilities: [
-      { name: 'Swipe', type: 'damage', trigger: 'attack', stats: {min: 60, count: 5} },
-      { name: 'Dash Strike', type: 'damage', trigger: 'dashAttack', stats: { min: 20, attack: true } },
-      { name: 'Rising Cutter', type: 'damage', trigger: 'special', stats: {min: 30, max: 30, count: 2} },
-      { name: 'Dash Upper', type: 'enkidu', trigger: 'dashSpecial', stats: { min: 40 } },
+      { name: 'Swipe', type: 'damage', trigger: 'attack', stats: {min: 60, count: 5, backstab: true} },
+      { name: 'Dash Strike', type: 'damage', trigger: 'dashAttack', stats: { min: 20, backstab: true } },
+      { name: 'Rising Cutter', type: 'damage', trigger: 'special', stats: {min: 30, max: 30, count: 2, backstab: true} },
+      { name: 'Dash Upper', type: 'enkidu', trigger: 'dashSpecial', stats: { min: 40, backstab: true } },
     ],
     mods: [
       { name: 'Maim', type: 'effect', target: 'coefficients', stats: { mult_base: 0.25, reduction: -0.5 }, status: { name: 'Maimed', target: 'foe' }},

@@ -61,7 +61,7 @@
 }
 
 .trait_info__description img {
-  height: 1.0em;
+  height: 1.5em;
 }
 .trait_info__description span {
   color: #4d4;
@@ -74,7 +74,7 @@
 .trait_info__description > div {
   display: flex;
   flex-flow: row wrap;
-  align-items: baseline;
+  align-items: center;
 }
 
 .trait_info__description > div + div {
@@ -92,10 +92,10 @@
   top: 0;
 }
 
-.rare {
-  color: rgb(10, 75, 255);
+span.rare {
+  color: rgb(90, 120, 255);
 }
-.epic {
+span.epic {
   color: rgb(94, 4, 211);
 }
 </style>

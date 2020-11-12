@@ -11,11 +11,11 @@ export default [
     exclude: beowolf_traits,
     rarity: -4,
     abilities: [
-      { name: 'Fire', type: 'shot', trigger: 'attack', stats: {min: 20, max: 60, pierce: true} },
-      { name: 'Power Shot', type: 'shot', trigger: 'chargeAttack', stats: {min: 70, attack: true, pierce: true} },
-      { name: 'Power Shot - Dash', type: 'shot', trigger: 'chargeAttack', stats: {min: 50, attack: true, pierce: true} },
-      { name: 'Dash Attack', type: 'damage', trigger: 'dashAttack', stats: { min: 20, max: 40, attack: true, pierce: true } },
-      { name: 'Volley Fire', type: 'damage', trigger: 'special', stats: {min: 10, count: 9} },
+      { name: 'Fire', type: 'shot', trigger: 'attack', stats: {min: 20, max: 60, backstab: true, pierce: true} },
+      { name: 'Power Shot', type: 'shot', trigger: 'chargeAttack', stats: {min: 70, backstab: true, pierce: true} },
+      { name: 'Power Shot - Dash', type: 'shot', trigger: 'chargeAttack', stats: {min: 50, backstab: true, pierce: true} },
+      { name: 'Dash Attack', type: 'damage', trigger: 'dashAttack', stats: { min: 20, max: 40, backstab: true, pierce: true } },
+      { name: 'Volley Fire', type: 'damage', trigger: 'special', stats: {min: 10, count: 9, backstab: true } },
     ],
   },
   {
@@ -60,15 +60,16 @@ export default [
     icon: 'assets/weapons/bow_echantment_2.png',
     rarity: 4,
     description: (stats) =>
-    `<div>Your <b>Cast</b> loads <b>Ammo</b> into your next <b>Attack</b>, firing on impact.</div>` +
-    `<div><i>None dared approach the queen of the gods, a reputation she cultivated.</i></div>` +
-    `<div>Ammo Drop Time:<div><span>${ 15 + fv(stats.duration) }s</span></div></div>`,
+      `<div>Your <b>Cast</b> loads &nbsp;<img src="/assets/AmmoIcon.png" />&nbsp; into your next <b>Attack</b>, firing on impact.</div>` +
+      `<div><i>None dared approach the queen of the gods, a reputation she cultivated.</i></div>` +
+      `<div>Ammo Drop Time:<div><span>${ fv(15 + stats.duration, null, 1) }s</span></div></div>`,
+    feature: (stats) => `<b>Attacks</b> trigger <b>Casts</b> by loading &nbsp;<img src="/assets/AmmoIcon.png" />`,
     mods: [{
       name: 'Aspect of Hera',
       type: 'effect',
-      target: 'lodge',
+      target: 'dislodge',
       stats: { duration: [-5, -7, -8.33, -8.85, -10]},
-    }]
+    }],
   },
   {
     name: 'Coronacht - Aspect of Rama',
@@ -77,30 +78,19 @@ export default [
     icon: 'assets/weapons/bow_enchantment_3.png',
     rarity: 4,
     description: (stats) =>
-    `<div>You have <b>Celestial Sharanga</b>, which can cause <b>Shared Suffering</b>.</div>` +
-    `<div><i>The preserver's marksmanship is one of his many unequaled qualities</i></div>` +
-    `<div>Shared Suffering Damage:<div><span>${ fp(stats.shared) }%</span>of<b>Attack</b>for<b>7 Sec.</b></div></div>`,
+      `<div>You have <b>Celestial Sharanga</b>, which can cause <b>Shared Suffering</b>.</div>` +
+      `<div><i>The preserver's marksmanship is one of his many unequaled qualities</i></div>` +
+      `<div>Shared Suffering Damage:<div><span>${ fp(stats.shared) }%</span>of<b>Attack</b>for<b>7 Sec.</b></div></div>`,
+    feature: (stats) =>
+      `<b>Attacks</b> do <span>${ fp(stats.shared) }%</span> of their damage to all foes with <b class="shared">Shared Suffering.</b>`,
     abilities: [
-      { name: 'Fire', type: 'shot', trigger: 'attack', stats: {min: 25, max: 120, pierce: true} },
-      { name: 'Dash Strike', type: 'shot', trigger: 'dashAttack', stats: { min: 25, max: 80, attack: true, pierce: true } },
-      { name: 'Volley Fire', type: 'volley', trigger: 'special', stats: {min: 5, count: 3} },
-      { name: 'Power Shot', type: 'shot', trigger: 'chargeAttack', stats: {min: 175, pierce: true, attack: true} },
-      { name: 'Power Shot - Dash', type: 'shot', trigger: 'chargeAttack', stats: {min: 125, pierce: true, attack: true} },
+      { name: 'Fire', type: 'shot', trigger: 'attack', stats: {min: 25, max: 120, pierce: true, backstab: true } },
+      { name: 'Dash Strike', type: 'shot', trigger: 'dashAttack', stats: { min: 25, max: 80, pierce: true, backstab: true } },
+      { name: 'Volley Fire', type: 'volley', trigger: 'special', stats: {min: 5, count: 3, backstab: true} },
+      { name: 'Power Shot', type: 'shot', trigger: 'chargeAttack', stats: {min: 175, pierce: true, backstab: true} },
+      { name: 'Power Shot - Dash', type: 'shot', trigger: 'chargeAttack', stats: {min: 125, pierce: true, backstab: true} },
     ],
-    effects: [
-      {
-        name: 'Shared Suffering',
-        type: 'shared',
-        trigger: 'volley',
-      },
-      {
-        name: 'Shared Suffering',
-        type: 'shared',
-        trigger: 'attack',
-        stats: { shared: [0.3, 0.38, 0.45, 0.53, 0.6] },
-        status: { target: 'foe', name: 'Shared Suffering' },
-      },
-    ],
+    effects: [{ name: 'Shared Suffering', type: 'shared', trigger: 'volley', stats: { shared: [0.30, 0.38, 0.45, 0.53, 0.60] }}],
   },
   {
     name: 'Twin Shot',
