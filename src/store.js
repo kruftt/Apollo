@@ -557,6 +557,7 @@ function computeDamageValues(build, effect) {
     const count = stats.count || 1
     const interval = stats.interval
     if ('riftbeamvortex'.indexOf(effect.type) !== -1) {
+      effect.ticks = count
       effect.damage_min = Math.round(damage_min)
       effect.damage_max = Math.round(damage_max)
       effect.dot_damage = (stats.vicious_cycle)
@@ -566,8 +567,8 @@ function computeDamageValues(build, effect) {
       effect.damage_min = Math.round(damage_min * count)
       effect.damage_max = Math.round(damage_max * count)
       if (interval) {
-        const max_ticks = Math.floor(0.05 + (stats.duration / interval))
-        effect.dot_damage = Math.round(damage_min * count * max_ticks)
+        effect.ticks = Math.floor(0.05 + (stats.duration / interval))
+        effect.dot_damage = Math.round(damage_min * count * effect.ticks)
       }
     }
 
@@ -588,7 +589,7 @@ function computeDamageValues(build, effect) {
       const damage_avg = (effect.damage_min + effect.damage_max) / 2
       const crit_avg = (effect.crit_min + effect.crit_max) / 2
       effect.avg_damage = damage_avg + (effect.crit_chance * (crit_avg - damage_avg))
-      if (interval) effect.avg_damage = effect.avg_damage * effect.dot_ticks
+      if (interval) effect.avg_damage = effect.avg_damage * effect.ticks
       effect.avg_damage = Math.round(effect.avg_damage)
     }
   }
