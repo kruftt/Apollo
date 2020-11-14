@@ -22,7 +22,7 @@ export default [
     type: 'aspect',
     weapon: 'Stygius',
     icon: 'assets/weapons/sword_base_icon.png',
-    rarity: 0,
+    rarity: 4,
     description: (stats) =>
       `<div>The form in which the blade of the underworld first revealed itself.</div>` +
       `<div><i>A blade such as this seeks not to remain idle for more than an aeon or two.</i></div>` +
@@ -37,7 +37,7 @@ export default [
     type: 'aspect',
     weapon: 'Stygius',
     icon: 'assets/weapons/sword_enchantment_2.png',
-    rarity: 0,
+    rarity: 4,
     description: (stats) =>
       `<div>For<b>3</b>Sec. after you<b>Special,</b> your<b>Attack</b>may deal<b>Critical</b>damage.</div>` +
       `<div><i>One of Nyx's daughters once brandished the blade against the arrogant.</i></div>` +
@@ -51,7 +51,7 @@ export default [
     type: 'aspect',
     weapon: 'Stygius',
     icon: 'assets/weapons/sword_enchantment_1.png',
-    rarity: 0,
+    rarity: 4,
     description: (stats) =>
       `<div>Your<b>Special</b>dislodges<b>Ammo</b>from foes.</div>` +
       `<div><i>Even before he ruled the seas, the blade's first bearer liked making a splash.</i></div>` +
@@ -68,7 +68,7 @@ export default [
     type: 'aspect',
     weapon: 'Stygius',
     icon: 'assets/weapons/sword_enchantment_3.png',
-    rarity: 0,
+    rarity: 4,
     description: (stats) =>
       `<div>You have<b>Holy Excalibur,</b> and<b>+50 Health</b>to your Life Total.</div>` +
       `<div><i>Peace and destruction await a kingdom governed by the rule of might.</i></div>` +

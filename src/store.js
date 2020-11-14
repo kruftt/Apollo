@@ -1,7 +1,7 @@
 import { reactive, watch, ref, computed } from 'vue'
 import { data, copyEffect } from './data/index.js'
 
-const status_curses = [ 'jolted', 'hangover', 'weak', 'marked' ]
+const status_curses = [ 'Jolted', 'Hangover', 'Weak', 'Marked', 'Exposed', 'Chill', 'Rupture', 'Doom' ]
 
 const include = reactive({})
 const exclude = reactive({})
@@ -117,9 +117,9 @@ const player = reactive({
   ...data.base.player,
   stats: { ...data.base.player.stats },
   status: {
-    ...data.base.player.status,
     'Fiery Presence': fp,
     'Shadow Presence': sp,
+    ...data.base.player.status,
   },
 })
 
@@ -554,21 +554,22 @@ function computeDamageValues(build, effect) {
     const damage_min = min * min_multiplier
     const damage_max = max * max_multiplier
 
-    const count = stats.count || 1
+    // ticks = total ticks over time, count = num stacks
+    const count = stats.count
     const interval = stats.interval
     if ('riftbeamvortex'.indexOf(effect.type) !== -1) {
-      effect.ticks = count
+      effect.ticks = count || Math.floor(0.05 + (stats.duration / interval))
       effect.damage_min = Math.round(damage_min)
       effect.damage_max = Math.round(damage_max)
       effect.dot_damage = (stats.vicious_cycle)
-        ? Math.round((damage_min + Math.max(count - 1, 0)) * count)
-        : Math.round(damage_min * count)
+        ? Math.round((damage_min + Math.max(effect.ticks - 1, 0)) * effect.ticks)
+        : Math.round(damage_min * effect.ticks)
     } else {
-      effect.damage_min = Math.round(damage_min * count)
-      effect.damage_max = Math.round(damage_max * count)
+      effect.damage_min = Math.round(damage_min * (count || 1))
+      effect.damage_max = Math.round(damage_max * (count || 1))
       if (interval) {
         effect.ticks = Math.floor(0.05 + (stats.duration / interval))
-        effect.dot_damage = Math.round(damage_min * count * effect.ticks)
+        effect.dot_damage = Math.round(damage_min * (count || 1) * effect.ticks)
       }
     }
 
@@ -637,7 +638,8 @@ function compileBuild() {
     slam,
     gods: {},
     abilities: {
-      dash: [{name: "Dash", type: 'ability', trigger: 'dash', stats: { count: 1 }, status: { target: 'player', name: 'Dash', stacks: true, max_stacks: 2 }, effects: []}],
+      // dash: [{name: "Dash", type: 'ability', trigger: 'dash', stats: { count: 1 }, status: { target: 'player', name: 'Dash', stacks: true, max_stacks: 2 }, effects: []}],
+      dash: [{name: "Dash", type: 'ability', trigger: 'dash', stats: {}, effects: []}],
       revenge: [{name: "Damage Taken", type: 'event', trigger: 'revenge', stats: {}, effects: []}],
       slain: [{name: "Enemy Death", type: 'event', trigger: 'slain', stats: {}, effects: []}],
     },
@@ -653,7 +655,7 @@ function compileBuild() {
     exclude: {},
   }
 
-  if (foe.status.weak) {
+  if (foe.status.Weak) {
     build.mods.effect.push(copyEffect(data_base.weak))
   }
   if (foe.status.Chill) {
@@ -664,6 +666,9 @@ function compileBuild() {
   }
   if (player.status.Sturdy) {
     build.mods.effect.push(data_base.sturdy)
+  }
+  if (player.status['Privileged Status'] && (status_curses.reduce((n, s) => n + (foe.status[s] ? 1 : 0), 0) > 1)) {
+    build.mods.effect.push(data_base.privileged)
   }
 
   for (const trait_list of [
@@ -700,6 +705,16 @@ function compileBuild() {
   // Link and Calculate
   linkEffects(build, build.abilities, true)
   linkEffects(build, build.effects)
+
+  // Cap any status stacks
+  for (const key in player.status) {
+    const max = build.player[`max_${key}`]
+    if (max && max < player.status[key]) player.status[key] = max
+  }
+  for (const key in foe.status) {
+    const max = build.foe[`max_${key}`]
+    if (max && max < foe.status[key]) foe.status[key] = max
+  }
 
   // Sync include/exclude
   syncObjectChanges(include, build.include)

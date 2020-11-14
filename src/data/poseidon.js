@@ -190,13 +190,21 @@ export default [
     description: (stats) =>
       `<div>Using knockback effects also<b>Ruptures</b>foes.</div>` +
       `<div>▶ Rupture Damage:<div><span>${ fv(stats.min) }</span></div></div>`,
-    effects: [{
-      name: 'Razor Shoals',
-      type: 'rupture',
-      trigger: 'knockback',
-      stats: { min: [ 5, 7.5, 10, 12.5 ], duration: 3, interval: 0.2 },
-      pom: pom(0.6, 0.2),
-    }],
+    effects: [
+      {
+        name: 'Razor Shoals',
+        type: 'rupture',
+        trigger: 'knockback',
+        stats: { min: [ 5, 7.5, 10, 12.5 ], duration: 3, interval: 0.2 },
+        pom: pom(0.6, 0.2),
+      },
+      {
+        name: 'Razor Shoals',
+        type: 'rupture',
+        trigger: 'knockback',
+        status: { name: 'Rupture', target: 'foe' },
+      },
+    ],
   },
   {
     name: 'Boiling Point',

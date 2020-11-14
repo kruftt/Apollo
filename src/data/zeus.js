@@ -60,7 +60,7 @@ export default [
       name: 'Electric Shot',
       type: 'chain',
       trigger: 'cast',
-      stats: { min: [60, 72, 84, 96] },
+      stats: { min: [60, 70, 81, 90] },
       status: { name: 'Electric Shot Bounces', target: 'foe', stacks: true, min_stacks: 1, max_stacks: 5 },
       pom: pom_4,
     },],
@@ -208,7 +208,9 @@ export default [
     rarity: 0,
     level: 1,
     prereqs: { 'Zeus': [ 'Thunder Flourish', "Zeus' Aid", 'Thunder Dash', "Heaven's Vengeance", 'Lightning Strike', 'Electric Shot', 'Lightning Reflexes' ] },
-    description: (stats) => `<div>Jolted: ${ stats.max }`,
+    description: (stats) =>
+      `<div>Your Lightning effects also make foes<b>Jolted.</b></div>` +
+      `<div>▶ Jolt Damage:<div><span>${ fv(stats.min, stats.max) }</span></div></div>`,
     effects: [
       { name: 'Jolted', type: 'jolted', trigger: 'chain', stats: { duration: 10 } },
       { name: 'Jolted', type: 'jolted', trigger: 'bolt', stats: { duration: 10 } },

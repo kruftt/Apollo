@@ -238,7 +238,7 @@ export default [
         type: 'effect',
         target: 'coefficients',
         stats: { backstab: [0.5, 0.625, 0.75, 0.875] },
-        status: { target: 'foe', name: 'exposed' },
+        status: { target: 'foe', name: 'Exposed' },
         pom: pom_4,
       }
     ],

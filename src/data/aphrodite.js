@@ -6,7 +6,7 @@ function weak(trigger) {
     type: 'weak',
     trigger,
     stats: { duration: [ 4, 4, 4, 4 ], reduction: 0.3 },
-    status: { name: 'weak', target: 'foe' },
+    status: { name: 'Weak', target: 'foe' },
   }
 }
 

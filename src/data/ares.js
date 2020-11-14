@@ -1,6 +1,6 @@
 import { fv, fp, pom, pom_3, pom_4, pom_6, pom_8 } from './util'
 
-const doom_status = { name: 'doom', target: 'foe' }
+const doom_status = { name: 'Doom', target: 'foe' }
 
 export default [
   {
@@ -72,7 +72,7 @@ export default [
       type: 'effect',
       target: 'Slicing Shot',
       stats: { count: 1 },
-      status: { target: 'foe', name: 'Blade Rift Hits', stacks: true, min_stacks: 1 },
+      status: { target: 'foe', name: 'Blade Rift Hits', stacks: true },
     }]
   },
   {
@@ -98,7 +98,7 @@ export default [
       type: 'effect',
       target: 'Slicing Flare',
       stats: { count: 1 },
-      status: { target: 'foe', name: 'Blade Rift Hits', stacks: true, min_stacks: 1 },
+      status: { target: 'foe', name: 'Blade Rift Hits', stacks: true },
     }]
   },
   {
@@ -116,7 +116,7 @@ export default [
       type: 'effect',
       target: 'Blade Dash',
       stats: { count: 1 },
-      status: { target: 'foe', name: 'Blade Rift Hits', stacks: true, min_stacks: 1 },
+      status: { target: 'foe', name: 'Blade Rift Hits', stacks: true },
     }],
     effects: [{
       name: 'Blade Dash',
@@ -161,7 +161,7 @@ export default [
         type: 'effect',
         target: ["Ares' Aid", "Ares' Aid - Max"],
         stats: { count: 1 },
-        status: { target: 'foe', name: 'Blade Rift Hits', stacks: true, min_stacks: 1 },
+        status: { target: 'foe', name: 'Blade Rift Hits', stacks: true },
       }
     ],
   },
@@ -302,18 +302,18 @@ export default [
       `<div>▶ Bonus Damage per Curse:<div><span>${ fv(stats.min) }</span></div></div>`,
     mods: [
       {
-        name: 'Dire Misfotune offset',
+        name: 'Dire Misfortune Offset',
         type: 'effect',
         target: 'doom',
         stats: { min: -10 },
         status: { ...doom_status },
       },
       {
-        name: 'Dire Misfotune',
+        name: 'Dire Misfortune',
         type: 'effect',
         target: 'doom',
         stats: { min: [10, 12, 14, 16] },
-        status: { ...doom_status, stacks: true, max_stacks: 10 },
+        status: { ...doom_status, stacks: true, max_stacks: 100 },
       },
     ],
   },

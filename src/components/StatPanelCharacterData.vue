@@ -131,7 +131,7 @@ function firstToUpper(str) {
   return str[0].toUpperCase() + str.slice(1)
 }
 function formatStatValue(n, v) {
-  if (n === 'health' || n === 'ammo') return v
+  if ('healthammodashes'.indexOf(n) !== -1) return v
   return `${ Math.round(1000*v)/10 }%`
 }
 

@@ -89,6 +89,13 @@ export const data =
       rarity: -2,
     },
 
+    privileged: {
+      name: 'Privileged Status',
+      type: 'effect',
+      target: 'coefficients',
+      stats: { mult_base: 0.4 },
+    },
+
     shadow: {
       name: 'Shadow Presence',
       type: 'effect',
@@ -159,10 +166,12 @@ export const data =
         dodge: 0,
         speed: 1,
         ammo: 2,
+        dashes: 1,
       },
       status: {
       //   'Fiery Presence': null,
       //   'Shadow Presence': null,
+        'Privileged Status': null,
       },
     },
 

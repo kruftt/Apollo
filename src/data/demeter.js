@@ -68,9 +68,16 @@ export default [
       type: 'beam',
       trigger: 'cast',
       stats: { min: [8, 9.2, 10.4, 11.6], duration: 5, interval: 0.2 },
-      status: { target: 'foe', name: 'Beam Hits' },
+      status: { target: 'foe', name: 'Crystal Beam' },
       pom: pom(0.2, 0.1)
     }],
+    mods: [{
+      name: 'Crystal Beam Stacks',
+      type: 'effect',
+      target: 'Crystal Beam',
+      stats: { count: 1 },
+      status: { target: 'foe', name: 'Crystal Beam', stacks: true },
+    }]
   },
   {
     name: 'Icy Flare',
@@ -138,6 +145,13 @@ export default [
         pom: pom(0.4, 0.2)
       },
     ],
+    mods: [{
+      name: 'Vortex Stacks',
+      type: 'effect',
+      target: 'vortex',
+      stats: { count: 1 },
+      status: { name: 'Winter Vortex', target: 'foe', stacks: true },
+    },],
     effects: [{...chill, trigger: 'vortex'}],
   },
   {

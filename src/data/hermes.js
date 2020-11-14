@@ -137,13 +137,15 @@ export default [
     god: 'Hermes',
     rarity: 0,
     description: (stats) =>
-      `<div>You can<b>Dash</b><span>+${ fv(stats.max_stacks) }</span>times in a row.</div>` +
-      `<div>▶ Extra Dashes:<div><span>+${ fv(stats.max_stacks) }</span></div></div>`,
+      `<div>You can<b>Dash</b><span>+${ fv(stats.dashes) }</span>times in a row.</div>` +
+      `<div>▶ Extra Dashes:<div><span>+${ fv(stats.dashes) }</span></div></div>`,
     mods: [{
       name: 'Greatest Reflex',
       type: 'effect',
-      target: 'dash',
-      stats: { max_stacks: [1,2,3,4] },
+      // target: 'dash',
+      // stats: { max_stacks: [1,2,3,4] },
+      target: 'player',
+      stats: { dashes: [1,2,3,4] },
     }],
   },
   {

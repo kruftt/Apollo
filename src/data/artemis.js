@@ -240,7 +240,7 @@ export default [
         type: 'effect',
         target: 'coefficients',
         stats: { crit_min: [0.3, 0.39, 0.6, 0.75], crit_max: [0.3, 0.45, 0.75, 0.81]},
-        status: { target: 'foe', name: 'marked' },
+        status: { target: 'foe', name: 'Marked' },
         pom: pom_4,
       }
     ],
