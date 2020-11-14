@@ -83,7 +83,10 @@
 }
 
 .trait_info__description > div > div {
-  width: 14em;
+  flex: 1 0 auto;
+  display: flex;
+  align-items: center;
+  max-width: 14em;
 }
 
 .trait_info__trait_prereqs {
@@ -93,10 +96,13 @@
 }
 
 span.rare {
-  color: rgb(90, 120, 255);
+  color: rgb(90, 120, 255) !important;
 }
 span.epic {
-  color: rgb(94, 4, 211);
+  color: rgb(94, 4, 211) !important;
+}
+span.heroic {
+  color: rgb(224, 1, 1) !important;
 }
 </style>
 

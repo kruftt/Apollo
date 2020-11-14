@@ -1,6 +1,6 @@
 <template>
 <div>
-  <div :class="[ 'effect_data', effect.type, effect.damage_max ? 'data--bold': '', ]">
+  <div :class="[ 'effect_data', effect.god, effect.damage_max ? 'data--bold': '', ]">
     <div class="effect_data__name">{{ effect.name + ((effect.stats.count) ? ` (${effect.stats.count})`: '') }}</div>
     <div title="Chance" v-if="effect.stats.chance" class="effect_data__info" >
       <b>{{ Math.round(100*effect.stats.chance) }}%</b>
@@ -41,9 +41,9 @@
     </div>
   </div>
 
-  <div title="Damage Over Time" v-if="effect.dot_damage !== undefined" :class="['dot_data', effect.type ]">
+  <div title="Damage Over Time" v-if="effect.dot_damage !== undefined" :class="['dot_data', effect.god ]">
     <div title="Interval" class="effect_data__interval">
-      &nbsp;<b>{{ effect.damage }}</b> every <b>{{ effect.stats.interval }}</b> Sec.
+      &nbsp;<b>{{ fv(effect.damage) }}</b> every <b>{{ fv(effect.stats.interval, null, 1) }}</b> Sec.
     </div>
   </div>
 
@@ -66,7 +66,7 @@
     </div>
   </template>
 
-  <div v-if="effect.slam" :class="['knockback_data', effect.slam.type]">
+  <div v-if="effect.slam" :class="['knockback_data', effect.slam.god]">
     &nbsp;Knockback
     <div :class="['slam_data', dmg_mag(30*effect.slam.stats.mult_base)]">Slam</div>
   </div>
@@ -162,7 +162,7 @@
 .avg_data {
   display: flex;
   text-align: left;
-  color: #8d8;
+  color: #9e9;
 }
 .avg_data__value { }
 
@@ -235,16 +235,18 @@
 }
 
 .event { color: #aaa; }
-.bolt, .chain, .jolt, .jolted, .spark { color: #cc4; }
-.heartbreak, .weak, .lament, .despair, .charm, .crush, .passion, .love { color: rgb(219, 88, 219); }
-.doom, .rift { color: #d55; }
-.deadly, .hunters, .arrow, .exit { color: #6b6; }
-.deflect, .shield, .phalanx { color: #baa968; }
-.arctic, .chill, .snow, .frozen, .freeze, .shatter, .beam, .vortex { color: rgb(177, 203, 255); }
-.hangover, .pressure, .trippy, .festive { color: rgb(146, 122, 255); }
-.wave, .rupture, .flood, .surge, .typhoon, .watery { color: rgb(122, 195, 255) }
-.shared { color: #bbf; }
-.hammer { color: rgb(152, 156, 173); }
+.Aphrodite { color: #db58db !important; }
+.Ares { color: #d55 !important; }
+.Artemis { color: #5b5 !important; }
+.Athena { color: #baa968 !important; }
+.Chaos { color: #808cff !important; }
+.Daedalus {  }
+.Demeter { color: #b1cbff !important; }
+.Hermes { color: #f77b65 !important; }
+.Dionysus { color: #927aff !important; }
+.Poseidon { color: #7ac3ff !important; }
+.Zeus { color: #cc4 !important; }
+.Rama { color: #bbf !important; }
 </style>
 
 

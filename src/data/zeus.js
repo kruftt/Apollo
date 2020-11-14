@@ -52,6 +52,7 @@ export default [
     god: 'Zeus',
     rarity: 0,
     level: 1,
+    exclude: ['Aegis - Aspect of Beowolf'],
     description: (stats) =>
       `<div>Your<b>Cast</b>is a burst of chain-lightning that bounces between foes.</div>` +
       `<div>▶ Cast Damage:<div><span>${ fv(stats.min) }</span></div></div>`,
@@ -59,7 +60,26 @@ export default [
       name: 'Electric Shot',
       type: 'chain',
       trigger: 'cast',
-      stats: { min: [60, 72, 84, 96], bounces: 5, range: 720 },
+      stats: { min: [60, 72, 84, 96] },
+      status: { name: 'Electric Shot Bounces', target: 'foe', stacks: true, max_stacks: 5 },
+      pom: pom_4,
+    },],
+  },
+  {
+    name: 'Thunder Flare',
+    type: 'cast',
+    icon: 'assets/traits/Zeus_05_Large.png',
+    god: 'Zeus',
+    rarity: 0,
+    level: 1,
+    description: (stats) =>
+      `<div>Your<b>Cast</b>causes a lightning bolt to strike nearby foes.</div>` +
+      `<div>▶ Cast Damage:<div><span>${ fv(stats.min) }</span></div></div>`,
+    abilities: [{
+      name: 'Thunder Flare',
+      type: 'bolt',
+      trigger: 'cast',
+      stats: { min: [60, 72, 84, 96] },
       pom: pom_4,
     },],
   },
@@ -77,7 +97,7 @@ export default [
       name: 'Lightning Bolt',
       type: 'bolt',
       trigger: 'dash',
-      stats: { min: [10, 13.3, 16.6, 20], range: 500, size: 200 },
+      stats: { min: [10, 13.3, 16.6, 20], size: 200 },
       pom: pom_8,
     },],
   },
@@ -91,13 +111,22 @@ export default [
     description: (stats) =>
       `<div>Your<b>Call</b>makes lightning strike nearby foes repeatedly for<b>1.5 Sec.</b></div>` +
       `<div>▶ Lightning Damage:<div><span>${ fv(stats.min) }</span></div></div>`,
-    abilities: [{
-      name: "Zeus' Aid",
-      type: 'bolt',
-      trigger: 'call',
-      stats: { min: [60, 66, 72, 84], duration: 1.5, interval: 0.2 },
-      pom: pom_4,
-    },],
+    abilities: [
+      {
+        name: "Zeus' Aid",
+        type: 'bolt',
+        trigger: 'call',
+        stats: { min: [60, 66, 72, 84], duration: 1.5, interval: 0.2 },
+        pom: pom_4,
+      },
+      {
+        name: "Zeus' Aid - Max",
+        type: 'bolt',
+        trigger: 'call',
+        stats: { min: [60, 66, 72, 84], duration: 9, interval: 0.2 },
+        pom: pom_4,
+      },
+    ],
   },
   {
     name: "Heaven's Vengeance",
@@ -206,6 +235,8 @@ export default [
     description: (stats) =>
       `<div>Your<b>God Gauge</b>charges faster when you deal or take damage.</div>` +
       `<div>▶ Wrath Gain:<div><span>+${ fp(stats.gauge) }%</span></div></div>`,
+    feature: (stats) =>
+      `Your<b class="Zeus">God Gauge</b>charges <span>${ fp(stats.gauge) }%</span> faster when you deal or take damage.`,
     mods: [{
       name: 'Clouded Judgment',
       type: 'effect',

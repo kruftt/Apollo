@@ -19,7 +19,7 @@ export default [
   {
     name: 'Heartbreak Strike',
     description: (stats) =>
-      '<div>Your<b>Attack</b>deals more damage and inflicts<b>Weak</b>.</div>' +
+      '<div>Your<b>Attack</b>deals more damage and inflicts<b>Weak.</b></div>' +
       `<div>▶ Attack Damage:<div><span>${fp(stats.mult_min, stats.mult_max)}%</span></div></div>`,
     type: 'attack',
     icon: 'assets/traits/Aphrodite_01_Large.png',
@@ -31,7 +31,7 @@ export default [
       name: 'Heartbreak Strike',
       type: 'effect',
       target: 'attack',
-      stats: { type: 'heartbreak', mult_min: [0.5, 0.65, 0.9, 1.15], mult_max: [0.5, 0.75, 1.0, 1.25] },
+      stats: { mult_min: [0.5, 0.65, 0.9, 1.15], mult_max: [0.5, 0.75, 1.0, 1.25] },
       pom: pom_4,
     }],
   },
@@ -43,14 +43,14 @@ export default [
     rarity: 0,
     level: 1,
     description: (stats) =>
-      '<div>Your<b>Special</b>deals more damage and inflicts<b>Weak</b>.</div>' +
+      '<div>Your<b>Special</b>deals more damage and inflicts<b>Weak.</b></div>' +
       `<div>▶ Special Damage:<div><span>+${fp(stats.mult_min, stats.mult_max)}%</span></div></div>`,
     effects: [ weak('special') ],
     mods: [{
       name: 'Heartbreak Flourish',
       type: 'effect',
       target: 'special',
-      stats: { type: 'heartbreak', mult_min: [0.8, 1.04, 1.44, 1.84], mult_max: [0.8, 1.2, 1.6, 2.0] },
+      stats: { mult_min: [0.8, 1.04, 1.44, 1.84], mult_max: [0.8, 1.2, 1.6, 2.0] },
       pom: pom_4,
     }],
   },
@@ -63,7 +63,7 @@ export default [
     level: 1,
     exclude: [ 'Aegis - Aspect of Beowolf' ],
     description: (stats) =>
-      '<div>Your<b>Cast</b>is a wide, short-range blast that inflicts<b>Weak</b>.</div>' +
+      '<div>Your<b>Cast</b>is a wide, short-range blast that inflicts<b>Weak.</b></div>' +
       `<div>▶ Cast Damage:<div><span>${fv(stats.min)}</span></div></div>`,
     effects: [ weak('cast') ],
     abilities: [{
@@ -82,7 +82,7 @@ export default [
     rarity: 0,
     level: 1,
     description: (stats) =>
-      '<div>Your<b>Cast</b>damages foes around you and inflicts<b>Weak</b>.</div>' +
+      '<div>Your<b>Cast</b>damages foes around you and inflicts<b>Weak.</b></div>' +
       `<div>▶ Cast Damage:<div><span>${fv(stats.min)}</span></div></div>`,
     effects: [
       weak('crush'),
@@ -103,13 +103,13 @@ export default [
     rarity: 0,
     level: 1,
     description: (stats) =>
-      '<div>Your<b>Dash</b>inflicts damage where you end up, inflicting<b>Weak</b>.</div>' +
+      '<div>Your<b>Dash</b>inflicts damage where you end up, inflicting<b>Weak.</b></div>' +
       `<div>▶ Dash Damage:<div><span>${fv(stats.min)}</span></div></div>`,
     mods: [{
       name: 'Passion Dash',
       type: 'effect',
       target: 'dash',
-      stats: { name: 'Passion Dash', min: [20,24,28,32], radius: 180, type: 'passion' },
+      stats: { name: 'Passion Dash', min: [20,24,28,32], radius: 180 },
       pom: pom_8,
     }],
     effects: [weak('dash')],
@@ -122,7 +122,7 @@ export default [
     rarity: 0,
     level: 1,
     description: (stats) =>
-      '<div>Your<b>Call</b>fires a seeking projective that inflicts <b>Charm</b>.</div>' +
+      '<div>Your<b>Call</b>fires a seeking projective that inflicts <b>Charm.</b></div>' +
       `<div>▶ Charm Duration:<div><span>${fv(stats.duration, null, 1)} Sec.</span></div></div>`,
     abilities: [
       { name: "Aphrodite's Aid", type: 'love', trigger: 'call' },
@@ -138,7 +138,7 @@ export default [
     rarity: 0,
     level: 1,
     description: (stats) =>
-      '<div>When foes are slain, they damage <b>nearby</b> foes and inflict<b>Weak</b>.</div>' +
+      '<div>When foes are slain, they damage <b>nearby</b> foes and inflict<b>Weak.</b></div>' +
       `<div>▶ Death Blast Damage:<div><span>${fv(stats.min,stats.max)}</span></div></div>`,
     effects: [
       {name: 'Dying Lament', trigger: 'slain', type: 'lament', stats: {min:[40,52,72,92], max:[40,60,80,100], radius:200}, pom: pom_6 },
@@ -153,7 +153,7 @@ export default [
     rarity: 0,
     level: 1,
     description: (stats) =>
-      '<div>After you take damage, damage nearby foes and inflict<b>Weak</b>.</div>' +
+      '<div>After you take damage, damage nearby foes and inflict<b>Weak.</b></div>' +
       `<div>▶ Revenge Damage:<div><span>${fv(stats.min,stats.max)}</span></div></div>`,
     effects: [
       {name: 'Wave of Despair', trigger: 'revenge', type: 'despair', stats: {min:[50,65,90,115], max:[50,75,100,125], radius:700}, pom: pom_8 },
@@ -195,7 +195,7 @@ export default [
       stats: { life_bonus: [0.3, 0.36, 0.42, 0.48] },
     }],
     feature: (stats) =>
-      `<img src="/assets/LifeUp_Small.png" />&nbsp;or&nbsp;<img src="/assets/LifeRestore_Small.png" />&nbsp;chamber rewards are worth <span>${ fp(stats.life_bonus) }%</span> more.`
+      `<img src="/Apollo/assets/LifeUp_Small.png" />&nbsp;or&nbsp;<img src="/Apollo/assets/LifeRestore_Small.png" />&nbsp;chamber rewards are worth <span>${ fp(stats.life_bonus) }%</span> more.`
   },
   {
     name: 'Empty Inside',

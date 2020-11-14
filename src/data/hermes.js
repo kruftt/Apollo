@@ -13,13 +13,13 @@ export default [
     god: 'Hermes',
     rarity: 0,
     description: (stats) =>
-      `<div>Your<b>Attack</b>is<span>+${ fp(stats.mult_speed) }%</span> faster.</div>` +
-      `<div>▶ Attack Speed:<div><span>+${ fp(stats.mult_speed) }%</span></div></div>`,
+      `<div>Your<b>Attack</b>is<span>+${ fp(stats.speed) }%</span> faster.</div>` +
+      `<div>▶ Attack Speed:<div><span>+${ fp(stats.speed) }%</span></div></div>`,
     mods: [{
       name: 'Swift Strike',
       type: 'effect',
       target: 'attack',
-      stats: { mult_speed: [0.125, 0.2125, 0.3, 0.3875] }
+      stats: { speed: [0.125, 0.2125, 0.3, 0.3875] }
     }],
   },
   {
@@ -29,13 +29,13 @@ export default [
     god: 'Hermes',
     rarity: 0,
     description: (stats) =>
-      `<div>Your<b>Special</b>is<span>+${ fp(stats.mult_speed) }%</span> faster.</div>` +
-      `<div>▶ Special Speed:<div><span>+${ fp(stats.mult_speed) }%</span></div></div>`,
+      `<div>Your<b>Special</b>is<span>+${ fp(stats.speed) }%</span> faster.</div>` +
+      `<div>▶ Special Speed:<div><span>+${ fp(stats.speed) }%</span></div></div>`,
     mods: [{
       name: 'Swift Strike',
       type: 'effect',
       target: 'special',
-      stats: { mult_speed: [0.125, 0.2125, 0.3, 0.3875] }
+      stats: { speed: [0.125, 0.2125, 0.3, 0.3875] }
     }],
   },
   {
@@ -45,13 +45,15 @@ export default [
     god: 'Hermes',
     rarity: 0,
     description: (stats) =>
-      `<div>Your<b>Cast</b>is<span>+${ fp(stats.mult_speed) }%</span> faster and fully automatic.</div>` +
-      `<div>▶ Cast Speed:<div><span>+${ fp(stats.mult_speed) }%</span></div></div>`,
+      `<div>Your<b>Cast</b>is<span>+${ fp(stats.speed) }%</span> faster and fully automatic.</div>` +
+      `<div>▶ Cast Speed:<div><span>+${ fp(stats.speed) }%</span></div></div>`,
+    feature: (stats) =>
+      `Fully automatic <b>Cast</b>.`,
     mods: [{
       name: 'Flurry Cast',
       type: 'effect',
       target: 'cast',
-      stats: { mult_speed: [0.2, 0.4, 0.6, 0.8] }
+      stats: { speed: [0.2, 0.4, 0.6, 0.8] }
     }],
   },
   {
@@ -61,18 +63,19 @@ export default [
     god: 'Hermes',
     rarity: 0,
     description: (stats) =>
-      `<div>For<span>${ fv(stats.duration) } Sec.</span>after you<b>Dash</b>become<b>Sturdy</b>and run<span>+100%</span>faster.</div>` +
-      `<div>▶ Duration:<div><span>${ fv(stats.duration) } Sec.</span></div></div>`,
+      `<div>For<span>${ fv(stats.duration, null, 1) } Sec.</span>after you<b>Dash</b>become<b>Sturdy</b>and run<span>+100%</span>faster.</div>` +
+      `<div>▶ Duration:<div><span>${ fv(stats.duration, null, 1) } Sec.</span></div></div>`,
     effects: [{
       name: 'Hyper Sprint',
       type: 'sturdy',
       trigger: 'dash',
+      stats: { duration: [ 0.5, 0.6, 0.7, 0.9 ] },
       status: { target: 'player', name: 'sturdy' },
     }],
     mods: [{
       name: 'Hyper Sprint',
       type: 'effect',
-      target: 'coefficients',
+      target: 'player',
       stats: { speed: 1 },
       status: { target: 'player', name: 'Hyper Sprint' },
     }]
@@ -89,7 +92,7 @@ export default [
     mods: [{
       name: 'Greater Haste',
       type: 'effect',
-      target: 'coefficients',
+      target: 'player',
       stats: { speed: [0.2, 0.3, 0.4, 0.5] },
     }],
   },
@@ -102,10 +105,12 @@ export default [
     description: (stats) =>
       `<div>After you take damage, quickly<b>Dash</b>to recover up to<span>+${ fp(stats.recovery) }%</span>Health lost.</div>` +
       `<div>▶ Recovery:<div><span>+${ fp(stats.recovery) }%</span></div></div>`,
+    feature: (stats) =>
+      `Dashing recovers up to <span>+${ fp(stats.recovery) }%</span> of lost Health.`,
     effects: [{
       name: 'Quick Recovery',
       type: 'recovery',
-      target: 'dash',
+      trigger: 'dash',
       stats: { recovery: [0.2, 0.3, 0.4, 0.5] },
     }],
   },
@@ -132,13 +137,13 @@ export default [
     god: 'Hermes',
     rarity: 0,
     description: (stats) =>
-      `<div>You can<b>Dash</b><span>+${ fv(stats.dashes) }</span>times in a row.</div>` +
-      `<div>▶ Extra Dashes:<div><span>+${ fv(stats.dashes) }</span></div></div>`,
+      `<div>You can<b>Dash</b><span>+${ fv(stats.max_stacks) }</span>times in a row.</div>` +
+      `<div>▶ Extra Dashes:<div><span>+${ fv(stats.max_stacks) }</span></div></div>`,
     mods: [{
       name: 'Greatest Reflex',
       type: 'effect',
-      target: 'player',
-      stats: { dashes: [1,2,3,4] },
+      target: 'dash',
+      stats: { max_stacks: [1,2,3,4] },
     }],
   },
   {
@@ -187,7 +192,15 @@ export default [
     rarity: 0,
     description: (stats) =>
       `<div>Each time you enter a<b>Chamber,</b>gain a bit wealth.</div>` +
-      `<div>▶ Obols per Chamber:<div><span>${'insert value'}</span></div></div>`,
+      `<div><div>▶&nbsp;<img src="/Apollo/assets/Currency_Small.png" />&nbsp;per Chamber:</div><div><span>${ stats.obols_per_chamber }</span></div></div>`,
+    feature: (stats) =>
+      `Gain <span>${ stats.obols_per_chamber }</span>&nbsp;<img src="/Apollo/assets/Currency_Small.png" />&nbsp;per <b>Chamber.</b>`,
+    mods: [{
+      name: 'Side Hustle',
+      target: 'player',
+      type: 'effect',
+      stats: { obols_per_chamber: [10,12,14,16] },
+    }],
   },
   {
     name: 'Rush Delivery',
@@ -227,8 +240,8 @@ export default [
     icon: 'assets/traits/Hermes_11.png',
     god: 'Hermes',
     rarity: 4,
-    description: (stats) =>
-      `<div>Your Cast Ammo automatically return to you.</div>`,
+    description: (stats) => `<div>Your&nbsp;<img src="/Apollo/assets/AmmoIcon.png" />&nbsp;automatically return to you.</div>`,
+    feature: (stats) => `<div>Your&nbsp;<img src="/Apollo/assets/AmmoIcon.png" />&nbsp;automatically return to you.</div>`,
   },
   {
     name: 'Bad News',

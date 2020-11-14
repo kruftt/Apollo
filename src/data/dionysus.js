@@ -4,8 +4,7 @@ const _hangover = {
   name: 'Hangover',
   type: 'hangover',
   stats: { duration: 4, interval: 0.5 },
-  status: { name: 'Hangover', target: 'foe', stacks: 5 },
-  stacks: true,
+  status: { name: 'Hangover', target: 'foe', max_stacks: 5 },
 }
 
 function hangover(trigger, min, pom) {
@@ -49,6 +48,7 @@ export default [
     god: 'Dionysus',
     rarity: 0,
     level: 1,
+    exclude: [ 'Aegis - Aspect of Beowolf' ],
     description: (stats) =>
       '<div>Your<b>Cast</b>lobs a projectile that bursts into<b>Festive Fog.</b></div>' +
       `<div>▶ Blast Damage:<div><span>${ fv(stats.min) }</span></div></div>`,
@@ -57,6 +57,30 @@ export default [
       type: 'trippy',
       trigger: 'cast',
       stats: { min: [100,120,140,160], radius: 400 },
+      pom: pom_6,
+    },],
+    effects: [{
+      name: 'Festive Fog',
+      type: 'festive',
+      trigger: 'trippy',
+      stats: { duration: 5, interval: 0.25, radius: 400, stun: true },
+    },],
+  },
+  {
+    name: 'Trippy Flare',
+    type: 'cast',
+    icon: 'assets/traits/Dionysus_02_Large.png',
+    god: 'Dionysus',
+    rarity: 0,
+    level: 1,
+    description: (stats) =>
+      '<div>Your<b>Cast</b>damages foes around you, leaving behind<b>Festive Fog.</b></div>' +
+      `<div>▶ Blast Damage:<div><span>${ fv(stats.min) }</span></div></div>`,
+    abilities: [{
+      name: 'Trippy Flare',
+      type: 'trippy',
+      trigger: 'cast',
+      stats: { min: [120,148,172,196], radius: 400 },
       pom: pom_6,
     },],
     effects: [{
@@ -93,12 +117,20 @@ export default [
     description: (stats) =>
       '<div>Your<b>Call</b>inflicts<b>Hangover</b>to foes all around you for <b>1.5 Sec.</b></div>' +
       `<div>▶ Hangover Damage:<div><span>${ fv(stats.min) }</span></div></div>`,
-    abilities: [{
-      name: "Dionysus' Aid",
-      type: 'dio aid',
-      trigger: 'call',
-      stats: { duration: 1.5 },
-    },],
+    abilities: [
+      {
+        name: "Dionysus' Aid",
+        type: 'dio aid',
+        trigger: 'call',
+        stats: { duration: 1.5 },
+      },
+      {
+        name: "Dionysus' Aid - Max",
+        type: 'dio aid',
+        trigger: 'call',
+        stats: { duration: 9 },
+      },
+    ],
     effects: [hangover('dio aid', [15,16.5,18,19.5], pom(0.4, 0.25))],
   },
   {
@@ -110,6 +142,7 @@ export default [
     description: (stats) =>
       '<div>If your<b><4</b>is low after Encounters, restore to the threshold.</div>' +
       `<div>▶ Life Threshold:<div><span>+${ fp(stats.threshold) }%</span></div></div>`,
+    features: (stats) => `Life Threshold: <span>${ fp(stats.threshold) }%</span>`,
     mods: [{
       name: 'After Party',
       type: 'effect',
@@ -126,7 +159,7 @@ export default [
     rarity: 0,
     level: 1,
     description: (stats) =>
-      '<div>Take less damage while at 40% <3 or below.</div>' +
+      '<div>Take less damage while at 40% health or below.</div>' +
       `<div>▶ Damage Resistance:<div><span>+${ fp(stats.reduction) }%</span></div></div>`,
     mods: [{
       name: 'Positive Outlook',
@@ -145,8 +178,9 @@ export default [
     rarity: 0,
     level: 1,
     description: (stats) =>
-      '<div>Gain <b><3</b>when you pick up<b>Nectar.</b>Receive <span>1 Nectar</span> now.</div>' +
+      '<div>Gain&nbsp;<img src="/Apollo/assets/LifeUp_Small.png" />&nbsp;when you pick up<b>Nectar.</b>Receive <span>1 Nectar</span> now.</div>' +
       `<div>▶ Life Gain:<div><span>${ fv(stats.health) }</span></div></div>`,
+    feature: (stats) => `Gain <span>${ fv(stats.health) }</span>&nbsp;<img src="/Apollo/assets/LifeUp_Small.png" />&nbsp;when you pick up <b>Nectar.</b>`,
     mods: [{
       name: 'Premium Vintage',
       type: 'effect',
@@ -163,8 +197,10 @@ export default [
     rarity: 0,
     level: 1,
     description: (stats) =>
-      '<div>Using a<b>Fountain</b>restores all<b><3</b>and gives you bonus damage.</div>' +
+      '<div>Using a<b>Fountain</b>restores <span>100%</span><img src="/Apollo/assets/LifeRestore_Small.png" />&nbsp;and gives you bonus damage.</div>' +
       `<div>▶ Bonus Damage per Fountain:<div><span>+${ fp(stats.mult_base) }%</span></div></div>`,
+    feature: (stats) =>
+      `Bonus Damage per Fountain: <span>+${ fp(stats.mult_base) }%</span>`,
     mods: [{
       name: 'Strong Drink',
       type: 'effect',
@@ -261,7 +297,7 @@ export default [
     rarity: 4,
     prereqs: { Trippy: ['Trippy Shot'], Dionysus: ["Dionysus' Aid", 'Drunken Flourish', "Drunken Strike"] },
     description: (stats) =>
-      '<div><b>Hangover</b>afflicted foes take bonus damage in <b>Festive Fog</b>.</div>' +
+      '<div><b>Hangover</b>afflicted foes take bonus damage in <b>Festive Fog.</b></div>' +
       `<div>▶ Bonus Damage:<div><span>+${ fp(stats.mult_base) }%</span></div></div>`,
     mods: [
       {
@@ -281,7 +317,7 @@ export default [
     effects: [
       {
         name: 'Hangover?',
-        type: 'hangover',
+        type: 'hangover bonus',
         trigger: 'festive',
         stats: { multiplier: 0.6 },
       }

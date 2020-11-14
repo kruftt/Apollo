@@ -13,8 +13,8 @@ export default [
     god: 'Chaos',
     rarity: 0,
     description: (stats) =>
-      `<div>Any&nbsp;<img src="/assets/Currency_Small.png" />&nbsp;you find are worth<span>+${ fp(stats.mult_obols_min, stats.mult_obols_max) }%</span></div>`,
-    feature: (stats) => `Any <img src="/assets/Currency_Small.png" /> you find are worth <span>+${ fp(stats.mult_obols_min, stats.mult_obols_max) }%</span> </div>`,
+      `<div>Any&nbsp;<img src="/Apollo/assets/Currency_Small.png" />&nbsp;you find are worth<span>+${ fp(stats.mult_obols_min, stats.mult_obols_max) }%</span></div>`,
+    feature: (stats) => `Any <img src="/Apollo/assets/Currency_Small.png" /> you find are worth <span>+${ fp(stats.mult_obols_min, stats.mult_obols_max) }%</span> </div>`,
     mods: [{
       name: 'Affluence',
       type: 'effect',
@@ -63,8 +63,8 @@ export default [
     god: 'Chaos',
     rarity: 0,
     description: (stats) =>
-      `<div>Any &nbsp;<img src="/assets/Darkness_Small.png" />&nbsp; and &nbsp;<img src="/assets/Gems_Small.png" />&nbsp; you find are worth<span>+${ fp(stats.darkness_min, stats.darkness_max) }%.</span></div>`,
-    feature: (stats) => `<img src="/assets/Darkness_Small.png" />&nbsp; and &nbsp;<img src="/assets/Gems_Small.png" />&nbsp; are worth <span>+${ fp(stats.darkness_min, stats.darkness_max) }%.</span>`,
+      `<div>Any &nbsp;<img src="/Apollo/assets/Darkness_Small.png" />&nbsp; and &nbsp;<img src="/Apollo/assets/Gems_Small.png" />&nbsp; you find are worth<span>+${ fp(stats.darkness_min, stats.darkness_max) }%.</span></div>`,
+    feature: (stats) => `<img src="/Apollo/assets/Darkness_Small.png" />&nbsp; and &nbsp;<img src="/Apollo/assets/Gems_Small.png" />&nbsp; are worth <span>+${ fp(stats.darkness_min, stats.darkness_max) }%.</span>`,
     mods: [{
       name: 'Eclipse',
       type: 'effect',
@@ -79,7 +79,8 @@ export default [
     god: 'Chaos',
     rarity: 0,
     description: (stats) =>
-      `<div><b>Boons</b> have<span>+${ fp(stats.rare_min, stats.rare_max) }%</span>chance to be<span class="rare">Rare</span>or better.</div>`,
+      `<div><b>Boons</b> have a<span>+${ fp(stats.rare_min, stats.rare_max) }%</span>chance to be<span class="rare">Rare</span>or better.</div>`,
+    feature: (stats) => `<b>Boons</b> have a <span>+${ fp(stats.rare_min, stats.rare_max) }%</span> chance to be <span class="rare">Rare</span> or better.`,
     mods: [{
       name: 'Favor',
       type: 'effect',

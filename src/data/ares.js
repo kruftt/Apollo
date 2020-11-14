@@ -16,7 +16,7 @@ export default [
     rarity: 0,
     level: 1,
     description: (stats) =>
-      '<div>Your<b>Attack</b>inflicts<b>Doom</b>.</div>' +
+      '<div>Your<b>Attack</b>inflicts<b>Doom.</b></div>' +
       `<div>▶ Curse Damage:<div><span>${ fv(stats.min) }</span></div></div>`,
     effects: [
       {
@@ -37,7 +37,7 @@ export default [
     rarity: 0,
     level: 1,
     description: (stats) =>
-      '<div>Your<b>Special</b>inflicts<b>Doom</b>.</div>' +
+      '<div>Your<b>Special</b>inflicts<b>Doom.</b></div>' +
       `<div>▶ Curse Damage:<div><span>${ fv(stats.min) }</span></div></div>`,
     effects: [{
       name: 'Doom',
@@ -67,6 +67,13 @@ export default [
       status: { target: 'foe', name: 'Blade Rift Hits' },
       pom: pom(0.2, 0.1),
     }],
+    mods: [{
+      name: 'Slicing Shot Hits',
+      type: 'effect',
+      target: 'Slicing Shot',
+      stats: { count: 1 },
+      status: { target: 'foe', name: 'Blade Rift Hits', stacks: true },
+    }]
   },
   {
     name: 'Slicing Flare',
@@ -86,6 +93,13 @@ export default [
       status: { target: 'foe', name: 'Blade Rift Hits' },
       pom: pom(0.2, 0.05),
     }],
+    mods: [{
+      name: 'Slicing Flare Hits',
+      type: 'effect',
+      target: 'Slicing Flare',
+      stats: { count: 1 },
+      status: { target: 'foe', name: 'Blade Rift Hits', stacks: true },
+    }]
   },
   {
     name: 'Blade Dash',
@@ -97,16 +111,21 @@ export default [
     description: (stats) =>
       '<div>Your<b>Dash</b>creates a<b>Blade Rift</b>where you started.</div>' +
       `<div>▶ Rift Damage per Hit:<div><span>${ fv(stats.min) }</span></div></div>`,
-    effects: [
-      {
-        name: 'Blade Rift',
-        type: 'rift',
-        trigger: 'dash',
-        stats: { min:[10,12,14,16], duration: 0.7, interval: 0.1, radius:150 },
-        status: { target: 'foe', name: 'Blade Rift Hits' },
-        pom: pom(0.6, 0.2),
-      }
-    ],
+    mods: [{
+      name: 'Blade Dash Hits',
+      type: 'effect',
+      target: 'Blade Dash',
+      stats: { count: 1 },
+      status: { target: 'foe', name: 'Blade Rift Hits', stacks: true },
+    }],
+    effects: [{
+      name: 'Blade Dash',
+      type: 'rift',
+      trigger: 'dash',
+      stats: { min:[10,12,14,16], duration: 0.7, interval: 0.1, radius:150 },
+      status: { target: 'foe', name: 'Blade Rift Hits' },
+      pom: pom(0.6, 0.2),
+    }],
   },
   {
     name: "Ares' Aid",
@@ -254,7 +273,7 @@ export default [
     description: (stats) =>
       '<div>Your<b>Blade Rift</b>effects last longer and pull foes in.</div>' +
       `<div>▶ Rift Duration<div><span>+${fp(stats.duration)}%</span></div></div>`,
-    feature: (stats) => `<b class="rift">Blade Rifts</b> pull foes in.`,
+    feature: (stats) => `<b class="Ares">Blade Rifts</b> pull foes in.`,
     mods: [{
       name: 'Engulfing Vortex',
       type: 'effect',
@@ -272,14 +291,22 @@ export default [
     description: (stats) =>
       '<div>Your<b>Doom</b>effects deal more damage when applied multiple times.</div>' +
       `<div>▶ Bonus Damage per Curse:<div><span>${ fv(stats.min) }</span></div></div>`,
-    mods: [{
-      name: 'Dire Misfotune',
-      type: 'effect',
-      target: 'doom',
-      stats: { min: [10, 12, 14, 16] },
-      status: { ...doom_status, stacks: 10 },
-      stacks: true,
-    }],
+    mods: [
+      {
+        name: 'Dire Misfotune offset',
+        type: 'effect',
+        target: 'doom',
+        stats: { min: -10 },
+        status: { ...doom_status },
+      },
+      {
+        name: 'Dire Misfotune',
+        type: 'effect',
+        target: 'doom',
+        stats: { min: [10, 12, 14, 16] },
+        status: { ...doom_status, stacks: true, max_stacks: 10 },
+      },
+    ],
   },
   {
     name: 'Impending Doom',
@@ -310,7 +337,7 @@ export default [
     description: (stats) =>
       '<div>Your<b>Blade Rift</b>effects deal more damage for each consecutive hit.</div>' +
       `<div>▶ Damage increase per hit:<div><span>2</span></div></div>`,
-    feature: (stats) => `<b class="rift">Blade Rifts</b> deal <span>+2</span> damage for each consecutive hit.`,
+    feature: (stats) => `<b class="Ares">Blade Rifts</b> deal <span>+2</span> damage for each consecutive hit.`,
     mods: [
       {
         name: 'Vicious Cycle',

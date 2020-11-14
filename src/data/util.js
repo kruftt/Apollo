@@ -1,4 +1,4 @@
-export const beowolf_traits = ['Passion Flare', 'Phalanx Flare', 'Slicing Flare', "Hunter's Flare"]
+export const beowolf_traits = ['Passion Flare', 'Phalanx Flare', 'Slicing Flare', "Hunter's Flare", 'Icy Flare', 'Trippy Flare', 'Flood Flare', 'Thunder Flare' ]
 export const beowolf_exclusions = ['Crush Shot', 'Phalanx Shot', 'Slicing Shot', 'True Shot', 'Crystal Beam', 'Trippy Shot', 'Flood Shot', 'Electric Shot']
 
 export function fv(a, b, d = 0) {

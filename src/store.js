@@ -1,5 +1,5 @@
 import { reactive, watch, ref, computed } from 'vue'
-import { data } from './data/index.js'
+import { data, copyEffect } from './data/index.js'
 
 const status_curses = [ 'jolted', 'hangover', 'weak', 'marked' ]
 
@@ -53,33 +53,30 @@ function wrapTrait(trait) {
   const d = t.description = ref(typeof td === 'string' ? td : '')
 
   if (typeof td === 'function') {
-    watch([r, l], () => d.value = td(getStatsContext(t)), { immediate: true })
+    watch([r, l], () => d.value = td(getTraitContext(t)), { immediate: true })
   }
 
   return t
 }
 
 const effect_categories = ['abilities', 'effects', 'mods']
-function getStatsContext(trait) {
+function getTraitContext(trait) {
   const stats = {}
   for (let key of effect_categories) {
     let effects = trait[key]
     if (effects === undefined) continue
 
     for (let effect of effects) {
-      Object.assign(stats, extractStats(effect, trait.rarity, trait.level))
+      Object.assign(stats, extractData(effect.stats, trait.rarity, trait.level, effect.pom))
+      Object.assign(stats, extractData(effect.status, trait.rarity, trait.level, effect.pom))
     }
   }
   return stats
 }
 
 function _pom() { return 0 }
-function extractStats (effect, rarity, level) {
-  const target = effect.stats || {}
-  const pom = (level && effect.pom)
-    ? effect.pom
-    : _pom
-
+function extractData (target, rarity, level, pom = _pom) {
+  if (target === undefined) return
   return Object.keys(target).reduce((extracted, k) => {
     const v = target[k]
     extracted[k] = (Array.isArray(v))
@@ -164,7 +161,7 @@ const store = reactive({
 })
 
 
-function extractTraitData(build, trait_data, build_data, rarity, level, overwrite) {
+function extractTraitData(trait_data, build_data, god, rarity, level, overwrite) {
   if (trait_data === undefined) return  // trait_data = abilties[] / effects[] / mods[]
 
   const extracted = trait_data.reduce((acc, v) => {
@@ -174,8 +171,9 @@ function extractTraitData(build, trait_data, build_data, rarity, level, overwrit
       return acc
     }
     const effect = Object.create(v)
-    effect.stats = extractStats(v, rarity, level)
-    effect.status = (effect.status) ? Object.create(effect.status) : null
+    god && (effect.god = god)
+    effect.stats = extractData(v.stats, rarity, level, v.pom) || {}
+    effect.status = extractData(v.status, rarity, level, v.pom)
 
     effect.effects = []
     if (acc[key] === undefined) acc[key] = [effect]
@@ -215,12 +213,12 @@ function extractTrait(trait, build) {
 
   // Add features
   if (trait.feature)
-    build.features.push(trait.feature(getStatsContext(trait)))
+    build.features.push(trait.feature(getTraitContext(trait)))
 
   // extract stats data
-  extractTraitData(build, trait.abilities, build.abilities, rarity, level, true)
-  extractTraitData(build, trait.effects, build.effects, rarity, level)
-  extractTraitData(build, trait.mods, build.mods, rarity, level)
+  extractTraitData(trait.abilities, build.abilities, trait.god, rarity, level, true)
+  extractTraitData(trait.effects, build.effects, trait.god, rarity, level)
+  extractTraitData(trait.mods, build.mods, trait.god, rarity, level)
 }
 
 function createDirectories(trigger_dir, initial) {
@@ -250,34 +248,25 @@ function applyStatus(build, effect_or_mod, status) {
   const stats = effect_or_mod.stats
   build_char.status[name] = null  // signal to initialize to 0 or maintain current value
 
-  const max_stacks = (status.stacks || Math.floor(0.05 + (stats.duration/stats.interval)))
-  if (typeof max_stacks === 'number') {
+  // max_[key] for interface if you get max_stacks...
+  const max_stacks = (status.max_stacks || Math.floor(0.05 + (stats.duration/stats.interval))) // NaN, number
+  if (!isNaN(max_stacks)) {
     const key = `max_${name}`
-    const current = build_char[key] || 0
-    build_char[key] = Math.max(current, max_stacks)
+    build_char[key] = Math.max((build_char[key] || 0), (max_stacks || 0))
+    if (stats.count > max_stacks) stats.count = max_stacks
   }
 
-  const status_value = store[target].status[name] || 0
-  if (!status_value) return false
-
-  if (effect_or_mod.stacks) {
-    const stacks = Math.min(status_value, max_stacks) // If max stacks is higher from a different ability
-    switch (effect_or_mod.target || effect_or_mod.type) {
-      case 'hangover':
-        stats.min *= stacks
-        stats.count = stacks
-        break
-      case 'chill':
-        stats.speed *= stacks
-        break
-
-      case 'rift':
-      case 'doom':
-        break
+  // copy keys in stats status_value times
+  const status_value = (store[target].status[name] || 0) // undefined, boolean, number
+  if (status_value && status.stacks) {
+    const count = Math.min(status_value, (isNaN(max_stacks) ? 1000 : max_stacks))
+    for (const key in stats) {
+      const v = stats[key]
+      if (typeof v === 'number') stats[key] = v * count
     }
   }
 
-  return true
+  return (status_value ? true : false)
 }
 
 function applyMetaMods(build, meta_mods) {
@@ -288,16 +277,6 @@ function applyMetaMods(build, meta_mods) {
     const status = meta_mod.status
     if (status)
       if (!applyStatus(build, meta_mod, status)) continue
-    // if (status) {
-    //   const status_value = store[status.target].status[status.name]
-    //   if (!status_value) continue
-      // if (meta_mod.stacks) {
-      //   const stats = meta_mod.stats
-      //   for (const key in stats) {
-      //     stats[key] *= status_value
-      //   }
-      // }
-    // }
 
     targets = meta_mod.target // mod name
     targets = Array.isArray(targets) ? targets : [targets]
@@ -308,16 +287,20 @@ function applyMetaMods(build, meta_mods) {
       meta_stats = meta_mod.stats
       for (let k in meta_stats) {
         switch (k) {
+          case 'stacks':
+            target.status[k] = meta_stats[k]
+            break
+          case 'max_stacks':
+            target.status[k] = (target.status[k] || 0) + meta_stats[k]
+            break
           case 'reduction':
           case 'mult_base':
           case 'mult_min':
           case 'mult_max':
-            const v = target_stats[k]
-            target_stats[k] = (v || 0) + meta_stats[k]
-            break
           case 'min':
           case 'max':
-            target_stats[k] = meta_stats[k]
+            const v = target_stats[k]
+            target_stats[k] = (v || 0) + meta_stats[k]
             break
         }
       }
@@ -339,7 +322,8 @@ function applyCharacterMod(build_character, mod) {
         build_stats['Projectile Speed'] = (build_stats['Projectile Speed'] || 1) + mod_stats[k]
         break
       default:
-        build_stats[k] += mod_stats[k]
+        // mod_stats[k] *= (mod_stats.count || 1)
+        build_stats[k] = (build_stats[k] || 0) + mod_stats[k]
         break
     }
   }
@@ -360,7 +344,7 @@ function applyCoefficientMod(coefficients, mod) {
         coefficients.mult_max += v
         break
       default:
-        coefficients[k] += mod_stats[k]
+        coefficients[k] = (coefficients[k] || 0) + mod_stats[k]
         break
     }
   }
@@ -371,9 +355,17 @@ function applyEffectMod(effects, mod) {
   const mod_stats = mod.stats
   let k, effect_stats
   for (const effect of effects) {
+    mod.god && (effect.god = mod.god)
     effect_stats = effect.stats
     for (k in mod_stats) {
       switch (k) {
+        case 'stacks':
+          effect.status[k] = mod_stats[k]
+          break
+        case 'max_stacks':
+          effect.status[k] = (effect.status[k] || 0) + mod_stats[k]
+          break
+
         case 'multiply_min':
           if (effect_stats.min)
             effect_stats.min *= mod_stats[k]
@@ -394,6 +386,7 @@ function applyEffectMod(effects, mod) {
         case 'multiply_radius':
           effect_stats.radius && (effect_stats.radius *= (1 + mod_stats[k]))
           break
+
         case 'name':
         case 'type':
           effect[k] = mod_stats[k]
@@ -404,10 +397,6 @@ function applyEffectMod(effects, mod) {
         case 'knockback':
           effect_stats[k] = mod_stats[k]
           break
-        case 'stacks':
-          effect.status[k] = (effect.status[k] || 0) + mod_stats[k]
-          break
-
         case 'min':
           const v = mod_stats[k]
           if (!mod_stats.max) {
@@ -415,6 +404,7 @@ function applyEffectMod(effects, mod) {
             if (max) effect_stats.max = max + v
           }
         default:
+          // mod_stats[k] *= (mod_stats.count || 1)
           effect_stats[k] = (effect_stats[k] || 0) + mod_stats[k]
           break
       }
@@ -503,6 +493,7 @@ function linkEffects(build, effect_data, is_ability_data = false) {
       // add triggers from stat names (e.g. backstab)
       const stats = effect.stats
       for (let k in stats) {
+        if (!stats[k]) continue
         secondary_effects = b_effects[k]
         if (secondary_effects)
           effect.effects.push(...secondary_effects)
@@ -557,27 +548,31 @@ function computeDamageValues(build, effect) {
     const crit_mult_min = crit_mult_base + (crit_stats.mult_min || 0)
     const crit_mult_max = crit_mult_base + (crit_stats.mult_max || 0)
 
-    effect.damage_min = Math.round(min * min_multiplier)
-    effect.damage_max = Math.round(max * max_multiplier)
+    const damage_min = min * min_multiplier
+    const damage_max = max * max_multiplier
+
+    const count = stats.count || 1
+    const interval = stats.interval
+    if ('riftbeamvortex'.indexOf(effect.type) !== -1) {
+      effect.damage_min = Math.round(damage_min)
+      effect.damage_max = Math.round(damage_max)
+      // effect.dot_damage = Math.round(damage_min * count)
+      effect.dot_damage = (stats.vicious_cycle)
+        ? Math.round((damage_min + Math.max(count - 1, 0)) * count)
+        : Math.round(damage_min * count)
+    } else {
+      effect.damage_min = Math.round(damage_min * count)
+      effect.damage_max = Math.round(damage_max * count)
+      if (interval) {
+        const max_ticks = Math.floor(0.05 + (stats.duration / interval))
+        effect.dot_damage = Math.round(damage_min * max_ticks * count)
+      }
+    }
+
     effect.damage = (effect.damage_min === effect.damage_max)
       ? `${ effect.damage_min }`
       : `${ effect.damage_min }-${ effect.damage_max }`
 
-    const interval = stats.interval
-    if (interval) {
-      const max_ticks = Math.floor(0.05 + (stats.duration / interval))
-      if (effect.type === 'rift') {
-        const num_hits = Math.min(max_ticks, (foe.status['Blade Rift Hits'] || 0))
-        effect.ticks = num_hits
-        stats.count = num_hits
-        effect.dot_damage = (stats.vicious_cycle)
-          ? (effect.damage_min + Math.max(num_hits - 1, 0)) * num_hits
-          : effect.damage_min * num_hits
-      } else {
-        effect.dot_damage = effect.damage_min * max_ticks
-        effect.ticks = max_ticks
-      }
-    }
 
     effect.crit_chance = _co.crit + (stats.crit || 0) + (0.5 * (_co.crit_min + _co.crit_max))
 
@@ -603,6 +598,7 @@ function syncObjectChanges(target, source) {
   for (key in source) {
     const svalue = source[key]
     const tvalue = target[key]
+    // console.log('syncing', svalue, tvalue)
     // null is object, have to check for object on target
     if (typeof tvalue === 'object') {
       syncObjectChanges(tvalue, svalue)
@@ -632,22 +628,24 @@ function compileBuild() {
   slam.effects = []
 
   const build = {
-    player: {
-      ...data_base.player,
-      stats: { ...data_base.player.stats },
-      status: { ...data_base.player.status },
-    },
-    foe: {
-      ...data_base.foe,
-      stats: { ...data_base.foe.stats },
-      status: { ...data_base.foe.status },
-    },
+    // player: {
+    //   ...data_base.player,
+    //   stats: { ...data_base.player.stats },
+    //   status: { ...data_base.player.status },
+    // },
+    // foe: {
+    //   ...data_base.foe,
+    //   stats: { ...data_base.foe.stats },
+    //   status: { ...data_base.foe.status },
+    // },
+    player: copyEffect(data_base.player),
+    foe: copyEffect(data_base.foe),
     coefficients: { ...data_base.coefficients },
     crit,
     slam,
     gods: {},
     abilities: {
-      dash: [{name: "Dash", type: 'ability', trigger: 'dash', stats: { count: 2 }, effects: []}],
+      dash: [{name: "Dash", type: 'ability', trigger: 'dash', stats: { count: 1 }, status: { target: 'player', name: 'Dash', stacks: true, max_stacks: 2 }, effects: []}],
       revenge: [{name: "Damage Taken", type: 'event', trigger: 'revenge', stats: {}, effects: []}],
       slain: [{name: "Enemy Death", type: 'event', trigger: 'slain', stats: {}, effects: []}],
     },
@@ -665,12 +663,13 @@ function compileBuild() {
   }
 
   if (foe.status.weak) {
-    const weak = data_base.weak
-    build.mods.effect.push({...weak, stats: { ...weak.stats }})
+    build.mods.effect.push(copyEffect(data_base.weak))
   }
-  if (foe.status.chill) {
-    const chill = data_base.chill
-    build.mods.effect.push({...chill, stats: { ...chill.stats }})
+  if (foe.status.Chill) {
+    build.mods.effect.push(copyEffect(data_base.chill))
+  }
+  if (foe.status.Hangover) {
+    build.mods.effect.push(copyEffect(data_base.hangover))
   }
   if (player.status.Sturdy) {
     build.mods.effect.push(data_base.sturdy)
@@ -701,6 +700,11 @@ function compileBuild() {
   // Modify the abilities and effects
   applyMetaMods(build, build.mods.meta)
   applyEffectMods(build, build.mods.effect)
+
+  // Hermes - Rush Delivery damage_from_speed
+  if (build.coefficients.damage_from_speed) {
+    build.coefficients.mult_base += (build.player.stats.speed * build.coefficients.damage_from_speed)
+  }
 
   // Link and Calculate
   linkEffects(build, build.abilities, true)

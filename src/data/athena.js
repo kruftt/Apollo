@@ -11,7 +11,7 @@ function deflect (trigger) {
     name: 'Deflect',
     type: 'deflect',
     trigger,
-    stats: { deflect: 1 },
+    stats: { mult_deflect: 1 },
   }
 }
 
@@ -35,7 +35,7 @@ export default [
       name: 'Divine Strike',
       type: 'effect',
       target: 'attack',
-      stats: { type: 'deflect', mult_min: [0.4,0.52,0.72,0.92], mult_max: [0.4,0.6,0.8,1] },
+      stats: { mult_min: [0.4,0.52,0.72,0.92], mult_max: [0.4,0.6,0.8,1] },
       pom: pom_4,
     }],
     effects: [deflect('attack')],
@@ -55,7 +55,7 @@ export default [
       name: 'Divine Flourish',
       type: 'effect',
       target: 'special',
-      stats: { type: 'deflect', mult_min: [0.6, 0.78, 1.08, 1.38], mult_max: [0.6, 0.9, 1.2, 1.5] },
+      stats: { mult_min: [0.6, 0.78, 1.08, 1.38], mult_max: [0.6, 0.9, 1.2, 1.5] },
       pom: pom_4,
     }],
   },
@@ -66,6 +66,7 @@ export default [
     god: 'Athena',
     rarity: 0,
     level: 1,
+    exclude: [ 'Aegis - Aspect of Beowolf' ],
     description: (stats) =>
       '<div>Your<b>Cast</b>damages foes in a small area, and can <b>Deflect.</b></div>' +
       `<div>▶ Cast Damage:<div><span>${ fv(stats.min) }</span></div></div>`,
@@ -111,7 +112,7 @@ export default [
       name: 'Divine Dash',
       type: 'effect', // deflect
       target: 'dash',
-      stats: { name: 'Divine Dash', type: 'deflect', min: [10, 12, 14, 16] },
+      stats: { name: 'Divine Dash', min: [10, 12, 14, 16] },
       pom: pom(0.6, 0.2),
     }],
     effects: [deflect('dash')],
@@ -143,7 +144,7 @@ export default [
       },
     ],
     effects: [
-      { name: 'Invulnerable', type: 'deflect', trigger: 'call' },
+      { name: 'Invulnerable', type: 'invuln', trigger: 'call' },
       deflect('call'),
     ],
   },
@@ -252,13 +253,13 @@ export default [
     prereqs: { Athena: ['Divine Strike', 'Divine Dash', 'Holy Shield', 'Divine Flourish'] },
     description: (stats) =>
       '<div>When you<b>Deflect</b>attacks, they deal more damage.</div>' +
-      `<div>▶ Deflect Damage:<div><span>+${ fp(stats.deflect) }%</span></div></div>`,
-    feature: (stats) => `<b>Deflect</b> deals <span>+${ fp(stats.deflect) }%</span> damage.`,
+      `<div>▶ Deflect Damage:<div><span>+${ fp(stats.mult_deflect) }%</span></div></div>`,
+    feature: (stats) => `<b>Deflect</b> deals <span>+${ fp(stats.mult_deflect) }%</span> damage.`,
     mods: [{
       name: 'Brilliant Riposte',
       type: 'effect',
       target: 'deflect',
-      stats: { deflect: [0.8, 1.12, 1.8, 2] },
+      stats: { mult_deflect: [0.8, 1.12, 1.8, 2] },
       pom: pom_4,
     }],
   },

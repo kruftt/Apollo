@@ -1,18 +1,10 @@
 import { fv, fp, pom, pom_4, pom_8 } from './util'
 
-// const chill_mod = {
-//   name: 'Chill',
-//   type: 'effect',
-//   target: 'foe',
-//   stats: { speed: -0.04 },
-//   status: { name: 'chill', target: 'foe', stacks: 10 },
-// }
-
 export const chill = {
   name: 'Chill',
   type: 'chill',
-  stats: { speed: -0.04 },
-  status: { name: 'chill', target: 'foe', stacks: 10 },
+  stats: { speed: -0.04, },
+  status: { name: 'Chill', target: 'foe', stacks: true, max_stacks: 10 },
 }
 
 export default [
@@ -29,7 +21,7 @@ export default [
     rarity: 0,
     level: 1,
     description: (stats) =>
-      '<div>Your<b>Attack</b>is stronger and inflicts<b>Chill</b>.</div>' +
+      '<div>Your<b>Attack</b>is stronger and inflicts<b>Chill.</b></div>' +
       `<div>▶ Attack Damage:<div><span>+${ fp(stats.mult_min, stats.mult_max) }%</span></div></div>`,
     mods: [{
       name: 'Frost Strike',
@@ -48,7 +40,7 @@ export default [
     rarity: 0,
     level: 1,
     description: (stats) =>
-      '<div>Your<b>Special</b>is stronger and inflicts<b>Chill</b>.</div>' +
+      '<div>Your<b>Special</b>is stronger and inflicts<b>Chill.</b></div>' +
       `<div>▶ Special Damage:<div><span>+${ fp(stats.mult_min, stats.mult_max) }%</span></div></div>`,
     mods: [{
       name: 'Frost Flourish',
@@ -66,16 +58,36 @@ export default [
     god: 'Demeter',
     rarity: 0,
     level: 1,
-    prereqs: {},
     threshold: 2,
+    exclude: [ 'Aegis - Aspect of Beowolf' ],
     description: (stats) =>
-      '<div>Your<b>Cast</b>drops a crystal that fires a beam straight ahead for<b>5 Sec</b>.</div>' +
+      '<div>Your<b>Cast</b>drops a crystal that fires a beam straight ahead for<b>5 Sec.</b></div>' +
       `<div>▶ Cast Damage:<div><span>${ fv(stats.min, null, 1) }</span></div></div>`,
     abilities: [{
       name: 'Crystal Beam',
       type: 'beam',
       trigger: 'cast',
       stats: { min: [8, 9.2, 10.4, 11.6], duration: 5, interval: 0.2 },
+      status: { target: 'foe', name: 'Beam Hits' },
+      pom: pom(0.2, 0.1)
+    }],
+  },
+  {
+    name: 'Icy Flare',
+    type: 'cast',
+    icon: 'assets/traits/Demeter_02_Large.png',
+    god: 'Demeter',
+    rarity: 0,
+    level: 1,
+    threshold: 2,
+    description: (stats) =>
+      '<div>Your<b>Cast</b>damages foes around you and inflicts<b>Chill.</b></div>' +
+      `<div>▶ Cast Damage:<div><span>${ fv(stats.min, null, 1) }</span></div></div>`,
+    abilities: [{
+      name: 'Icy Flare',
+      type: 'flare',
+      trigger: 'cast',
+      stats: { min: [70, 80, 90, 100] },
       pom: pom(0.2, 0.1)
     }],
   },
@@ -87,7 +99,7 @@ export default [
     rarity: 0,
     level: 1,
     description: (stats) =>
-      '<div>Your<b>Dash</b>shoots a gust ahead that inflicts<b>Chill</b>.</div>' +
+      '<div>Your<b>Dash</b>shoots a gust ahead that inflicts<b>Chill.</b></div>' +
       `<div>▶ Gust Damage:<div><span>${ fv(stats.min) }</span></div></div>`,
     abilities: [{
       name: 'Mistral Dash',
@@ -106,15 +118,26 @@ export default [
     rarity: 0,
     level: 1,
     description: (stats) =>
-      '<div>Your<b>Call</b>creates a winter vortex for<span>5 Sec.,</span> deals damage every<span>0.25 Sec</span>inflicting<b>Chill</b>.</div>' +
+      '<div>Your<b>Call</b>creates a winter vortex for<span>5 Sec.,</span> deals damage every<span>0.25 Sec</span>inflicting<b>Chill.</b></div>' +
       `<div>▶ Damage:<div><span>${ fv(stats.min) }</span></div></div>`,
-    abilities: [{
-      name: "Demeter's Aid",
-      type: 'vortex',
-      trigger: 'call',
-      stats: { min: [10, 11, 12, 13], duration: 5, interval: 0.25 },
-      pom: pom(0.4, 0.2)
-    }],
+    abilities: [
+      {
+        name: "Demeter's Aid",
+        type: 'vortex',
+        trigger: 'call',
+        stats: { min: [10, 11, 12, 13], duration: 5, interval: 0.25 },
+        status: { name: 'Winter Vortex', target: 'foe' },
+        pom: pom(0.4, 0.2)
+      },
+      {
+        name: "Demeter's Aid - Max",
+        type: 'vortex',
+        trigger: 'call',
+        stats: { min: [10, 11, 12, 13], duration: 15, interval: 0.25 },
+        status: { name: 'Winter Vortex', target: 'foe' },
+        pom: pom(0.4, 0.2)
+      },
+    ],
     effects: [{...chill, trigger: 'vortex'}],
   },
   {
@@ -124,7 +147,6 @@ export default [
     god: 'Demeter',
     rarity: 0,
     level: 1,
-    prereqs: {},
     threshold: 2,
     description: (stats) =>
       '<div>After you take damage, damage and <i>completely</i><b>Chill</b>your foe.</div>' +
@@ -135,7 +157,7 @@ export default [
         type: 'frozen',
         trigger: 'revenge',
         stats: { min: [10,15,20,25] },
-        pom: pom_8
+        pom: pom_8,
       },
       { ...chill, trigger: 'frozen' }
     ],
@@ -149,6 +171,8 @@ export default [
     description: (stats) =>
       '<div>Your<b>Boons</b>become<b>Common,</b>then gain<b>Rarity</b>every<b>3 Encounters.</b></div>' +
       `<div>▶ Random boons affected:<div><span>${ fv(stats.num_boons) }</span></div></div>`,
+    feature: (stats) =>
+      `<div><span>${ (stats.num_boons === 1) ? `${stats.num_boons}</span> <b>Boon</b> becomes <b>Common,</b> then gains` : `${stats.num_boons}</span> <b>Boons</b> become <b>Common,</b> then gain` } <span class="rare">Rarity</span> every <b>3</b> Encounters.</div>`,
     effects: [{
       name: 'Rare Crop',
       type: 'boon buff',
@@ -182,11 +206,12 @@ export default [
     god: 'Demeter',
     rarity: 0,
     level: 1,
-    prereqs: {},
     threshold: 2,
     description: (stats) =>
-      '<div>Any<b>Health</b>effects are more potent. Restore<span>+30%</span>now.</div>' +
+      '<div>Any&nbsp;<img src="/Apollo/assets/LifeRestore_Small.png" />&nbsp;effects are more potent. Restore<span>+30%</span>now.</div>' +
       `<div>▶ Improved Restoration:<div><span>+${ fp(stats.restoration) }%</span></div></div>`,
+    feature: (stats) =>
+      `<img src="/Apollo/assets/LifeRestore_Small.png" />&nbsp;effects are <span>${ fp(stats.restoration) }%</span> more potent.`,
     mods: [{
       name: 'Nourished Soul',
       type: 'effect',
@@ -202,7 +227,6 @@ export default [
     god: 'Demeter',
     rarity: 0,
     level: 1,
-    prereqs: {},
     threshold: 2,
     description: (stats) =>
       '<div>Whenever you<b>Cast,</b>damage nearby foes and inflict<b>Chill.</b></div>' +
@@ -252,7 +276,7 @@ export default [
         type: 'effect',
         target: 'foe',
         stats: { speed: [-.1, -.15, -.2, -.25] },
-        status: { target: 'foe', name: 'Killing Freeze' }
+        status: { target: 'foe', name: 'Killing Freeze' },
       },
     ],
     effects: [{
@@ -271,7 +295,7 @@ export default [
     level: 1,
     prereqs: { Demeter: ['Crystal Beam'] },
     description: (stats) =>
-      '<div>Your<b>Cast</b>fires long and inflicts<b>Chill.</b></div>' +
+      '<div>Your<b>Cast</b>fires longer and inflicts<b>Chill.</b></div>' +
       `<div>▶ Bonus Duration:<div><span>${ fv(stats.duration, null, 1) } Sec.</span></div></div>`,
     mods: [{
       name: 'Glacial Glare',
@@ -294,6 +318,8 @@ export default [
     description: (stats) =>
       '<div>Chill-affected foes shatter at 10% hp, inflicting<b>Chill</b>nearby.</div>' +
       `<div>▶ Shatter Area Damage:<div><span>${ fv(stats.min) }</span></div></div>`,
+    feature: (stats) =>
+      `<span class="Demeter">Chill-affected</span> foes <span class="Demeter">shatter</span> at <span>10%</span> hp, inflicting <span class="Demeter">Chill</span> nearby.`,
     effects: [{
       name: 'Shatter',
       type: 'shatter',

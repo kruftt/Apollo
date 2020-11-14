@@ -10,11 +10,14 @@ export default [
     icon: 'assets/weapons/shield_base_icon.png',
     rarity: -4,
     abilities: [
-      { type: 'damage', trigger: 'attack', name: 'Bash', stats: {backstab:true, min: 25} },
+      { type: 'damage', trigger: 'attack', name: 'Bash', stats: {backstab:true, min: 25, knockback: true} },
       { type: 'damage', trigger: 'chargeAttack', name: 'Bull Rush', stats: {backstab:true, min: 20, max:40, charge: 2, defend: true} },
-      { type: 'damage', trigger: 'dashAttack', name: 'Dash-Strike', stats: {backstab:true, min: 25} },
-      { type: 'damage', trigger: 'special', name: 'Throw', stats: {min: 15, backstab: true} },
+      { type: 'damage', trigger: 'dashAttack', name: 'Dash-Strike', stats: {backstab:true, min: 25, knockback: true} },
+      { type: 'damage', trigger: 'special', name: 'Throw', stats: { min: 15, backstab: true } },
     ],
+    mods: [
+      { type: 'effect', target: 'special', name: 'Throw bounces', stats: { count: 1 }, status: { target: 'foe', name: 'Shield Bounces', stacks: true, max_stacks: 2 } }
+    ]
   },
   {
     name: 'Aegis - Aspect of Zagreus',
@@ -37,7 +40,7 @@ export default [
     weapon: 'Aegis',
     icon: 'assets/weapons/shield_enchantment_2.png',
     rarity: 4,
-    exclude: beowolf_traits,
+    exclude: [ ...beowolf_traits, 'Charged Flight' ],
     description: (stats) =>
       `<div>After you <b>Bull Rush</b> your next <b>Special</b> throws multiple shields.</div>` +
       `<div><i>All sprang from the primordial depths; only one artifact bore witness.</i></div>` +
@@ -52,7 +55,7 @@ export default [
     weapon: 'Aegis',
     icon: 'assets/weapons/shield_enchantment_1.png',
     rarity: 4,
-    exclude: beowolf_traits,
+    exclude: [ ...beowolf_traits, 'Dread Flight', 'Charged Flight', 'Dashing Flight' ],
     description: (stats) =>
       `<div>Your <b>Special</b> is replaced with the <b>Blitz Disc.</b></div>` +
       `<div><i>Once he became king of the Olympians, he truly had nothing left to fear.</i></div>` +
@@ -93,13 +96,13 @@ export default [
     god: 'Daedalus',
     weapon: 'Aegis',
     rarity: -3,
-    exclude: aegis_exclusions,
+    exclude: [ ...aegis_exclusions, 'Aegis - Aspect of Zeus' ],
     description: (stats) => `<div>Your<b>Special</b>can strike up to<span>4</span>additional foes before returning.</div>`,
     mods: [{
       name: 'Dread Flight',
-      type: 'effect',
-      target: 'special',
-      stats: { count: 4 },
+      type: 'meta',
+      target: 'Throw bounces',
+      stats: { max_stacks: 4 },
     }],
   },
   {
@@ -130,7 +133,7 @@ export default [
     mods: [{
       name: 'Pulverizing Blow',
       type: 'effect',
-      target: 'attack',
+      target: ['Bash', 'Heavy Bash'],
       stats: { count: 2, knockback: false },
     }],
   },
@@ -217,7 +220,7 @@ export default [
     god: 'Daedalus',
     weapon: 'Aegis',
     rarity: -3,
-    exclude: aegis_exclusions,
+    exclude: [ ...aegis_exclusions, 'Dashing Flight', 'Aegis - Aspect of Chaos', 'Aegis - Aspect of Zeus' ],
     description: (stats) => `<div>Hold<b>Special</b>to charge your throw for up to<span>+200%</span>base damage.</div>`,
     mods: [
       {
@@ -253,7 +256,7 @@ export default [
     god: 'Daedalus',
     weapon: 'Aegis',
     rarity: -3,
-    exclude: aegis_exclusions,
+    exclude: [ ...aegis_exclusions, 'Charged Flight' ],
     description: (stats) => `<div>While you<b>Dash,</b>your<b>Special</b>is faster and deals<span>+100%</span>damage.</div>`,
     mods: [{
       name: 'Dashing Flight',

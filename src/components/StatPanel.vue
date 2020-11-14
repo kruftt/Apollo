@@ -98,17 +98,11 @@
 .build_features__bullet {
   display: inline-block;
   height: 1em;
-  margin-right: 0.2em;
+  margin: 0.1em 0.4em 0 0;
+  opacity: 0.7;
 }
 .build_features__content {
-  /* display: flex; */
-  /* align-content: center; */
-  /* text-align: center; */
-  /* vertical-align: middle; */
-}
-.build_features__content > b,
-.build_features__content > span {
-  /* margin: 0 0.2em; */
+  margin-right: 1em;
 }
 
 .build_features__content img {
@@ -120,7 +114,6 @@
 }
 .build_features__feature {
   display: flex;
-  align-items: center;
 }
 .build_features__feature + .build_features__feature {
   margin-top: 0.6em;

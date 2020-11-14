@@ -30,6 +30,14 @@ rarity:
 5: duo
 */
 
+export function copyEffect(effect) {
+  return {
+    ...effect,
+    stats: { ...effect.stats },
+    status: (effect.status ? { ...effect.status } : undefined)
+  }
+}
+
 export const data =
 {
   placeholder : {
@@ -116,11 +124,10 @@ export const data =
 
     chill: {
       name: 'Chill',
-      type: 'chill',
+      type: 'effect',
       target: 'foe',
       stats: { speed: -0.04 },
-      status: { name: 'chill', target: 'foe' },
-      stacks: true,
+      status: { name: 'Chill', target: 'foe', stacks: true, max_stacks: 10 },
     },
 
     weak: {
@@ -128,6 +135,14 @@ export const data =
       type: 'effect',
       target: 'coefficients',
       stats: { reduction: 0.3 }
+    },
+
+    hangover: {
+      name: 'Hangover Stacks',
+      type: 'effect',
+      target: 'hangover',
+      stats: { count: 1 },
+      status: { name: 'Hangover', target: 'foe', stacks: true, max_stacks: 5 },
     },
 
     slam: {

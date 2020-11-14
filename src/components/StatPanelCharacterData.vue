@@ -148,7 +148,6 @@ export default {
     const stepUp = (status_key) => character.status[status_key] += (character.status[status_key] < character[`max_${status_key}`]) ? 1 : 0
 
     function scrollStacks(e, status_key) {
-      console.log('we in here', status_key)
       if (e.wheelDelta > 0) stepUp(status_key)
       else stepDown(status_key)
     }

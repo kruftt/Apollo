@@ -20,7 +20,7 @@ export default [
       name: 'Tempest Strike',
       type: 'effect',
       target: 'attack',
-      stats: { mult_min: [0.3, 0.39, 0.54, 0.69], mult_max: [0.3, 0.45, 0.6, 0.75], knockback: true, type: 'wave' },
+      stats: { mult_min: [0.3, 0.39, 0.54, 0.69], mult_max: [0.3, 0.45, 0.6, 0.75], knockback: true },
       pom: pom_4,
     },],
   },
@@ -38,7 +38,7 @@ export default [
       name: 'Tempest Flourish',
       type: 'effect',
       target: 'special',
-      stats: { mult_min: [0.3, 0.39, 0.54, 0.69], mult_max: [0.3, 0.45, 0.6, 0.75], knockback: true, type: 'wave' },
+      stats: { mult_min: [0.3, 0.39, 0.54, 0.69], mult_max: [0.3, 0.45, 0.6, 0.75], knockback: true },
       pom: pom_4,
     },],
   },
@@ -49,8 +49,21 @@ export default [
     god: 'Poseidon',
     rarity: 0,
     level: 1,
+    exclude: ['Aegis - Aspect of Beowolf'],
     description: (stats) =>
       '<div>Your<b>Cast</b>damages foes in an area and knocks them away.</div>' +
+      `<div>▶ Cast Damage:<div><span>${ fv(stats.min) }</span></div></div>`,
+    abilities: [{name: 'Flood Shot', type: 'flood', trigger: 'cast', stats: { min: [60,72,84,96], size: 500, knockback: true, lodge: true }, pom: pom_6}],
+  },
+  {
+    name: 'Flood Flare',
+    type: 'cast',
+    icon: 'assets/traits/Poseidon_02_Large.png',
+    god: 'Poseidon',
+    rarity: 0,
+    level: 1,
+    description: (stats) =>
+      '<div>Your<b>Cast</b>damages foes around you and knocks them away.</div>' +
       `<div>▶ Cast Damage:<div><span>${ fv(stats.min) }</span></div></div>`,
     abilities: [{name: 'Flood Shot', type: 'flood', trigger: 'cast', stats: { min: [60,72,84,96], size: 500, knockback: true }, pom: pom_6}],
   },
@@ -82,13 +95,22 @@ export default [
     description: (stats) =>
       `<div>Your<b>Call</b>makes you surge into foes while<b>Impervious</b>for <b>${ stats.duration } Sec.</b></div>` +
       `<div>▶ Impact Damage:<div><span>${ fv(stats.min) }</span></div></div>`,
-    abilities: [{
-      name: "Poseidon's Aid",
-      type: 'surge',
-      trigger: 'call',
-      stats: { min: [ 250, 300, 350, 400], duration: 1.2, knockback: true },
-      pom: pom_4,
-    }],
+    abilities: [
+      {
+        name: "Poseidon's Aid",
+        type: 'surge',
+        trigger: 'call',
+        stats: { min: [ 250, 300, 350, 400], duration: 1.2, knockback: true },
+        pom: pom_4,
+      },
+      {
+        name: "Poseidon's Aid - Max",
+        type: 'surge',
+        trigger: 'call',
+        stats: { min: [ 250, 300, 350, 400], duration: 7.2, knockback: true },
+        pom: pom_4,
+      },
+    ],
   },
   {
     name: "Typhoon's Fury",
@@ -105,7 +127,7 @@ export default [
       name: "Typhoon's Fury",
       type: 'effect',
       target: 'slam',
-      stats: { mult_base: [3, 3.75, 4.5, 5.25], type: 'typhoon' },
+      stats: { mult_base: [3, 3.75, 4.5, 5.25] },
       pom: pom_4,
     }],
   },
@@ -117,7 +139,7 @@ export default [
     rarity: 0,
     level: 1,
     description: (stats) =>
-      `<div>Your<b>Attack</b>and<b>Special</b>are stronger the first<b>10 Sec.</b>of <b>Encounters.<b></div>` +
+      `<div>Your<b>Attack</b>and<b>Special</b>are stronger the first<b>10 Sec.</b>of Encounters.</div>` +
       `<div>▶ Initial Damage Bonus:<div><span>+${ fp(stats.mult_base) }%</span></div></div>`,
     mods: [{
       name: 'Hydraulic Might',
@@ -138,6 +160,8 @@ export default [
     description: (stats) =>
       `<div>Any<b>Chamber Rewards</b>are worth more.</div>` +
       `<div>▶ Reward Bonus:<div><span>+${ fp(stats.reward) }%</span></div></div>`,
+    feature: (stats) =>
+      `Chamber rewards are worth <span>+${ fp(stats.reward) }%</span>`,
     mods: [{
       name: "Ocean's Bounty",
       type: 'reward',
@@ -153,7 +177,7 @@ export default [
     god: 'Poseidon',
     rarity: 0,
     description: (stats) =>
-      `<div>Gain an assortment of<b>goodies.</b></div>`, // + `<div>▶ Obols<div><span>${ fv(stats.) }</span></div></div>`,
+      `<div>Gain an assortment of<b>Goodies.</b></div>`,
   },
   {
     name: 'Razor Shoals',
@@ -185,6 +209,8 @@ export default [
     description: (stats) =>
       `<div>Your<b>God Gauge</b>charges faster when you take damage.</div>` +
       `<div>▶ Faster Gauge Gain When Hit:<div><span>+${ fp(stats.gauge_hit) }%</span></div></div>`,
+    feature: (stats) =>
+      `<b>God Gauge</b>charges <span>${ fp(stats.gauge_hit) }%</span> faster when you take damage.`,
     mods: [{
       name: 'Boiling Point',
       type: 'effect',
@@ -241,11 +267,12 @@ export default [
     god: 'Poseidon',
     rarity: 0,
     level: 1,
-    prereqs: {},
-    threshold: 2,
+    prereqs: { Poseidon: ["Poseidon's Aid"] },
     description: (stats) =>
       `<div>Your<b>Call</b>pulls in foes and the effect lasts longer.</div>` +
       `<div>▶ Duration<div><span>+${ fv(stats.duration, null, 1) } Sec.</span></div></div>`,
+    feature: (stats) =>
+      `Your<b class="Poseidon">Call</b>pulls foes in.`,
     mods: [{
       name: 'Rip Current',
       type: 'effect',
@@ -265,6 +292,8 @@ export default [
     description: (stats) =>
       `<div>You have a greater chance to find a<b>Fishing Point</b>in each<b>Chamber.</b></div>` +
       `<div>▶ Fish Spawn Chance:<div><span>+20%</span></div></div>`,
+    feature: (stats) =>
+      `<span>+20%</span> Fish spawn chance.`,
     mods: [{
       name: 'Huge Catch',
       type: 'effect',

@@ -1,4 +1,5 @@
 import { fv, fp, beowolf_traits } from './util'
+const stygius_exclusions = [ 'Coronacht', 'Aegis', 'Varatha', 'Exagryph', 'Malphon' ]
 
 export default [
   {
@@ -89,6 +90,7 @@ export default [
   {
     name: 'Breaching Slash',
     type: 'hammer',
+    exclude: stygius_exclusions,
     weapon: 'Stygius',
     icon: 'assets/weapons/sword_punturing_blade_06.png',
     god: 'Daedalus',
@@ -107,6 +109,7 @@ export default [
   {
     name: 'Cruel Thrust',
     type: 'hammer',
+    exclude: [ ...stygius_exclusions, 'World Splitter', 'Flurry Slash' ],
     weapon: 'Stygius',
     icon: 'assets/weapons/sword_cursed_thrust_09.png',
     god: 'Daedalus',
@@ -121,6 +124,7 @@ export default [
   {
     name: 'Cursed Slash',
     type: 'hammer',
+    exclude: stygius_exclusions,
     weapon: 'Stygius',
     icon: 'assets/weapons/sword_cursed_lifesteal_trait_12.png',
     god: 'Daedalus',
@@ -144,6 +148,7 @@ export default [
   {
     name: 'Dash Nova',
     type: 'hammer',
+    exclude: stygius_exclusions,
     weapon: 'Stygius',
     icon: 'assets/weapons/sword_seeking_14.png',
     god: 'Daedalus',
@@ -171,6 +176,7 @@ export default [
   {
     name: 'Double Edge',
     type: 'hammer',
+    exclude: stygius_exclusions,
     weapon: 'Stygius',
     icon: 'assets/weapons/sword_killing_thrust_07.png',
     god: 'Daedalus',
@@ -183,18 +189,20 @@ export default [
   {
     name: 'Double Nova',
     type: 'hammer',
+    exclude: stygius_exclusions,
     weapon: 'Stygius',
     icon: 'assets/weapons/sword_blink_strike_04.png',
     god: 'Daedalus',
     rarity: -3,
     description: (stats) => `<div>Your<b>Special</b>hits twice but no longer knocks foes away.</div>`,
     abilities: [
-      { type: 'damage', trigger: 'special', name: 'Nova Smash', stats: {min: 50, max: 50, count: 2} },
+      { type: 'damage', trigger: 'special', name: 'Nova Smash', stats: {min: 50, max: 50, count: 2, knockback: false} },
     ],
   },
   {
     name: 'Flurry Slash',
     type: 'hammer',
+    exclude: [ ...stygius_exclusions, 'World Splitter', 'Cruel Thrust' ],
     weapon: 'Stygius',
     icon: 'assets/weapons/sword_sudden_slash_01.png',
     god: 'Daedalus',
@@ -212,6 +220,7 @@ export default [
   {
     name: 'Hoarding Slash',
     type: 'hammer',
+    exclude: stygius_exclusions,
     weapon: 'Stygius',
     icon: 'assets/weapons/sword_hoard_13.png',
     god: 'Daedalus',
@@ -231,6 +240,7 @@ export default [
   {
     name: 'Piercing Wave',
     type: 'hammer',
+    exclude: stygius_exclusions,
     weapon: 'Stygius',
     icon: 'assets/weapons/sword_blade_nova_02.png',
     god: 'Daedalus',
@@ -248,6 +258,7 @@ export default [
   {
     name: 'Shadow Slash',
     type: 'hammer',
+    exclude: stygius_exclusions,
     weapon: 'Stygius',
     icon: 'assets/weapons/sword_backstab_trait_10.png',
     god: 'Daedalus',
@@ -265,6 +276,7 @@ export default [
   {
     name: 'Super Nova',
     type: 'hammer',
+    exclude: stygius_exclusions,
     weapon: 'Stygius',
     icon: 'assets/weapons/sword_superior_deflection_08.png',
     god: 'Daedalus',
@@ -282,6 +294,7 @@ export default [
   {
     name: 'World Splitter',
     type: 'hammer',
+    exclude: [ ...stygius_exclusions, 'Flurry Slash', 'Cruel Thrust' ],
     weapon: 'Stygius',
     icon: 'assets/weapons/sword_giant_slash_03.png',
     god: 'Daedalus',
@@ -299,10 +312,12 @@ export default [
   {
     name: 'Greater Consecration',
     type: 'hammer',
+    exclude: stygius_exclusions,
     weapon: 'Stygius',
     icon: 'assets/weapons/sword_arthur_15.png',
     god: 'Daedalus',
     rarity: -3,
+    prereqs: { Arthur: ['Stygius - Aspect of Arthur'] },
     description: (stats) => `<div>Your<b>Holy Excalibur</b>aura is<span>+45%</span>larger; makes foes<span>+10%</span>slower.</div>`,
     mods: [
       {

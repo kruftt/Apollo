@@ -17,7 +17,7 @@ export default [
       { name: 'Dash Attack', type: 'damage', trigger: 'dashAttack', stats: { min: 20, max: 20, backstab: true } },
       { name: 'Spin Attack lvl 1', type: 'spin', trigger: 'chargeAttack', stats: {duration: 0.5,  min: 50, max: 50} },
       { name: 'Spin Attack lvl 2', type: 'spin', trigger: 'chargeAttack', stats: {duration: 0.5,  min: 100, max: 100} },
-      { name: 'Throw', type: 'damage', trigger: 'special', stats: {min: 25, max: 25, range: 850, backstab: true} },
+      { name: 'Throw', type: 'damage', trigger: 'special', stats: {min: 25, max: 25, backstab: true} },
       { name: 'Return', type: 'damage', trigger: 'special', stats: {min: 25, max: 25, backstab: true} },
     ],
   },
@@ -133,15 +133,14 @@ export default [
     god: 'Daedalus',
     weapon: 'Varatha',
     rarity: -3,
-    exclude: varatha_exclusions,
+    exclude: [ ...varatha_exclusions, 'Exploding Launcher', 'Varatha - Aspect of Guan Yu', 'Varatha - Aspect of Achilles'],
     description: (stats) => `<div>Your<b>Special</b>bounces to up to<span>7</span>foes, dealing<span>+30%</span>damage for each.</div>`,
     mods: [{
       name: 'Chain Skewer',
       type: 'effect',
       target: 'Throw',
-      stats: { mult_base: 0.4 },
-      status: { target: 'foe', name: 'Chain Skewer', stacks: 7 },
-      stacks: true,
+      stats: { mult_base: 0.3 },
+      status: { target: 'foe', name: 'Chain Skewer', stacks: true, max_stacks: 7 },
     }],
   },
   {
@@ -168,7 +167,7 @@ export default [
     god: 'Daedalus',
     weapon: 'Varatha',
     rarity: -3,
-    exclude: varatha_exclusions,
+    exclude: [ ...varatha_exclusions, 'Exploding Launcher', 'Varatha - Aspect of Guan Yu'],
     description: (stats) => `<div>Your<b>Special</b>deals<span>+50%</span>damage;<span>+50%</span><b>Critical</b>chance on recovery.</div>`,
     mods: [
       {
@@ -192,7 +191,7 @@ export default [
     god: 'Daedalus',
     weapon: 'Varatha',
     rarity: -3,
-    exclude: varatha_exclusions,
+    exclude: [ ...varatha_exclusions, 'Chain Skewer', 'Vicious Skewer', 'Varatha - Aspect of Guan Yu', 'Varatha - Aspect of Achilles'],
     description: (stats) => `<div>Your<b>Special</b>is replaced with a shot that deals<span>50</span>damage in an area.</div>`,
     abilities: [{
       name: 'Exploding Launcher',
@@ -208,7 +207,7 @@ export default [
     god: 'Daedalus',
     weapon: 'Varatha',
     rarity: -3,
-    exclude: varatha_exclusions,
+    exclude: [ ...varatha_exclusions, 'Flurry Jab'],
     description: (stats) => `<div>Your<b>Spin Attack</b>deals<span>+125%</span>damage and hits a larger area.</div>`,
     mods: [{
       name: 'Massive Spin',
@@ -224,7 +223,7 @@ export default [
     god: 'Daedalus',
     weapon: 'Varatha',
     rarity: -3,
-    exclude: varatha_exclusions,
+    exclude: [ ...varatha_exclusions, 'Flurry Jab'],
     description: (stats) => `<div>Your<b>Spin Attack</b>charges and recovers much faster.</div>`,
     mods: [{
       name: 'Quick Spin',
@@ -240,7 +239,7 @@ export default [
     god: 'Daedalus',
     weapon: 'Varatha',
     rarity: -3,
-    exclude: varatha_exclusions,
+    exclude: [ ...varatha_exclusions, 'Flaring Spin', 'Massive Spin', 'Quick Spin', 'Varatha - Aspect of Guan Yu'],
     description: (stats) => `<div>Hold<b>Attack</b>to strike rapidly, but you cannot<b>Spin Attack.</b></div>`,
     abilities: [
       { name: 'Jab', type: 'damage', trigger: 'attack', stats: {min: 30, max: 30}},
@@ -254,7 +253,7 @@ export default [
     god: 'Daedalus',
     weapon: 'Varatha',
     rarity: -3,
-    exclude: varatha_exclusions,
+    exclude: [ ...varatha_exclusions, 'Varatha - Aspect of Achilles'],
     description: (stats) => `<div>Hold<b>Special</b>to charge your skewer for up to<span>+200%</span>base damage.</div>`,
     mods: [{
       name: 'Charged Skewer',
@@ -322,8 +321,9 @@ export default [
     mods: [{
       name: 'Triple Jab',
       type: 'effect',
-      target: 'attack',
-      stats: { count: 3 },
+      target: [ 'Strike 1', 'Strike 2', 'Strike 3'], // 'attack',
+      stats: { count: 1 },
+      status: { name: 'Triple Jab', target: 'foe', stacks: true, max_stacks: 3 },
     }],
   },
   {

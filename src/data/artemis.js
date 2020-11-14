@@ -20,7 +20,7 @@ export default [
       name: 'Deadly Strike',
       type: 'effect',
       target: 'attack',
-      stats: { type: 'deadly', crit: 0.15, mult_min: [0.2,0.26,0.36,0.46], mult_max: [0.2,0.3,0.4,0.5] },
+      stats: { crit: 0.15, mult_min: [0.2,0.26,0.36,0.46], mult_max: [0.2,0.3,0.4,0.5] },
       pom: pom_4,
     }],
   },
@@ -39,7 +39,6 @@ export default [
       type: 'effect',
       target: 'special',
       stats: {
-        type: 'deadly',
         mult_min: [ 0.4, 0.52, 0.72, 0.92 ],
         mult_max: [ 0.4, 0.6, 0.8, 1.0 ],
         crit: [ 0.2, 0.2, 0.2, 0.2 ],
@@ -98,7 +97,7 @@ export default [
       name: 'Hunter Dash',
       type: 'effect',
       target: 'dashAttack',
-      stats: { type: 'hunters', mult_base: [0.5,0.8,1.1,1.4] },
+      stats: { mult_base: [0.5,0.8,1.1,1.4] },
       pom: pom_2,
     }],
   },
@@ -175,7 +174,7 @@ export default [
     level: 1,
     prereqs: { Artemis: [ "Artemis' Aid", 'Deadly Flourish', 'Deadly Strike', 'Pressure Points', 'True Shot' ] },
     description: (stats) =>
-      '<div>Your<b>Critical</b>effects deal even more damage to <b>Armor</b>.</div>' +
+      '<div>Your<b>Critical</b>effects deal even more damage to <b>Armor.</b></div>' +
       `<div>▶ Critical Damage Bonus:<div><span>+${ fp(stats.mult_min, stats.mult_max ) }</span></div></div>`,
     mods: [{
       name: 'Hide Breaker',
@@ -233,7 +232,7 @@ export default [
     level: 1,
     prereqs: { Artemis: ["Artemis' Aid", "Deadly Flourish", 'Deadly Strike', 'Hunter Dash', 'Pressure Points', 'True Shot'] },
     description: (stats) =>
-      '<div>After you deal<b>Critical</b>damage to a foe, a foe near it is<b>Marked</b>.</div>' +
+      '<div>After you deal<b>Critical</b>damage to a foe, a foe near it is<b>Marked.</b></div>' +
       `<div>▶ Bonus Crit Chance:<div><span>+${ fp(stats.crit_min, stats.crit_max) }%</span></div></div>`,
     mods: [
       {
@@ -273,7 +272,7 @@ export default [
     prereqs: { Artemis: ['Exit Wounds', 'Pressure Points', 'Support Fire'] },
     threshold: 2,
     description: (stats) =>
-      '<div>Gain extra<b>Bloodstone</b>for your<b>Cast</b>.</div>' +
+      '<div>Gain extra<b>Bloodstone</b>for your<b>Cast.</b></div>' +
       `<div>▶ Max Ammo:<div><span>+${ fv(stats.ammo) }</span></div></div>`,
     mods: [{name: 'Fully Loaded', type: 'effect', target: 'player', stats: { ammo: 2 }}],
   },

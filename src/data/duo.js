@@ -41,6 +41,11 @@ export default [
       stats: { crit: 0.2 },
       status: { target: 'player', name: 'Deadly Reversal' },
     }],
+    effects: [{
+      name: 'Deadly Reversal',
+      type: 'reversal',
+      trigger: 'deflect',
+    }]
   },
   {
     name: 'Exclusive Access',
@@ -55,6 +60,8 @@ export default [
     description: (stats) =>
       `<div>Any Boons you find have superior effects.</div>` +
       `<div>▶ Minimum Boon Rarity:<div><span class="epic">Epic</span></div></div>`,
+    feature: (stats) =>
+      `Minimum Boon Rarity: <span class="epic">Epic</span>`,
   },
   {
     name: 'Heart Rend',
@@ -122,7 +129,7 @@ export default [
     name: 'Lightning Phalanx',
     type: 'secondary',
     icon: 'assets/traits/Athena_Zeus_01.png',
-    god: ['Athena', 'Zeus'],
+    god: ['Zeus', 'Athena'],
     rarity: 5,
     prereqs: {
       Zeus: ['Lightning Strike', 'Thunder Flourish', 'Thunder Dash', 'Electric Shot', "Zeus' Aid"],
@@ -131,12 +138,21 @@ export default [
     description: (stats) =>
       `<div>Your Cast bounces between enemies.</div>` +
       `<div>▶ Max Bounces:<div><span>3</span></div></div>`,
-    mods: [{
-      name: 'Lightning Phalanx',
-      type: 'effect',
-      target: 'Phalanx Shot',
-      stats: { count: 4 }
-    }],
+    mods: [
+      {
+        name: 'Lightning Phalanx',
+        type: 'effect',
+        target: 'Phalanx Shot',
+        stats: { count: 1 },
+      },
+      {
+        name: 'Lightning Phalanx Bounces',
+        type: 'effect',
+        target: 'Phalanx Shot',
+        stats: { count: 1 },
+        status: { name: 'Phalanx Bounces', target: 'foe', stacks: true, max_stacks: 3 },
+      },
+    ],
   },
   {
     name: 'Low Tolerance',
@@ -151,13 +167,23 @@ export default [
     description: (stats) =>
       `<div>Your Hangover effects can stack even more times against Weak foes.</div>` +
       `<div>▶ Max Stacks vs Weak:<div><span>+3</span></div></div>`,
-    mods: [{
-      name: 'Low Tolerance',
-      type: 'effect',
-      target: 'hangover',
-      stats: { stacks: 3 },
-      status: { target: 'foe', name: 'weak' },
-    },],
+    feature: (stats) => '<span class="Dionysus">Hangover</span> stacks <span>8</span> times vs <span class="Aphrodite">Weak</span> foes.',
+    mods: [
+      {
+        name: 'Low Tolerance',
+        type: 'effect',
+        target: 'hangover',
+        stats: { max_stacks: 3 },
+        status: { target: 'foe', name: 'weak' },
+      },
+      {
+        name: 'Low Tolerance',
+        type: 'meta',
+        target: 'Hangover Stacks',
+        stats: { max_stacks: 3 },
+        status: { target: 'foe', name: 'weak' },
+      },
+    ],
   },
   {
     name: 'Merciful End',
@@ -170,8 +196,9 @@ export default [
       Ares: ['Curse of Agony', 'Curse of Pain'],
     },
     description: (stats) =>
-      `<div>Your attacks that can Deflect immediately activate Doom effects.</div>` +
+      `<div>Your attacks that can Deflect immediately activate<b>Doom</b>effects.</div>` +
       `<div>▶ Doom Combo Damage:<div><span>40</span></div></div>`,
+    feature: (stats) => '<span class="Athena">Deflect</span> immediately activates <span class="Ares">Doom.</span>',
     effects: [{
       name: 'Merciful End',
       type: 'merciful',
@@ -232,6 +259,8 @@ export default [
     description: (stats) =>
       `<div>All Poms of Power you find are more effective.</div>` +
       `<div>▶ Pom Level Increase:<div><span>1</span></div></div>`,
+    feature: (stats) =>
+      `Poms of Power are more effective.`
   },
   {
     name: 'Sea Storm',
@@ -352,6 +381,8 @@ export default [
     description: (stats) =>
       `<div>Your Jolted effects do not expire when foes attack.</div>` +
       `<div>▶ Jolted Duration:<div><span>10 Sec.</span></div></div>`,
+    feature: (stats) =>
+      `<span class="Zeus">Jolted</span> effects do not expire when foes attack.`
   },
   {
     name: 'Unshakable Mettle',
@@ -366,6 +397,8 @@ export default [
     description: (stats) =>
       `<div>You cannot be stunned, and resist some damage from Bosses.</div>` +
       `<div>▶ Boss Damage Reduction:<div><span>10%</span></div></div>`,
+    feature: (stats) =>
+      `You cannot be stunned.`,
     mods: [{
       name: 'Unshakable Mettle',
       type: 'effect',
@@ -406,12 +439,21 @@ export default [
     description: (stats) =>
       `<div>Your Cast is a pulse that deals damage to foes around you.</div>` +
       `<div>▶ Pulses per Cast:<div><span>3</span></div></div>`,
-    mods: [{
-      name: 'Curse of Drowning',
-      type: 'effect',
-      target: 'Flood Shot',
-      stats: { count: 3, name: 'Drowning Waves' },
-    }],
+    mods: [
+      {
+        name: 'Curse of Drowning',
+        type: 'effect',
+        target: 'Flood Shot',
+        stats: { name: 'Drowning Waves', lodge: false },
+      },
+      {
+        name: 'Curse of Drowning',
+        type: 'effect',
+        target: 'Flood Shot',
+        stats: { count: 1 },
+        status: { target: 'foe', name: 'Drowning Waves', stacks: true, max_stacks: 3 },
+      }
+    ],
   },
   {
     name: 'Stubborn Roots',
@@ -426,6 +468,8 @@ export default [
     description: (stats) =>
       `<div>While you have no Death/Stubborn Defiance, your Life slowly recovers.</div>` +
       `<div>▶ Life Regeneration:<div><span>1</span>every 0.8 Sec.</div></div>`,
+    feature: (stats) =>
+      `Regenerate <span>1</span>&nbsp;<img src="/Apollo/assets/LifeRestore_Small.png" />&nbsp;per <b>Sec</b> while you have no <b>Death/Stubborn Defiance.</b>`,
   },
   {
     name: 'Cold Embrace',
@@ -438,8 +482,10 @@ export default [
       Aphrodite: ['Heartbreak Strike', 'Passion Dash', 'Heartbreak Flourish', "Aphrodite's Aid"],
     },
     description: (stats) =>
-      `<div>Your Cast crystal fires its beam directly at you for +4 Sec.</div>` +
+      `<div>Your Cast fires its beam directly at you for +4 Sec.</div>` +
       `<div>▶ Bonus Cast Damage:<div><span>+30%</span></div></div>`,
+    feature: (stats) =>
+      `<span class="Demeter">Crystal Beam</span> fires directly at you.`,
     mods: [{
       name: 'Cold Embrace',
       type: 'effect',
@@ -458,8 +504,10 @@ export default [
       Aphrodite: ["Heartbreak Strike", "Heartbreak Flourish", "Crush Shot", "Passion Dash", "Aphrodite's Aid"],
     },
     description: (stats) =>
-      `<div>Your God Gauge charges up automatically, but is capped at 25%</div>` +
+      `<div>Your<b>God Gauge</b>charges up automatically, but is capped at<span>25%</span></div>` +
       `<div>▶ Auto Gauge Gain:<div><span>1%</span>every 0.2 Sec.</div></div>`,
+    feature: (stats) =>
+      `<b>God Gauge</b> charges automatically, but is capped at <span>25%</span>`
   },
   {
     name: 'Curse of Nausea',
@@ -494,6 +542,8 @@ export default [
     description: (stats) =>
       `<div>Your foes' ranged-attack projectiles are slower.</div>` +
       `<div>▶ Foe Projectile Speed Reduction:<div><span>+50%</span></div></div>`,
+    feature: (stats) =>
+      `Foes' <b>projectiles</b> are <span class="Athena">slower.</span>`,
     mods: [{
       name: 'Calculated Risk',
       type: 'effect',
@@ -515,13 +565,13 @@ export default [
     description: (stats) =>
       `<div>Your Cast inflicts Chill, but is smaller and moves slower.</div>` +
       `<div>▶ Blade Rift size:<div><span class="bad_effect">-15%</span></div></div>`,
-    effects: [{...chill, trigger: 'cast'}]
-    // mods: [{
-    //   name: 'Freezing Vortex',
-    //   type: 'effect',
-    //   target: 'cast',
-    //   stats: { min: 40 },
-    // }],
+    effects: [{...chill, trigger: 'cast'}],
+    mods: [{
+      name: 'Freezing Vortex',
+      type: 'effect',
+      target: 'cast',
+      stats: { multiply_radius: -0.15 },
+    }],
   },
   {
     name: 'Splitting Headache',
@@ -541,8 +591,7 @@ export default [
       type: 'effect',
       target: 'coefficients',
       stats: { crit: 0.015 },
-      status: { target: 'foe', name: 'hangover' },
-      stacks: true,
+      status: { target: 'foe', name: 'Hangover' },
     }],
   },
 ]
