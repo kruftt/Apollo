@@ -451,7 +451,7 @@ export default [
         type: 'effect',
         target: 'Flood Shot',
         stats: { count: 1 },
-        status: { target: 'foe', name: 'Drowning Waves', stacks: true, max_stacks: 3 },
+        status: { target: 'foe', name: 'Drowning Waves', stacks: true, min_stacks: 1, max_stacks: 3 },
       }
     ],
   },

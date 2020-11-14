@@ -209,18 +209,17 @@ export const data =
     ...artemis,
     ...athena,
     ...chaos,
+    {
+      name: 'Daedalus',
+      type: 'god',
+      icon: 'assets/gods/Hammer.png',
+    },
     ...demeter,
     ...dionysus,
     ...hermes,
     ...poseidon,
     ...zeus,
     ...duo,
-
-    {
-      name: 'Daedalus',
-      type: 'god',
-      icon: 'assets/gods/Hammer.png',
-    },
   ]
 }
 

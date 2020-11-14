@@ -182,8 +182,9 @@ export default [
     god: 'Daedalus',
     rarity: -3,
     description: (stats) => `<div>Your<b>Dash-Strike</b>hits twice and deals<span>+20% damage.</span></div>`,
-    abilities: [
-      { type: 'damage', trigger: 'dashAttack', name: 'Dash-attack', stats: {min: 30, max: 30, mult_base: 0.2, attack: true, knockback: true, count: 2} },
+    mods: [
+      { type: 'effect', target: 'dashAttack', name: 'Double Edge', stats: { mult_base: 0.2 } },
+      { type: 'effect', target: 'dashAttack', name: 'Double Edge', stats: { count: 1 }, status: { target: 'foe', name: 'Double Edge', stacks: true, min_stacks: 1, max_stacks: 2 } },
     ],
   },
   {
@@ -195,8 +196,9 @@ export default [
     god: 'Daedalus',
     rarity: -3,
     description: (stats) => `<div>Your<b>Special</b>hits twice but no longer knocks foes away.</div>`,
-    abilities: [
-      { type: 'damage', trigger: 'special', name: 'Nova Smash', stats: {min: 50, max: 50, count: 2, knockback: false} },
+    mods: [
+      { type: 'effect', target: 'special', name: 'Double Nova', stats: { knockback: false } },
+      { type: 'effect', target: 'special', name: 'Double Nova', stats: { count: 1 }, status: { target: 'foe', name: 'Double Edge', stacks: true, min_stacks: 1, max_stacks: 2 } },
     ],
   },
   {

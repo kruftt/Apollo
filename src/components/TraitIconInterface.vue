@@ -135,7 +135,7 @@
 
 .trait_icon__level_container {
   position: absolute;
-  z-index: 0;
+  /* z-index: 0; */
   width: 100%;
   top: 4.5em;
   display: flex;

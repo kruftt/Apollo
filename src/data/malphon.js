@@ -13,11 +13,12 @@ export default [
     abilities: [
       { name: 'Pummel', type: 'damage', trigger: 'attack', stats: {min: 15, backstab: true } },
       { name: 'Dash Strike', type: 'damage', trigger: 'dashAttack', stats: { min: 25, backstab: true } },
-      { name: 'Rising Cutter', type: 'damage', trigger: 'special', stats: {min: 30, max: 30, count: 2, backstab: true} },
-      { name: 'Dash Upper', type: 'damage', trigger: 'dashSpecial', stats: { min: 40, count: 1, backstab: true } },
+      { name: 'Rising Cutter', type: 'damage', trigger: 'special', stats: {min: 30, max: 30, backstab: true} },
+      { name: 'Dash Upper', type: 'damage', trigger: 'dashSpecial', stats: { min: 40, backstab: true } },
     ],
     mods: [
-      { name: 'Combo Hits', type: 'effect', target: ['Pummel', 'Swipe', 'Heavy Knuckle'], stats: { count: 1 }, status: { name: 'Combo Hits', target: 'foe', stacks: true, max_stacks: 5 } }
+      { name: 'Combo', type: 'effect', target: ['Pummel', 'Swipe', 'Heavy Knuckle'], stats: { count: 1 }, status: { name: 'Combo', target: 'foe', stacks: true, min_stacks: 1, max_stacks: 5 } },
+      { name: 'Rising Cutter Stacks', type: 'effect', target: 'Rising Cutter', stats: { count: 1 }, status: { name: 'Rising Cutter', target: 'foe', stacks: true, min_stacks: 1, max_stacks: 2 } },
     ],
   },
   {
@@ -82,8 +83,8 @@ export default [
       `<div><i>They were a natural fit; her power to bring life, their power to take it.</i></div>` +
       `<div><div>Bonus Special Hits:</div><div><span>${ fv(stats.max_stacks) }</span></div></div>`,
     mods: [
-      // { name: 'Rising Cutter', type: 'effect', target: 'special', stats: {count: [1, 2, 3, 4, 5]}, status: {target: 'player', name: 'Giga Cutter'}},
-      { name: 'Aspect of Demeter', type: 'effect', target: ['Rising Cutter', 'Kinetic Launcher'], stats: {count: 1}, status: {target: 'player', name: 'Giga Cutter', stacks: true, max_stacks: [1, 2, 3, 4, 5]}},
+      { name: 'Aspect of Demeter', type: 'effect', target: 'Kinetic Launcher', stats: { count: 1 } },
+      { name: 'Aspect of Demeter', type: 'effect', target: ['Rising Cutter', 'Kinetic Launcher'], stats: {count: 1}, status: {target: 'foe', name: 'Giga Cutter', stacks: true, max_stacks: [1, 2, 3, 4, 5]}},
     ],
   },
   {
@@ -200,14 +201,14 @@ export default [
         type: 'effect',
         target: 'attack',
         stats: { min: -2.5 },
-        status: { name: 'Combo Hits', target: 'foe' },
+        status: { name: 'Combo', target: 'foe' },
       },
       {
         name: 'Concentrated Knuckle',
         type: 'effect',
         target: 'attack',
         stats: { min: 2.5 },
-        status: { name: 'Combo Hits', target: 'foe', stacks: true },
+        status: { name: 'Combo', target: 'foe', stacks: true },
       },
     ],
   },
@@ -239,7 +240,7 @@ export default [
     exclude: [ ...malphon_exclusions, 'Malphon - Aspect of Talos' ],
     description: (stats) => `<div>Hold<b>Special</b>for longer range and up to<span>+100%</span>base damage.</div>`,
     abilities: [
-      { name: 'Flying Cutter', type: 'damage', trigger: 'chargeSpecial', stats: {min: 30, max: 60, count: 2, charge: 1.5} },
+      { name: 'Flying Cutter', type: 'damage', trigger: 'chargeSpecial', stats: {min: 30, max: 60, charge: 1.5} },
     ],
   },
   {
@@ -266,7 +267,7 @@ export default [
     exclude: [ ...malphon_exclusions, 'Malphon - Aspect of Demeter', 'Kinetic Launcher' ],
     description: (stats) => `<div>After using your<b>Special,</b>deal<span>90</span>damage in an area where you land.</div>`,
     abilities: [
-      { name: 'Rising Cutter', type: 'damage', trigger: 'special', stats: { min: 30, max: 30, count: 2, backstab: true } },
+      { name: 'Rising Cutter', type: 'damage', trigger: 'special', stats: { min: 30, max: 30, backstab: true } },
       { name: 'Quake Cutter', type: 'damage', trigger: 'special', stats: { min: 90 } },
     ],
   },
@@ -281,7 +282,9 @@ export default [
     description: (stats) => `<div>Your<b>Special</b>becomes a charged ranged attack that deals<span>50</span>base damage.</div>`,
     abilities: [
       { name: 'Kinetic Launcher', type: 'damage', trigger: 'special', stats: {min: 50 } },
-      { type: null, trigger: 'special' },
+    ],
+    mods: [
+      { name: 'Kinetic Launcher', type: 'meta', target: 'Rising Cutter Stacks', stats: { inactive: true } },
     ],
   },
   {
@@ -297,7 +300,7 @@ export default [
       { name: 'Heavy Knuckle', type: 'damage', trigger: 'attack', stats: {min: 40} },
     ],
     mods: [
-      { name: 'Heavy Knuckle', type: 'meta', target: 'Combo Hits', stats: { max_stacks: -2 }},
+      { name: 'Heavy Knuckle', type: 'meta', target: 'Combo', stats: { max_stacks: -2 }},
     ],
   },
   {

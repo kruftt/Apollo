@@ -16,7 +16,7 @@
       >
         <div class="character_panel__status_name">{{ firstToUpper(status_key) }}</div>
         <template v-if="character[`max_${status_key}`]">
-          <div class="character_panel__value_container" @click.stop="" @mousewheel.stop="scrollStacks($event, status_key)">
+          <div class="character_panel__value_container" @click.stop="" @mousewheel.prevent="scrollStacks($event, status_key)">
             <img class="character_panel__button button__value_arrow" src="/assets/Arrow_Left.png" @click.stop="stepDown(status_key)" />
             <div :id="`${status_key}_numbers`" class="character_panel__number">{{ Number(character.status[status_key]) }}</div>
             <img class="character_panel__button button__value_arrow" src="/assets/Arrow_Right.png" @click.stop="stepUp(status_key)" />
@@ -127,8 +127,6 @@
 
 
 <script>
-// import { computed } from 'vue'
-
 function firstToUpper(str) {
   return str[0].toUpperCase() + str.slice(1)
 }
@@ -137,14 +135,13 @@ function formatStatValue(n, v) {
   return `${ Math.round(1000*v)/10 }%`
 }
 
-
 export default {
   props: {
     character: Object,
   },
   setup(props) {
     const character = props.character
-    const stepDown = (status_key) => character.status[status_key] -= (character.status[status_key] > 0) ? 1 : 0
+    const stepDown = (status_key) => character.status[status_key] -= (character.status[status_key] > (character[`min_${status_key}`] || 0)) ? 1 : 0
     const stepUp = (status_key) => character.status[status_key] += (character.status[status_key] < character[`max_${status_key}`]) ? 1 : 0
 
     function scrollStacks(e, status_key) {
@@ -153,9 +150,6 @@ export default {
     }
 
     return {
-      // max_stacks: computed(() => character[`max_${status_key}`]),
-      // stepDown: (status_key) => document.getElementById(status_key).stepDown(),
-      // stepUp: (status_key) => document.getElementById(status_key).stepUp(),
       stepDown,
       stepUp,
       scrollStacks,

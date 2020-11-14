@@ -275,7 +275,8 @@ export default [
       name: 'Serrated Point',
       type: 'effect',
       target: 'Dash Attack',
-      stats: { count: 3 },
+      stats: { count: 1 },
+      status: { name: 'Serrated Point', target: 'foe', stacks: true, min_stacks: 1, max_stacks: 3 },
     }],
   },
   {
@@ -323,7 +324,7 @@ export default [
       type: 'effect',
       target: [ 'Strike 1', 'Strike 2', 'Strike 3'], // 'attack',
       stats: { count: 1 },
-      status: { name: 'Triple Jab', target: 'foe', stacks: true, max_stacks: 3 },
+      status: { name: 'Triple Jab', target: 'foe', stacks: true, min_stacks: 1, max_stacks: 3 },
     }],
   },
   {

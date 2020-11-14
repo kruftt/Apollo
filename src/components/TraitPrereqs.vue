@@ -24,9 +24,7 @@
   padding: 1em 0.5em;
   color: #ccc;
   background-color: #080808;
-  /* border: 2px solid #544; */
   border-left: 2px solid #544;
-  /* border-left: 2px solid #762; */
   font-size: 105%
 }
 .trait_prereqs__section_label {

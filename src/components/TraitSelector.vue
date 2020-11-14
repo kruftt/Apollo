@@ -24,7 +24,7 @@
 
 <style scoped>
 .trait_selector__screen {
-  z-index: 1;
+  z-index: 3;
   background-color: #0008;
   display: flex;
   flex-flow: row nowrap;
@@ -32,13 +32,13 @@
   min-width: 100%;
 }
 .trait_selector__panel_wrapper {
+
   position: relative;
   height: 40em;
   margin: 3em 0;
   border: 2px solid #544;
   /* border: 2px solid #540; */
   border-radius: 8px;
-
   display: flex;
   flex-flow: row nowrap;
 }

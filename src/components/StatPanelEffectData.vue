@@ -43,7 +43,7 @@
 
   <div title="Damage Over Time" v-if="effect.dot_damage !== undefined" :class="['dot_data', effect.god ]">
     <div title="Interval" class="effect_data__interval">
-      &nbsp;<b>{{ fv(effect.damage) }}</b> every <b>{{ fv(effect.stats.interval, null, 1) }}</b> Sec.
+      &nbsp;<b>{{ fv(effect.damage_min) }}</b> every <b>{{ fv(effect.stats.interval, null, 1) }}</b> Sec.
     </div>
   </div>
 

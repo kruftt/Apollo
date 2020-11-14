@@ -35,7 +35,7 @@ export default [
       name: 'Ambush',
       type: 'effect',
       target: 'coefficients',
-      stats: { backstab_min: [0.4, 0.6, 0.8], backstab_max: [0.6, 0.9, 1.2] },
+      stats: { backstab_min: [0.6, 0.8, 1.0], backstab_max: [0.8, 1.2, 1.4] },
       status: { target: 'player', name: 'Shadow Presence' },
     }],
   },

@@ -242,6 +242,7 @@ function createDirectories(trigger_dir, initial) {
 
 // initialize signal, false if no status, multiply if stacks,
 function applyStatus(build, effect_or_mod, status) {
+  if (status.inactive) return false
   const name = status.name
   const target = status.target
   const build_char = build[target]
@@ -255,9 +256,17 @@ function applyStatus(build, effect_or_mod, status) {
     build_char[key] = Math.max((build_char[key] || 0), (max_stacks || 0))
     if (stats.count > max_stacks) stats.count = max_stacks
   }
+  const min_stacks = status.min_stacks
+  if (typeof min_stacks === 'number') {
+    const key = `min_${name}`
+    build_char[key] = min_stacks
+    if (stats.count < min_stacks) stats.count = min_stacks
+  }
 
   // copy keys in stats status_value times
-  const status_value = (store[target].status[name] || 0) // undefined, boolean, number
+  let status_value = (store[target].status[name] || 0) // undefined, boolean, number
+  if (status_value < min_stacks) status_value = store[target].status[name] = min_stacks
+
   if (status_value && status.stacks) {
     const count = Math.min(status_value, (isNaN(max_stacks) ? 1000 : max_stacks))
     for (const key in stats) {
@@ -287,9 +296,11 @@ function applyMetaMods(build, meta_mods) {
       meta_stats = meta_mod.stats
       for (let k in meta_stats) {
         switch (k) {
+          case 'inactive':
           case 'stacks':
             target.status[k] = meta_stats[k]
             break
+          case 'min_stacks':
           case 'max_stacks':
             target.status[k] = (target.status[k] || 0) + meta_stats[k]
             break
@@ -322,7 +333,6 @@ function applyCharacterMod(build_character, mod) {
         build_stats['Projectile Speed'] = (build_stats['Projectile Speed'] || 1) + mod_stats[k]
         break
       default:
-        // mod_stats[k] *= (mod_stats.count || 1)
         build_stats[k] = (build_stats[k] || 0) + mod_stats[k]
         break
     }
@@ -404,7 +414,6 @@ function applyEffectMod(effects, mod) {
             if (max) effect_stats.max = max + v
           }
         default:
-          // mod_stats[k] *= (mod_stats.count || 1)
           effect_stats[k] = (effect_stats[k] || 0) + mod_stats[k]
           break
       }
@@ -470,11 +479,7 @@ function applyEffectMods(build, mods) {
   }
 }
 
-// effect_data = build.abilities, build.effects = { trigger: [ effect, ... ] }
-// > effect directories indexed by trigger
-// 1. Build type directory
-// 2. For each effect
-  // 3.
+
 function linkEffects(build, effect_data, is_ability_data = false) {
   const b_effects = build.effects // by trigger
 
@@ -523,7 +528,6 @@ function linkEffects(build, effect_data, is_ability_data = false) {
       computeDamageValues(build, effect)
     }
   }
-  // computeDamageValues(build, build.slam)
 }
 
 function computeDamageValues(build, effect) {
@@ -533,7 +537,6 @@ function computeDamageValues(build, effect) {
   if (min) {
     const max = stats.max || min
     const _co = build.coefficients
-    // const backstab_mult = + ((stats.backstab && player.status.Backstab) ? (stats.mult_backstab || 1) * ((coefficients.backstab || 0) + (typeof stats.backstab === 'number' ? stats.backstab : 0)): 0)
     const bs = foe.status.Backstab
     const fh = foe.status.Undamaged
 
@@ -541,8 +544,8 @@ function computeDamageValues(build, effect) {
       + ((bs && stats.backstab) ? (_co.backstab || 0) + (typeof stats.backstab === 'number' ? stats.backstab : 0): 0)
       + (foe.status.Undamaged ? _co.first + (stats.first || 0) : 0)
 
-    const min_multiplier = base_multiplier + _co.mult_min + (stats.mult_min || 0) + (bs ? _co.backstab_min : 0) + (fh ? _co.first_min : 0)
-    const max_multiplier = base_multiplier + _co.mult_max + (stats.mult_max || 0) + (bs ? _co.backstab_max : 0) + (fh ? _co.first_max : 0)
+    const min_multiplier = base_multiplier + _co.mult_min + (stats.mult_min || 0) + ((bs && stats.backstab) ? _co.backstab_min : 0) + (fh ? _co.first_min : 0)
+    const max_multiplier = base_multiplier + _co.mult_max + (stats.mult_max || 0) + ((bs && stats.backstab) ? _co.backstab_max : 0) + (fh ? _co.first_max : 0)
     const crit_stats = build.crit.stats
     const crit_mult_base = crit_stats.mult_base
     const crit_mult_min = crit_mult_base + (crit_stats.mult_min || 0)
@@ -556,7 +559,6 @@ function computeDamageValues(build, effect) {
     if ('riftbeamvortex'.indexOf(effect.type) !== -1) {
       effect.damage_min = Math.round(damage_min)
       effect.damage_max = Math.round(damage_max)
-      // effect.dot_damage = Math.round(damage_min * count)
       effect.dot_damage = (stats.vicious_cycle)
         ? Math.round((damage_min + Math.max(count - 1, 0)) * count)
         : Math.round(damage_min * count)
@@ -565,7 +567,7 @@ function computeDamageValues(build, effect) {
       effect.damage_max = Math.round(damage_max * count)
       if (interval) {
         const max_ticks = Math.floor(0.05 + (stats.duration / interval))
-        effect.dot_damage = Math.round(damage_min * max_ticks * count)
+        effect.dot_damage = Math.round(damage_min * count * max_ticks)
       }
     }
 
@@ -598,7 +600,7 @@ function syncObjectChanges(target, source) {
   for (key in source) {
     const svalue = source[key]
     const tvalue = target[key]
-    // console.log('syncing', svalue, tvalue)
+
     // null is object, have to check for object on target
     if (typeof tvalue === 'object') {
       syncObjectChanges(tvalue, svalue)
@@ -615,7 +617,6 @@ function syncObjectChanges(target, source) {
 }
 
 let stopWatch = () => null
-// const mod_types = ['ability', 'reduction', 'base', 'percent', 'effect']
 const mod_types = ['meta', 'effect']
 function compileBuild() {
   stopWatch()
@@ -628,16 +629,6 @@ function compileBuild() {
   slam.effects = []
 
   const build = {
-    // player: {
-    //   ...data_base.player,
-    //   stats: { ...data_base.player.stats },
-    //   status: { ...data_base.player.status },
-    // },
-    // foe: {
-    //   ...data_base.foe,
-    //   stats: { ...data_base.foe.stats },
-    //   status: { ...data_base.foe.status },
-    // },
     player: copyEffect(data_base.player),
     foe: copyEffect(data_base.foe),
     coefficients: { ...data_base.coefficients },
@@ -654,7 +645,6 @@ function compileBuild() {
       effect: [data_base.shadow, data_base.fiery],
     },
     effects: {
-      // knockback: [{...data_base.slam, stats: {...data_base.slam.stats}, effects: []}],
       lodge: [{name: 'Dislodge', type: 'dislodge', trigger: 'lodge', stats: {duration: 15}, effects: []}],
     },
     features: [],
@@ -735,7 +725,6 @@ function filterTraits(props) {
     name = trait.name
     if (exclude[name]) continue
     for (let k in props) {
-      //
       const trait_value = trait[k]
       const props_value = props[k]
       if (Array.isArray(trait_value)) {

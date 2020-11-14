@@ -4,7 +4,7 @@ const exagryph_exclusions = [ 'Stygius', 'Malphon', 'Varatha', 'Exagryph', 'Coro
 const lucifer_hammers = [ 'Concentrated Beam', 'Flash Fire', 'Triple Beam', 'Eternal Chamber', 'Greater Inferno' ]
 
 function fire(max_stacks) {
-  return { name: 'Fire Hits', type: 'effect', target: 'Fire', stats: { count: 1 }, status: {target: 'foe', name: 'Fire Hits', stacks: true, max_stacks } }
+  return { name: 'Fire Hits', type: 'effect', target: 'Fire', stats: { count: 1 }, status: {target: 'foe', name: 'Fire Hits', stacks: true, min_stacks: 1, max_stacks } }
 }
 
 export default [
@@ -100,7 +100,7 @@ export default [
         type: 'effect',
         target: 'Beam',
         stats: { count: 1 },
-        status: { target: 'foe', name: 'Beam', stacks: true, max_stacks: 20 },
+        status: { target: 'foe', name: 'Beam', stacks: true, min_stacks: 1, max_stacks: 20 },
       },
       {
         name: 'Beam Ramp Offset',
@@ -250,7 +250,7 @@ export default [
       type: 'effect',
       target: 'special',
       stats: { count: 1 },
-      status: { name: 'Triple Bomb', target: 'foe', stacks: true, max_stacks: 3 },
+      status: { name: 'Triple Bomb', target: 'foe', stacks: true, min_stacks: 1, max_stacks: 3 },
     }],
   },
   {
@@ -321,7 +321,7 @@ export default [
         type: 'effect',
         target: 'special',
         stats: { count: 1 },
-        status: { name: 'Cluster Bomb', target: 'foe', stacks: true, max_stacks: 5 },
+        status: { name: 'Cluster Bomb', target: 'foe', stacks: true, min_stacks: 1, max_stacks: 5 },
       },
     ],
   },
@@ -414,7 +414,7 @@ export default [
     exclude: exagryph_exclusions,
     description: (stats) => `<div>Your Igneus Eden<b>Attack</b>fires<span>3</span>beams in a spread pattern.</div>`,
     mods: [
-      { name: 'Triple Beam', type: 'effect', target: 'Beam', stats: { multiply_base: 1 }, status: { target: 'foe', name: 'Triple Beam', stacks: true, max_stacks: 3 } },
+      { name: 'Triple Beam', type: 'effect', target: 'Beam', stats: { multiply_base: 1 }, status: { target: 'foe', name: 'Triple Beam', stacks: true, min_stacks: 1, max_stacks: 3 } },
     ]
   },
   {
@@ -426,15 +426,26 @@ export default [
     rarity: -3,
     exclude: [ ...exagryph_exclusions, 'Concentrated Beam' ],
     description: (stats) => `<div>Your Igneus Eden has ∞ ammo, but its damage no longer ramps.</div>`,
-    abilities: [
-      { name: 'Beam', type: 'damage', trigger: 'attack', stats: { min: 10, count: 20, backstab: true }, },
+    mods: [
+      {
+        name: 'Eternal Chamber',
+        type: 'meta',
+        target: 'Beam Stack',
+        stats: { max_stacks: 666 },
+      },
+      {
+        name: 'Eternal Chamber',
+        type: 'meta',
+        target: 'Beam Ramp',
+        stats: { min: -0.5 },
+      },
+      {
+        name: 'Eternal Chamber',
+        type: 'meta',
+        target: 'Beam Ramp Offset',
+        stats: { min: 0.5 },
+      }
     ],
-    mods: [{
-      name: 'Eternal Chamber',
-      type: 'meta',
-      target: 'Beam Ramp',
-      stats: { min: -0.5 },
-    }],
   },
   {
     name: 'Greater Inferno',

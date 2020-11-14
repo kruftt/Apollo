@@ -8,7 +8,7 @@ function volley(max_stacks) {
     type: 'effect',
     target: 'Volley Fire',
     stats: { count: 1 },
-    status: { name: 'Volley Hits', target: 'foe', stacks: true, max_stacks },
+    status: { name: 'Volley Hits', target: 'foe', stacks: true, min_stacks: 1, max_stacks },
   }
 }
 
@@ -132,7 +132,7 @@ export default [
         type: 'effect',
         target: 'shot',
         stats: { count: 1 },
-        status: { name: 'Twin Shot', target: 'foe', stacks: true, max_stacks: 2 },
+        status: { name: 'Twin Shot', target: 'foe', stacks: true, min_stacks: 1, max_stacks: 2 },
       },
     ],
   },
@@ -254,7 +254,7 @@ export default [
       type: 'effect',
       target: 'attack',
       stats: { count: 1 },
-      status: { name: 'Triple Shot', target: 'foe', stacks: true, max_stacks: 3 },
+      status: { name: 'Triple Shot', target: 'foe', stacks: true, min_stacks: 1, max_stacks: 3 },
     }],
   },
   {

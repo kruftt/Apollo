@@ -61,7 +61,7 @@ export default [
       type: 'chain',
       trigger: 'cast',
       stats: { min: [60, 72, 84, 96] },
-      status: { name: 'Electric Shot Bounces', target: 'foe', stacks: true, max_stacks: 5 },
+      status: { name: 'Electric Shot Bounces', target: 'foe', stacks: true, min_stacks: 1, max_stacks: 5 },
       pom: pom_4,
     },],
   },

@@ -13,7 +13,7 @@ export default [
       { type: 'damage', trigger: 'attack', name: 'Bash', stats: {backstab:true, min: 25, knockback: true} },
       { type: 'damage', trigger: 'chargeAttack', name: 'Bull Rush', stats: {backstab:true, min: 20, max:40, charge: 2, defend: true} },
       { type: 'damage', trigger: 'dashAttack', name: 'Dash-Strike', stats: {backstab:true, min: 25, knockback: true} },
-      { type: 'damage', trigger: 'special', name: 'Throw', stats: { min: 15, backstab: true } },
+      { type: 'damage', trigger: 'special', name: 'Throw', stats: { count: 1, min: 15, backstab: true } },
     ],
     mods: [
       { type: 'effect', target: 'special', name: 'Throw bounces', stats: { count: 1 }, status: { target: 'foe', name: 'Shield Bounces', stacks: true, max_stacks: 2 } }
@@ -48,6 +48,9 @@ export default [
     mods: [
       { name: 'Aspect of Chaos', type: 'effect', target: 'special', stats: { bonus_shields: [ 1,2,3,4,5] } },
     ],
+    effects: [
+      { name: 'Chaos Charge', type: 'chaos', trigger: 'chargeAttack' },
+    ]
   },
   {
     name: 'Aegis - Aspect of Zeus',
@@ -134,7 +137,8 @@ export default [
       name: 'Pulverizing Blow',
       type: 'effect',
       target: ['Bash', 'Heavy Bash'],
-      stats: { count: 2, knockback: false },
+      stats: { count: 1, knockback: false },
+      status: { name: 'Bash', target: 'foe', stacks: true, min_stacks: 1, max_stacks: 2 },
     }],
   },
   {
