@@ -35,7 +35,7 @@ export default [
       {
         name: 'Aspect of Zagreus',
         type: 'effect',
-        target: 'coefficients',
+        target: 'player',
         stats: { dodge: [ 0.1, 0.14, 0.18, 0.22, 0.25] }
       },
     ],

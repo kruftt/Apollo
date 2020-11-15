@@ -161,7 +161,7 @@ const store = reactive({
 })
 
 
-function extractTraitData(trait_data, build_data, god, rarity, level, overwrite) {
+function extractTraitData(build, trait_data, build_data, god, rarity, level, overwrite) {
   if (trait_data === undefined) return  // trait_data = abilties[] / effects[] / mods[]
 
   const extracted = trait_data.reduce((acc, v) => {
@@ -173,9 +173,13 @@ function extractTraitData(trait_data, build_data, god, rarity, level, overwrite)
     const effect = Object.create(v)
     god && (effect.god = god)
     effect.stats = extractData(v.stats, rarity, level, v.pom) || {}
-    effect.status = extractData(v.status, rarity, level, v.pom)
-
     effect.effects = []
+
+    if (effect.status = extractData(v.status, rarity, level, v.pom)) {
+      const applied = applyStatus(build, effect)
+      if (!applied && effect.target) return acc
+    }
+
     if (acc[key] === undefined) acc[key] = [effect]
     else acc[key].push(effect)
     return acc
@@ -216,9 +220,9 @@ function extractTrait(trait, build) {
     build.features.push(trait.feature(getTraitContext(trait)))
 
   // extract stats data
-  extractTraitData(trait.abilities, build.abilities, trait.god, rarity, level, true)
-  extractTraitData(trait.effects, build.effects, trait.god, rarity, level)
-  extractTraitData(trait.mods, build.mods, trait.god, rarity, level)
+  extractTraitData(build, trait.abilities, build.abilities, trait.god, rarity, level, true)
+  extractTraitData(build, trait.effects, build.effects, trait.god, rarity, level)
+  extractTraitData(build, trait.mods, build.mods, trait.god, rarity, level)
 }
 
 function createDirectories(trigger_dir, initial) {
@@ -241,7 +245,8 @@ function createDirectories(trigger_dir, initial) {
 }
 
 // initialize signal, false if no status, multiply if stacks,
-function applyStatus(build, effect_or_mod, status) {
+function applyStatus(build, effect_or_mod) {
+  const status = effect_or_mod.status
   if (status.inactive) return false
   const name = status.name
   const target = status.target
@@ -284,9 +289,9 @@ function applyMetaMods(build, meta_mods) {
   let targets, target, target_stats, meta_stats
   for (let meta_mod of meta_mods) {
 
-    const status = meta_mod.status
-    if (status)
-      if (!applyStatus(build, meta_mod, status)) continue
+    // const status = meta_mod.status
+    // if (status)
+    //   if (!applyStatus(build, meta_mod, status)) continue
 
     targets = meta_mod.target // mod name
     targets = Array.isArray(targets) ? targets : [targets]
@@ -430,9 +435,9 @@ function applyEffectMods(build, mods) {
       ? mod.target
       : [mod.target]
 
-    const status = mod.status
-    if (status)
-      if (!applyStatus(build, mod, status)) continue
+    // const status = mod.status
+    // if (status)
+    //   if (!applyStatus(build, mod, status)) continue
 
     const dir = build.directory
     for (target of targets) {
@@ -490,9 +495,10 @@ function linkEffects(build, effect_data, is_ability_data = false) {
     // if (!effects) continue // Abilities may have been overwritten
 
     for (let effect of effects) {
-      const status = effect.status
-      if (status)
-        applyStatus(build, effect, status)
+      // const status = effect.status
+      // if (status)
+      //   applyStatus(build, effect, status)
+
       // Toggle curses on the UI
       let secondary_effects
 
@@ -661,22 +667,6 @@ function compileBuild() {
     exclude: {},
   }
 
-  if (foe.status.Weak) {
-    build.mods.effect.push(copyEffect(data_base.weak))
-  }
-  if (foe.status.Chill) {
-    build.mods.effect.push(copyEffect(data_base.chill))
-  }
-  if (foe.status.Hangover) {
-    build.mods.effect.push(copyEffect(data_base.hangover))
-  }
-  if (player.status.Sturdy) {
-    build.mods.effect.push(data_base.sturdy)
-  }
-  if (player.status['Privileged Status'] && (status_curses.reduce((n, s) => n + (foe.status[s] ? 1 : 0), 0) > 1)) {
-    build.mods.effect.push(data_base.privileged)
-  }
-
   for (const trait_list of [
     [ store.weapon ],
     filterObjects(traits, { type: 'cast' }),
@@ -690,6 +680,26 @@ function compileBuild() {
       // Copy the properties we need from the data, overwrite abilities
       extractTrait(trait, build)
     }
+  }
+
+  if (player.status.Sturdy) {
+    build.mods.effect.push(data_base.sturdy)
+  }
+  if (build.foe.status.Weak !== undefined && foe.status.Weak) {
+    build.mods.effect.push(copyEffect(data_base.weak))
+  }
+  if (build.foe.status.Chill !== undefined) {
+    const effect = copyEffect(data_base.chill)
+    if (applyStatus(build, effect))
+      build.mods.effect.push(effect)
+  }
+  if (build.foe.status.Hangover !== undefined) {
+    const effect = copyEffect(data_base.hangover)
+    if (applyStatus(build, effect))
+      build.mods.effect.push(effect)
+  }
+  if (player.status['Privileged Status'] && (status_curses.reduce((n, s) => n + ((foe.status[s] && build.foe.status[s] !== undefined) ? 1 : 0), 0) > 1)) {
+    build.mods.effect.push(data_base.privileged)
   }
 
   // build effects_by_type index for mod application

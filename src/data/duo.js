@@ -171,13 +171,6 @@ export default [
     mods: [
       {
         name: 'Low Tolerance',
-        type: 'effect',
-        target: 'hangover',
-        stats: { max_stacks: 3 },
-        status: { target: 'foe', name: 'weak' },
-      },
-      {
-        name: 'Low Tolerance',
         type: 'meta',
         target: 'Hangover Stacks',
         stats: { max_stacks: 3 },
