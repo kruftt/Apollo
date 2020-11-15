@@ -583,12 +583,12 @@ function computeDamageValues(build, effect) {
     const first_max_bonus = fh ? damage_max * (_co.first + (stats.first || 0) + _co.first_max) : 0
 
     if (effect.dot_damage) {
-      effect.damage_min = Math.round(damage_min)
-      effect.damage_max = Math.round(damage_max)
+      effect.damage_min = Math.round((count || 1) * damage_min)
+      effect.damage_max = Math.round((count || 1) * damage_max)
       // effect.dot_damage += first_min_bonus
     } else {
-      effect.damage_min = Math.round(damage_min + first_min_bonus)
-      effect.damage_max = Math.round(damage_max + first_max_bonus)
+      effect.damage_min = Math.round((count || 1) * damage_min + first_min_bonus)
+      effect.damage_max = Math.round((count || 1) * damage_max + first_max_bonus)
     }
 
     effect.damage = (effect.damage_min === effect.damage_max)
