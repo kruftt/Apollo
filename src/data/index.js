@@ -169,8 +169,8 @@ export const data =
         dashes: 1,
       },
       status: {
-      //   'Fiery Presence': null,
-      //   'Shadow Presence': null,
+        'Fiery Presence': null,
+        'Shadow Presence': null,
         'Privileged Status': null,
       },
     },

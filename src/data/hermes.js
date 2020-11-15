@@ -160,7 +160,7 @@ export default [
     mods: [{
       name: 'Second Wind',
       type: 'effect',
-      target: 'coefficients',
+      target: 'player',
       stats: { dodge: [0.3, 0.375, 0.45, 0.525], speed: [0.3, 0.375, 0.45, 0.525] },
       status: { target: 'player', name: 'Second Wind' },
     }],

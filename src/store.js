@@ -117,9 +117,9 @@ const player = reactive({
   ...data.base.player,
   stats: { ...data.base.player.stats },
   status: {
+    ...data.base.player.status,
     'Fiery Presence': fp,
     'Shadow Presence': sp,
-    ...data.base.player.status,
   },
 })
 
@@ -269,7 +269,7 @@ function applyStatus(build, effect_or_mod) {
   }
 
   // copy keys in stats status_value times
-  let status_value = (store[target].status[name] || 0) // undefined, boolean, number
+  let status_value = (store[target].status[name] || 0) // undefined, boolean, number, ref?
   if (status_value < min_stacks) status_value = store[target].status[name] = min_stacks
 
   if (status_value && status.stacks) {
@@ -550,19 +550,16 @@ function computeDamageValues(build, effect) {
     const max = stats.max || min
     const _co = build.coefficients
     const bs = foe.status.Backstab
-    const fh = foe.status.Undamaged
 
     const base_multiplier = 1 + _co.mult_base + (stats.mult_base || 0)
       + ((bs && stats.backstab) ? (_co.backstab || 0) + (typeof stats.backstab === 'number' ? stats.backstab : 0): 0)
-      + (foe.status.Undamaged ? _co.first + (stats.first || 0) : 0)
 
-    const min_multiplier = base_multiplier + _co.mult_min + (stats.mult_min || 0) + ((bs && stats.backstab) ? _co.backstab_min : 0) + (fh ? _co.first_min : 0)
-    const max_multiplier = base_multiplier + _co.mult_max + (stats.mult_max || 0) + ((bs && stats.backstab) ? _co.backstab_max : 0) + (fh ? _co.first_max : 0)
+    const min_multiplier = base_multiplier + _co.mult_min + (stats.mult_min || 0) + ((bs && stats.backstab) ? _co.backstab_min : 0)
+    const max_multiplier = base_multiplier + _co.mult_max + (stats.mult_max || 0) + ((bs && stats.backstab) ? _co.backstab_max : 0)
     const crit_stats = build.crit.stats
     const crit_mult_base = crit_stats.mult_base
     const crit_mult_min = crit_mult_base + (crit_stats.mult_min || 0)
     const crit_mult_max = crit_mult_base + (crit_stats.mult_max || 0)
-
     const damage_min = min * min_multiplier
     const damage_max = max * max_multiplier
 
@@ -571,18 +568,27 @@ function computeDamageValues(build, effect) {
     const interval = stats.interval
     if ('riftbeamvortexserpent'.indexOf(effect.type) !== -1) {
       effect.ticks = count || Math.floor(0.05 + (stats.duration / interval))
-      effect.damage_min = Math.round(damage_min)
-      effect.damage_max = Math.round(damage_max)
       effect.dot_damage = (stats.vicious_cycle)
         ? Math.round((damage_min + Math.max(effect.ticks - 1, 0)) * effect.ticks)
         : Math.round(damage_min * effect.ticks)
     } else {
-      effect.damage_min = Math.round(damage_min * (count || 1))
-      effect.damage_max = Math.round(damage_max * (count || 1))
       if (interval) {
         effect.ticks = Math.floor(0.05 + (stats.duration / interval))
         effect.dot_damage = Math.round(damage_min * (count || 1) * effect.ticks)
       }
+    }
+
+    const fh = foe.status.Undamaged
+    const first_min_bonus = fh ? damage_min * (_co.first + (stats.first || 0) + _co.first_min) : 0
+    const first_max_bonus = fh ? damage_max * (_co.first + (stats.first || 0) + _co.first_max) : 0
+
+    if (effect.dot_damage) {
+      effect.damage_min = Math.round(damage_min)
+      effect.damage_max = Math.round(damage_max)
+      // effect.dot_damage += first_min_bonus
+    } else {
+      effect.damage_min = Math.round(damage_min + first_min_bonus)
+      effect.damage_max = Math.round(damage_max + first_max_bonus)
     }
 
     effect.damage = (effect.damage_min === effect.damage_max)
@@ -626,12 +632,14 @@ function syncObjectChanges(target, source) {
     }
   }
   for (key in target) {
-    if (source[key] === undefined) delete target[key]
+    if (source[key] === undefined) {
+      console.log('deleting', key)
+      delete target[key]
+    }
   }
 }
 
 let stopWatch = () => null
-const mod_types = ['meta', 'effect']
 function compileBuild() {
   stopWatch()
   const data_base = data.base
@@ -650,14 +658,13 @@ function compileBuild() {
     slam,
     gods: {},
     abilities: {
-      // dash: [{name: "Dash", type: 'ability', trigger: 'dash', stats: { count: 1 }, status: { target: 'player', name: 'Dash', stacks: true, max_stacks: 2 }, effects: []}],
       dash: [{name: "Dash", type: 'ability', trigger: 'dash', stats: {}, effects: []}],
       revenge: [{name: "Damage Taken", type: 'event', trigger: 'revenge', stats: {}, effects: []}],
       slain: [{name: "Enemy Death", type: 'event', trigger: 'slain', stats: {}, effects: []}],
     },
     mods: {
       meta: [],
-      effect: [data_base.shadow, data_base.fiery],
+      effect: [],
     },
     effects: {
       lodge: [{name: 'Dislodge', type: 'dislodge', trigger: 'lodge', stats: {duration: 15}, effects: []}],
@@ -681,6 +688,9 @@ function compileBuild() {
       extractTrait(trait, build)
     }
   }
+
+  if (player.status["Fiery Presence"]) build.mods.effect.push(data_base.fiery)
+  if (player.status["Shadow Presence"]) build.mods.effect.push(data_base.shadow)
 
   if (player.status.Sturdy) {
     build.mods.effect.push(data_base.sturdy)
