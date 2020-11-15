@@ -175,7 +175,7 @@ export default [
       type: 'effect',
       name: 'Different League',
       stats: {reduction: [0.1, 0.125, 0.15, 0.175] },
-      status: {target: 'foe', name: 'nearby'},
+      status: {target: 'foe', name: 'Nearby'},
       pom: pom_4,
     }],
   },

@@ -130,7 +130,7 @@ export default [
   },
   {
     name: "Heaven's Vengeance",
-    type: 'revenge',
+    type: 'secondary',
     icon: 'assets/traits/Zeus_01_Large.png',
     god: 'Zeus',
     rarity: 0,

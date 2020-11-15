@@ -19,17 +19,16 @@ export function pom(id_mult, min_mult = 0.1, dim_mult = 0.7) {
   return (l, b) => {
     // l = level, b = base common mult/damage
     let t = b * min_mult
-    let result = 0
-    let accumulator = id_mult * b * 1.4285714285714286
-    let value
+    let tot_dim_mult = b * id_mult
+
+    let value, result = 0
     for (let i = 1; i < l; i++) {
-      accumulator *= dim_mult
-      value = Math.max(t, accumulator)
-      // value = (value < 1) ? Math.round(100*value)/100 : Math.floor(value)
+      value = Math.max(t, tot_dim_mult)
       result += value
+      tot_dim_mult *= dim_mult
     }
-    // return result
-    return (b < 1) ? Math.round(100*result)/100 : Math.round(result)
+
+    return (b < 1) ? Math.round(100*result)/100 : Math.round(10*result)/10
   }
 }
 

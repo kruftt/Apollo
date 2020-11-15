@@ -140,7 +140,7 @@ export default [
     god: 'Dionysus',
     rarity: 0,
     description: (stats) =>
-      '<div>If your<b><4</b>is low after Encounters, restore to the threshold.</div>' +
+      '<div>If your&nbsp;<img src="/Apollo/assets/Life_Small.png" />&nbsp;is low after Encounters, restore to the threshold.</div>' +
       `<div>▶ Life Threshold:<div><span>+${ fp(stats.threshold) }%</span></div></div>`,
     features: (stats) => `Life Threshold: <span>${ fp(stats.threshold) }%</span>`,
     mods: [{

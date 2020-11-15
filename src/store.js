@@ -271,7 +271,8 @@ function applyStatus(build, effect_or_mod, status) {
     const count = Math.min(status_value, (isNaN(max_stacks) ? 1000 : max_stacks))
     for (const key in stats) {
       const v = stats[key]
-      if (typeof v === 'number') stats[key] = v * count
+      if ('minmaxspeedcount'.indexOf(key) !== -1) stats[key] = v * count
+      // if (typeof v === 'number') stats[key] = v * count
     }
   }
 
@@ -433,6 +434,7 @@ function applyEffectMods(build, mods) {
     if (status)
       if (!applyStatus(build, mod, status)) continue
 
+    const dir = build.directory
     for (target of targets) {
       switch(target) {
         case 'player':
@@ -450,6 +452,7 @@ function applyEffectMods(build, mods) {
           if (mod.name === 'Punishing Sweep') break
         case 'chargeAttack':
           applyEffectMod(build.abilities.chargeAttack, mod)
+          // applyEffectMod(dir.type['serpent'], mod)
           break
 
         case 'special':
@@ -471,7 +474,6 @@ function applyEffectMods(build, mods) {
           applyEffectMod(build.abilities.call, mod)
           break
         default:
-          const dir = build.directory
           applyEffectMod(dir.type[target] || dir.name[target], mod)
           break
       }
@@ -492,7 +494,6 @@ function linkEffects(build, effect_data, is_ability_data = false) {
       if (status)
         applyStatus(build, effect, status)
       // Toggle curses on the UI
-      const type = effect.type
       let secondary_effects
 
       // add triggers from stat names (e.g. backstab)
@@ -520,8 +521,13 @@ function linkEffects(build, effect_data, is_ability_data = false) {
         }
       }
 
-      // check what the type triggers
-      secondary_effects = b_effects[type]
+      // type
+      secondary_effects = b_effects[effect.type]
+      if (secondary_effects)
+        effect.effects.push(...secondary_effects)
+
+      // name
+      secondary_effects = b_effects[effect.name]
       if (secondary_effects)
         effect.effects.push(...secondary_effects)
 
@@ -557,7 +563,7 @@ function computeDamageValues(build, effect) {
     // ticks = total ticks over time, count = num stacks
     const count = stats.count
     const interval = stats.interval
-    if ('riftbeamvortex'.indexOf(effect.type) !== -1) {
+    if ('riftbeamvortexserpent'.indexOf(effect.type) !== -1) {
       effect.ticks = count || Math.floor(0.05 + (stats.duration / interval))
       effect.damage_min = Math.round(damage_min)
       effect.damage_max = Math.round(damage_max)

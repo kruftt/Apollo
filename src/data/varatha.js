@@ -11,14 +11,15 @@ export default [
     exclude: beowolf_traits,
     rarity: -4,
     abilities: [
-      { name: 'Strike 1', type: 'damage', trigger: 'attack', stats: {min: 25, max: 25, backstab: true} },
-      { name: 'Strike 2', type: 'damage', trigger: 'attack', stats: {min: 30, max: 30, backstab: true} },
-      { name: 'Strike 3', type: 'damage', trigger: 'attack', stats: {min: 30, max: 30, backstab: true} },
+      { name: 'Strike 1', type: 'damage', trigger: 'attack', stats: {min: 25, backstab: true} },
+      { name: 'Strike 2', type: 'damage', trigger: 'attack', stats: {min: 30, backstab: true} },
+      { name: 'Strike 3', type: 'damage', trigger: 'attack', stats: {min: 30, backstab: true} },
       { name: 'Dash Attack', type: 'damage', trigger: 'dashAttack', stats: { min: 20, max: 20, backstab: true } },
-      { name: 'Spin Attack lvl 1', type: 'spin', trigger: 'chargeAttack', stats: {duration: 0.5,  min: 50, max: 50} },
-      { name: 'Spin Attack lvl 2', type: 'spin', trigger: 'chargeAttack', stats: {duration: 0.5,  min: 100, max: 100} },
-      { name: 'Throw', type: 'damage', trigger: 'special', stats: {min: 25, max: 25, backstab: true} },
-      { name: 'Return', type: 'damage', trigger: 'special', stats: {min: 25, max: 25, backstab: true} },
+      { name: 'Spin Attack - 1', type: 'spin', trigger: 'chargeAttack', stats: {duration: 0.25, radius: 210,  min: 30} },
+      { name: 'Spin Attack - 2', type: 'spin', trigger: 'chargeAttack', stats: {duration: 0.33, radius: 350,  min: 50} },
+      { name: 'Spin Attack - 3', type: 'spin', trigger: 'chargeAttack', stats: {duration: 0.66, radius: 500,  min: 100} },
+      { name: 'Throw', type: 'damage', trigger: 'special', stats: {min: 25, backstab: true} },
+      { name: 'Return', type: 'damage', trigger: 'special', stats: {min: 25, backstab: true} },
     ],
   },
   {
@@ -72,13 +73,41 @@ export default [
       `<div>Your<b>Spin Attack</b>becomes<b>Punishing Sweep.</b></div>` +
       `<div><i>The god of the dead discarded the eternal spear for a larger counterpart.</i></div>` +
       `<div><div>Punishing Bonus Damage:</div><div><span>+${ fp(stats.mult_base) }%</span></div></div>`,
-    mods: [{
-      name: 'Punishing Sweep',
-      type: 'effect',
-      target: ['attack', 'special'],
-      stats: { mult_base: [ 0.3, 0.6, 0.9, 1.2, 1.5 ] },
-      status: { name: 'Punishing Sweep', target: 'foe' },
-    }],
+    effects: [
+      {
+        name: 'Punishment',
+        type: 'punish',
+        trigger: 'spin',
+        god: 'Hades',
+      },
+    ],
+    mods: [
+      {
+        name: 'Punishing Sweep',
+        type: 'effect',
+        target: 'Spin Attack - 1',
+        stats: { radius: 100 },
+      },
+      {
+        name: 'Punishing Sweep',
+        type: 'effect',
+        target: 'Spin Attack - 2',
+        stats: { radius: 130 },
+      },
+      {
+        name: 'Punishing Sweep',
+        type: 'effect',
+        target: 'Spin Attack - 3',
+        stats: { radius: 137 },
+      },
+      {
+        name: 'Punishing Sweep',
+        type: 'effect',
+        target: ['attack', 'special'],
+        stats: { mult_base: [ 0.3, 0.6, 0.9, 1.2, 1.5 ] },
+        status: { name: 'Punishment', target: 'foe' },
+      }
+    ],
   },
   {
     name: 'Varatha - Aspect of Guan Yu',
@@ -91,23 +120,21 @@ export default [
       `<div><i>A mighty general shall battle with unmatched ferocity to unite his people.</i></div>` +
       `<div><div>Life Total & Life Gain:</div><div><span>-${ 100 - fp(stats.health_multiply) }%</span></div></div>`,
     abilities: [
-      { name: 'Strike 1', type: 'attack', trigger: 'attack', stats: {min: 40, max: 40, backstab: true} },
-      { name: 'Strike 2', type: 'attack', trigger: 'attack', stats: {min: 60, max: 60, backstab: true} },
-      { name: 'Strike 3', type: 'attack', trigger: 'attack', stats: {min: 100, max: 100, backstab: true} },
-      { name: 'Dash Attack', type: 'attack', trigger: 'dashAttack', stats: { min: 30, max: 30, backstab: true } },
-      { name: 'Serpent Slash lvl 1', type: 'spin', trigger: 'chargeAttack', stats: {min: 30, max: 30, duration: 1.2, interval: 0.2} },
-      { name: 'Serpent Slash lvl 2', type: 'spin', trigger: 'chargeAttack', stats: {min: 50, max: 50, duration: 1.2, interval: 0.2} },
-      { name: 'Crackling Skewer', type: 'attack', trigger: 'special', stats: {min: 45, max: 45, pierce: true, backstab: true } },
+      { name: 'Strike 1', type: 'damage', trigger: 'attack', stats: {min: 40, max: 40, backstab: true} },
+      { name: 'Strike 2', type: 'damage', trigger: 'attack', stats: {min: 60, max: 60, backstab: true} },
+      { name: 'Strike 3', type: 'damage', trigger: 'attack', stats: {min: 100, max: 100, backstab: true} },
+      { name: 'Dash Attack', type: 'damage', trigger: 'dashAttack', stats: { min: 30, max: 30, backstab: true } },
+      { name: 'Serpent Slash 1', type: 'serpent', trigger: 'chargeAttack', stats: {charge: 0.5, min: 20, duration: 1.0, interval: 0.2 }, status: { name: 'Spinning Blade', target: 'foe' }  },
+      { name: 'Serpent Slash 2', type: 'serpent', trigger: 'chargeAttack', stats: {charge: 1.0, min: 30, duration: 1.25, interval: 0.2 }, status: { name: 'Spinning Blade', target: 'foe' }  },
+      { name: 'Serpent Slash 3', type: 'serpent', trigger: 'chargeAttack', stats: {charge: 1.5, min: 50, duration: 1.5, interval: 0.2 }, status: { name: 'Spinning Blade', target: 'foe' }  },
+      { name: 'Crackling Skewer', type: 'damage', trigger: 'special', stats: {min: 45, max: 45, pierce: true, backstab: true } },
+    ],
+    effects: [
+      {name: "+1 hp / hit", type: 'healing', trigger: 'serpent', god: 'Guan' },
     ],
     mods: [
-      {
-        name: 'Frost Fair Blade',
-        type: 'effect',
-        target: 'player',
-        stats: {
-          health_multiply: [ 0.3, 0.35, 0.4, 0.45, 0.5 ]
-        },
-      },
+      { name: 'Frost Fair Blade', type: 'effect', target: 'player', stats: { health_multiply: [ 0.3, 0.35, 0.4, 0.45, 0.5 ] }, },
+      { name: 'Spinning Blade Stacks', type: 'effect', target: 'serpent', stats: { count: 1 }, status: { name: 'Spinning Blade', target: 'foe', stacks: true } },
     ],
   },
   {
@@ -124,6 +151,7 @@ export default [
       type: 'effect',
       target: 'attack',
       stats: { mult_max: 0.4 },
+      status: { name: 'Distant', target: 'foe' },
     }],
   },
   {

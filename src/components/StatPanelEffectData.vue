@@ -15,11 +15,15 @@
       </div>
       <div title="Charge"  v-if="effect.stats.charge" class="effect_data__info">
         <img src="/assets/ChargeIcon.png" class="effect_data__icon effect_data__thin_icon" />
-        &nbsp;{{ fv(effect.stats.charge) }}s
+        &nbsp;{{ fv(effect.stats.charge, null, 2) }}s
       </div>
       <div title="Increased Damage Taken" v-if="effect.stats.multiplier" class="effect_data__info" >
         <img src="/assets/ShieldIcon.png" class="effect_data__icon" />
         &nbsp;{{ `-${fp(effect.stats.multiplier)}%` }}
+      </div>
+      <div title="Speed"  v-if="effect.stats.speed" class="effect_data__info">
+        <img src="/assets/SpeedIcon.png" class="effect_data__icon" />
+        &nbsp;{{ `${effect.stats.speed > 0 ? '+' : '' }${fp(effect.stats.speed)}%` }}
       </div>
       <div title="Range"  v-if="effect.stats.range" class="effect_data__info">
         <img src="/assets/RangeIcon.png" class="effect_data__icon effect_data__thin_icon" />
@@ -242,6 +246,8 @@
 .Chaos { color: #808cff !important; }
 .Daedalus {  }
 .Demeter { color: #b1cbff !important; }
+.Guan { color: #2c9b2c !important; }
+.Hades { color: #ad3131 !important; }
 .Hermes { color: #f77b65 !important; }
 .Dionysus { color: #927aff !important; }
 .Poseidon { color: #7ac3ff !important; }
