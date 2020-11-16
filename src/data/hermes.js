@@ -70,7 +70,7 @@ export default [
       type: 'sturdy',
       trigger: 'dash',
       stats: { duration: [ 0.5, 0.6, 0.7, 0.9 ] },
-      status: { target: 'player', name: 'sturdy' },
+      status: { target: 'player', name: 'Sturdy' },
     }],
     mods: [{
       name: 'Hyper Sprint',

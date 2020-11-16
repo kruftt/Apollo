@@ -46,9 +46,9 @@ export default {
     const store_data = props.store_data
     const ability_data = props.ability_data
     const ad = computed(() => (store_data.selection ? ability_data[store_data.selection - 1] : null))
-    const step = () => (store_data.selection = (props.store_data.selection + 1) % 3) && (store_data.rank = ad.value.ranks)
+    const step = () => (store_data.selection = (props.store_data.selection + 1) % 3) && (store_data.rank = ad.value ? ad.value.ranks : -1)
     const stepDown = () => ((store_data.rank > 1) && (store_data.rank -= 1))
-    const stepUp = () => ((store_data.rank < ad.value.ranks) && (store_data.rank += 1))
+    const stepUp = () => (ad.value && store_data.rank < ad.value.ranks && (store_data.rank += 1))
     const scrollRanks = (e) => (e.wheelDelta > 0 ? stepUp() : stepDown())
 
     return {

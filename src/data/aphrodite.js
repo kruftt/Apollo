@@ -274,7 +274,7 @@ export default [
         type: 'effect',
         target: 'cast',
         stats: { first: [0.5, 0.75, 1.0, 1.25] },
-        status: { target: 'foe', name: 'Undamaged' },
+        status: { target: 'foe', name: 'First Hit' },
       },
     ],
   },

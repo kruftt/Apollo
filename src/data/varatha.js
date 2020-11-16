@@ -321,7 +321,7 @@ export default [
       type: 'effect',
       target: 'coefficients',
       stats: { reduction: 0.3 },
-      status: { target: 'player', name: 'sturdy' }
+      status: { target: 'player', name: 'Sturdy' }
     }],
     effects: [
       {
@@ -368,8 +368,8 @@ export default [
     mods: [{
       name: 'Winged Serpent',
       type: 'effect',
-      target: 'spin',
-      stats: { duration: 0.8 },
+      target: 'serpent',
+      stats: { multiply_duration: 1.8 },
     }],
   },
 ]

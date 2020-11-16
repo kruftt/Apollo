@@ -30,13 +30,12 @@ export default [
     rarity: 0,
     description: (stats) =>
       `<div>You deal<span>+${ fp(stats.backstab_min, stats.backstab_max) }%</span>damage striking foes from behind.</div>` +
-      `<div>(requires shadow presence)</div>`,
+      `<div><div>Requires<b>Shadow Presence.</b></div></div>`,
     mods: [{
       name: 'Ambush',
       type: 'effect',
       target: 'coefficients',
       stats: { backstab_min: [0.6, 0.8, 1.0], backstab_max: [0.8, 1.2, 1.4] },
-      status: { target: 'player', name: 'Shadow Presence' },
     }],
   },
   {
@@ -53,7 +52,6 @@ export default [
       type: 'effect',
       target: 'coefficients',
       stats: { first_min: [0.4, 0.6, 0.8], first_max: [0.6, 0.9, 1.2] },
-      status: { target: 'player', name: 'Fiery Presence' },
     }],
   },
   {

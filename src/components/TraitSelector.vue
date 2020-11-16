@@ -127,6 +127,7 @@ export default {
     })
 
     function selectTrait(trait) {
+      document.getElementsByClassName('trait_selector__panel')[0].scrollTop = 0
       switch(trait.type) {
         case 'aspect':
           store.weapon = selection.weapon

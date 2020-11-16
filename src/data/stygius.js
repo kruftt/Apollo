@@ -165,7 +165,7 @@ export default [
       type: 'sturdy',
       target: 'coefficients',
       stats: { reduction: 0.3 },
-      status: { target: 'player', name: 'sturdy' }
+      status: { target: 'player', name: 'Sturdy' }
     }],
     effects: [{
       name: 'Sturdy',

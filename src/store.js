@@ -268,10 +268,14 @@ function applyStatus(build, effect_or_mod) {
 
   // max_[key] for interface if you get max_stacks...
   const max_stacks = (status.max_stacks || Math.floor(0.05 + (stats.duration/stats.interval))) // NaN, number
+
   if (!isNaN(max_stacks)) {
     const key = `max_${name}`
     build_char[key] = Math.max((build_char[key] || 0), (max_stacks || 0))
-    if (stats.count > max_stacks) stats.count = max_stacks
+
+    if (!status.max_stacks) status.max_stacks = max_stacks
+    // console.log(stats.count, max_stacks)
+    // if (stats.count > max_stacks) stats.count = max_stacks // This is supposed to prevent this..
   }
   const min_stacks = status.min_stacks
   if (typeof min_stacks === 'number') {
@@ -353,6 +357,10 @@ function applyCharacterMod(build_character, mod) {
       case 'speed_projectile':
         build_stats['Projectile Speed'] = (build_stats['Projectile Speed'] || 1) + mod_stats[k]
         break
+      case 'reduction': //
+      case 'dodge':
+        build_character[k] += mod_stats[k]
+        break
       default:
         build_stats[k] = (build_stats[k] || 0) + mod_stats[k]
         break
@@ -392,6 +400,10 @@ function applyEffectMod(effects, mod) {
       switch (k) {
         case 'stacks':
           effect.status[k] = mod_stats[k]
+          break
+        case 'count':
+          const max = effect.status.max_stacks
+          effect_stats[k] = Math.min((effect_stats[k] || 0) + mod_stats[k], max)
           break
         case 'max_stacks':
           effect.status[k] = (effect.status[k] || 0) + mod_stats[k]
@@ -586,25 +598,24 @@ function computeDamageValues(build, effect) {
     const interval = stats.interval
     if ('riftbeamvortexserpent'.indexOf(effect.type) !== -1) {
       effect.ticks = count || Math.floor(0.05 + (stats.duration / interval))
+      effect.damage_min = Math.round(damage_min)
+      effect.damage_max = Math.round(damage_max)
       effect.dot_damage = (stats.vicious_cycle)
         ? Math.round((damage_min + Math.max(effect.ticks - 1, 0)) * effect.ticks)
         : Math.round(damage_min * effect.ticks)
     } else {
       if (interval) {
         effect.ticks = Math.floor(0.05 + (stats.duration / interval))
+        effect.damage_min = Math.round(damage_min * (count || 1))
+        effect.damage_max = Math.round(damage_max * (count || 1))
         effect.dot_damage = Math.round(damage_min * (count || 1) * effect.ticks)
       }
     }
 
-    const fh = foe.status.Undamaged
-    const first_min_bonus = fh ? damage_min * (_co.first + (stats.first || 0) + _co.first_min) : 0
-    const first_max_bonus = fh ? damage_max * (_co.first + (stats.first || 0) + _co.first_max) : 0
-
-    if (effect.dot_damage) {
-      effect.damage_min = Math.round((count || 1) * damage_min)
-      effect.damage_max = Math.round((count || 1) * damage_max)
-      // effect.dot_damage += first_min_bonus
-    } else {
+    if (!effect.dot_damage) {
+      const fh = foe.status['First Hit']
+      const first_min_bonus = fh ? damage_min * (_co.first + (stats.first || 0) + _co.first_min) : 0
+      const first_max_bonus = fh ? damage_max * (_co.first + (stats.first || 0) + _co.first_max) : 0
       effect.damage_min = Math.round((count || 1) * damage_min + first_min_bonus)
       effect.damage_max = Math.round((count || 1) * damage_max + first_max_bonus)
     }
@@ -788,8 +799,8 @@ function compileBuild() {
   syncObjectChanges(exclude, build.exclude)
 
   // Update dynamic character stats
-  build.player.stats.dodge += (build.coefficients.dodge + build.foe.dodge)
-  build.player.stats.reduction += (build.coefficients.reduction + build.foe.reduction)
+  build.player.stats.dodge += (build.coefficients.dodge + build.foe.dodge + build.player.dodge)
+  build.player.stats.reduction += (build.coefficients.reduction + build.foe.reduction + build.player.dodge)
   syncObjectChanges(player, build.player)
   syncObjectChanges(foe, build.foe)
 

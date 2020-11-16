@@ -161,6 +161,8 @@ export const data =
 
     player: {
       name: 'Zagreus',
+      dodge: 0,
+      reduction: 0,
       stats: {
         health: 50,
         dodge: 0,
@@ -186,7 +188,7 @@ export const data =
         speed: 1,
       },
       status: {
-        'Undamaged': null,
+        'First Hit': null,
         'Backstab': null,
       },
     },
