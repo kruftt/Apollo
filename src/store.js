@@ -608,7 +608,9 @@ function computeDamageValues(build, effect) {
       : `${ effect.damage_min }-${ effect.damage_max }`
 
 
-    effect.crit_chance = _co.crit + (stats.crit || 0) + (0.5 * (_co.crit_min + _co.crit_max))
+    effect.crit_chance = (effect.type === 'bolt')
+      ? 0
+      : _co.crit + (stats.crit || 0) + (0.5 * (_co.crit_min + _co.crit_max))
 
     if (effect.crit_chance) {
       effect.crit_min = effect.damage_min * crit_mult_min
