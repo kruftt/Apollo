@@ -6,7 +6,7 @@
 
       <div class="character_panel__value_container">
         <img class="character_panel__button button__value_arrow" src="/assets/Arrow_Left.png" @click.stop="stepDown(status_name)" />
-        <div :id="`${status_name}_numbers`" class="character_panel__number">{{ Number(character.status[status_name]) }}</div>
+        <div class="character_panel__number">{{ Number(character.status[status_name]) }}</div>
         <img class="character_panel__button button__value_arrow" src="/assets/Arrow_Right.png" @click.stop="stepUp(status_name)" />
       </div>
     </div>
@@ -52,7 +52,7 @@
 }
 
 .button__value_arrow {
-
+  filter: opacity(50%);
 }
 
 .character_panel__number {
@@ -100,6 +100,8 @@ export default {
     }
 
     return {
+      stepDown,
+      stepUp,
       scrollStacks,
       toggle,
     }

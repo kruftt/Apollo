@@ -164,19 +164,23 @@ export const data =
       stats: {
         health: 50,
         dodge: 0,
+        reduction: 0,
         speed: 1,
-        ammo: 2,
         dashes: 1,
+        ammo: 1,
+        'Ammo Regen (Sec.)': 5,
       },
       status: {
-        'Fiery Presence': null,
-        'Shadow Presence': null,
-        'Privileged Status': null,
+        // 'Fiery Presence': null,
+        // 'Shadow Presence': null,
+        // 'Privileged Status': null,
       },
     },
 
     foe: {
       name: 'Foe',
+      reduction: 0,
+      dodge: 0,
       stats: {
         health: 100,
         speed: 1,
@@ -201,8 +205,36 @@ export const data =
       crit_min: 0,  // Chance
       crit_max: 0,  // Chance
       reduction: 0,
+      dodge: 0,
       restoration: 0,
     },
+  },
+
+  mirror: {
+    presence: [
+      { name: 'Shadow Presence', target: 'coefficients', stats: { backstab: 0.1 }},
+      { name: 'Fiery Presence', target: 'coefficients' , stats: { first: 0.15 }},
+    ],
+    reflex: [
+      { name: 'Greater Reflex', target: 'player', stats: { dashes: 1 }},
+      { name: 'Ruthless Reflex', target: 'coefficients', stats: { dodge: 0.5, mult_base: 0.5 }, status: { name: 'Ruthless Reflex', target: 'player' } },
+    ],
+    blood: [
+      { name: 'Boiling Blood', target: ['attack', 'special'], stats: { mult_base: 0.1 }, status: { name: 'Lodged', target: 'foe' }},
+      { name: 'Abyssal Blood', target: 'foe', stats: { speed: -0.05, reduction: 0.05 }, status: { name: 'Lodged', target: 'foe' }},
+    ],
+    soul: [
+      { name: 'Infernal Soul', target: 'player', stats: { ammo: 1 }},
+      { name: 'Stygian Soul', target: 'player', stats: { set_ammo_regen: 1 }},
+    ],
+    skin: [
+      { name: 'Thick Skin', target: 'player', stats: { health: 5 }},
+      { name: 'High Confidence', target: 'coefficients', stats: { mult_base: 0.05 }, status: { name: 'High Confidence', target: 'player' }},
+    ],
+    privlege: [
+      { name: 'Privileged Status', target: 'coefficients', stats: { mult_base: 0.2 }},
+      { name: 'Family Favorite', target: 'coefficients', stats: { mult_base: 0.025 }},
+    ],
   },
 
   traits : [

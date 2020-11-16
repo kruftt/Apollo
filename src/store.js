@@ -1,7 +1,9 @@
 import { reactive, watch, ref, computed } from 'vue'
 import { data, copyEffect } from './data/index.js'
 
-const status_curses = [ 'Jolted', 'Hangover', 'Weak', 'Marked', 'Exposed', 'Chill', 'Rupture', 'Doom' ]
+// const status_curses = [ 'Jolted', 'Hangover', 'Weak', 'Marked', 'Exposed', 'Chill', 'Rupture', 'Doom' ]
+const status_curses = 'JoltedHangoverWeakMarkedExposedChillRuptureDoom'
+const gods = 'AphroditeAresArtemisAthenaDemeterDionysusPoseidonZeus'
 
 const include = reactive({})
 const exclude = reactive({})
@@ -139,6 +141,15 @@ const foe = reactive({
   status: { ...data.base.foe.status },
 })
 
+const mirror = reactive({
+  presence: { selection: 0, rank: 1 },
+  reflex: { selection: 0, rank: 1 },
+  blood: { selection: 0, rank: 1 },
+  soul: { selection: 0, rank: 1 },
+  skin: { selection: 0, rank: 1 },
+  privlege: { selection: 0, rank: 1 },
+})
+
 const traits = reactive([
   data.base.attack,
   data.base.special,
@@ -154,6 +165,7 @@ const store = reactive({
   placeholder: data.placeholder,
   hover: null,
   selected: null,
+  mirror,
   traits,
   weapon: selectTrait({ name: 'Stygius' }),
   player,
@@ -332,6 +344,9 @@ function applyCharacterMod(build_character, mod) {
   let k
   for (k in mod_stats) {
     switch (k) {
+      case 'set_ammo_regen':
+        build_stats['Ammo Regen (Sec.)'] -= mod_stats[k]
+        break
       case 'health_multiply':
         build_stats.health *= mod_stats[k]
         break
@@ -398,6 +413,9 @@ function applyEffectMod(effects, mod) {
           break
         case 'multiply_duration':
           effect_stats.duration && (effect_stats.duration *= mod_stats[k])
+          break
+        case 'div_duration':
+          effect_stats.duration && (effect_stats.duration /= mod_stats[k])
           break
         case 'multiply_radius':
           effect_stats.radius && (effect_stats.radius *= (1 + mod_stats[k]))
@@ -687,8 +705,35 @@ function compileBuild() {
     }
   }
 
-  if (player.status["Fiery Presence"]) build.mods.effect.push(data_base.fiery)
-  if (player.status["Shadow Presence"]) build.mods.effect.push(data_base.shadow)
+
+  // Mirror of Night
+  const _mirror = mirror // store.mirror
+  const data_mirror = data.mirror
+  for (const key in _mirror) {
+    const talent = _mirror[key]
+    const selection = talent.selection
+    if (selection) {
+      const mod = copyEffect(data_mirror[key][selection - 1])
+      const stats = mod.stats
+      for (const k in stats) stats[k] *= talent.rank
+
+      if (key === 'privlege') {
+        if (selection === 1) {
+          // Privileged Status
+          // if (status_curses.reduce((n, s) => n + ((foe.status[s] && build.foe.status[s] !== undefined) ? 1 : 0), 0) < 2) continue
+          if (Object.keys(foe.status).reduce((n, k) => n + ((foe.status[k] && status_curses.indexOf(k) !== -1 && build.foe.status[k] !== undefined) ? 1 : 0), 0) < 2) continue
+        } else {
+          // Family Favorite
+          stats.mult_base *= Object.keys(build.gods).reduce((n, k) => n + ((gods.indexOf(k) !== -1) ? 1 : 0), 0)
+        }
+      }
+
+      if (mod.status && !applyStatus(build, mod)) continue
+      build.mods.effect.unshift(mod)
+    }
+  }
+
+
 
   if (player.status.Sturdy) {
     build.mods.effect.push(data_base.sturdy)
@@ -706,9 +751,7 @@ function compileBuild() {
     if (applyStatus(build, effect))
       build.mods.effect.push(effect)
   }
-  if (player.status['Privileged Status'] && (status_curses.reduce((n, s) => n + ((foe.status[s] && build.foe.status[s] !== undefined) ? 1 : 0), 0) > 1)) {
-    build.mods.effect.push(data_base.privileged)
-  }
+
 
   // build effects_by_type index for mod application
   // build.effects[trigger] = [ effect, ... ]
@@ -745,11 +788,12 @@ function compileBuild() {
   syncObjectChanges(exclude, build.exclude)
 
   // Update dynamic character stats
-  build.player.stats.reduction = build.coefficients.reduction
+  build.player.stats.dodge += (build.coefficients.dodge + build.foe.dodge)
+  build.player.stats.reduction += (build.coefficients.reduction + build.foe.reduction)
   syncObjectChanges(player, build.player)
   syncObjectChanges(foe, build.foe)
 
-  stopWatch = watch([store.traits, store.player.status, store.foe.status],
+  stopWatch = watch([store.mirror, store.traits, store.player.status, store.foe.status],
     () => { store.build = compileBuild() },
     { deep: true }
   )

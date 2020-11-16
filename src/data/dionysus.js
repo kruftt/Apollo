@@ -4,7 +4,7 @@ const _hangover = {
   name: 'Hangover',
   type: 'hangover',
   stats: { duration: 4, interval: 0.5 },
-  status: { name: 'Hangover', target: 'foe' },
+  status: { name: 'Hangover', target: 'foe', max_stacks: 1 }, // max_stacks: 1 blocks the duration/interval from setting the stacks
 }
 
 function hangover(trigger, min, pom) {
