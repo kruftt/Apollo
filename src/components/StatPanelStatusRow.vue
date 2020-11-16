@@ -17,7 +17,7 @@
       <div class="character_panel__status_name">{{ status_name }}</div>
       <img
         class="character_panel__checkbox_image"
-        :src="`/assets/RadioButton_${ character.status[status_name] ? 'S' : 'Uns' }elected.png`"
+        :src="`/Apollo/assets/RadioButton_${ character.status[status_name] ? 'S' : 'Uns' }elected.png`"
       />
     </div>
   </template>
