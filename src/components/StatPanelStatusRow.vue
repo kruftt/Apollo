@@ -2,7 +2,7 @@
 
   <template v-if="character[`max_${status_name}`]">
     <div class="character_panel__status_row" @mousewheel.prevent="scrollStacks($event, status_name)">
-      <div class="character_panel__status_name">{{ status_name }}</div>
+      <div :class="['character_panel__status_name', `${character.status[status_name] ? '' : 'status__inactive'}`]">{{ status_name }}</div>
 
       <div class="character_panel__value_container">
         <img class="character_panel__button button__value_arrow" src="/assets/Arrow_Left.png" @click.stop="stepDown(status_name)" />
@@ -14,7 +14,7 @@
 
   <template v-else>
     <div class="character_panel__status_row" @click="toggle(status_name)">
-      <div class="character_panel__status_name">{{ status_name }}</div>
+      <div :class="['character_panel__status_name', `${character.status[status_name] ? '' : 'status__inactive'}`]">{{ status_name }}</div>
       <img
         class="character_panel__checkbox_image"
         :src="`/Apollo/assets/RadioButton_${ character.status[status_name] ? 'S' : 'Uns' }elected.png`"
@@ -38,6 +38,9 @@
 }
 .character_panel__status_row:hover > .character_panel__status_name {
   font-size: 105%;
+}
+.status__inactive {
+  color: grey;
 }
 
 .character_panel__value_container {
