@@ -632,10 +632,8 @@ function syncObjectChanges(target, source) {
     }
   }
   for (key in target) {
-    if (source[key] === undefined) {
-      console.log('deleting', key)
+    if (source[key] === undefined)
       delete target[key]
-    }
   }
 }
 
