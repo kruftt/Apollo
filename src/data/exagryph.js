@@ -232,7 +232,7 @@ export default [
         type: 'effect',
         target: 'attack',
         stats: { mult_base: 0.5 },
-        status: { target: 'foe', name: 'armored' },
+        status: { target: 'foe', name: 'Armored' },
       },
     ],
   },

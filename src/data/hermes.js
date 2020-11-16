@@ -55,6 +55,11 @@ export default [
       target: 'cast',
       stats: { speed: [0.2, 0.4, 0.6, 0.8] }
     }],
+    effects:[{
+      name: 'Full Auto',
+      type: 'automatic',
+      trigger: 'cast',
+    }],
   },
   {
     name: 'Hyper Sprint',
@@ -111,7 +116,7 @@ export default [
       name: 'Quick Recovery',
       type: 'recovery',
       trigger: 'dash',
-      stats: { recovery: [0.2, 0.3, 0.4, 0.5] },
+      stats: { recovery: [0.3, 0.4, 0.5, 0.6] },
     }],
   },
   {

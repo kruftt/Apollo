@@ -185,7 +185,7 @@ export default [
       type: 'effect',
       target: 'special',
       stats: { mult_base: 4 },
-      status: { target: 'foe', name: 'armored' },
+      status: { target: 'foe', name: 'Armored' },
     }],
   },
   {
@@ -287,7 +287,7 @@ export default [
       name: 'Charged Skewer',
       type: 'effect',
       target: 'special',
-      stats: { mult_max: 2 },
+      stats: { multiply_max: 3 },
     }],
   },
   {

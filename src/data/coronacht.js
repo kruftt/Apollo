@@ -198,7 +198,7 @@ export default [
         type: 'effect',
         target: 'special',
         stats: { mult_base: 4 },
-        status: { target: 'foe', name: 'armored' }
+        status: { target: 'foe', name: 'Armored' }
       },
       {
         name: 'Piercing Volley',

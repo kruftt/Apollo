@@ -181,7 +181,7 @@ export default [
       type: 'effect',
       target: 'crit',
       stats: { mult_min: [2,2.6,3.6,4.6], mult_max: [2,3,4,5] },
-      status: { target: 'foe', name: 'armored' },
+      status: { target: 'foe', name: 'Armored' },
       pom: pom_4,
     }],
   },

@@ -108,7 +108,7 @@ export const data =
       name: 'Fiery Presence',
       type: 'effect',
       target: 'coefficients',
-      stats: { first: 0.75 },
+      stats: { first: 0.15 },
       status: { target: 'player', name: 'Fiery Presence' },
     },
 

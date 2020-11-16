@@ -111,29 +111,11 @@ function filterObjects(obj_arr, props) {
   })
 }
 
-
-const fp = ref(false)
-const sp = ref(false)
-
 const player = reactive({
   ...data.base.player,
   stats: { ...data.base.player.stats },
-  status: {
-    ...data.base.player.status,
-    'Fiery Presence': fp,
-    'Shadow Presence': sp,
-  },
+  status: { ...data.base.player.status },
 })
-
-// link Fiery and Shadow
-watch(
-  [fp, sp],
-  ([fpv, spv], [ofpv, ospv]) => {
-    if (!fpv || !spv) return
-    if (ofpv) fp.value = false
-    else sp.value = false
-  }
-)
 
 const foe = reactive({
   ...data.base.foe,
@@ -598,6 +580,7 @@ function computeDamageValues(build, effect) {
     const interval = stats.interval
     if ('riftbeamvortexserpent'.indexOf(effect.type) !== -1) {
       effect.ticks = count || Math.floor(0.05 + (stats.duration / interval))
+      if (effect.ticks) effect.stats.duration = effect.ticks * interval
       effect.damage_min = Math.round(damage_min)
       effect.damage_max = Math.round(damage_max)
       effect.dot_damage = (stats.vicious_cycle)
@@ -614,8 +597,8 @@ function computeDamageValues(build, effect) {
 
     if (!effect.dot_damage) {
       const fh = foe.status['First Hit']
-      const first_min_bonus = fh ? damage_min * (_co.first + (stats.first || 0) + _co.first_min) : 0
-      const first_max_bonus = fh ? damage_max * (_co.first + (stats.first || 0) + _co.first_max) : 0
+      const first_min_bonus = fh ? min * (_co.first + (stats.first || 0) + _co.first_min) : 0
+      const first_max_bonus = fh ? max * (_co.first + (stats.first || 0) + _co.first_max) : 0
       effect.damage_min = Math.round((count || 1) * damage_min + first_min_bonus)
       effect.damage_max = Math.round((count || 1) * damage_max + first_max_bonus)
     }

@@ -201,7 +201,7 @@ export default [
       type: 'effect',
       target: 'chargeAttack',
       stats: { mult_base: 4 },
-      status: { target: 'foe', name: 'armored' },
+      status: { target: 'foe', name: 'Armored' },
     }],
   },
   {

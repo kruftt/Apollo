@@ -102,7 +102,7 @@ export default [
         type: 'damage',
         target: 'attack',
         stats: { mult_base: 3 },
-        status: { target: 'foe', name: 'armored' },
+        status: { target: 'foe', name: 'Armored' },
       }
     ],
   },

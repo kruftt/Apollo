@@ -135,7 +135,7 @@ export default [
         type: 'effect',
         target: 'dashAttack',
         stats: { mult_base: 9 },
-        status: { name: 'armored', target: 'foe' },
+        status: { name: 'Armored', target: 'foe' },
       },
     ],
   },
