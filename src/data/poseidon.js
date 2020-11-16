@@ -127,7 +127,7 @@ export default [
       name: "Typhoon's Fury",
       type: 'effect',
       target: 'slam',
-      stats: { mult_base: [3, 3.75, 4.5, 5.25] },
+      stats: { mult_base: [2, 2.75, 3.5, 4.25] },
       pom: pom_4,
     }],
   },

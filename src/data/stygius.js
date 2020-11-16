@@ -60,7 +60,7 @@ export default [
       { name: 'Aspect of Poseidon', type: 'effect', target: 'cast', stats: { mult_min: [ 0.1, 0.2, 0.3, 0.4, 0.5 ] } },
     ],
     effects: [
-      { name: 'Asect of Poseidon', type: 'dislodge', trigger: 'special', stats: {} },
+      { name: 'Dislodge', type: 'dislodge', trigger: 'special', stats: {} },
     ],
   },
   {
@@ -198,7 +198,7 @@ export default [
     description: (stats) => `<div>Your<b>Special</b>hits twice but no longer knocks foes away.</div>`,
     mods: [
       { type: 'effect', target: 'special', name: 'Double Nova', stats: { knockback: false } },
-      { type: 'effect', target: 'special', name: 'Double Nova', stats: { count: 1 }, status: { target: 'foe', name: 'Double Edge', stacks: true, min_stacks: 1, max_stacks: 2 } },
+      { type: 'effect', target: 'special', name: 'Double Nova', stats: { count: 1 }, status: { target: 'foe', name: 'Double Nova', stacks: true, min_stacks: 1, max_stacks: 2 } },
     ],
   },
   {

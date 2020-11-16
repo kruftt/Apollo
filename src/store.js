@@ -274,8 +274,8 @@ function applyStatus(build, effect_or_mod) {
     build_char[key] = Math.max((build_char[key] || 0), (max_stacks || 0))
 
     if (!status.max_stacks) status.max_stacks = max_stacks
-    // console.log(stats.count, max_stacks)
     // if (stats.count > max_stacks) stats.count = max_stacks // This is supposed to prevent this..
+    // console.log(stats.count, max_stacks)
   }
   const min_stacks = status.min_stacks
   if (typeof min_stacks === 'number') {
@@ -402,7 +402,7 @@ function applyEffectMod(effects, mod) {
           effect.status[k] = mod_stats[k]
           break
         case 'count':
-          const max = effect.status.max_stacks
+          const max = (effect.status && effect.status.max_stacks) || 666
           effect_stats[k] = Math.min((effect_stats[k] || 0) + mod_stats[k], max)
           break
         case 'max_stacks':
@@ -532,15 +532,6 @@ function linkEffects(build, effect_data, is_ability_data = false) {
       // Toggle curses on the UI
       let secondary_effects
 
-      // add triggers from stat names (e.g. backstab)
-      const stats = effect.stats
-      for (let k in stats) {
-        if (!stats[k]) continue
-        secondary_effects = b_effects[k]
-        if (secondary_effects)
-          effect.effects.push(...secondary_effects)
-      }
-
       // if ability, add the ability-triggered effects as well
       if (is_ability_data) {
         secondary_effects = b_effects[trigger]
@@ -566,6 +557,15 @@ function linkEffects(build, effect_data, is_ability_data = false) {
       secondary_effects = b_effects[effect.name]
       if (secondary_effects)
         effect.effects.push(...secondary_effects)
+
+      // add triggers from stat names (e.g. backstab)
+      const stats = effect.stats
+      for (let k in stats) {
+        if (!stats[k]) continue
+        secondary_effects = b_effects[k]
+        if (secondary_effects)
+          effect.effects.push(...secondary_effects)
+      }
 
       computeDamageValues(build, effect)
     }

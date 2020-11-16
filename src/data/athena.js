@@ -74,7 +74,7 @@ export default [
       name: 'Phalanx Shot',
       type: 'phalanx',
       trigger: 'cast',
-      stats: { min: [85, 102, 119, 136] },
+      stats: { min: [85, 102, 119, 136], lodge: true },
       pom: pom_6,
     }],
     effects: [deflect('phalanx')],

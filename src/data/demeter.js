@@ -173,7 +173,7 @@ export default [
         stats: { min: [10,15,20,25] },
         pom: pom_8,
       },
-      { ...chill, trigger: 'frozen' }
+      { ...chill, trigger: 'frozen', stats: { speed: -0.4, count: 10 }, status: { ...chill.status, stacks: false }},
     ],
   },
   {
