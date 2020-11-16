@@ -91,23 +91,23 @@ function formatStatValue(n, v) {
 
 const mirrorData = {
   presence: [
-    { name: 'Shadow Presence', ranks: 5, src: '/assets/mirror/shadow presence.png' },
-    { name: 'Fiery Presence', ranks: 5, src: '/assets/mirror/Fiery_Presence.png' },
+    { name: 'Shadow Presence', ranks: 5, src: '/Apollo/assets/mirror/shadow presence.png' },
+    { name: 'Fiery Presence', ranks: 5, src: '/Apollo/assets/mirror/Fiery_Presence.png' },
   ], reflex: [
-    { name: 'Greater Reflex', ranks: 1, src: '/assets/mirror/greater reflex.png' },
-    { name: 'Ruthless Reflex', ranks: 1, src: '/assets/mirror/Greater_Celerity.png' },
+    { name: 'Greater Reflex', ranks: 1, src: '/Apollo/assets/mirror/greater reflex.png' },
+    { name: 'Ruthless Reflex', ranks: 1, src: '/Apollo/assets/mirror/Greater_Celerity.png' },
   ], blood: [
-    { name: 'Boiling Blood', ranks: 5, src: '/assets/mirror/boiling blood.png' },
-    { name: 'Abyssal Blood', ranks: 5, src: '/assets/mirror/First_Blood.png' },
+    { name: 'Boiling Blood', ranks: 5, src: '/Apollo/assets/mirror/boiling blood.png' },
+    { name: 'Abyssal Blood', ranks: 5, src: '/Apollo/assets/mirror/First_Blood.png' },
   ], soul: [
-    { name: 'Infernal Soul', ranks: 2, src: '/assets/mirror/infernal soul.png' },
-    { name: 'Stygian Soul', ranks: 3, src: '/assets/mirror/Stygian_Soul.png' },
+    { name: 'Infernal Soul', ranks: 2, src: '/Apollo/assets/mirror/infernal soul.png' },
+    { name: 'Stygian Soul', ranks: 3, src: '/Apollo/assets/mirror/Stygian_Soul.png' },
   ], skin: [
-    { name: 'Thick Skin', ranks: 10, src: '/assets/mirror/thick skin.png' },
-    { name: 'High Confidence', ranks: 5, src: '/assets/mirror/High_Confidence.png' },
+    { name: 'Thick Skin', ranks: 10, src: '/Apollo/assets/mirror/thick skin.png' },
+    { name: 'High Confidence', ranks: 5, src: '/Apollo/assets/mirror/High_Confidence.png' },
   ], privlege: [
-    { name: 'Privileged Status', ranks: 2, src: '/assets/mirror/priveleged status.png' },
-    { name: 'Family Favorite', ranks: 2, src: '/assets/mirror/Unifying_Bond.png' },
+    { name: 'Privileged Status', ranks: 2, src: '/Apollo/assets/mirror/priveleged status.png' },
+    { name: 'Family Favorite', ranks: 2, src: '/Apollo/assets/mirror/Unifying_Bond.png' },
   ],
 }
 
