@@ -271,7 +271,8 @@ function applyStatus(build, effect_or_mod) {
   if (status_value < min_stacks) status_value = store[target].status[name] = min_stacks
 
   if (status_value && status.stacks) {
-    const count = Math.min(status_value, (isNaN(max_stacks) ? 1000 : max_stacks))
+    // const count = Math.min(status_value, (isNaN(max_stacks) ? 1000 : max_stacks))
+    const count = Math.min(status_value, (max_stacks ? max_stacks : 1000))
     for (const key in stats) {
       const v = stats[key]
       if ('minmaxspeedcount'.indexOf(key) !== -1) stats[key] = v * count
