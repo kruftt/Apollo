@@ -1,5 +1,5 @@
 <template>
-  <div class="trait_info">
+  <div class="trait_info noselect">
     <TraitIconInterface
       class="trait_info__icon"
       :trait="trait"

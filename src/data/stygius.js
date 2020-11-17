@@ -53,7 +53,7 @@ export default [
     icon: 'assets/weapons/sword_enchantment_1.png',
     rarity: 4,
     description: (stats) =>
-      `<div>Your<b>Special</b>dislodges<b>Ammo</b>from foes.</div>` +
+      `<div>Your<b>Special</b>dislodges&nbsp;<img src="/Apollo/assets/AmmoIcon.png" />&nbsp;from foes.</div>` +
       `<div><i>Even before he ruled the seas, the blade's first bearer liked making a splash.</i></div>` +
       `<div><div>Cast Damage:</div><div><span>+${ fp(stats.mult_min) }%</span></div></div>`,
     mods: [

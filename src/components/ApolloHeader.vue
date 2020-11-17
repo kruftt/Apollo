@@ -29,7 +29,6 @@
 }
 
 #header_bar__title {
-  /* height: 100%; */
   height: 5em;
   margin: 0;
   color: #DDD;

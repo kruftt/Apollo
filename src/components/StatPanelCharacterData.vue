@@ -1,6 +1,5 @@
 <template>
   <div class="character_panel">
-
     <div class="character_panel__name">{{ character.name }}</div>
 
     <div v-for="stat_value, stat_name in character.stats" class="character_panel__row">

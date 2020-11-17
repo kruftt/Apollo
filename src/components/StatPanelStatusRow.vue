@@ -1,23 +1,23 @@
 <template>
 
-  <template v-if="character[`max_${status_name}`]">
-    <div class="character_panel__status_row" @mousewheel.prevent="scrollStacks($event, status_name)">
-      <div :class="['character_panel__status_name', `${character.status[status_name] ? '' : 'status__inactive'}`]">{{ status_name }}</div>
+  <template v-if="max">
+    <div class="character_panel__status_row" @mousewheel.prevent="scrollStacks" @click="cycle">
+      <div :class="['character_panel__status_name', `${status_value ? '' : 'status__inactive'}`]">{{ status_name }}</div>
 
       <div class="character_panel__value_container">
-        <img class="character_panel__button button__value_arrow" src="/assets/Arrow_Left.png" @click.stop="stepDown(status_name)" />
-        <div class="character_panel__number">{{ Number(character.status[status_name]) }}</div>
-        <img class="character_panel__button button__value_arrow" src="/assets/Arrow_Right.png" @click.stop="stepUp(status_name)" />
+        <img class="character_panel__button button__value_arrow" src="/assets/Arrow_Left.png" @click.stop="stepDown()" />
+        <div class="character_panel__number">{{ Number(status_value) }}</div>
+        <img class="character_panel__button button__value_arrow" src="/assets/Arrow_Right.png" @click.stop="stepUp()" />
       </div>
     </div>
   </template>
 
   <template v-else>
-    <div class="character_panel__status_row" @click="toggle(status_name)">
-      <div :class="['character_panel__status_name', `${character.status[status_name] ? '' : 'status__inactive'}`]">{{ status_name }}</div>
+    <div class="character_panel__status_row" @click="toggle()">
+      <div :class="['character_panel__status_name', `${status_value ? '' : 'status__inactive'}`]">{{ status_name }}</div>
       <img
         class="character_panel__checkbox_image"
-        :src="`/Apollo/assets/RadioButton_${ character.status[status_name] ? 'S' : 'Uns' }elected.png`"
+        :src="`/Apollo/assets/RadioButton_${ status_value ? 'S' : 'Uns' }elected.png`"
       />
     </div>
   </template>
@@ -59,15 +59,10 @@
 }
 
 .character_panel__number {
-  /* -webkit-appearance: textfield;
-  -moz-appearance: textfield;
-  appearance: textfield; */
   text-align: center;
   background-color: #111;
   color: #ddd;
   padding: 0 0.3em;
-  /* border: none; */
-  /* width: 1.5em; */
 }
 
 .character_panel__checkbox_image {
@@ -80,6 +75,8 @@
 
 
 <script>
+import { computed } from 'vue'
+
 export default {
   props: {
     character: Object,
@@ -88,24 +85,22 @@ export default {
   },
 
   setup(props) {
-    const character = props.character
-    const stepDown = (status_key) => character.status[status_key] -= (character.status[status_key] > (character[`min_${status_key}`] || 0)) ? 1 : 0
-    const stepUp = (status_key) => character.status[status_key] += (character.status[status_key] < character[`max_${status_key}`]) ? 1 : 0
-
-    function scrollStacks(e, status_key) {
-      if (e.wheelDelta > 0) stepUp(status_key)
-      else stepDown(status_key)
-    }
-
-    function toggle(status_key) {
-      const status = character.status
-      status[status_key] = !status[status_key]
-    }
+    const { character, status_name, status_value } = props
+    const min = computed(() => character[`min_${status_name}`] || 0)
+    const max = computed(() => character[`max_${status_name}`])
+    const cstatus = character.status
+    const stepDown = () => cstatus[status_name] -= (cstatus[status_name] > min.value) ? 1 : 0
+    const stepUp = () => cstatus[status_name] += (cstatus[status_name] < max.value) ? 1 : 0
+    const scrollStacks = (e) => (e.wheelDelta > 0) ? stepUp(status_name) : stepDown(status_name)
+    const cycle = () => cstatus[status_name] = Math.max(min.value, (cstatus[status_name] + 1) % (max.value + 1))
+    const toggle = () => cstatus[status_name] = !cstatus[status_name]
 
     return {
+      cycle,
+      max,
+      scrollStacks,
       stepDown,
       stepUp,
-      scrollStacks,
       toggle,
     }
   },

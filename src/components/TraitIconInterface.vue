@@ -9,6 +9,7 @@
 
     <template v-else >
       <div class="trait_icon__target" @click.stop="cb(trait)" />
+      <div v-if="trait.type !== 'keepsake'" class="trait_icon__highlight" @click.stop="cb(trait)" />
       <img
         v-if="active"
         src="/assets/TrashButtonHilight.png"
@@ -65,9 +66,18 @@
   transform: rotate(45deg);
   z-index: 1;
 }
-/* .trait_icon__target:hover {
-  box-shadow: inset 0 0 0.4em 0.1em #BB44, 0 0 0.2em 0 #BB44;
-} */
+.trait_icon__highlight {
+  position: absolute;
+  left: 1.52em;
+  top: 1.61em;
+  width: 3.5em;
+  height: 3.5em;
+  transform: rotate(45deg);
+  z-index: 1;
+}
+.trait_icon__highlight:hover {
+  box-shadow: inset 0 0 0.25em 0.05em #BB46, 0 0 0.3em 0.05em #BB46;
+}
 
 .trait_icon__button {
   z-index: 2;

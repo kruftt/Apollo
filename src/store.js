@@ -1,7 +1,6 @@
 import { reactive, watch, ref, computed } from 'vue'
 import { data, copyEffect } from './data/index.js'
 
-// const status_curses = [ 'Jolted', 'Hangover', 'Weak', 'Marked', 'Exposed', 'Chill', 'Rupture', 'Doom' ]
 const status_curses = 'JoltedHangoverWeakMarkedExposedChillRuptureDoom'
 const gods = 'AphroditeAresArtemisAthenaDemeterDionysusPoseidonZeus'
 
@@ -12,7 +11,6 @@ const watchPrereqs = (prereqs) =>
     a[v] = computed(() => include[v] ? true : false)
     return a
   }, {})
-
 
 // Make trait data reactive and add inclusion/exlusion properties
 const trait_data = data.traits.map((t) => {
@@ -40,7 +38,6 @@ const trait_data = data.traits.map((t) => {
     }
     return true
   })
-
   return trait
 })
 
@@ -249,15 +246,15 @@ function applyStatus(build, effect_or_mod) {
   build_char.status[name] = null  // signal to initialize to 0 or maintain current value
 
   // max_[key] for interface if you get max_stacks...
-  const max_stacks = (status.max_stacks || Math.floor(0.05 + (stats.duration/stats.interval))) // NaN, number
+  const max_stacks = (status.max_stacks === undefined)
+    ? Math.floor(0.05 + (stats.duration/stats.interval)) // NaN, number
+    : status.max_stacks  // let through max_stacks === 0
 
   if (!isNaN(max_stacks)) {
     const key = `max_${name}`
     build_char[key] = Math.max((build_char[key] || 0), (max_stacks || 0))
 
-    if (!status.max_stacks) status.max_stacks = max_stacks
-    // if (stats.count > max_stacks) stats.count = max_stacks // This is supposed to prevent this..
-    // console.log(stats.count, max_stacks)
+    if (!status.max_stacks) status.max_stacks = max_stacks // (passthrough if 0)
   }
   const min_stacks = status.min_stacks
   if (typeof min_stacks === 'number') {
@@ -266,32 +263,16 @@ function applyStatus(build, effect_or_mod) {
     if (stats.count < min_stacks) stats.count = min_stacks
   }
 
-  // copy keys in stats status_value times
   let status_value = (store[target].status[name] || 0) // undefined, boolean, number, ref?
   if (status_value < min_stacks) status_value = store[target].status[name] = min_stacks
 
-  if (status_value && status.stacks) {
-    // const count = Math.min(status_value, (isNaN(max_stacks) ? 1000 : max_stacks))
-    const count = Math.min(status_value, (max_stacks ? max_stacks : 1000))
-    for (const key in stats) {
-      const v = stats[key]
-      if ('minmaxspeedcount'.indexOf(key) !== -1) stats[key] = v * count
-      // if (typeof v === 'number') stats[key] = v * count
-    }
-  }
-
-  return (status_value ? true : false)
+  return !!status_value
 }
 
 function applyMetaMods(build, meta_mods) {
   const effect_mods = build.mods.effect
   let targets, target, target_stats, meta_stats
   for (let meta_mod of meta_mods) {
-
-    // const status = meta_mod.status
-    // if (status)
-    //   if (!applyStatus(build, meta_mod, status)) continue
-
     targets = meta_mod.target // mod name
     targets = Array.isArray(targets) ? targets : [targets]
     for (target of targets) {
@@ -305,9 +286,18 @@ function applyMetaMods(build, meta_mods) {
           case 'stacks':
             target.status[k] = meta_stats[k]
             break
+          case 'count':
+            console.warn('Meta Mod w/ count:', meta_mod)
+            break
           case 'min_stacks':
-          case 'max_stacks':
             target.status[k] = (target.status[k] || 0) + meta_stats[k]
+            break
+          case 'max_stacks':
+            const tstatus = target.status
+            const max = tstatus[k] = (tstatus[k] || 0) + meta_stats[k]
+            const char = build[tstatus.target]
+            const key = `max_${ tstatus.name }`
+            char[key] = Math.max(char[key], max)
             break
           case 'reduction':
           case 'mult_base':
@@ -327,7 +317,6 @@ function applyMetaMods(build, meta_mods) {
 function applyCharacterMod(build_character, mod) {
   const mod_stats = mod.stats
   const build_stats = build_character.stats
-
   let k
   for (k in mod_stats) {
     switch (k) {
@@ -379,61 +368,62 @@ function applyEffectMod(effects, mod) {
   for (const effect of effects) {
     mod.god && (effect.god = mod.god)
     effect_stats = effect.stats
+
     for (k in mod_stats) {
+      const mvalue = mod_stats[k]
       switch (k) {
-        case 'stacks':
-          effect.status[k] = mod_stats[k]
-          break
         case 'count':
-          const max = (effect.status && effect.status.max_stacks) || 666
-          effect_stats[k] = Math.min((effect_stats[k] || 0) + mod_stats[k], max)
+          // cap local count to effect.status.max_stacks || 666
+          effect_stats[k] = Math.min((effect.stats[k] || 0) + mvalue, ((effect.status && effect.status.max_stacks) || 666))
+          break
+        case 'stacks':
+          effect.status[k] = mvalue
           break
         case 'max_stacks':
-          effect.status[k] = (effect.status[k] || 0) + mod_stats[k]
+          console.warn('Effect mod with max_stacks!')
+          effect.status[k] = (effect.status[k] || 0) + mvalue
           break
-
         case 'multiply_min':
           if (effect_stats.min)
-            effect_stats.min *= mod_stats[k]
+            effect_stats.min *= mvalue
           break
         case 'multiply_max':
           if (effect_stats.max)
-            effect_stats.max *= mod_stats[k]
+            effect_stats.max *= mvalue
           else if (effect_stats.min)
-            effect_stats.max = effect_stats.min * mod_stats[k]
+            effect_stats.max = effect_stats.min * mvalue
           break
         case 'multiply_base':
-          effect_stats.min && (effect_stats.min *= mod_stats[k])
-          effect_stats.max && (effect_stats.max *= mod_stats[k])
+          effect_stats.min && (effect_stats.min *= mvalue)
+          effect_stats.max && (effect_stats.max *= mvalue)
           break
         case 'multiply_duration':
-          effect_stats.duration && (effect_stats.duration *= mod_stats[k])
+          effect_stats.duration && (effect_stats.duration *= mvalue)
           break
         case 'div_duration':
-          effect_stats.duration && (effect_stats.duration /= mod_stats[k])
+          effect_stats.duration && (effect_stats.duration /= mvalue)
           break
         case 'multiply_radius':
-          effect_stats.radius && (effect_stats.radius *= (1 + mod_stats[k]))
+          effect_stats.radius && (effect_stats.radius *= (1 + mvalue))
           break
-
         case 'name':
         case 'type':
-          effect[k] = mod_stats[k]
+          effect[k] = mvalue
           break
         case 'backstab':
         case 'dislodge':
         case 'lodge':
         case 'knockback':
-          effect_stats[k] = mod_stats[k]
+          effect_stats[k] = mvalue
           break
         case 'min':
-          const v = mod_stats[k]
+          const v = mvalue
           if (!mod_stats.max) {
             const max = effect_stats.max
             if (max) effect_stats.max = max + v
           }
         default:
-          effect_stats[k] = (effect_stats[k] || 0) + mod_stats[k]
+          effect_stats[k] = (effect_stats[k] || 0) + mvalue
           break
       }
     }
@@ -444,13 +434,16 @@ function applyEffectMods(build, mods) {
   let targets, target
 
   for (const mod of mods) {
+    // stack status multiplier capped by mod's max_stacks
+    const mstats = mod.stats
+    const mstatus = mod.status
+    const mmax = (mstatus && mstatus.max_stacks) || 666
+    const mstacks = (mstatus && store[mstatus.target].status[mstatus.name]) || 1
+    for (const key in mstats) mstats[key] *= Math.min(mmax, mstacks)
+
     targets = Array.isArray(mod.target)
       ? mod.target
       : [mod.target]
-
-    // const status = mod.status
-    // if (status)
-    //   if (!applyStatus(build, mod, status)) continue
 
     const dir = build.directory
     for (target of targets) {
@@ -505,13 +498,8 @@ function linkEffects(build, effect_data, is_ability_data = false) {
 
   for (let trigger in effect_data) {
     const effects = effect_data[trigger]
-    // if (!effects) continue // Abilities may have been overwritten
 
     for (let effect of effects) {
-      // const status = effect.status
-      // if (status)
-      //   applyStatus(build, effect, status)
-
       // Toggle curses on the UI
       let secondary_effects
 
@@ -702,8 +690,6 @@ function compileBuild() {
     }
   }
 
-
-  // Mirror of Night
   const _mirror = mirror // store.mirror
   const data_mirror = data.mirror
   for (const key in _mirror) {
@@ -717,7 +703,6 @@ function compileBuild() {
       if (key === 'privlege') {
         if (selection === 1) {
           // Privileged Status
-          // if (status_curses.reduce((n, s) => n + ((foe.status[s] && build.foe.status[s] !== undefined) ? 1 : 0), 0) < 2) continue
           if (Object.keys(foe.status).reduce((n, k) => n + ((foe.status[k] && status_curses.indexOf(k) !== -1 && build.foe.status[k] !== undefined) ? 1 : 0), 0) < 2) continue
         } else {
           // Family Favorite
@@ -740,15 +725,15 @@ function compileBuild() {
   }
   if (build.foe.status.Chill !== undefined) {
     const effect = copyEffect(data_base.chill)
-    if (applyStatus(build, effect))
+    if (applyStatus(build, effect)) {
       build.mods.effect.push(effect)
+    }
   }
   if (build.foe.status.Hangover !== undefined) {
     const effect = copyEffect(data_base.hangover)
     if (applyStatus(build, effect))
       build.mods.effect.push(effect)
   }
-
 
   // build effects_by_type index for mod application
   // build.effects[trigger] = [ effect, ... ]

@@ -81,7 +81,7 @@ export default [
       type: 'effect',
       target: 'crit',
       stats: { mult_base: 1.5 },
-      status: { target: 'foe', name: 'weak' },
+      status: { target: 'foe', name: 'Weak' },
     },],
   },
   {
@@ -174,7 +174,7 @@ export default [
         type: 'meta',
         target: 'Hangover Stacks',
         stats: { max_stacks: 3 },
-        status: { target: 'foe', name: 'weak' },
+        status: { target: 'foe', name: 'Weak' },
       },
     ],
   },
