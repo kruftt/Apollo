@@ -397,7 +397,7 @@ export default [
       type: 'effect',
       target: 'coefficients',
       stats: { reduction: 0.1 },
-      status: { target: 'foe', name: 'boss' },
+      status: { target: 'foe', name: 'Boss' },
     }],
   },
   {

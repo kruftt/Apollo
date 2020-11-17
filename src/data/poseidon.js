@@ -263,7 +263,7 @@ export default [
         type: 'meta',
         target: ['Tempest Strike', 'Tempest Flourish', 'Flood Strike', 'Tidal Dash' ],
         stats: { mult_base: [0.2, 0.3, 0.4, 0.5] },
-        status: { name: 'boss', target: 'foe' },
+        status: { name: 'Boss', target: 'foe' },
         pom: pom_4,
       },
     ],

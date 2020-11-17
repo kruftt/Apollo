@@ -124,12 +124,12 @@ const foe = reactive({
 })
 
 const mirror = reactive({
-  presence: { selection: 1, rank: 1 },
-  reflex: { selection: 1, rank: 1 },
-  blood: { selection: 1, rank: 1 },
-  soul: { selection: 1, rank: 1 },
-  skin: { selection: 1, rank: 1 },
-  privlege: { selection: 1, rank: 1 },
+  presence: { selection: 0, rank: 1 },
+  reflex: { selection: 0, rank: 1 },
+  blood: { selection: 0, rank: 1 },
+  soul: { selection: 0, rank: 1 },
+  skin: { selection: 0, rank: 1 },
+  privlege: { selection: 0, rank: 1 },
 })
 
 const traits = reactive([

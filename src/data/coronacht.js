@@ -23,8 +23,8 @@ export default [
     abilities: [
       { name: 'Fire', type: 'shot', trigger: 'attack', stats: {min: 20, max: 60, backstab: true, pierce: true} },
       { name: 'Power Shot', type: 'shot', trigger: 'chargeAttack', stats: {duration: 1, min: 70, backstab: true, pierce: true} },
-      { name: 'Power Shot - Dash', type: 'shot', trigger: 'chargeAttack', stats: {duration: 1, min: 50, backstab: true, pierce: true} },
       { name: 'Dash Attack', type: 'shot', trigger: 'dashAttack', stats: {min: 20, max: 40, backstab: true, pierce: true} },
+      { name: 'Dash - Power Shot', type: 'shot', trigger: 'dashAttack', stats: {duration: 1, min: 50, backstab: true, pierce: true} },
       { name: 'Volley Fire', type: 'volley', trigger: 'special', stats: {min: 10, backstab: true} },
     ],
   },
@@ -179,7 +179,7 @@ export default [
     description: (stats) => `<div>Hold<b>Attack</b>to shoot rapidly, but you cannot Power Shot.</div>`,
     abilities: [
       { name: 'Flurry', type: 'shot', trigger: 'attack', stats: {min: 60, pierce: true} },
-      { name: 'Dash Flurry', type: 'damage', trigger: 'dashAttack', stats: { min: 40, attack: 40, pierce: true } },
+      { name: 'Dash Flurry', type: 'damage', trigger: 'dashAttack', stats: { min: 40, pierce: true } },
       { type: null, trigger: 'chargeAttack' },
     ],
   },
