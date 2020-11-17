@@ -124,12 +124,12 @@ const foe = reactive({
 })
 
 const mirror = reactive({
-  presence: { selection: 0, rank: 1 },
-  reflex: { selection: 0, rank: 1 },
-  blood: { selection: 0, rank: 1 },
-  soul: { selection: 0, rank: 1 },
-  skin: { selection: 0, rank: 1 },
-  privlege: { selection: 0, rank: 1 },
+  presence: { selection: 1, rank: 1 },
+  reflex: { selection: 1, rank: 1 },
+  blood: { selection: 1, rank: 1 },
+  soul: { selection: 1, rank: 1 },
+  skin: { selection: 1, rank: 1 },
+  privlege: { selection: 1, rank: 1 },
 })
 
 const traits = reactive([
@@ -577,7 +577,7 @@ function computeDamageValues(build, effect) {
     const damage_max = max * max_multiplier
 
     // ticks = total ticks over time, count = num stacks
-    const count = stats.count
+    const count = (effect.type === 'doom') ? 1 : stats.count
     const interval = stats.interval
     if ('riftbeamvortexserpent'.indexOf(effect.type) !== -1) {
       effect.ticks = count || Math.floor(0.05 + (stats.duration / interval))

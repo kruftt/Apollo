@@ -2,12 +2,19 @@
   <div class="stat_panel">
     <template v-for="name, key of ability_names">
       <template v-if="store.build.abilities[key]">
-        <div class="stat_panel__name_bar">
+        <div class="stat_panel__name_bar noselect" @click="(collapsed[key] = !collapsed[key])">
+          {{ collapsed[key] ? '&#9654;' : '&#9660;' }}
           <div class="name_bar__spacer" />
           <div class="name_bar__name">{{ name }}</div>
           <div class="name_bar__spacer" />
+          {{ collapsed[key] ? '&#9664;' : '&#9660;' }}
         </div>
-        <StatPanelEffectData v-for="effect of store.build.abilities[key]" :effect="effect" class="stat_panel__effect_data" />
+        <StatPanelEffectData
+          v-if="!collapsed[key]"
+          v-for="effect of store.build.abilities[key]"
+          :effect="effect"
+          class="stat_panel__effect_data"
+        />
       </template>
     </template>
   </div>
@@ -50,20 +57,25 @@
   margin: 0em;
 }
 
+
 .stat_panel__name_bar {
   height: 1.5em;
   margin: 0 1em 0.1em 0;
+  color: #222;
   display: flex;
   flex-flow: row nowrap;
   align-items: center;
 }
 .name_bar__spacer {
+  margin: 0 0.3em;
   flex: 1 1;
-  background-color: #444;
+  background-color: #333;
   height: 0.05em;
+  position: relative;
+  top: 0.07em;
 }
 .name_bar__name {
-  color: #444;
+  color: #333;
   margin: 0 0.25em;
   font-weight: bold;
 }
@@ -122,7 +134,7 @@
 </style>
 
 <script>
-import { computed } from 'vue'
+import { computed, reactive } from 'vue'
 import TraitInfoBar from './TraitInfoBar.vue'
 import StatPanelCharacterData from './StatPanelCharacterData.vue'
 import StatPanelEffectData from './StatPanelEffectData.vue'
@@ -150,6 +162,7 @@ export default {
   },
   setup () {
     return {
+      collapsed: reactive({}),
       ability_names,
       store,
     }
