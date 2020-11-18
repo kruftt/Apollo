@@ -306,7 +306,7 @@ export default [
         type: 'effect',
         target: 'doom',
         stats: { min: -10 },
-        status: { ...doom_status },
+        status: { ...doom_status, max_stacks: 1 },
       },
       {
         name: 'Dire Misfortune',

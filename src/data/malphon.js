@@ -201,7 +201,7 @@ export default [
         type: 'effect',
         target: 'attack',
         stats: { min: -2.5 },
-        status: { name: 'Combo', target: 'foe' },
+        status: { name: 'Combo', target: 'foe', max_stacks: 1 },
       },
       {
         name: 'Concentrated Knuckle',

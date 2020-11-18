@@ -83,7 +83,7 @@ export default [
     weapon: 'Exagryph',
     icon: 'assets/weapons/gun_enchantment_3.png',
     rarity: 4,
-    exclude: ['Flurry Fire', 'Ricochet Fire', 'Spread Fire', 'Explosive Fire', 'Delta Chamber', 'Rocket Bomb', 'Cluster Bomb', 'Seeking Fire'],
+    exclude: ['Flurry Fire', 'Ricochet Fire', 'Spread Fire', 'Explosive Fire', 'Delta Chamber', 'Rocket Bomb', 'Cluster Bomb', 'Seeking Fire', 'Concentrated Fire'],
     description: (stats) =>
       `<div>You have<b>Igneus Eden,</b>which launches volatile<b>Hellfire.</b></div>` +
       `<div><i>As he fell from grace, he nonetheless fought back in all his defiant fury.</i></div>` +
@@ -107,7 +107,7 @@ export default [
         type: 'effect',
         target: 'Beam',
         stats: { min: -0.5 },
-        status: { target: 'foe', name: 'Beam' },
+        status: { target: 'foe', name: 'Beam', max_stacks: 1 },
       },
       {
         name: 'Beam Ramp',
@@ -225,7 +225,7 @@ export default [
         name: 'Piercing Fire',
         type: 'effect',
         target: 'attack',
-        stats: { pierce: true },
+        stats: { pierce: true, unblockable: true },
       },
       {
         name: 'Piercing Fire',
@@ -343,11 +343,11 @@ export default [
         status: { target: 'foe', name: 'Fire Hits' },
       },
       {
-        name: 'Concentrated Fire offset',
+        name: 'Concentrated Fire Offset',
         type: 'effect',
         target: 'attack',
         stats: { min: -1 },
-        status: { target: 'foe', name: 'Fire Hits' },
+        status: { target: 'foe', name: 'Fire Hits', max_stacks: 1 },
       },
     ],
   },

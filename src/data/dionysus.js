@@ -206,6 +206,7 @@ export default [
       type: 'effect',
       target: 'coefficients',
       stats: { mult_base: [ 0.03, 0.04, 0.05, 0.06 ] },
+      status: { name: 'Fountains', target: 'player', max_stacks: 10 },
       pom: pom(0.2, 0.1),
     }],
   },

@@ -325,11 +325,11 @@ export default [
         status: { target: 'foe', name: 'Volley Hits' },
       },
       {
-        name: 'Concentrated Volley offset',
+        name: 'Concentrated Volley Offset',
         type: 'effect',
         target: 'special',
         stats: { min: -1.5 },
-        status: { target: 'foe', name: 'Volley Hits' },
+        status: { target: 'foe', name: 'Volley Hits', max_stacks: 1 },
       },
     ],
   },
