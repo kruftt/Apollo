@@ -61,9 +61,15 @@ export default [
       type: 'chain',
       trigger: 'cast',
       stats: { min: [60, 70, 81, 90] },
-      status: { name: 'Electric Shot Bounces', target: 'foe', stacks: true, min_stacks: 1, max_stacks: 5 },
       pom: pom_4,
-    },],
+    }],
+    mods: [{
+      name: 'Electric Shots',
+      type: 'effect',
+      target: 'Electric Shot',
+      stats: { count: 1 },
+      status: { name: 'Electric Shot Bounces', target: 'foe', min_stacks: 1, max_stacks: 5 },
+    }]
   },
   {
     name: 'Thunder Flare',

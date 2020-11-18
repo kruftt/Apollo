@@ -38,7 +38,7 @@ export default [
       name: 'Tempest Flourish',
       type: 'effect',
       target: 'special',
-      stats: { mult_min: [0.3, 0.39, 0.54, 0.69], mult_max: [0.3, 0.45, 0.6, 0.75], knockback: true },
+      stats: { mult_min: [0.7, 0.91, 1.26, 1.61], mult_max: [0.7, 1.05, 1.4, 1.75], knockback: true },
       pom: pom_4,
     },],
   },
@@ -195,14 +195,8 @@ export default [
         name: 'Razor Shoals',
         type: 'rupture',
         trigger: 'knockback',
-        stats: { min: [ 5, 7.5, 10, 12.5 ], duration: 3, interval: 0.2 },
+        stats: { min: [ 10, 15, 20, 25 ], duration: 3, interval: 0.2 },
         pom: pom(0.6, 0.2),
-      },
-      {
-        name: 'Razor Shoals',
-        type: 'rupture',
-        trigger: 'knockback',
-        status: { name: 'Rupture', target: 'foe' },
       },
     ],
   },
@@ -218,7 +212,7 @@ export default [
       `<div>Your<b>God Gauge</b>charges faster when you take damage.</div>` +
       `<div>▶ Faster Gauge Gain When Hit:<div><span>+${ fp(stats.gauge_hit) }%</span></div></div>`,
     feature: (stats) =>
-      `<b>God Gauge</b>charges <span>${ fp(stats.gauge_hit) }%</span> faster when you take damage.`,
+      `<b>God Gauge</b> charges <span>${ fp(stats.gauge_hit) }%</span> faster when you take damage.`,
     mods: [{
       name: 'Boiling Point',
       type: 'effect',

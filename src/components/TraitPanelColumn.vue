@@ -16,11 +16,13 @@
 <style>
 .trait_panel__column {
   position: relative;
-  margin: 0 -2em 0 0;
+  margin: 0 -2.3em 0 0;
+  /* margin: 0 -2em 0 0; */
   padding-right: 0.5em;
 }
 .trait_panel__column:nth-child(odd) {
-  top: 1.0em;
+  top: 1.1em;
+  /* top: 1.0em; */
 }
 .trait_panel__column:nth-child(even) {
   top: 4.1em;

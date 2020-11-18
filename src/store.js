@@ -3,6 +3,7 @@ import { data, copyEffect } from './data/index.js'
 
 const status_curses = 'JoltedHangoverWeakMarkedExposedChillRuptureDoom'
 const gods = 'AphroditeAresArtemisAthenaDemeterDionysusPoseidonZeus'
+const no_crit = 'boltrupture'
 
 const include = reactive({})
 const exclude = reactive({})
@@ -417,10 +418,9 @@ function applyEffectMod(effects, mod) {
           effect_stats[k] = mvalue
           break
         case 'min':
-          const v = mvalue
           if (!mod_stats.max) {
             const max = effect_stats.max
-            if (max) effect_stats.max = max + v
+            if (max) effect_stats.max = max + mvalue
           }
         default:
           effect_stats[k] = (effect_stats[k] || 0) + mvalue
@@ -439,7 +439,9 @@ function applyEffectMods(build, mods) {
     const mstatus = mod.status
     const mmax = (mstatus && mstatus.max_stacks) || 666
     const mstacks = (mstatus && store[mstatus.target].status[mstatus.name]) || 1
-    for (const key in mstats) mstats[key] *= Math.min(mmax, mstacks)
+    for (const key in mstats)
+      if (typeof mstats[key] === 'number')
+        mstats[key] *= Math.min(mmax, mstacks)
 
     targets = Array.isArray(mod.target)
       ? mod.target
@@ -597,16 +599,16 @@ function computeDamageValues(build, effect) {
       : `${ effect.damage_min }-${ effect.damage_max }`
 
 
-    effect.crit_chance = (effect.type === 'bolt')
-      ? 0
-      : _co.crit + (stats.crit || 0) + (0.5 * (_co.crit_min + _co.crit_max))
+    effect.crit_chance = (no_crit.indexOf(effect.type) === -1)
+      ? _co.crit + (stats.crit || 0) + (0.5 * (_co.crit_min + _co.crit_max))
+      : 0
 
     if (effect.crit_chance) {
-      effect.crit_min = effect.damage_min * crit_mult_min
-      effect.crit_max = effect.damage_max * crit_mult_max
+      effect.crit_min = Math.floor(effect.damage_min * crit_mult_min)
+      effect.crit_max = Math.floor(effect.damage_max * crit_mult_max)
       effect.crit_damage = (effect.damage_min === effect.damage_max)
-          ? `${ Math.round(effect.crit_min) }`
-          : `${ Math.round(effect.crit_min) }-${ Math.round(effect.crit_max) }`
+          ? `${ effect.crit_min }`
+          : `${ effect.crit_min }-${ effect.crit_max }`
 
       const damage_avg = (effect.damage_min + effect.damage_max) / 2
       const crit_avg = (effect.crit_min + effect.crit_max) / 2

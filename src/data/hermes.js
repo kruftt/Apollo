@@ -188,7 +188,7 @@ export default [
       name: 'Quick Reload',
       type: 'effect',
       target: 'dislodge',
-      stats: { div_duration: [3.2, 4.8, 5.4, 7] },
+      stats: { div_duration: [3, 3.75, 5, 7.5] },
     }],
   },
   {

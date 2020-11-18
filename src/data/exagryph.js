@@ -4,7 +4,7 @@ const exagryph_exclusions = [ 'Stygius', 'Malphon', 'Varatha', 'Exagryph', 'Coro
 const lucifer_hammers = [ 'Concentrated Beam', 'Flash Fire', 'Triple Beam', 'Eternal Chamber', 'Greater Inferno' ]
 
 function fire(max_stacks) {
-  return { name: 'Fire Hits', type: 'effect', target: 'Fire', stats: { count: 1 }, status: {target: 'foe', name: 'Fire Hits', stacks: true, min_stacks: 1, max_stacks } }
+  return { name: 'Fire Hits', type: 'effect', target: 'Fire', stats: { count: 1 }, status: {target: 'foe', name: 'Fire Hits', min_stacks: 1, max_stacks } }
 }
 
 export default [
@@ -100,7 +100,7 @@ export default [
         type: 'effect',
         target: 'Beam',
         stats: { count: 1 },
-        status: { target: 'foe', name: 'Beam', stacks: true, min_stacks: 1, max_stacks: 20 },
+        status: { target: 'foe', name: 'Beam', min_stacks: 1, max_stacks: 20 },
       },
       {
         name: 'Beam Ramp Offset',
@@ -114,7 +114,7 @@ export default [
         type: 'effect',
         target: 'Beam',
         stats: { min: 0.5 },
-        status: { target: 'foe', name: 'Beam', stacks: true, max_stacks: 20 },
+        status: { target: 'foe', name: 'Beam', max_stacks: 20 },
       },
     ],
     effects: [
@@ -250,7 +250,7 @@ export default [
       type: 'effect',
       target: 'special',
       stats: { count: 1 },
-      status: { name: 'Triple Bomb', target: 'foe', stacks: true, min_stacks: 1, max_stacks: 3 },
+      status: { name: 'Triple Bomb', target: 'foe', min_stacks: 1, max_stacks: 3 },
     }],
   },
   {
@@ -321,7 +321,7 @@ export default [
         type: 'effect',
         target: 'special',
         stats: { count: 1 },
-        status: { name: 'Cluster Bomb', target: 'foe', stacks: true, min_stacks: 1, max_stacks: 5 },
+        status: { name: 'Cluster Bomb', target: 'foe', min_stacks: 1, max_stacks: 5 },
       },
     ],
   },
@@ -340,7 +340,7 @@ export default [
         type: 'effect',
         target: 'attack',
         stats: { min: 1 },
-        status: { target: 'foe', name: 'Fire Hits', stacks: true },
+        status: { target: 'foe', name: 'Fire Hits' },
       },
       {
         name: 'Concentrated Fire offset',
@@ -414,7 +414,7 @@ export default [
     exclude: exagryph_exclusions,
     description: (stats) => `<div>Your Igneus Eden<b>Attack</b>fires<span>3</span>beams in a spread pattern.</div>`,
     mods: [
-      { name: 'Triple Beam', type: 'effect', target: 'Beam', stats: { multiply_base: 1 }, status: { target: 'foe', name: 'Triple Beam', stacks: true, min_stacks: 1, max_stacks: 3 } },
+      { name: 'Triple Beam', type: 'effect', target: 'Beam', stats: { multiply_base: 1 }, status: { target: 'foe', name: 'Triple Beam', min_stacks: 1, max_stacks: 3 } },
     ]
   },
   {

@@ -55,9 +55,9 @@ export default [
     description: (stats) =>
       `<div>Your<b>Special</b>dislodges&nbsp;<img src="/Apollo/assets/AmmoIcon.png" />&nbsp;from foes.</div>` +
       `<div><i>Even before he ruled the seas, the blade's first bearer liked making a splash.</i></div>` +
-      `<div><div>Cast Damage:</div><div><span>+${ fp(stats.mult_min) }%</span></div></div>`,
+      `<div><div>Cast Damage:</div><div><span>+${ fp(stats.mult_base) }%</span></div></div>`,
     mods: [
-      { name: 'Aspect of Poseidon', type: 'effect', target: 'cast', stats: { mult_min: [ 0.1, 0.2, 0.3, 0.4, 0.5 ] } },
+      { name: 'Aspect of Poseidon', type: 'effect', target: 'cast', stats: { mult_base: [ 0.1, 0.2, 0.3, 0.4, 0.5 ] } },
     ],
     effects: [
       { name: 'Dislodge', type: 'dislodge', trigger: 'special', stats: {} },
@@ -184,7 +184,7 @@ export default [
     description: (stats) => `<div>Your<b>Dash-Strike</b>hits twice and deals<span>+20% damage.</span></div>`,
     mods: [
       { type: 'effect', target: 'dashAttack', name: 'Double Edge', stats: { mult_base: 0.2 } },
-      { type: 'effect', target: 'dashAttack', name: 'Double Edge', stats: { count: 1 }, status: { target: 'foe', name: 'Double Edge', stacks: true, min_stacks: 1, max_stacks: 2 } },
+      { type: 'effect', target: 'dashAttack', name: 'Double Edge', stats: { count: 1 }, status: { target: 'foe', name: 'Double Edge', min_stacks: 1, max_stacks: 2 } },
     ],
   },
   {
@@ -198,7 +198,7 @@ export default [
     description: (stats) => `<div>Your<b>Special</b>hits twice but no longer knocks foes away.</div>`,
     mods: [
       { type: 'effect', target: 'special', name: 'Double Nova', stats: { knockback: false } },
-      { type: 'effect', target: 'special', name: 'Double Nova', stats: { count: 1 }, status: { target: 'foe', name: 'Double Nova', stacks: true, min_stacks: 1, max_stacks: 2 } },
+      { type: 'effect', target: 'special', name: 'Double Nova', stats: { count: 1 }, status: { target: 'foe', name: 'Double Nova', min_stacks: 1, max_stacks: 2 } },
     ],
   },
   {
@@ -234,8 +234,7 @@ export default [
         type: 'effect',
         target: 'attack',
         stats: { mult_base: 0.0005 },
-        status: { target: 'player', name: 'Obols', stacks: 100000 },
-        stacks: true,
+        status: { target: 'player', name: 'Obols', max_stacks: 100000 },
       }
     ],
   },

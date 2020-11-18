@@ -72,7 +72,7 @@ export default [
       type: 'effect',
       target: 'Slicing Shot',
       stats: { count: 1 },
-      status: { target: 'foe', name: 'Blade Rift Hits', stacks: true },
+      status: { target: 'foe', name: 'Blade Rift Hits' },
     }]
   },
   {
@@ -98,7 +98,7 @@ export default [
       type: 'effect',
       target: 'Slicing Flare',
       stats: { count: 1 },
-      status: { target: 'foe', name: 'Blade Rift Hits', stacks: true },
+      status: { target: 'foe', name: 'Blade Rift Hits' },
     }]
   },
   {
@@ -116,7 +116,7 @@ export default [
       type: 'effect',
       target: 'Blade Dash',
       stats: { count: 1 },
-      status: { target: 'foe', name: 'Blade Rift Hits', stacks: true },
+      status: { target: 'foe', name: 'Blade Rift Hits' },
     }],
     effects: [{
       name: 'Blade Dash',
@@ -161,7 +161,7 @@ export default [
         type: 'effect',
         target: ["Ares' Aid", "Ares' Aid - Max"],
         stats: { count: 1 },
-        status: { target: 'foe', name: 'Blade Rift Hits', stacks: true },
+        status: { target: 'foe', name: 'Blade Rift Hits' },
       }
     ],
   },
@@ -313,7 +313,7 @@ export default [
         type: 'effect',
         target: 'doom',
         stats: { min: [10, 12, 14, 16], count: 1 },
-        status: { ...doom_status, stacks: true, max_stacks: 100 },
+        status: { ...doom_status, max_stacks: 100 },
       },
     ],
   },

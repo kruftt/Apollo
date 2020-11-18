@@ -134,7 +134,7 @@ export default [
     ],
     mods: [
       { name: 'Frost Fair Blade', type: 'effect', target: 'player', stats: { health_multiply: [ 0.3, 0.35, 0.4, 0.45, 0.5 ] }, },
-      { name: 'Spinning Blade Stacks', type: 'effect', target: 'serpent', stats: { count: 1 }, status: { name: 'Spinning Blade', target: 'foe', stacks: true } },
+      { name: 'Spinning Blade Stacks', type: 'effect', target: 'serpent', stats: { count: 1 }, status: { name: 'Spinning Blade', target: 'foe' } },
     ],
   },
   {
@@ -168,7 +168,7 @@ export default [
       type: 'effect',
       target: 'Throw',
       stats: { mult_base: 0.3 },
-      status: { target: 'foe', name: 'Chain Skewer', stacks: true, max_stacks: 7 },
+      status: { target: 'foe', name: 'Chain Skewer', max_stacks: 7 },
     }],
   },
   {
@@ -304,7 +304,7 @@ export default [
       type: 'effect',
       target: 'Dash Attack',
       stats: { count: 1 },
-      status: { name: 'Serrated Point', target: 'foe', stacks: true, min_stacks: 1, max_stacks: 3 },
+      status: { name: 'Serrated Point', target: 'foe', min_stacks: 1, max_stacks: 3 },
     }],
   },
   {
@@ -352,7 +352,7 @@ export default [
       type: 'effect',
       target: [ 'Strike 1', 'Strike 2', 'Strike 3'], // 'attack',
       stats: { count: 1 },
-      status: { name: 'Triple Jab', target: 'foe', stacks: true, min_stacks: 1, max_stacks: 3 },
+      status: { name: 'Triple Jab', target: 'foe', min_stacks: 1, max_stacks: 3 },
     }],
   },
   {

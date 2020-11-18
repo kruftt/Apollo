@@ -16,7 +16,7 @@ export default [
       { type: 'damage', trigger: 'special', name: 'Throw', stats: { count: 1, min: 15, backstab: true } },
     ],
     mods: [
-      { type: 'effect', target: 'special', name: 'Throw bounces', stats: { count: 1 }, status: { target: 'foe', name: 'Shield Bounces', stacks: true, max_stacks: 2 } }
+      { type: 'effect', target: 'special', name: 'Throw bounces', stats: { count: 1 }, status: { target: 'foe', name: 'Shield Bounces', max_stacks: 2 } }
     ]
   },
   {
@@ -138,7 +138,7 @@ export default [
       type: 'effect',
       target: ['Bash', 'Heavy Bash'],
       stats: { count: 1, knockback: false },
-      status: { name: 'Bash', target: 'foe', stacks: true, min_stacks: 1, max_stacks: 2 },
+      status: { name: 'Bash', target: 'foe', min_stacks: 1, max_stacks: 2 },
     }],
   },
   {

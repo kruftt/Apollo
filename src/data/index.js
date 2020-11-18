@@ -65,7 +65,7 @@ export const data =
       icon: 'assets/traits/SlotIcon_Ranged.png',
       rarity: -1,
       abilities: [
-        { name: 'Cast', type: 'damage', trigger: 'cast', stats: { min: 50, max: 50, lodge: true } },
+        { name: 'Cast', type: 'damage', trigger: 'cast', stats: { min: 50, lodge: true } },
       ],
     },
 
@@ -134,7 +134,7 @@ export const data =
       type: 'effect',
       target: 'foe',
       stats: { speed: -0.04 },
-      status: { name: 'Chill', target: 'foe', stacks: true, max_stacks: 10 },
+      status: { name: 'Chill', target: 'foe', max_stacks: 10 },
     },
 
     weak: {
@@ -149,7 +149,7 @@ export const data =
       type: 'effect',
       target: 'hangover',
       stats: { count: 1 },
-      status: { name: 'Hangover', target: 'foe', stacks: true, max_stacks: 5 },
+      status: { name: 'Hangover', target: 'foe', max_stacks: 5 },
     },
 
     slam: {

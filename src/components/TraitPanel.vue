@@ -33,7 +33,7 @@
 
 #trait_panel__columns {
   display: flex;
-  padding-right: 2.5em;
+  padding-right: 3.1em;
 }
 </style>
 

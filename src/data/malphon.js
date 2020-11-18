@@ -17,8 +17,8 @@ export default [
       { name: 'Dash Upper', type: 'damage', trigger: 'dashSpecial', stats: { min: 40, backstab: true } },
     ],
     mods: [
-      { name: 'Combo', type: 'effect', target: ['Pummel', 'Swipe', 'Heavy Knuckle'], stats: { count: 1 }, status: { name: 'Combo', target: 'foe', stacks: true, min_stacks: 1, max_stacks: 5 } },
-      { name: 'Rising Cutter Stacks', type: 'effect', target: 'Rising Cutter', stats: { count: 1 }, status: { name: 'Rising Cutter', target: 'foe', stacks: true, min_stacks: 1, max_stacks: 2 } },
+      { name: 'Combo', type: 'effect', target: ['Pummel', 'Swipe', 'Heavy Knuckle'], stats: { count: 1 }, status: { name: 'Combo', target: 'foe', min_stacks: 1, max_stacks: 5 } },
+      { name: 'Rising Cutter Stacks', type: 'effect', target: 'Rising Cutter', stats: { count: 1 }, status: { name: 'Rising Cutter', target: 'foe', min_stacks: 1, max_stacks: 2 } },
     ],
   },
   {
@@ -84,7 +84,7 @@ export default [
       `<div><div>Bonus Special Hits:</div><div><span>${ fv(stats.max_stacks) }</span></div></div>`,
     mods: [
       { name: 'Aspect of Demeter', type: 'effect', target: 'Kinetic Launcher', stats: { count: 1 } },
-      { name: 'Aspect of Demeter', type: 'effect', target: ['Rising Cutter', 'Kinetic Launcher'], stats: {count: 1}, status: {target: 'foe', name: 'Giga Cutter', stacks: true, max_stacks: [1, 2, 3, 4, 5]}},
+      { name: 'Aspect of Demeter', type: 'effect', target: ['Rising Cutter', 'Kinetic Launcher'], stats: {count: 1}, status: {target: 'foe', name: 'Giga Cutter', max_stacks: [1, 2, 3, 4, 5]}},
     ],
   },
   {
@@ -208,7 +208,7 @@ export default [
         type: 'effect',
         target: 'attack',
         stats: { min: 2.5 },
-        status: { name: 'Combo', target: 'foe', stacks: true },
+        status: { name: 'Combo', target: 'foe' },
       },
     ],
   },

@@ -4,7 +4,7 @@ export const chill = {
   name: 'Chill',
   type: 'chill',
   stats: { speed: -0.04, },
-  status: { name: 'Chill', target: 'foe', stacks: true, max_stacks: 10 },
+  status: { name: 'Chill', target: 'foe' },
 }
 
 export default [
@@ -76,7 +76,7 @@ export default [
       type: 'effect',
       target: 'Crystal Beam',
       stats: { count: 1 },
-      status: { target: 'foe', name: 'Crystal Beam', stacks: true },
+      status: { target: 'foe', name: 'Crystal Beam' },
     }]
   },
   {
@@ -150,7 +150,7 @@ export default [
       type: 'effect',
       target: 'vortex',
       stats: { count: 1 },
-      status: { name: 'Winter Vortex', target: 'foe', stacks: true },
+      status: { name: 'Winter Vortex', target: 'foe' },
     },],
     effects: [{...chill, trigger: 'vortex'}],
   },

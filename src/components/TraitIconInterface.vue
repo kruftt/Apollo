@@ -59,24 +59,26 @@
 
 .trait_icon__target {
   position: absolute;
-  left: 0.6em;
-  top: 0.6em;
-  width: 5.2em;
-  height: 5.2em;
+  left: 0.7em;
+  top: 0.7em;
+  width: 5.0em;
+  height: 5.0em;
   transform: rotate(45deg);
   z-index: 1;
+  /* background-color: #6666;
+  outline: 1px solid #ff08; */
 }
 .trait_icon__highlight {
   position: absolute;
-  left: 1.52em;
-  top: 1.61em;
+  left: 1.47em;
+  top: 1.55em;
   width: 3.5em;
   height: 3.5em;
   transform: rotate(45deg);
   z-index: 1;
 }
 .trait_icon__highlight:hover {
-  box-shadow: inset 0 0 0.25em 0.05em #BB46, 0 0 0.3em 0.05em #BB46;
+  box-shadow: inset 0 0 0.25em 0.05em #BB44, 0 0 0.3em 0.05em #BB44;
 }
 
 .trait_icon__button {
