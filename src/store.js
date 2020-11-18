@@ -421,6 +421,9 @@ function applyEffectMod(effects, mod) {
         case 'knockback':
           effect_stats[k] = mvalue
           break
+        case 'set_min':
+          effect_stats.min = mvalue
+          break
         case 'min':
           if (!mod_stats.max) {
             const max = effect_stats.max

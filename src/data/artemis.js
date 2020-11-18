@@ -92,12 +92,12 @@ export default [
     level: 1,
     description: (stats) =>
       '<div>Your<b>Dash-Strike</b>deals more damage.</div>' +
-      `<div>▶ Dash Attack Damage:<div><span>${ fp(stats.mult_base) }</span></div></div>`,
+      `<div>▶ Dash Attack Damage:<div><span>+${ fp(stats.mult_base) }%</span></div></div>`,
     mods: [{
       name: 'Hunter Dash',
       type: 'effect',
       target: 'dashAttack',
-      stats: { mult_base: [0.5,0.8,1.1,1.4] },
+      stats: { mult_base: [0.5,0.6,0.7,0.8] },
       pom: pom_2,
     }],
   },

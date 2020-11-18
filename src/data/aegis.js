@@ -80,8 +80,8 @@ export default [
       `<div>Dragon Rush Bonus Damage & Area:<div><span>+${ fp(stats.mult_base) }</span></div></div>`,
     abilities: [
       { name: 'Heavy Bash', type: 'damage', trigger: 'attack', stats: { min: 40, knockback: true, backstab: true } },
-      { name: 'Bull Rush', type: 'bull', trigger: 'chargeAttack', stats: { min: 50, defend: true, backstab: true } },
-      { name: 'Dragon Rush', type: 'dragon', trigger: 'chargeAttack', stats: { min: 50, defend: true, backstab: true } },
+      { name: 'Bull Rush', type: 'bull', trigger: 'chargeAttack', stats: { min: 50, charge: 2, defend: true, backstab: true } },
+      { name: 'Dragon Rush', type: 'dragon', trigger: 'chargeAttack', stats: { min: 50, charge: 2, defend: true, backstab: true } },
       { name: 'Heavy Throw', type: 'damage', trigger: 'special', stats: { min: 45, backstab: true } },
       { name: 'Load Ammo', trigger: 'cast', type: 'load' },
     ],
@@ -183,8 +183,9 @@ export default [
     exclude: aegis_exclusions,
     description: (stats) => `<div>Your<b>Bull Rush</b>gains a Power Rush that does<span>+500%</span>damage.</div>`,
     mods: [
-      { name: 'Minotaur Rush', type: 'effect', target: 'Bull Rush', stats: { name: 'Power Rush', mult_base: 5 }, status: { target: 'player', name: 'Power Rush'} },
-      { name: 'Minotaur Rush', type: 'effect', target: 'Dragon Rush', stats: { name: 'Power Dragon Rush', mult_base: 5 }, status: { target: 'player', name: 'Power Rush'} },
+      { name: 'Minotaur Rush', type: 'effect', target: 'chargeAttack', stats: { mult_base: 5 }, status: { target: 'player', name: 'Power Rush'} },
+      // { name: 'Minotaur Rush', type: 'effect', target: 'Bull Rush', stats: { mult_base: 5 }, status: { target: 'player', name: 'Power Rush'} },
+      // { name: 'Minotaur Rush', type: 'effect', target: 'Dragon Rush', stats: { mult_base: 5 }, status: { target: 'player', name: 'Power Rush'} },
     ],
   },
   {
@@ -204,6 +205,9 @@ export default [
       status: { target: 'foe', name: 'Armored' },
     }],
   },
+  // { type: 'damage', trigger: 'chargeAttack', name: 'Bull Rush', stats: {backstab:true, min: 20, max:40, charge: 2, defend: true} },
+  // { name: 'Bull Rush', type: 'bull', trigger: 'chargeAttack', stats: { min: 50, defend: true, backstab: true } },
+  // { name: 'Dragon Rush', type: 'dragon', trigger: 'chargeAttack', stats: { min: 50, defend: true, backstab: true } },
   {
     name: 'Charged Shot',
     type: 'hammer',
@@ -213,9 +217,13 @@ export default [
     rarity: -3,
     exclude: aegis_exclusions,
     description: (stats) => `<div>Your<b>Bull Rush</b>instead fires a piercing shot that deals<span>80</span>base damage.</div>`,
-    abilities: [
-      { type: 'damage', trigger: 'chargeAttack', name: 'Charged Shot', stats: {backstab:true, unblockable: true, min: 80, duration: 2, piercing: true, defend: true} },
+    mods: [
+      { type: 'effect', target: 'Bull Rush', stats: { name: 'Charged Shot', piercing: true, set_min: 80 } },
+      { type: 'effect', target: 'Dragon Rush', stats: { name: 'Charged Dragon Shot', piercing: true, set_min: 80 } },
     ],
+    // abilities: [
+    //   { type: 'damage', trigger: 'chargeAttack', name: 'Charged Shot', stats: {backstab:true, unblockable: true, min: 80, duration: 2, piercing: true, defend: true} },
+    // ],
   },
   {
     name: 'Charged Flight',
