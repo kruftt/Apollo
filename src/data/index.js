@@ -104,14 +104,6 @@ export const data =
       status: { target: 'player', name: 'Shadow Presence' },
     },
 
-    fiery: {
-      name: 'Fiery Presence',
-      type: 'effect',
-      target: 'coefficients',
-      stats: { first: 0.15 },
-      status: { target: 'player', name: 'Fiery Presence' },
-    },
-
     sturdy: {
       name: 'Sturdy',
       type: 'effect',
@@ -214,7 +206,7 @@ export const data =
   mirror: {
     presence: [
       { name: 'Shadow Presence', target: 'coefficients', stats: { backstab: 0.1 }},
-      { name: 'Fiery Presence', target: 'coefficients' , stats: { first: 0.15 }},
+      { name: 'Fiery Presence', target: ['attack', 'special'], stats: { first: 0.15 }},
     ],
     reflex: [
       { name: 'Greater Reflex', target: 'player', stats: { dashes: 1 }},

@@ -268,8 +268,8 @@ export default [
       {
         name: 'Shadow Slash',
         type: 'effect',
-        target: 'attack',
-        stats: { backstab: 1 },
+        target: [ 'Strike', 'Chop', 'Thrust', 'Slash',  'Big Slash', 'Monster Slash'],
+        stats: { backstab: 2 },
       }
     ],
   },
