@@ -233,11 +233,11 @@ export default [
     rarity: 0,
     description: (stats) =>
       `<div>You regenerate Cast Ammo faster.</div>` +
-      `<div>▶ Regeneration Time:<div><span>${ fv(2.5 - stats.ammo_regen) }</span></div></div>`,
+      `<div>▶ Regeneration Time:<div><span>${ fv(stats.ammo_regen, null, 1) } Sec.</span></div></div>`,
     mods: [{
       name: 'Auto Reload',
       type: 'effect',
-      target: 'coefficients',
+      target: 'player',
       stats: { ammo_regen: [-0.5, -1, -1.5, -2] },
     }],
   },

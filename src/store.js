@@ -321,8 +321,12 @@ function applyCharacterMod(build_character, mod) {
   let k
   for (k in mod_stats) {
     switch (k) {
+      case 'ammo_regen':
+        if (!build_stats['Ammo Regen (Sec.)']) break
+        build_stats['Ammo Regen (Sec.)'] += mod_stats[k]
+        break
       case 'set_ammo_regen':
-        build_stats['Ammo Regen (Sec.)'] -= mod_stats[k]
+        build_stats['Ammo Regen (Sec.)'] = 6 - mod_stats[k]
         break
       case 'health_multiply':
         build_stats.health *= mod_stats[k]

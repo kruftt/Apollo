@@ -170,7 +170,6 @@ export const data =
         speed: 1,
         dashes: 1,
         ammo: 1,
-        'Ammo Regen (Sec.)': 5,
       },
       status: {
         // 'Fiery Presence': null,
