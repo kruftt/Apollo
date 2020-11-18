@@ -18,7 +18,7 @@ export default [
     ],
     mods: [
       { name: 'Combo', type: 'effect', target: ['Pummel', 'Swipe', 'Heavy Knuckle'], stats: { count: 1 }, status: { name: 'Combo', target: 'foe', min_stacks: 1, max_stacks: 5 } },
-      { name: 'Rising Cutter Stacks', type: 'effect', target: 'Rising Cutter', stats: { count: 1 }, status: { name: 'Rising Cutter', target: 'foe', min_stacks: 1, max_stacks: 2 } },
+      { name: 'Rising Cutter Stacks', type: 'effect', target: ['Rising Cutter', 'Magnetic Cutter'], stats: { count: 1 }, status: { name: 'Cutter Hits', target: 'foe', min_stacks: 1, max_stacks: 2 } },
     ],
   },
   {
@@ -52,7 +52,7 @@ export default [
       `<div><i>They filled the bronze giant with power, conforming to its massive frame.</i></div>` +
       `<div><div>Magnetic Attack & Cast Bonus:</div><div><span>+${ fp(stats.mult_base) }%</span></div></div>`,
     abilities: [
-      { name: 'Magnetic Cutter', type: 'magnetic', trigger: 'special', stats: {min: 30, max: 30, count: 2} },
+      { name: 'Magnetic Cutter', type: 'magnetic', trigger: 'special', stats: { min: 30 } },
       { name: 'Dash Upper', type: 'magnetic', trigger: 'dashSpecial', stats: { min: 40 } },
     ],
     effects: [{
@@ -101,7 +101,7 @@ export default [
     abilities: [
       { name: 'Swipe', type: 'damage', trigger: 'attack', stats: {min: 60, backstab: true} },
       { name: 'Dash Strike', type: 'damage', trigger: 'dashAttack', stats: { min: 20, backstab: true } },
-      { name: 'Rising Cutter', type: 'damage', trigger: 'special', stats: {min: 30, max: 30, count: 2, backstab: true} },
+      { name: 'Rising Cutter', type: 'damage', trigger: 'special', stats: {min: 30, max: 30, backstab: true} },
       { name: 'Dash Upper', type: 'enkidu', trigger: 'dashSpecial', stats: { min: 40, backstab: true } },
     ],
     mods: [
