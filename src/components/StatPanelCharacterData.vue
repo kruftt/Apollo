@@ -2,7 +2,7 @@
   <div class="character_panel">
     <div class="character_panel__name_bar">
       <div class="character_panel__name">{{ character.status.Boss ? 'Boss' : character.name }}</div>
-      <img v-if="character.privilege" class="character_panel__privileged" src="/assets/mirror/priveleged status.png" />
+      <img v-if="character.privilege" class="character_panel__privileged" :src="mirrorData.privilege[0].src" />
     </div>
 
     <div v-for="stat_value, stat_name in character.stats" class="character_panel__row">
