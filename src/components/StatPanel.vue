@@ -81,7 +81,10 @@
 }
 
 .stat_panel__effect_data + .stat_panel__name_bar {
-  margin-top: 2em;
+  margin-top: 1em;
+}
+.stat_panel__name_bar + .stat_panel__name_bar {
+  margin-top: -0.4em;
 }
 
 .stat_panel__effect_data {
@@ -89,7 +92,7 @@
   color: #bbb;
 }
 .stat_panel__effect_data + .stat_panel__effect_data {
-  margin-top: 1.0em;
+  margin-top: 1.2em;
 }
 
 .stat_panel__char_data {

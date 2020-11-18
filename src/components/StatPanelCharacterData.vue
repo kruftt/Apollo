@@ -1,6 +1,9 @@
 <template>
   <div class="character_panel">
-    <div class="character_panel__name">{{ character.name }}</div>
+    <div class="character_panel__name_bar">
+      <div class="character_panel__name">{{ character.status.Boss ? 'Boss' : character.name }}</div>
+      <img v-if="character.privilege" class="character_panel__privileged" src="/assets/mirror/priveleged status.png" />
+    </div>
 
     <div v-for="stat_value, stat_name in character.stats" class="character_panel__row">
       <div class="character_panel__stat_name">{{ firstToUpper(stat_name) }}</div>
@@ -8,8 +11,10 @@
     </div>
 
     <div class="character_panel__status noselect">
-      <div v-if="character.name === 'Zagreus'" @click="mirror_active = !mirror_active">
-        <div class="character_panel__mirror">{{ (mirror_active ? '&#9660; Mirror of Night' : '&#9654; Mirror of Night' ) }}</div>
+      <div v-if="character.name === 'Zagreus'">
+        <div class="character_panel__mirror" @click="mirror_active = !mirror_active">
+          {{ (mirror_active ? '&#9660; Mirror of Night' : '&#9654; Mirror of Night' ) }}
+        </div>
         <StatPanelMirrorRow
           v-if="mirror_active"
           v-for="store_data, key in mirror"
@@ -35,9 +40,19 @@
   color: #ccc;
 }
 
+.character_panel__name_bar {
+  margin-right: 0.8em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 .character_panel__name {
   font-size: 110%;
-  margin-right: 0.8em;
+}
+.character_panel__privileged {
+  width: 1.5em;
+  height: 1.5em;
+  margin-left: 0.5em;
 }
 
 .character_panel__row {
@@ -104,7 +119,7 @@ const mirrorData = {
   ], skin: [
     { name: 'Thick Skin', ranks: 10, src: '/Apollo/assets/mirror/thick skin.png' },
     { name: 'High Confidence', ranks: 5, src: '/Apollo/assets/mirror/High_Confidence.png' },
-  ], privlege: [
+  ], privilege: [
     { name: 'Privileged Status', ranks: 2, src: '/Apollo/assets/mirror/priveleged status.png' },
     { name: 'Family Favorite', ranks: 2, src: '/Apollo/assets/mirror/Unifying_Bond.png' },
   ],

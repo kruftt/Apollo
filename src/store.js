@@ -127,7 +127,7 @@ const mirror = reactive({
   blood: { selection: 0, rank: 1 },
   soul: { selection: 0, rank: 1 },
   skin: { selection: 0, rank: 1 },
-  privlege: { selection: 0, rank: 1 },
+  privilege: { selection: 0, rank: 1 },
 })
 
 const traits = reactive([
@@ -706,10 +706,12 @@ function compileBuild() {
       const stats = mod.stats
       for (const k in stats) stats[k] *= talent.rank
 
-      if (key === 'privlege') {
+      if (key === 'privilege') {
         if (selection === 1) {
           // Privileged Status
-          if (Object.keys(foe.status).reduce((n, k) => n + ((foe.status[k] && status_curses.indexOf(k) !== -1 && build.foe.status[k] !== undefined) ? 1 : 0), 0) < 2) continue
+          const inactive = (Object.keys(foe.status).reduce((n, k) => n + ((foe.status[k] && status_curses.indexOf(k) !== -1 && build.foe.status[k] !== undefined) ? 1 : 0), 0) < 2)
+          build.foe.privilege = !inactive
+          if (inactive) continue
         } else {
           // Family Favorite
           stats.mult_base *= Object.keys(build.gods).reduce((n, k) => n + ((gods.indexOf(k) !== -1) ? 1 : 0), 0)

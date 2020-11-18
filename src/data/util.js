@@ -3,8 +3,8 @@ export const beowolf_exclusions = ['Crush Shot', 'Phalanx Shot', 'Slicing Shot',
 
 export function fv(a, b, d = 0) {
   const p = Math.pow(10, d)
-  a = Math.floor(p*a)/p
-  b && (b = Math.floor(p*b)/p)
+  a = Math.round(p*a)/p
+  b && (b = Math.round(p*b)/p)
   return (a === b || !b) ? `${a}` : `${a}-${b}`
 }
 export function fp(a, b, d = 0) {

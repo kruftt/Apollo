@@ -224,7 +224,7 @@ export const data =
       { name: 'Thick Skin', target: 'player', stats: { health: 5 }},
       { name: 'High Confidence', target: 'coefficients', stats: { mult_base: 0.05 }, status: { name: 'High Confidence', target: 'player' }},
     ],
-    privlege: [
+    privilege: [
       { name: 'Privileged Status', target: 'coefficients', stats: { mult_base: 0.2 }},
       { name: 'Family Favorite', target: 'coefficients', stats: { mult_base: 0.025 }},
     ],
