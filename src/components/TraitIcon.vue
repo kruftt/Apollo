@@ -1,6 +1,8 @@
 <template>
   <div class="trait_icon">
-    <img v-if="trait.icon" class="trait_icon__image" :src="trait.icon" />
+    <div class="trait_icon__image_container">
+      <img v-if="trait.icon" class="trait_icon__image" :src="trait.icon" />
+    </div>
     <img v-if="frame" class="trait_icon__frame" :src="frame" />
   </div>
 </template>
@@ -12,18 +14,25 @@
   width: 6.5em;
 }
 
-.trait_icon__image {
+.trait_icon__image_container {
   position: absolute;
-  left: 0.87em;
-  top: 0.82em;
-  width: 4.8em;
-  height: 4.8em;
+  height: 6.5em;
+  width: 6.5em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.trait_icon__image {
+  position: relative;
+  width: 4.9em;
+  height: 4.9em;
 }
 
 .trait_icon__frame {
   position: absolute;
-  left: 0;
-  top: 0;
+  left: 0.01em;
+  top: 0.08em;
   height: 6.6em;
 }
 </style>

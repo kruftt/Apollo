@@ -9,7 +9,7 @@
 
     <template v-else >
       <div class="trait_icon__target" @click.stop="cb(trait)" />
-      <div v-if="trait.type !== 'keepsake'" class="trait_icon__highlight" @click.stop="cb(trait)" />
+      <div v-if="'keepsakegod'.indexOf(trait.type) === -1" class="trait_icon__highlight" @click.stop="cb(trait)" />
       <img
         v-if="active"
         src="/assets/TrashButtonHilight.png"
