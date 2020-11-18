@@ -163,7 +163,7 @@ export default [
     level: 1,
     threshold: 2,
     description: (stats) =>
-      '<div>After you take damage, damage and <i>completely</i><b>Chill</b>your foe.</div>' +
+      '<div>After you take damage, damage and completely<b>Chill</b>your foe.</div>' +
       `<div>▶ Revenge Damage:<div><span>${ fv(stats.min) }</span></div></div>`,
     effects: [
       {

@@ -41,7 +41,7 @@ export default [
       name: 'Lightning Bolt',
       type: 'bolt',
       trigger: 'special',
-      stats: { min: [30, 37.5, 45, 60], size: 200 },
+      stats: { min: [30, 37.5, 45, 60], radius: 200 },
       pom: pom_4,
     }],
   },
@@ -103,7 +103,7 @@ export default [
       name: 'Lightning Bolt',
       type: 'bolt',
       trigger: 'dash',
-      stats: { min: [10, 13.3, 16.6, 20], size: 200 },
+      stats: { min: [10, 13.3, 16.6, 20], radius: 200 },
       pom: pom_8,
     },],
   },
@@ -197,12 +197,12 @@ export default [
     prereqs: { Zeus: ['Thunder Dash', 'Thunder Flourish', "Zeus' Aid"] },
     description: (stats) =>
       `<div>Your lightning bolt effects deal damage in a larger area.</div>` +
-      `<div>▶ Bolt Area of Effect:<div><span>+${ fp(stats.percent_area) }%</span></div></div>`,
+      `<div>▶ Bolt Area of Effect:<div><span>+${ fp(stats.multiply_radius) }%</span></div></div>`,
     mods: [{
       name: 'High Voltage',
       type: 'effect',
       target: 'bolt',
-      stats: { percent_area: [0.6,0.72,0.84,0.96] },
+      stats: { multiply_radius: [0.6,0.72,0.84,0.96] },
       pom: pom_4,
     },],
   },

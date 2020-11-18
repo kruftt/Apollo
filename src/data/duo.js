@@ -272,7 +272,7 @@ export default [
       name: 'Sea Storm',
       type: 'bolt',
       trigger: 'knockback',
-      stats: { min: 40 },
+      stats: { min: 40, radius: 200 },
     }],
   },
   {

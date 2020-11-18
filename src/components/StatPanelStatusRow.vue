@@ -85,15 +85,13 @@ export default {
   },
 
   setup(props) {
-    const { character, status_name, status_value } = props
-    const min = computed(() => character[`min_${status_name}`] || 0)
-    const max = computed(() => character[`max_${status_name}`])
-    const cstatus = character.status
-    const stepDown = () => cstatus[status_name] -= (cstatus[status_name] > min.value) ? 1 : 0
-    const stepUp = () => cstatus[status_name] += (cstatus[status_name] < max.value) ? 1 : 0
-    const scrollStacks = (e) => (e.wheelDelta > 0) ? stepUp(status_name) : stepDown(status_name)
-    const cycle = () => cstatus[status_name] = Math.max(min.value, (cstatus[status_name] + 1) % (max.value + 1))
-    const toggle = () => cstatus[status_name] = !cstatus[status_name]
+    const min = computed(() => props.character[`min_${props.status_name}`] || 0)
+    const max = computed(() => props.character[`max_${props.status_name}`])
+    const stepDown = () => props.character.status[props.status_name] -= (props.character.status[props.status_name] > min.value) ? 1 : 0
+    const stepUp = () => props.character.status[props.status_name] += (props.character.status[props.status_name] < max.value) ? 1 : 0
+    const scrollStacks = (e) => (e.wheelDelta > 0) ? stepUp(props.status_name) : stepDown(props.status_name)
+    const cycle = () => props.character.status[props.status_name] = Math.max(min.value, (props.character.status[props.status_name] + 1) % (max.value + 1))
+    const toggle = () => props.character.status[props.status_name] = !props.character.status[props.status_name]
 
     return {
       cycle,

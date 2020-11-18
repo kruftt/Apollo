@@ -127,7 +127,7 @@ export default [
     exclude: stygius_exclusions,
     weapon: 'Stygius',
     icon: 'assets/weapons/sword_cursed_lifesteal_trait_12.png',
-    god: 'Daedalus',
+    god: 'Guan',
     rarity: -3,
     description: (stats) => `<div>Your<b>Attack</b>restores<span>2 Health,</span> but you have<span class="bad_effect">-60% Health.</span></div>`,
     mods: [
@@ -137,13 +137,12 @@ export default [
         target: 'player',
         stats: { health_multiply: 0.4 },
       },
-      {
-        name: 'Cursed Slash',
-        type: 'effect',
-        target: 'attack',
-        stats: { lifesteal: 2 },
-      }
     ],
+    effects: [{
+      name: '+2 hp',
+      type: 'health',
+      trigger: 'attack',
+    }]
   },
   {
     name: 'Dash Nova',
