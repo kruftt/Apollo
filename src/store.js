@@ -5,6 +5,8 @@ const status_curses = 'JoltedHangoverWeakMarkedExposedChillRuptureDoom'
 const gods = 'AphroditeAresArtemisAthenaDemeterDionysusPoseidonZeus'
 const no_crit = 'boltrupture'
 
+const formatId = (id) => `${id < 36 ? '0' : ''}${id.toString(36)}`
+const formatValue = (value) => `${Math.min(35,value).toString(36)}`
 const include = reactive({})
 const exclude = reactive({})
 const watchPrereqs = (prereqs) =>
@@ -14,8 +16,9 @@ const watchPrereqs = (prereqs) =>
   }, {})
 
 // Make trait data reactive and add inclusion/exlusion properties
-const trait_data = data.traits.map((t) => {
+const trait_data = data.traits.map((t, i) => {
   const trait = reactive(t)
+  trait.id = formatId(i)
   const prereqs = t.prereqs
   trait.prereqs = (prereqs)
     ? Object.keys(prereqs).reduce((p, k) => {
@@ -24,21 +27,20 @@ const trait_data = data.traits.map((t) => {
       }, {})
     : null
 
-  trait.active = computed(() => {
-    if (prereqs) {
-      const threshold = trait.threshold
-      if (threshold) {
-        return Object.keys(prereqs).reduce((a, key) =>
-          prereqs[key].reduce((_a, _v) => include[_v] ? _a+1 : _a, 0) >= threshold, true
-        )
-      } else {
-        return Object.keys(prereqs).reduce((a, v) =>
-          prereqs[v].reduce((_a, _v) => include[_v] ? _a+1 : _a, 0) && a, true
-        )
-      }
-    }
-    return true
-  })
+  trait.active = prereqs
+    ? computed(() => {
+        const threshold = trait.threshold
+        if (threshold) {
+          return Object.keys(prereqs).reduce((a, key) =>
+            prereqs[key].reduce((_a, _v) => include[_v] ? _a+1 : _a, 0) >= threshold, true
+          )
+        } else {
+          return Object.keys(prereqs).reduce((a, v) =>
+            prereqs[v].reduce((_a, _v) => include[_v] ? _a+1 : _a, 0) && a, true
+          )
+        }
+      })
+    : true
   return trait
 })
 
@@ -110,15 +112,15 @@ function filterObjects(obj_arr, props) {
 }
 
 const player = reactive({
-  ...data.base.player,
-  stats: { ...data.base.player.stats },
-  status: { ...data.base.player.status },
+  ...data.player,
+  stats: { ...data.player.stats },
+  status: { ...data.player.status },
 })
 
 const foe = reactive({
-  ...data.base.foe,
-  stats: { ...data.base.foe.stats },
-  status: { ...data.base.foe.status },
+  ...data.foe,
+  stats: { ...data.foe.stats },
+  status: { ...data.foe.status },
 })
 
 const mirror = reactive({
@@ -131,17 +133,16 @@ const mirror = reactive({
 })
 
 const traits = reactive([
-  data.base.attack,
-  data.base.special,
-  data.base.cast,
-  data.base.dash,
-  data.base.call,
-  data.base.keepsake,
+  selectTrait({ name: 'base', type: 'attack' }),
+  selectTrait({ name: 'base', type: 'special' }),
+  selectTrait({ name: 'base', type: 'cast' }),
+  selectTrait({ name: 'base', type: 'dash' }),
+  selectTrait({ name: 'base', type: 'call' }),
+  selectTrait({ name: 'base', type: 'keepsake' }),
   selectTrait({ weapon: 'Stygius', name: 'Stygius - Aspect of Zagreus' }),
 ])
 
 const store = reactive({
-  base: data.base,
   placeholder: data.placeholder,
   hover: null,
   selected: null,
@@ -605,8 +606,8 @@ function computeDamageValues(build, effect) {
       const fh = foe.status['First Hit']
       const first_min_bonus = fh ? min * (_co.first + (stats.first || 0) + _co.first_min) : 0
       const first_max_bonus = fh ? max * (_co.first + (stats.first || 0) + _co.first_max) : 0
-      effect.damage_min = Math.round((count || 1) * damage_min + first_min_bonus)
-      effect.damage_max = Math.round((count || 1) * damage_max + first_max_bonus)
+      effect.damage_min = Math.round((count || 1) * Math.round(damage_min + first_min_bonus))
+      effect.damage_max = Math.round((count || 1) * Math.round(damage_max + first_max_bonus))
     }
 
     effect.damage = (effect.damage_min === effect.damage_max)
@@ -660,18 +661,18 @@ function syncObjectChanges(target, source) {
 let stopWatch = () => null
 function compileBuild() {
   stopWatch()
-  const data_base = data.base
-  const crit = Object.create(data_base.crit)
+  const _data = data
+  const crit = Object.create(_data.crit)
   crit.stats = { ...crit.stats }
   crit.effects = []
-  const slam = Object.create(data_base.slam)
+  const slam = Object.create(_data.slam)
   slam.stats = {...slam.stats }
   slam.effects = []
 
   const build = {
-    player: copyEffect(data_base.player),
-    foe: copyEffect(data_base.foe),
-    coefficients: { ...data_base.coefficients },
+    player: copyEffect(_data.player),
+    foe: copyEffect(_data.foe),
+    coefficients: { ..._data.coefficients },
     crit,
     slam,
     gods: {},
@@ -689,7 +690,7 @@ function compileBuild() {
     },
     features: [],
     include: {},
-    exclude: {},
+    exclude: { base: true },
   }
 
   for (const trait_list of [
@@ -734,24 +735,24 @@ function compileBuild() {
     }
   }
 
-  const casts = copyEffect(data_base.casts)
+  const casts = copyEffect(_data.casts)
   applyStatus(build, casts)
   build.mods.effect.push(casts)
 
   if (player.status.Sturdy) {
-    build.mods.effect.push(data_base.sturdy)
+    build.mods.effect.push(_data.sturdy)
   }
   if (build.foe.status.Weak !== undefined && foe.status.Weak) {
-    build.mods.effect.push(copyEffect(data_base.weak))
+    build.mods.effect.push(copyEffect(_data.weak))
   }
   if (build.foe.status.Chill !== undefined) {
-    const effect = copyEffect(data_base.chill)
+    const effect = copyEffect(_data.chill)
     if (applyStatus(build, effect)) {
       build.mods.effect.push(effect)
     }
   }
   if (build.foe.status.Hangover !== undefined) {
-    const effect = copyEffect(data_base.hangover)
+    const effect = copyEffect(_data.hangover)
     if (applyStatus(build, effect))
       build.mods.effect.push(effect)
   }
@@ -799,6 +800,7 @@ function compileBuild() {
   // Set max casts to ammo
   foe['max_Casts'] = build.player.stats.ammo
 
+  window.location.hash = genHash(store)
   stopWatch = watch([store.mirror, store.traits, store.player.status, store.foe.status],
     () => { store.build = compileBuild() },
     { deep: true }
@@ -829,9 +831,64 @@ function filterTraits(props) {
   return result
 }
 
-window.trait_data = trait_data
+function genHash(store) {
+  const traits = store.traits
+  const out = []
+  for (const k in mirror) {
+    const ability = mirror[k]
+    out.push(formatValue((ability.selection) ? (18 * (ability.selection - 1)) + ability.rank : 0))
+  }
+  out.push(store.weapon.id)
+  for (const trait of traits) {
+    out.push(trait.id)
+    if (typeof trait.level === 'number') out.push(Math.min(35, trait.level).toString(36))
+    if (trait.rarity > -1 && trait.rarity < 5) out.push(Math.min(35, trait.rarity).toString(36))
+  }
+  return out.join('')
+}
+
+function applyHash(store, selectTrait) {
+  const hash = window.location.hash.substr(1)
+  if (!hash) return
+
+  let i = 0
+  // mirror :: 0:12
+  for (const k in mirror) {
+    const ability = mirror[k]
+    const input = parseInt(hash.slice(i++,i), 36)
+    ability.selection = (input > 18) ? 2 : ((input > 0) ? 1 : 0)
+    ability.rank = Math.max(1, (input % 18))
+  }
+
+  store.weapon = selectTrait({ id: hash.slice(i,(i+=2)) })
+  const traits = []
+  let t, l, r
+  console.log(i)
+  while (i < hash.length) {
+    // two characters for trait
+    console.log(hash.slice(i,i+2))
+    t = selectTrait({ id: hash.slice(i,(i+=2)) })
+    console.log(t)
+    l = r = null
+    const lv = t.level
+    if (typeof lv === 'number') {
+      t.level = parseInt(hash.slice(i++,i), 36)
+    }
+    const rv = t.rarity
+    if (rv > -1 && rv < 5) {
+      t.rarity = parseInt(hash.slice(i++,i), 36)
+    }
+    traits.push(t)
+  }
+  store.traits = traits
+}
+
 window.store = store
+
+applyHash(store, selectTrait)
 store.build = compileBuild()
+store.genHash = genHash
+store.selectTrait = selectTrait
 store.filterTraits = filterTraits
 
 export const useStore = () => store

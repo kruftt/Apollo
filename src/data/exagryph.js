@@ -297,7 +297,7 @@ export default [
       name: 'Hazard Bomb',
       type: 'effect',
       target: 'special',
-      stats: { multiply_base: 4 },
+      stats: { multiply_base: 4, multiply_radius: 0.45 },
     }],
   },
   {

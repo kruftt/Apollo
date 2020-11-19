@@ -60,8 +60,8 @@
 
 .stat_panel__name_bar {
   height: 1.5em;
-  margin: 0 1em 0.1em 0;
-  color: #222;
+  margin: 0 1em 0 0;
+  color: #282828;
   display: flex;
   flex-flow: row nowrap;
   align-items: center;
@@ -80,20 +80,19 @@
   font-weight: bold;
 }
 
-.stat_panel__effect_data + .stat_panel__name_bar {
-  margin-top: 1em;
-}
-.stat_panel__name_bar + .stat_panel__name_bar {
-  margin-top: -0.4em;
-}
-
 .stat_panel__effect_data {
   margin: 0 1.25em 0 0.25em;
   color: #bbb;
 }
-.stat_panel__effect_data + .stat_panel__effect_data {
-  margin-top: 1.2em;
-}
+
+.stat_panel__name_bar:hover { color: #444; }
+.stat_panel__name_bar:hover > .name_bar__spacer { color: #444; }
+.stat_panel__name_bar:hover > .name_bar__name { color: #444; }
+
+.stat_panel__name_bar + .stat_panel__effect_data { margin-top: 0.2em; }
+.stat_panel__effect_data + .stat_panel__effect_data { margin-top: 1.0em; }
+.stat_panel__effect_data + .stat_panel__name_bar { margin-top: 1em; }
+.stat_panel__name_bar + .stat_panel__name_bar { margin-top: -0.3em; }
 
 .stat_panel__char_data {
   margin: 0 0.5em 2em 0.5em;

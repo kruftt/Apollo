@@ -45,178 +45,132 @@ export const data =
     type: 'placeholder',
   },
 
-  base : {
-    attack: {
-      name: 'base',
-      type: 'attack',
-      icon: 'assets/traits/SlotIcon_Attack.png',
-      rarity: -1,
-    },
+  privileged: {
+    name: 'Privileged Status',
+    type: 'effect',
+    target: 'coefficients',
+    stats: { mult_base: 0.4 },
+  },
 
-    special: {
-      name: 'base',
-      type: 'special',
-      icon: 'assets/traits/SlotIcon_Secondary.png',
-      rarity: -1,
-    },
+  shadow: {
+    name: 'Shadow Presence',
+    type: 'effect',
+    target: 'coefficients',
+    stats: { backstab: 0.5 },
+    status: { target: 'player', name: 'Shadow Presence' },
+  },
 
-    cast: {
-      name: 'base',
-      type: 'cast',
-      icon: 'assets/traits/SlotIcon_Ranged.png',
-      rarity: -1,
-      abilities: [
-        { name: 'Cast', type: 'damage', trigger: 'cast', stats: { min: 50, lodge: true } },
-      ],
-    },
+  sturdy: {
+    name: 'Sturdy',
+    type: 'effect',
+    target: 'coefficients',
+    stats: { reduction: 0.3 },
+    status: { target: 'player', name: 'Sturdy' },
+  },
 
-    dash: {
-      name: 'base',
-      type: 'dash',
-      icon: 'assets/traits/SlotIcon_Dash.png',
-      rarity: -1,
+  crit: {
+    name: 'Crit',
+    type: 'damage',
+    trigger: 'crit',
+    stats: {
+      mult_base: 3,
     },
+  },
 
-    call: {
-      name: 'base',
-      type: 'call',
-      icon: 'assets/traits/SlotIcon_Wrath.png',
-      rarity: -1,
-    },
+  chill: {
+    name: 'Chill',
+    type: 'effect',
+    target: 'foe',
+    stats: { speed: -0.04 },
+    status: { name: 'Chill', target: 'foe', max_stacks: 10 },
+  },
 
-    keepsake: {
-      name: 'base',
-      type: 'keepsake',
-      rarity: -2,
-    },
+  weak: {
+    name: 'Weak',
+    type: 'effect',
+    target: 'coefficients',
+    stats: { reduction: 0.3 }
+  },
 
-    privileged: {
-      name: 'Privileged Status',
-      type: 'effect',
-      target: 'coefficients',
-      stats: { mult_base: 0.4 },
-    },
+  hangover: {
+    name: 'Hangover Stacks',
+    type: 'effect',
+    target: 'hangover',
+    stats: { count: 1 },
+    status: { name: 'Hangover', target: 'foe', max_stacks: 5 },
+  },
 
-    shadow: {
-      name: 'Shadow Presence',
-      type: 'effect',
-      target: 'coefficients',
-      stats: { backstab: 0.5 },
-      status: { target: 'player', name: 'Shadow Presence' },
-    },
+  slam: {
+    name: 'Slam',
+    type: 'slam',
+    trigger: 'knockback',
+    stats: { mult_base: 1 },
+  },
 
-    sturdy: {
-      name: 'Sturdy',
-      type: 'effect',
-      target: 'coefficients',
-      stats: { reduction: 0.3 },
-      status: { target: 'player', name: 'Sturdy' },
-    },
+  casts: {
+    name: 'Casts',
+    type: 'effect',
+    target: 'cast',
+    stats: {count: 1},
+    status: {target: 'foe', name: 'Casts', min_stacks: 1}
+  },
 
-    crit: {
-      name: 'Crit',
-      type: 'damage',
-      trigger: 'crit',
-      stats: {
-        mult_base: 3,
-      },
-    },
-
-    chill: {
-      name: 'Chill',
-      type: 'effect',
-      target: 'foe',
-      stats: { speed: -0.04 },
-      status: { name: 'Chill', target: 'foe', max_stacks: 10 },
-    },
-
-    weak: {
-      name: 'Weak',
-      type: 'effect',
-      target: 'coefficients',
-      stats: { reduction: 0.3 }
-    },
-
-    hangover: {
-      name: 'Hangover Stacks',
-      type: 'effect',
-      target: 'hangover',
-      stats: { count: 1 },
-      status: { name: 'Hangover', target: 'foe', max_stacks: 5 },
-    },
-
-    slam: {
-      name: 'Slam',
-      type: 'slam',
-      trigger: 'knockback',
-      stats: { mult_base: 1 },
-    },
-
-    casts: {
-      name: 'Casts',
-      type: 'effect',
-      target: 'cast',
-      stats: {count: 1},
-      status: {target: 'foe', name: 'Casts', min_stacks: 1}
-    },
-
-    player: {
-      name: 'Zagreus',
+  player: {
+    name: 'Zagreus',
+    dodge: 0,
+    reduction: 0,
+    stats: {
+      health: 50,
       dodge: 0,
       reduction: 0,
-      stats: {
-        health: 50,
-        dodge: 0,
-        reduction: 0,
-        speed: 1,
-        dashes: 1,
-        ammo: 1,
-      },
-      status: {
-        // 'Fiery Presence': null,
-        // 'Shadow Presence': null,
-        // 'Privileged Status': null,
-      },
+      speed: 1,
+      dashes: 1,
+      ammo: 1,
     },
+    status: {
+      // 'Fiery Presence': null,
+      // 'Shadow Presence': null,
+      // 'Privileged Status': null,
+    },
+  },
 
-    foe: {
-      name: 'Foe',
-      reduction: 0,
-      dodge: 0,
-      stats: {
-        health: 100,
-        speed: 1,
-      },
-      status: {
-        'First Hit': null,
-        'Backstab': null,
-        'Casts': null,
-      },
+  foe: {
+    name: 'Foe',
+    reduction: 0,
+    dodge: 0,
+    stats: {
+      health: 100,
+      speed: 1,
     },
+    status: {
+      'First Hit': null,
+      'Backstab': null,
+      'Casts': null,
+    },
+  },
 
-    coefficients: {
-      mult_base: 0,
-      mult_min: 0,
-      mult_max: 0,
-      first: 0,
-      first_min: 0,
-      first_max: 0,
-      backstab: 0,
-      backstab_min: 0,
-      backstab_max: 0,
-      crit: 0,  // Chance
-      crit_min: 0,  // Chance
-      crit_max: 0,  // Chance
-      reduction: 0,
-      dodge: 0,
-      restoration: 0,
-      gauge_start: 0,
-      gauge_charge: 0,
-      gauge_deal: 0,
-      gauge_take: 0,
-      gauge_crit: 0,
-      gauge_auto: 0,
-    },
+  coefficients: {
+    mult_base: 0,
+    mult_min: 0,
+    mult_max: 0,
+    first: 0,
+    first_min: 0,
+    first_max: 0,
+    backstab: 0,
+    backstab_min: 0,
+    backstab_max: 0,
+    crit: 0,  // Chance
+    crit_min: 0,  // Chance
+    crit_max: 0,  // Chance
+    reduction: 0,
+    dodge: 0,
+    restoration: 0,
+    gauge_start: 0,
+    gauge_charge: 0,
+    gauge_deal: 0,
+    gauge_take: 0,
+    gauge_crit: 0,
+    gauge_auto: 0,
   },
 
   mirror: {
@@ -247,6 +201,45 @@ export const data =
   },
 
   traits : [
+    {
+      name: 'base',
+      type: 'attack',
+      icon: 'assets/traits/SlotIcon_Attack.png',
+      rarity: -1,
+    },
+    {
+      name: 'base',
+      type: 'special',
+      icon: 'assets/traits/SlotIcon_Secondary.png',
+      rarity: -1,
+    },
+    {
+      name: 'base',
+      type: 'cast',
+      icon: 'assets/traits/SlotIcon_Ranged.png',
+      rarity: -1,
+      abilities: [
+        { name: 'Cast', type: 'damage', trigger: 'cast', stats: { min: 50, lodge: true } },
+      ],
+    },
+    {
+      name: 'base',
+      type: 'dash',
+      icon: 'assets/traits/SlotIcon_Dash.png',
+      rarity: -1,
+    },
+    {
+      name: 'base',
+      type: 'call',
+      icon: 'assets/traits/SlotIcon_Wrath.png',
+      rarity: -1,
+    },
+    {
+      name: 'base',
+      type: 'keepsake',
+      rarity: -2,
+    },
+
     ...stygius,
     ...varatha,
     ...aegis,

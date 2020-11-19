@@ -184,24 +184,25 @@ export default {
   props: { active: Boolean, trait: Object, cb: Function },
   setup (props) {
     const remove = () => {
-      switch(props.trait.type) {
+      const t = props.trait.type
+      switch(t) {
         case 'attack':
-          store.traits.splice(0, 1, store.base.attack)
+          store.traits.splice(0, 1, store.selectTrait({type: t, name: 'base'}))
           break
         case 'special':
-          store.traits.splice(1, 1, store.base.special)
+          store.traits.splice(1, 1, store.selectTrait({type: t, name: 'base'}))
           break
         case 'cast':
-          store.traits.splice(2, 1, store.base.cast)
+          store.traits.splice(2, 1, store.selectTrait({type: t, name: 'base'}))
           break
         case 'dash':
-          store.traits.splice(3, 1, store.base.dash)
+          store.traits.splice(3, 1, store.selectTrait({type: t, name: 'base'}))
           break
         case 'call':
-          store.traits.splice(4, 1, store.base.call)
+          store.traits.splice(4, 1, store.selectTrait({type: t, name: 'base'}))
           break
         case 'keepsake':
-          store.traits.splice(5, 1, store.base.keepsake)
+          store.traits.splice(5, 1, store.selectTrait({type: t, name: 'base'}))
           break
         case 'hammer':
         case 'primary':
