@@ -107,13 +107,13 @@ export const data =
     stats: { mult_base: 1 },
   },
 
-  casts: {
-    name: 'Casts',
-    type: 'effect',
-    target: 'cast',
-    stats: {count: 1},
-    status: {target: 'foe', name: 'Casts', min_stacks: 1}
-  },
+  // casts: {
+  //   name: 'Casts',
+  //   type: 'effect',
+  //   target: 'cast',
+  //   stats: {count: 1},
+  //   status: {target: 'foe', name: 'Casts'}
+  // },
 
   player: {
     name: 'Zagreus',
@@ -145,7 +145,7 @@ export const data =
     status: {
       'First Hit': null,
       'Backstab': null,
-      'Casts': null,
+      // 'Casts': null,
     },
   },
 

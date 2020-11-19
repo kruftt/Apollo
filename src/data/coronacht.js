@@ -86,11 +86,12 @@ export default [
         stats: { duration: [-5, -7, -8.33, -8.85, -10]},
       },
       {
-        name: 'Triggers Cast',
+        name: 'Aspect of Hera',
         type: 'effect',
         target: 'attack',
         stats: { triggers: 'cast' },
         status: { name: 'Loaded', target: 'player' },
+        // status: { name: 'Casts', target: 'foe' },
       },
     ],
   },

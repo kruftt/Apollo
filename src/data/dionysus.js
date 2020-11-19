@@ -77,19 +77,20 @@ export default [
     description: (stats) =>
       '<div>Your<b>Cast</b>damages foes around you, leaving behind<b>Festive Fog.</b></div>' +
       `<div>▶ Blast Damage:<div><span>${ fv(stats.min) }</span></div></div>`,
-    abilities: [{
-      name: 'Trippy Flare',
-      type: 'trippy',
-      trigger: 'cast',
-      stats: { min: [120,148,172,196], radius: 400 },
-      pom: pom_6,
-    },],
     effects: [{
-      name: 'Festive Fog',
-      type: 'festive',
-      trigger: 'trippy',
-      stats: { duration: 5, interval: 0.25, radius: 400, stun: true },
-    },],
+        name: 'Trippy Flare',
+        type: 'trippy',
+        trigger: 'dragon',
+        stats: { min: [120,148,172,196], radius: 400 },
+        pom: pom_6,
+      },
+      {
+        name: 'Festive Fog',
+        type: 'festive',
+        trigger: 'trippy',
+        stats: { duration: 5, interval: 0.25, radius: 400, stun: true },
+      },
+    ],
   },
   {
     name: 'Drunken Dash',

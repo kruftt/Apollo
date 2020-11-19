@@ -82,10 +82,10 @@ export default [
     description: (stats) =>
       `<div>Your<b>Cast</b>causes a lightning bolt to strike nearby foes.</div>` +
       `<div>▶ Cast Damage:<div><span>${ fv(stats.min) }</span></div></div>`,
-    abilities: [{
+    effects: [{
       name: 'Thunder Flare',
       type: 'bolt',
-      trigger: 'cast',
+      trigger: 'dragon',
       stats: { min: [60, 72, 84, 96] },
       pom: pom_4,
     },],

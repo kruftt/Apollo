@@ -66,7 +66,7 @@ export default [
     description: (stats) =>
       '<div>Your<b>Cast</b>damages foes around you and knocks them away.</div>' +
       `<div>▶ Cast Damage:<div><span>${ fv(stats.min) }</span></div></div>`,
-    abilities: [{name: 'Flood Shot', type: 'flood', trigger: 'cast', stats: { min: [60,72,84,96], radius: 500, knockback: true }, pom: pom_6}],
+    effects: [{name: 'Flood Shot', type: 'flood', trigger: 'dragon', stats: { min: [60,72,84,96], radius: 500, knockback: true }, pom: pom_6}],
   },
   {
     name: 'Tidal Dash',

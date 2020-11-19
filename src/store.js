@@ -493,6 +493,7 @@ function applyEffectMods(build, mods) {
           break
         case 'cast':
           applyEffectMod(build.abilities.cast, mod)
+          applyEffectMod(build.effects.dragon, mod)
           break
         case 'call':
           applyEffectMod(build.abilities.call, mod)
@@ -735,9 +736,9 @@ function compileBuild() {
     }
   }
 
-  const casts = copyEffect(_data.casts)
-  applyStatus(build, casts)
-  build.mods.effect.push(casts)
+  // const casts = copyEffect(_data.casts)
+  // applyStatus(build, casts)
+  // build.mods.effect.push(casts)
 
   if (player.status.Sturdy) {
     build.mods.effect.push(_data.sturdy)
@@ -777,6 +778,11 @@ function compileBuild() {
   linkEffects(build, build.abilities, true)
   linkEffects(build, build.effects)
 
+  // If Hera, replace cast
+  if (build.mods.effect.reduce((hera, mod) => hera || mod.name === 'Aspect of Hera', false)) {
+    build.abilities.cast = [{ name: 'Load Ammo', type: 'event', trigger: 'cast', stats: { count: build.foe.status.Casts }, effects: []}]
+  }
+
   // Cap any status stacks
   for (const key in player.status) {
     const max = build.player[`max_${key}`]
@@ -798,7 +804,7 @@ function compileBuild() {
   syncObjectChanges(foe, build.foe)
 
   // Set max casts to ammo
-  foe['max_Casts'] = build.player.stats.ammo
+  // foe['max_Casts'] = build.player.stats.ammo
 
   window.location.hash = genHash(store)
   stopWatch = watch([store.mirror, store.traits, store.player.status, store.foe.status],

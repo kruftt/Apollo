@@ -76,10 +76,10 @@ export default [
     description: (stats) =>
     '<div>Your<b>Cast</b>damages foes around you, with a 10% <b>Critical</b> chance.</div>' +
       `<div>▶ Cast Damage:<div><span>${ fv(stats.min) }</span></div></div>`,
-    abilities: [{
+    effects: [{
       name: "Hunter's Flare",
       type: 'hunters',
-      trigger: 'cast',
+      trigger: 'dragon',
       stats: { min: [55, 62.975, 70.95, 78.925], crit: 0.1, lodge: true },
       pom: pom_6,
     }],
@@ -215,7 +215,7 @@ export default [
     prereqs: {Artemis: ['Deadly Flourish', 'Deadly Strike', 'Pressure Points', 'True Shot' ]},
     description: (stats) =>
       '<div>Your<b>God Gauge</b>charges faster when you deal<b>Critical</b>damage.</div>' +
-      `<div>▶ Faster Gauge Gain on Critical:<div><span>+${ fp(stats.gauge) }%</span></div></div>`,
+      `<div>▶ Faster Gauge Gain on Critical:<div><span>+${ fp(stats.gauge_crit) }%</span></div></div>`,
     mods: [{
       name: 'Hunter Instinct',
       type: 'effect',

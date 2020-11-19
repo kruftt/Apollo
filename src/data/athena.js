@@ -90,14 +90,16 @@ export default [
     description: (stats) =>
       '<div>Your<b>Cast</b>damages foes around you, and can <b>Deflect.</b></div>' +
       `<div>▶ Cast Damage:<div><span>${ fv(stats.min) }</span></div></div>`,
-    abilities: [{
-      name: 'Phalanx Flare',
-      type: 'phalanx',
-      trigger: 'cast',
-      stats: { min: [80, 90, 100, 110] },
-      pom: pom_6,
-    }],
-    effects: [deflect('phalanx')],
+    effects: [
+      {
+        name: 'Phalanx Flare',
+        type: 'phalanx',
+        trigger: 'dragon',
+        stats: { min: [80, 90, 100, 110] },
+        pom: pom_6,
+      },
+      deflect('phalanx'),
+    ],
   },
   {
     name: 'Divine Dash',

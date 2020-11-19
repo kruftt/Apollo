@@ -87,7 +87,7 @@ export default [
       '<div>Your<b>Cast</b>sends a large<b>Blade Rift</b>hurling ahead.</div>' +
       `<div>▶ Rift Damage per Hit:<div><span>${ fv(stats.min) }</span></div></div>`,
     effects: [{
-      name: 'Blade Rift',
+      name: 'Slicing Flare',
       type: 'rift',
       trigger: 'dragon',
       stats: { min: [30,36,42,48], duration: 4, interval: 0.1, radius: 200 },

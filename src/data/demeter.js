@@ -91,10 +91,10 @@ export default [
     description: (stats) =>
       '<div>Your<b>Cast</b>damages foes around you and inflicts<b>Chill.</b></div>' +
       `<div>▶ Cast Damage:<div><span>${ fv(stats.min, null, 1) }</span></div></div>`,
-    abilities: [{
+    effects: [{
       name: 'Icy Flare',
       type: 'flare',
-      trigger: 'cast',
+      trigger: 'dragon',
       stats: { min: [70, 80, 90, 100] },
       pom: pom(0.2, 0.1)
     }],
