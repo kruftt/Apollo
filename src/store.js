@@ -861,14 +861,13 @@ function applyHash(store, selectTrait) {
   }
 
   store.weapon = selectTrait({ id: hash.slice(i,(i+=2)) })
-  const traits = []
+  // const _traits = []
+  const _traits = traits
+  _traits.length = 0
   let t, l, r
-  console.log(i)
   while (i < hash.length) {
     // two characters for trait
-    console.log(hash.slice(i,i+2))
     t = selectTrait({ id: hash.slice(i,(i+=2)) })
-    console.log(t)
     l = r = null
     const lv = t.level
     if (typeof lv === 'number') {
@@ -878,9 +877,9 @@ function applyHash(store, selectTrait) {
     if (rv > -1 && rv < 5) {
       t.rarity = parseInt(hash.slice(i++,i), 36)
     }
-    traits.push(t)
+    _traits.push(t)
   }
-  store.traits = traits
+  // store.traits = traits
 }
 
 window.store = store
