@@ -1,4 +1,4 @@
-import { fv, fp, pom, pom_4, pom_6, pom_8 } from './util'
+import { beowolf_cast_exclusions, fv, fp, pom, pom_4, pom_6, pom_8 } from './util'
 
 // const deflect = {
 //   name: 'Deflect',
@@ -86,6 +86,7 @@ export default [
     god: 'Athena',
     rarity: 0,
     level: 1,
+    exclude: beowolf_cast_exclusions,
     description: (stats) =>
       '<div>Your<b>Cast</b>damages foes around you, and can <b>Deflect.</b></div>' +
       `<div>▶ Cast Damage:<div><span>${ fv(stats.min) }</span></div></div>`,
@@ -217,8 +218,8 @@ export default [
       '<div>You begin each<b>Encounter</b>with your<b>God Gauge</b>partly full.</div>' +
       `<div>▶ Starting Gauge:<div><span>+${ fp(stats.gauge_start) }%</span></div></div>`,
     feature: (stats) => `Begin each <b>Encounter</b> with your <b>God Gauge</b> <span>${ fp(stats.gauge_start) }%</span> full.`,
-    effects: [{
-      name: 'Proud Bearing', type: 'buff', trigger: 'start', stats: { gauge_start: [0.2, 0.25, 0.3, 0.4] }, pom: pom(0.5),
+    mods: [{
+      name: 'Proud Bearing', type: 'effect', target: 'coefficients', stats: { gauge_start: [0.2, 0.25, 0.3, 0.4] }, pom: pom(0.5),
     }],
   },
   {

@@ -1,4 +1,4 @@
-import { fv, fp, pom, pom_3, pom_4, pom_6, pom_8 } from './util'
+import { beowolf_cast_exclusions, fv, fp, pom, pom_3, pom_4, pom_6, pom_8 } from './util'
 
 const doom_status = { name: 'Doom', target: 'foe' }
 
@@ -82,6 +82,7 @@ export default [
     god: 'Ares',
     rarity: 0,
     level: 1,
+    exclude: beowolf_cast_exclusions,
     description: (stats) =>
       '<div>Your<b>Cast</b>sends a large<b>Blade Rift</b>hurling ahead.</div>' +
       `<div>▶ Rift Damage per Hit:<div><span>${ fv(stats.min) }</span></div></div>`,

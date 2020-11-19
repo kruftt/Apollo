@@ -1,4 +1,4 @@
-import { fv, fp, pom, pom_4, pom_6 } from './util'
+import { beowolf_cast_exclusions, fv, fp, pom, pom_4, pom_6 } from './util'
 
 const _hangover = {
   name: 'Hangover',
@@ -73,6 +73,7 @@ export default [
     god: 'Dionysus',
     rarity: 0,
     level: 1,
+    exclude: beowolf_cast_exclusions,
     description: (stats) =>
       '<div>Your<b>Cast</b>damages foes around you, leaving behind<b>Festive Fog.</b></div>' +
       `<div>▶ Blast Damage:<div><span>${ fv(stats.min) }</span></div></div>`,

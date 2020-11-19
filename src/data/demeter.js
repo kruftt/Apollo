@@ -1,4 +1,4 @@
-import { fv, fp, pom, pom_4, pom_8 } from './util'
+import { beowolf_cast_exclusions, fv, fp, pom, pom_4, pom_8 } from './util'
 
 export const chill = {
   name: 'Chill',
@@ -87,6 +87,7 @@ export default [
     rarity: 0,
     level: 1,
     threshold: 2,
+    exclude: beowolf_cast_exclusions,
     description: (stats) =>
       '<div>Your<b>Cast</b>damages foes around you and inflicts<b>Chill.</b></div>' +
       `<div>▶ Cast Damage:<div><span>${ fv(stats.min, null, 1) }</span></div></div>`,

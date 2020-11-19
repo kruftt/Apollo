@@ -1,4 +1,4 @@
-import { fv, fp, pom, pom_4, pom_6, pom_8, } from './util'
+import { beowolf_cast_exclusions, fv, fp, pom, pom_4, pom_6, pom_8, } from './util'
 
 function weak(trigger) {
   return {
@@ -81,6 +81,7 @@ export default [
     god: 'Aphrodite',
     rarity: 0,
     level: 1,
+    exclude: beowolf_cast_exclusions,
     description: (stats) =>
       '<div>Your<b>Cast</b>damages foes around you and inflicts<b>Weak.</b></div>' +
       `<div>▶ Cast Damage:<div><span>${fv(stats.min)}</span></div></div>`,

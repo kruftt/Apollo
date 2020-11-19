@@ -17,6 +17,9 @@
         <img src="/assets/ChargeIcon.png" class="effect_data__icon effect_data__thin_icon" />
         &nbsp;{{ fv(effect.stats.charge, null, 2) }}s
       </div>
+      <div title="Piercing"  v-if="effect.stats.pierce" class="effect_data__info">
+        <img src="/assets/PierceIcon.png" class="effect_data__icon" />
+      </div>
       <div title="Increased Damage Taken" v-if="effect.stats.multiplier" class="effect_data__info" >
         <img src="/assets/ShieldIcon.png" class="effect_data__icon" />
         &nbsp;{{ `-${fp(effect.stats.multiplier)}%` }}

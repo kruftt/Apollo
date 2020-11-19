@@ -1,4 +1,4 @@
-import { fv, fp, pom, pom_2, pom_4, pom_6 } from './util'
+import { beowolf_cast_exclusions, fv, fp, pom, pom_2, pom_4, pom_6 } from './util'
 
 export default [
   {
@@ -72,6 +72,7 @@ export default [
     god: 'Artemis',
     rarity: 0,
     level: 1,
+    exclude: beowolf_cast_exclusions,
     description: (stats) =>
     '<div>Your<b>Cast</b>damages foes around you, with a 10% <b>Critical</b> chance.</div>' +
       `<div>▶ Cast Damage:<div><span>${ fv(stats.min) }</span></div></div>`,
@@ -218,8 +219,8 @@ export default [
     mods: [{
       name: 'Hunter Instinct',
       type: 'effect',
-      target: 'crit',
-      stats: { gauge: [0.25, 0.3, 0.35, 0.4] },
+      target: 'coefficients',
+      stats: { gauge_crit: [0.25, 0.3, 0.35, 0.4] },
       pom: pom_4,
     }],
   },

@@ -10,6 +10,7 @@ import exagryph from './exagryph'
 import hermes from './hermes'
 import malphon from './malphon'
 import poseidon from './poseidon'
+import shop from './shop'
 import stygius from './stygius'
 import varatha from './varatha'
 import aegis from './aegis'
@@ -200,6 +201,12 @@ export const data =
       reduction: 0,
       dodge: 0,
       restoration: 0,
+      gauge_start: 0,
+      gauge_charge: 0,
+      gauge_deal: 0,
+      gauge_take: 0,
+      gauge_crit: 0,
+      gauge_auto: 0,
     },
   },
 
@@ -254,6 +261,8 @@ export const data =
     ...poseidon,
     ...zeus,
     ...duo,
+
+    ...shop,
   ]
 }
 

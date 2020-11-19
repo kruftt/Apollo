@@ -1,4 +1,4 @@
-import { fv, fp, pom, pom_4, pom_6, pom_8 } from './util'
+import { beowolf_cast_exclusions, fv, fp, pom, pom_4, pom_6, pom_8 } from './util'
 
 export default [
   {
@@ -78,6 +78,7 @@ export default [
     god: 'Zeus',
     rarity: 0,
     level: 1,
+    exclude: beowolf_cast_exclusions,
     description: (stats) =>
       `<div>Your<b>Cast</b>causes a lightning bolt to strike nearby foes.</div>` +
       `<div>▶ Cast Damage:<div><span>${ fv(stats.min) }</span></div></div>`,
@@ -242,14 +243,14 @@ export default [
     prereqs: { Call: ["Aphrodite's Aid", "Ares' Aid", "Artemis' Aid", "Athena's Aid", "Demeter's Aid", "Dionysus' Aid", "Poseidon's Aid", "Zeus' Aid"] },
     description: (stats) =>
       `<div>Your<b>God Gauge</b>charges faster when you deal or take damage.</div>` +
-      `<div>▶ Wrath Gain:<div><span>+${ fp(stats.gauge) }%</span></div></div>`,
+      `<div>▶ Wrath Gain:<div><span>+${ fp(stats.gauge_charge) }%</span></div></div>`,
     feature: (stats) =>
-      `Your<b class="Zeus">God Gauge</b>charges <span>${ fp(stats.gauge) }%</span> faster when you deal or take damage.`,
+      `Your<b class="Zeus">God Gauge</b>charges <span>${ fp(stats.gauge_charge) }%</span> faster when you deal or take damage.`,
     mods: [{
       name: 'Clouded Judgment',
       type: 'effect',
       target: 'coefficients',
-      stats: { gauge: [0.1,0.12,0.14,0.16] },
+      stats: { gauge_charge: [0.1,0.12,0.14,0.16] },
       pom: pom_4,
     }],
   },

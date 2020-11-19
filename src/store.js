@@ -193,7 +193,7 @@ function extractTrait(trait, build) {
 
   // register inclusions/exclusions
   build.include[trait.name] = true
-  if (trait.type !== 'weapon' && trait.god !== 'Chaos')
+  if (trait.type !== 'weapon' && 'ChaosCharon'.indexOf(trait.god) === -1)
     build.exclude[trait.name] = true
   const exclude = trait.exclude
   exclude && exclude.reduce((a, v) => {
@@ -377,6 +377,9 @@ function applyEffectMod(effects, mod) {
     for (k in mod_stats) {
       const mvalue = mod_stats[k]
       switch (k) {
+        case 'triggers':
+          effect.triggers = mod_stats[k]
+          break
         case 'count':
           // cap local count to effect.status.max_stacks || 666
           effect_stats[k] = Math.min((effect.stats[k] || 0) + mvalue, ((effect.status && effect.status.max_stacks) || 666))
@@ -546,6 +549,11 @@ function linkEffects(build, effect_data, is_ability_data = false) {
         if (secondary_effects)
           effect.effects.push(...secondary_effects)
       }
+
+      // 'triggers' prop to trigger another ability (hera -> cast)
+      secondary_effects = build.abilities[effect.triggers]
+      if (secondary_effects)
+        effect.effects.push(...secondary_effects)
 
       computeDamageValues(build, effect)
     }

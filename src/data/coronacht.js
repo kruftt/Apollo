@@ -84,7 +84,14 @@ export default [
         type: 'effect',
         target: 'dislodge',
         stats: { duration: [-5, -7, -8.33, -8.85, -10]},
-      }
+      },
+      {
+        name: 'Triggers Cast',
+        type: 'effect',
+        target: 'attack',
+        stats: { triggers: 'cast' },
+        status: { name: 'Loaded', target: 'player' },
+      },
     ],
   },
   {

@@ -1,4 +1,4 @@
-import { fv, fp, pom, pom_2, pom_4, pom_6 } from './util'
+import { beowolf_cast_exclusions, fv, fp, pom, pom_2, pom_4, pom_6 } from './util'
 
 export default [
   {
@@ -62,6 +62,7 @@ export default [
     god: 'Poseidon',
     rarity: 0,
     level: 1,
+    exclude: beowolf_cast_exclusions,
     description: (stats) =>
       '<div>Your<b>Cast</b>damages foes around you and knocks them away.</div>' +
       `<div>▶ Cast Damage:<div><span>${ fv(stats.min) }</span></div></div>`,
@@ -210,14 +211,14 @@ export default [
     prereqs: { Call: ["Aphrodite's Aid", "Ares' Aid", "Artemis' Aid", "Athena's Aid", "Demeter's Aid", "Dionysus' Aid", "Poseidon's Aid", "Zeus' Aid"] },
     description: (stats) =>
       `<div>Your<b>God Gauge</b>charges faster when you take damage.</div>` +
-      `<div>▶ Faster Gauge Gain When Hit:<div><span>+${ fp(stats.gauge_hit) }%</span></div></div>`,
+      `<div>▶ Faster Gauge Gain When Hit:<div><span>+${ fp(stats.gauge_take) }%</span></div></div>`,
     feature: (stats) =>
-      `<b>God Gauge</b> charges <span>${ fp(stats.gauge_hit) }%</span> faster when you take damage.`,
+      `<b>God Gauge</b> charges <span>${ fp(stats.gauge_take) }%</span> faster when you take damage.`,
     mods: [{
       name: 'Boiling Point',
       type: 'effect',
       target: 'coefficients',
-      stats: { gauge_hit: [0.4, 0.5, 0.6, 0.7] },
+      stats: { gauge_take: [0.4, 0.5, 0.6, 0.7] },
       pom: pom_4,
     },],
   },

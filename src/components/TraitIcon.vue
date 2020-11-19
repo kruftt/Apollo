@@ -47,6 +47,7 @@ export default {
       const r = props.trait.rarity
       if (r !== undefined) {
         switch (r) {
+          case -5: return null
           case -3: return 'assets/frames/special_hammer.png'
           case -2: return 'assets/frames/Keepsake_Backing_Edit.png'
           case -1: return 'assets/frames/primary.png'

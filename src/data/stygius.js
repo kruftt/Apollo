@@ -99,7 +99,7 @@ export default [
     mods: [
       {
         name: 'Breaching Slash',
-        type: 'damage',
+        type: 'effect',
         target: 'attack',
         stats: { mult_base: 3 },
         status: { target: 'foe', name: 'Armored' },

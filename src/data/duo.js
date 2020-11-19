@@ -500,7 +500,10 @@ export default [
       `<div>Your<b>God Gauge</b>charges up automatically, but is capped at<span>25%</span></div>` +
       `<div>▶ Auto Gauge Gain:<div><span>1%</span>every 0.2 Sec.</div></div>`,
     feature: (stats) =>
-      `<b>God Gauge</b> charges automatically, but is capped at <span>25%</span>`
+      `<b>God Gauge</b> charges automatically, but is capped at <span>25%</span>`,
+    mods: [
+      { name: 'Smoldering Air', type: 'effect', target: 'coefficients', stats: { gauge_auto: 0.01 } },
+    ],
   },
   {
     name: 'Curse of Nausea',

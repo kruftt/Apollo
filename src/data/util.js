@@ -1,5 +1,6 @@
 export const beowolf_traits = ['Passion Flare', 'Phalanx Flare', 'Slicing Flare', "Hunter's Flare", 'Icy Flare', 'Trippy Flare', 'Flood Flare', 'Thunder Flare' ]
 export const beowolf_exclusions = ['Crush Shot', 'Phalanx Shot', 'Slicing Shot', 'True Shot', 'Crystal Beam', 'Trippy Shot', 'Flood Shot', 'Electric Shot']
+export const beowolf_cast_exclusions = ['Aegis - Aspect of Zagreus', 'Aegis - Aspect of Chaos', 'Aegis - Aspect of Zeus', 'Coronacht', 'Exagryph', 'Malphon', 'Stygius', 'Varatha' ]
 
 export function fv(a, b, d = 0) {
   const p = Math.pow(10, d)
