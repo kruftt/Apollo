@@ -239,7 +239,7 @@ export default [
         name: 'Charged Flight',
         type: 'effect',
         target: 'special',
-        stats: { mult_max: 2 },
+        stats: { charge: 0.72, multiply_min: 1.08, multiply_max: 3 },
       },
     ],
   },

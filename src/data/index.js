@@ -152,6 +152,14 @@ export const data =
       stats: { mult_base: 1 },
     },
 
+    casts: {
+      name: 'Casts',
+      type: 'effect',
+      target: 'cast',
+      stats: {count: 1},
+      status: {target: 'foe', name: 'Casts', min_stacks: 1}
+    },
+
     player: {
       name: 'Zagreus',
       dodge: 0,
@@ -182,6 +190,7 @@ export const data =
       status: {
         'First Hit': null,
         'Backstab': null,
+        'Casts': null,
       },
     },
 
@@ -212,7 +221,7 @@ export const data =
 
   mirror: {
     presence: [
-      { name: 'Shadow Presence', target: 'coefficients', stats: { backstab: 0.1 }},
+      { name: 'Shadow Presence', target: ['attack', 'special'], stats: { backstab: 0.1 }},
       { name: 'Fiery Presence', target: ['attack', 'special'], stats: { first: 0.15 }},
     ],
     reflex: [

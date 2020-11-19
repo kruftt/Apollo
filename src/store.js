@@ -734,7 +734,9 @@ function compileBuild() {
     }
   }
 
-
+  const casts = copyEffect(data_base.casts)
+  applyStatus(build, casts)
+  build.mods.effect.push(casts)
 
   if (player.status.Sturdy) {
     build.mods.effect.push(data_base.sturdy)
@@ -793,6 +795,9 @@ function compileBuild() {
   build.player.stats.reduction += (build.coefficients.reduction + build.foe.reduction + build.player.dodge)
   syncObjectChanges(player, build.player)
   syncObjectChanges(foe, build.foe)
+
+  // Set max casts to ammo
+  foe['max_Casts'] = build.player.stats.ammo
 
   stopWatch = watch([store.mirror, store.traits, store.player.status, store.foe.status],
     () => { store.build = compileBuild() },
