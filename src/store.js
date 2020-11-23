@@ -15,10 +15,12 @@ const watchPrereqs = (prereqs) =>
     return a
   }, {})
 
+const traits_by_id = {}
 // Make trait data reactive and add inclusion/exlusion properties
 const trait_data = data.traits.map((t, i) => {
   const trait = reactive(t)
   trait.id = formatId(i)
+  traits_by_id[trait.id] = trait
   const prereqs = t.prereqs
   trait.prereqs = (prereqs)
     ? Object.keys(prereqs).reduce((p, k) => {
@@ -866,14 +868,17 @@ function applyHash(store, selectTrait) {
     ability.rank = Math.max(1, (input % 18))
   }
 
-  store.weapon = selectTrait({ id: hash.slice(i,(i+=2)) })
+  // store.weapon = selectTrait({ id: hash.slice(i,(i+=2)) })
+  store.weapon = wrapTrait(traits_by_id[hash.slice(i,(i+=2))])
+
   // const _traits = []
   const _traits = traits
   _traits.length = 0
   let t, l, r
   while (i < hash.length) {
     // two characters for trait
-    t = selectTrait({ id: hash.slice(i,(i+=2)) })
+    // t = selectTrait({ id: hash.slice(i,(i+=2)) })
+    t = wrapTrait(traits_by_id[hash.slice(i,(i+=2))])
     l = r = null
     const lv = t.level
     if (typeof lv === 'number') {
@@ -888,6 +893,52 @@ function applyHash(store, selectTrait) {
   // store.traits = traits
 }
 
+
+const socket = ref(null)
+const connection_status = ref('disconnected')
+
+const search = function () {
+  connection_status.value = 'searching'
+  const _socket = socket.value = new WebSocket("ws://localhost:55666", 'Apollo');
+  _socket.addEventListener('message', message_cb)
+  _socket.addEventListener('open', open_cb)
+  _socket.addEventListener('close', close_cb)
+}
+
+let searching = false
+const open_cb = function () {
+  connection_status.value = 'connected'
+  console.log('connected to ApolloLive')
+}
+const close_cb = function () {
+  connection_status.value = 'disconnected';
+  console.log('diconnected from ApolloLive')
+  if (searching) {
+    search()
+  }
+}
+
+const message_cb = function (event) {
+  console.log('ApolloLive: ', JSON.parse(event.data).nil);
+}
+
+function toggle_connection () {
+  searching = !searching
+  if (searching) {
+    search()
+  } else {
+    socket.value.close()
+  }
+
+
+  // let _socket = socket.value
+  // if (!_socket || _socket.readyState === 3) {
+  //   attempt_connection()
+  // } else if (_socket.readyState === 1) {
+  //   _socket.close()
+  // }
+}
+
 window.store = store
 
 applyHash(store, selectTrait)
@@ -895,6 +946,8 @@ store.build = compileBuild()
 store.genHash = genHash
 store.selectTrait = selectTrait
 store.filterTraits = filterTraits
+store.toggle_connection = toggle_connection
+store.connection_status = connection_status
 
 export const useStore = () => store
 export default useStore
