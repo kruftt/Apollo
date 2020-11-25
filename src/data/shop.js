@@ -2,16 +2,17 @@ import { fp, fv } from './util'
 
 export default [
   {
-    name: 'Charon',
+    name: 'Shop',
     type: 'god',
     icon: 'assets/shop/Gameplay_WellShop_01.png',
   },
   // &nbsp;<img src="/Apollo/assets/Currency_Small.png" />&nbsp;
   {
     name: 'Aether Net',
+    title: 'TemporaryPreloadSuperGenerationTrait',
     type: 'secondary',
     icon: 'assets/shop/net_20.png',
-    god: 'Charon',
+    god: 'Shop',
     rarity: -5,
     description: (stats) =>
       `<div>Your<b>God Gauge<b>starts with<span>+${ fp(stats.gauge_start) }%</span></b></div>`,
@@ -25,9 +26,10 @@ export default [
   },
   {
     name: 'Braid of Atlas',
+    title: 'TemporaryImprovedRangedTrait',
     type: 'secondary',
     icon: 'assets/shop/braid_of_atlas_04.png',
-    god: 'Charon',
+    god: 'Shop',
     rarity: -5,
     description: (stats) =>
       `<div>Your<b>Cast</b>deals<span>+${ fp(stats.mult_base) }%</span>damage.</div>`,
@@ -40,9 +42,10 @@ export default [
   },
   {
     name: 'Chimaera Jerky',
+    title: 'TemporaryImprovedSecondaryTrait',
     type: 'secondary',
     icon: 'assets/shop/jerky_22.png',
-    god: 'Charon',
+    god: 'Shop',
     rarity: -5,
     description: (stats) =>
       `<div>Your<b>Special</b>deals<span>+${ fp(stats.mult_base) }%</span>damage.</div>`,
@@ -55,9 +58,10 @@ export default [
   },
   {
     name: 'Cyclops Jerky',
+    title: 'TemporaryImprovedWeaponTrait',
     type: 'secondary',
     icon: 'assets/shop/cyclops_jerky_01.png',
-    god: 'Charon',
+    god: 'Shop',
     rarity: -5,
     description: (stats) =>
       `<div>Your<b>Attack</b>deals<span>+${ fp(stats.mult_base) }%</span>damage.</div>`,
@@ -70,9 +74,10 @@ export default [
   },
   {
     name: 'Cyclops Jerky Select',
+    title: 'TemporaryImprovedWeaponTrait_Patroclus',
     type: 'secondary',
     icon: 'assets/shop/cyclops_jerky_01.png',
-    god: 'Charon',
+    god: 'Shop',
     rarity: -5,
     description: (stats) =>
       `<div>Your<b>Attack</b>deals<span>+${ fp(stats.mult_base) }%</span>damage.</div>`,
@@ -85,9 +90,10 @@ export default [
   },
   {
     name: 'Eris Bangle',
+    title: 'TemporaryAlphaStrikeTrait',
     type: 'secondary',
     icon: 'assets/shop/bangle_14.png',
-    god: 'Charon',
+    god: 'Shop',
     rarity: -5,
     description: (stats) =>
       `<div>You deal<span>+50%</span>damage striking<b>undamaged</b>foes.</div>`,
@@ -101,9 +107,10 @@ export default [
   },
   {
     name: 'Ignited Ichor',
+    title: 'TemporaryMoveSpeedTrait',
     type: 'secondary',
     icon: 'assets/shop/ignited_ichor_09.png',
-    god: 'Charon',
+    god: 'Shop',
     rarity: -5,
     description: (stats) =>
       `<div>Gain<span>20%</span>move speed.</div>`,
@@ -116,9 +123,10 @@ export default [
   },
   {
     name: 'Nail of Talos',
+    title: 'TemporaryArmorDamageTrait',
     type: 'secondary',
     icon: 'assets/shop/nail_19.png',
-    god: 'Charon',
+    god: 'Shop',
     rarity: -5,
     description: (stats) =>
       `<div>You deal<span>+50%</span>damage to<b>Armor.</b></div>`,
@@ -132,9 +140,10 @@ export default [
   },
   {
     name: 'Nemesis Crest',
+    title: 'TemporaryBackstabTrait',
     type: 'secondary',
     icon: 'assets/shop/brooch_15.png',
-    god: 'Charon',
+    god: 'Shop',
     rarity: -5,
     description: (stats) =>
       `<div>You deal +50% damage striking foes from behind.</div>`,
@@ -147,9 +156,10 @@ export default [
   },
   {
     name: 'Prometheus Stone',
+    title: 'TemporaryMoreAmmoTrait',
     type: 'secondary',
     icon: 'assets/shop/prometheus_stone_03.png',
-    god: 'Charon',
+    god: 'Shop',
     rarity: -5,
     description: (stats) =>
       `<div>Gain +1&nbsp;<img src="/Apollo/assets/AmmoIcon.png"/>&nbsp;for your Cast.</div>`,

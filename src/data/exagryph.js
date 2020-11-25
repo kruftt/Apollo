@@ -10,6 +10,7 @@ function fire(max_stacks) {
 export default [
   {
     name: 'Exagryph',
+    title: 'GunWeapon',
     description: 'The Adamant Rail.',
     icon: 'assets/weapons/gun_base_icon.png',
     type: 'weapon',
@@ -24,6 +25,7 @@ export default [
   },
   {
     name: 'Exagryph - Aspect of Zagreus',
+    title: 'GunBaseUpgradeTrait',
     type: 'aspect',
     weapon: 'Exagryph',
     icon: 'assets/weapons/gun_base_icon.png',
@@ -40,6 +42,7 @@ export default [
   },
   {
     name: 'Exagryph - Aspect of Eris',
+    title: 'GunGrenadeSelfEmpowerTrait',
     type: 'aspect',
     weapon: 'Exagryph',
     icon: 'assets/weapons/gun_enchantment_1.png',
@@ -62,6 +65,7 @@ export default [
   },
   {
     name: 'Exagryph - Aspect of Hestia',
+    title: 'GunManualReloadTrait',
     type: 'aspect',
     weapon: 'Exagryph',
     icon: 'assets/weapons/gun_enchantment_2.png',
@@ -79,6 +83,7 @@ export default [
   },
   {
     name: 'Exagryph - Aspect of Lucifer',
+    title: 'GunLoadedGrenadeTrait',
     type: 'aspect',
     weapon: 'Exagryph',
     icon: 'assets/weapons/gun_enchantment_3.png',
@@ -128,6 +133,7 @@ export default [
   },
   {
     name: 'Flurry Fire',
+    title: 'GunMinigunTrait',
     type: 'hammer',
     icon: 'assets/weapons/gun_minigun_trait_01.png',
     god: 'Daedalus',
@@ -152,6 +158,7 @@ export default [
   },
   {
     name: 'Ricochet Fire',
+    title: 'GunChainShotTrait',
     type: 'hammer',
     icon: 'assets/weapons/gun_richochet_14.png',
     god: 'Daedalus',
@@ -167,6 +174,7 @@ export default [
   },
   {
     name: 'Spread Fire',
+    title: 'GunShotgunTrait',
     type: 'hammer',
     icon: 'assets/weapons/gun_shotgun_trait_02.png',
     god: 'Daedalus',
@@ -181,6 +189,7 @@ export default [
   },
   {
     name: 'Explosive Fire',
+    title: 'GunHeavyBulletTrait',
     type: 'hammer',
     icon: 'assets/weapons/gun_dash_ammo_trait_04.png',
     god: 'Daedalus',
@@ -197,6 +206,7 @@ export default [
   },
   {
     name: 'Delta Chamber',
+    title: 'GunInfiniteAmmoTrait',
     type: 'hammer',
     icon: 'assets/weapons/gun_infinite_ammo_trait_09.png',
     god: 'Daedalus',
@@ -213,6 +223,7 @@ export default [
   },
   {
     name: 'Piercing Fire',
+    title: 'GunArmorPenerationTrait',
     type: 'hammer',
     icon: 'assets/weapons/gun_grenade_drop_trait_12.png',
     god: 'Daedalus',
@@ -238,6 +249,7 @@ export default [
   },
   {
     name: 'Triple Bomb',
+    title: 'GunGrenadeFastTrait',
     type: 'hammer',
     icon: 'assets/weapons/gun_grenade_fast_trait_07.png',
     god: 'Daedalus',
@@ -255,6 +267,7 @@ export default [
   },
   {
     name: 'Rocket Bomb',
+    title: 'GunGrenadeProjectileSpeedTrait',
     type: 'hammer',
     icon: 'assets/weapons/gun_armor_penetration_trait_08.png',
     god: 'Daedalus',
@@ -268,6 +281,7 @@ export default [
   },
   {
     name: 'Targeting System',
+    title: 'GunSlowGrenade',
     type: 'hammer',
     icon: 'assets/weapons/gun_homing_bullet_trait_10.png',
     god: 'Daedalus',
@@ -285,6 +299,7 @@ export default [
   },
   {
     name: 'Hazard Bomb',
+    title: 'GunExplodingSecondaryTrait',
     type: 'hammer',
     icon: 'assets/weapons/gun_grenade_drop_trait_06.png',
     god: 'Daedalus',
@@ -302,6 +317,7 @@ export default [
   },
   {
     name: 'Cluster Bomb',
+    title: 'GunGrenadeClusterTrait',
     type: 'hammer',
     icon: 'assets/weapons/gun_grenade_cluster_trait_05.png',
     god: 'Daedalus',
@@ -327,6 +343,7 @@ export default [
   },
   {
     name: 'Concentrated Fire',
+    title: 'GunConsecutiveFireTrait',
     type: 'hammer',
     icon: 'assets/weapons/gun_consecutive_fire_trait_11.png',
     god: 'Daedalus',
@@ -353,6 +370,7 @@ export default [
   },
   {
     name: 'Seeking Fire',
+    title: 'GunHomingBulletTrait',
     type: 'hammer',
     icon: 'assets/weapons/gun_homing_bullet_trait_10.png',
     god: 'Daedalus',
@@ -369,6 +387,7 @@ export default [
   },
   {
     name: 'Concentrated Beam',
+    title: 'GunLoadedGrenadeLaserTrait',
     type: 'hammer',
     icon: 'assets/weapons/gun_lucifer_04.png',
     god: 'Daedalus',
@@ -393,6 +412,7 @@ export default [
   },
   {
     name: 'Flash Fire',
+    title: 'GunLoadedGrenadeSpeedTrait',
     type: 'hammer',
     icon: 'assets/weapons/gun_lucifer_05.png',
     god: 'Daedalus',
@@ -406,6 +426,7 @@ export default [
   },
   {
     name: 'Triple Beam',
+    title: 'GunLoadedGrenadeWideTrait',
     type: 'hammer',
     icon: 'assets/weapons/gun_lucifer_02.png',
     god: 'Daedalus',
@@ -419,6 +440,7 @@ export default [
   },
   {
     name: 'Eternal Chamber',
+    title: 'GunLoadedGrenadeInfiniteAmmoTrait',
     type: 'hammer',
     icon: 'assets/weapons/gun_lucifer_03.png',
     god: 'Daedalus',
@@ -449,6 +471,7 @@ export default [
   },
   {
     name: 'Greater Inferno',
+    title: 'GunLoadedGrenadeBoostTrait',
     type: 'hammer',
     icon: 'assets/weapons/gun_lucifer_01.png',
     god: 'Daedalus',

@@ -8,6 +8,7 @@ export default [
   },
   {
     name: 'Affluence',
+    title: 'ChaosBlessingMoneyTrait',
     type: 'secondary',
     icon: 'assets/chaos/blessing_gold_drop_bonus_05.png',
     god: 'Chaos',
@@ -24,6 +25,7 @@ export default [
   },
   {
     name: 'Ambush',
+    title: 'ChaosBlessingBackstabTrait',
     type: 'secondary',
     icon: 'assets/chaos/backstab_15.png',
     god: 'Chaos',
@@ -35,11 +37,12 @@ export default [
       name: 'Ambush',
       type: 'effect',
       target: 'coefficients',
-      stats: { backstab_min: [0.6, 0.8, 1.0], backstab_max: [0.8, 1.2, 1.4] },
+      stats: { backstab_min: [0.6, 0.9, 1.2], backstab_max: [0.8, 1.2, 1.6] },
     }],
   },
   {
     name: 'Assault',
+    title: 'ChaosBlessingAlphaStrikeTrait',
     type: 'secondary',
     icon: 'assets/chaos/alpha_strike_14.png',
     god: 'Chaos',
@@ -51,11 +54,12 @@ export default [
       name: 'Assault',
       type: 'effect',
       target: 'coefficients',
-      stats: { first_min: [0.4, 0.6, 0.8], first_max: [0.6, 0.9, 1.2] },
+      stats: { first_min: [0.3, 0.45, 0.6], first_max: [0.5, 0.75, 1.0] },
     }],
   },
   {
     name: 'Eclipse',
+    title: 'ChaosBlessingGemTrait',
     type: 'secondary',
     icon: 'assets/chaos/blessing_darkness_drop_bonus_06.png',
     god: 'Chaos',
@@ -67,11 +71,12 @@ export default [
       name: 'Eclipse',
       type: 'effect',
       target: 'coefficients',
-      stats: { darkness_min: [0.75,1.125,1.5], darkness_max: [1,1.5,2] }
+      stats: { darkness_min: [0.5, 0.75, 1], darkness_max: [0.75, 1.125, 1.5] },
     },],
   },
   {
     name: 'Favor',
+    title: 'ChaosBlessingBoonRarityTrait',
     type: 'secondary',
     icon: 'assets/chaos/blessing_boon_rarity_increased_10.png',
     god: 'Chaos',
@@ -88,6 +93,7 @@ export default [
   },
   {
     name: 'Flourish',
+    title: 'ChaosBlessingSecondaryTrait',
     type: 'secondary',
     icon: 'assets/chaos/blessing_secondary_damage_12.png',
     god: 'Chaos',
@@ -103,6 +109,7 @@ export default [
   },
   {
     name: 'Grasp',
+    title: 'ChaosBlessingAmmoTrait',
     type: 'secondary',
     icon: 'assets/chaos/blessing_ammo_capacity_03.png',
     god: 'Chaos',
@@ -118,6 +125,7 @@ export default [
   },
   {
     name: 'Lunge',
+    title: 'ChaosBlessingDashAttackTrait',
     type: 'secondary',
     icon: 'assets/chaos/blessing_dash_attack_damage_13.png',
     god: 'Chaos',
@@ -128,11 +136,12 @@ export default [
       name: 'Lunge',
       type: 'effect',
       target: 'dashAttack',
-      stats: { mult_min: [0.3,0.45,0.6], mult_max: [0.6,0.9,1.2] },
+      stats: { mult_min: [0.4,0.6,0.8], mult_max: [0.6,0.9,1.2] },
     }],
   },
   {
     name: 'Shot',
+    title: 'ChaosBlessingRangedTrait',
     type: 'secondary',
     icon: 'assets/chaos/blessing_cast_damage_02.png',
     god: 'Chaos',
@@ -148,6 +157,7 @@ export default [
   },
   {
     name: 'Soul',
+    title: 'ChaosBlessingMaxHealthTrait',
     type: 'secondary',
     icon: 'assets/chaos/blessing_maximum_health_04.png',
     god: 'Chaos',
@@ -163,6 +173,7 @@ export default [
   },
   {
     name: 'Strike',
+    title: 'ChaosBlessingMeleeTrait',
     type: 'secondary',
     icon: 'assets/chaos/blessing_attack_damage_01.png',
     god: 'Chaos',
@@ -178,6 +189,7 @@ export default [
   },
   {
     name: 'Defiance',
+    title: 'ChaosBlessingExtraChanceTrait',
     type: 'secondary',
     icon: 'assets/chaos/blessing_death_defiance_08.png',
     god: 'Chaos',

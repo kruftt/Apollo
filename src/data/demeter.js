@@ -15,6 +15,7 @@ export default [
   },
   {
     name: 'Frost Strike',
+    title: 'DemeterWeaponTrait',
     type: 'attack',
     icon: 'assets/traits/Demeter_01_Large.png',
     god: 'Demeter',
@@ -34,8 +35,9 @@ export default [
   },
   {
     name: 'Frost Flourish',
+    title: 'DemeterSecondaryTrait',
     type: 'special',
-  icon: 'assets/traits/Demeter_secondary_attack.png',
+    icon: 'assets/traits/Demeter_secondary_attack.png',
     god: 'Demeter',
     rarity: 0,
     level: 1,
@@ -53,6 +55,7 @@ export default [
   },
   {
     name: 'Crystal Beam',
+    title: 'DemeterRangedTrait',
     type: 'cast',
     icon: 'assets/traits/Demeter_02_Large.png',
     god: 'Demeter',
@@ -81,6 +84,7 @@ export default [
   },
   {
     name: 'Icy Flare',
+    title: 'ShieldLoadAmmo_DemeterRangedTrait',
     type: 'cast',
     icon: 'assets/traits/Demeter_02_Large.png',
     god: 'Demeter',
@@ -101,6 +105,7 @@ export default [
   },
   {
     name: 'Mistral Dash',
+    title: 'DemeterRushTrait',
     type: 'dash',
     icon: 'assets/traits/Demeter_03_Large.png',
     god: 'Demeter',
@@ -120,6 +125,7 @@ export default [
   },
   {
     name: "Demeter's Aid",
+    title: 'DemeterShoutTrait',
     type: 'call',
     icon: 'assets/traits/Demeter_04_Large.png',
     god: 'Demeter',
@@ -157,6 +163,7 @@ export default [
   },
   {
     name: 'Frozen Touch',
+    title: 'DemeterRetaliateTrait',
     type: 'secondary',
     icon: 'assets/traits/Demeter_13_Large.png',
     god: 'Demeter',
@@ -179,6 +186,7 @@ export default [
   },
   {
     name: 'Rare Crop',
+    title: 'HarvestBoonTrait',
     type: 'secondary',
     icon: 'assets/traits/Demeter_08_Large.png',
     god: 'Demeter',
@@ -197,6 +205,7 @@ export default [
   },
   {
     name: 'Ravenous Will',
+    title: 'ZeroAmmoBonusTrait',
     type: 'secondary',
     icon: 'assets/traits/Demeter_11_Large.png',
     god: 'Demeter',
@@ -216,6 +225,7 @@ export default [
   },
   {
     name: 'Nourished Soul',
+    title: 'HealingPotencyTrait',
     type: 'secondary',
     icon: 'assets/traits/Demeter_09_Large.png',
     god: 'Demeter',
@@ -237,6 +247,7 @@ export default [
   },
   {
     name: 'Snow Burst',
+    title: 'CastNovaTrait',
     type: 'secondary',
     icon: 'assets/traits/Demeter_05_Large.png',
     god: 'Demeter',
@@ -259,6 +270,7 @@ export default [
   },
   {
     name: 'Arctic Blast',
+    title: 'MaximumChillBlast',
     type: 'secondary',
     icon: 'assets/traits/Demeter_07_Large.png',
     god: 'Demeter',
@@ -277,6 +289,7 @@ export default [
   },
   {
     name: 'Killing Freeze',
+    title: 'MaximumChillBonusSlow',
     type: 'secondary',
     icon: 'assets/traits/Demeter_12_Large.png',
     god: 'Demeter',
@@ -303,6 +316,7 @@ export default [
   },
   {
     name: 'Glacial Glare',
+    title: 'DemeterRangedBonusTrait',
     type: 'secondary',
     icon: 'assets/traits/Demeter_14_Large.png',
     god: 'Demeter',
@@ -323,6 +337,7 @@ export default [
   },
   {
     name: 'Winter Harvest',
+    title: 'InstantChillKill',
     type: 'secondary',
     icon: 'assets/traits/Demeter_10_Large.png',
     god: 'Demeter',

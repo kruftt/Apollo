@@ -8,6 +8,7 @@ export default [
   },
   {
     name: 'Swift Strike',
+    title: 'HermesWeaponTrait',
     type: 'secondary',
     icon: 'assets/traits/Hermes_06.png',
     god: 'Hermes',
@@ -19,11 +20,12 @@ export default [
       name: 'Swift Strike',
       type: 'effect',
       target: 'attack',
-      stats: { speed: [0.125, 0.2125, 0.3, 0.3875] }
+      stats: { speed: [0.1, 0.2, 0.3, 0.3] }
     }],
   },
   {
     name: 'Swift Flourish',
+    title: 'HermesSecondaryTrait',
     type: 'secondary',
     icon: 'assets/traits/Hermes_09.png',
     god: 'Hermes',
@@ -35,11 +37,12 @@ export default [
       name: 'Swift Strike',
       type: 'effect',
       target: 'special',
-      stats: { speed: [0.125, 0.2125, 0.3, 0.3875] }
+      stats: { speed: [0.1, 0.2, 0.3, 0.3] }
     }],
   },
   {
     name: 'Flurry Cast',
+    title: 'RapidCastTrait',
     type: 'secondary',
     icon: 'assets/traits/Hermes_02.png',
     god: 'Hermes',
@@ -63,6 +66,7 @@ export default [
   },
   {
     name: 'Hyper Sprint',
+    title: 'RushSpeedBoostTrait',
     type: 'secondary',
     icon: 'assets/traits/Hermes_08.png',
     god: 'Hermes',
@@ -87,6 +91,7 @@ export default [
   },
   {
     name: 'Greater Haste',
+    title: 'MoveSpeedTrait',
     type: 'secondary',
     icon: 'assets/traits/Hermes_05.png',
     god: 'Hermes',
@@ -103,6 +108,7 @@ export default [
   },
   {
     name: 'Quick Recovery',
+    title: 'RushRallyTrait',
     type: 'secondary',
     icon: 'assets/traits/Hermes_07.png',
     god: 'Hermes',
@@ -121,6 +127,7 @@ export default [
   },
   {
     name: 'Greater Evasion',
+    title: 'DodgeChanceTrait',
     type: 'secondary',
     icon: 'assets/traits/Hermes_04.png',
     god: 'Hermes',
@@ -137,6 +144,7 @@ export default [
   },
   {
     name: 'Greatest Reflex',
+    title: 'BonusDashTrait',
     type: 'secondary',
     icon: 'assets/traits/Hermes_01.png',
     god: 'Hermes',
@@ -155,6 +163,7 @@ export default [
   },
   {
     name: 'Second Wind',
+    title: 'HermesShoutDodge',
     type: 'secondary',
     icon: 'assets/traits/Hermes_12.png',
     god: 'Hermes',
@@ -177,6 +186,7 @@ export default [
   },
   {
     name: 'Quick Reload',
+    title: 'AmmoReclaimTrait',
     type: 'secondary',
     icon: 'assets/traits/Hermes_03.png',
     god: 'Hermes',
@@ -193,6 +203,7 @@ export default [
   },
   {
     name: 'Side Hustle',
+    title: 'ChamberGoldTrait',
     type: 'secondary',
     icon: 'assets/traits/Hermes_14.png',
     god: 'Hermes',
@@ -211,6 +222,7 @@ export default [
   },
   {
     name: 'Rush Delivery',
+    title: 'SpeedDamageTrait',
     type: 'secondary',
     icon: 'assets/traits/Hermes_15.png',
     god: 'Hermes',
@@ -227,6 +239,7 @@ export default [
   },
   {
     name: 'Auto Reload',
+    title: 'AmmoReloadTrait',
     type: 'secondary',
     icon: 'assets/traits/Hermes_03.png',
     god: 'Hermes',
@@ -243,6 +256,7 @@ export default [
   },
   {
     name: 'Greater Recall',
+    title: 'MagnetismTrait',
     type: 'secondary',
     icon: 'assets/traits/Hermes_11.png',
     god: 'Hermes',
@@ -252,6 +266,7 @@ export default [
   },
   {
     name: 'Bad News',
+    title: 'UnstoredAmmoDamageTrait',
     type: 'secondary',
     icon: 'assets/traits/Hermes_02.png',
     god: 'Hermes',

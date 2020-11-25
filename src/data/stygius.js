@@ -4,6 +4,7 @@ const stygius_exclusions = [ 'Coronacht', 'Aegis', 'Varatha', 'Exagryph', 'Malph
 export default [
   {
     name: 'Stygius',
+    title: 'SwordWeapon',
     description: 'The Blade of the Underworld.',
     type: 'weapon',
     exclude: beowolf_traits,
@@ -19,6 +20,7 @@ export default [
   },
   {
     name: 'Stygius - Aspect of Zagreus',
+    title: 'SwordBaseUpgradeTrait',
     type: 'aspect',
     weapon: 'Stygius',
     icon: 'assets/weapons/sword_base_icon.png',
@@ -34,6 +36,7 @@ export default [
   },
   {
     name: 'Stygius - Aspect of Nemesis',
+    title: 'SwordCriticalParryTrait',
     type: 'aspect',
     weapon: 'Stygius',
     icon: 'assets/weapons/sword_enchantment_2.png',
@@ -48,6 +51,7 @@ export default [
   },
   {
     name: 'Stygius - Aspect of Poseidon',
+    title: 'DislodgeAmmoTrait',
     type: 'aspect',
     weapon: 'Stygius',
     icon: 'assets/weapons/sword_enchantment_1.png',
@@ -65,6 +69,7 @@ export default [
   },
   {
     name: 'Stygius - Aspect of Arthur',
+    title: 'SwordConsecrationTrait',
     type: 'aspect',
     weapon: 'Stygius',
     icon: 'assets/weapons/sword_enchantment_3.png',
@@ -89,6 +94,7 @@ export default [
   },
   {
     name: 'Breaching Slash',
+    title: 'SwordHealthBufferDamageTrait',
     type: 'hammer',
     exclude: stygius_exclusions,
     weapon: 'Stygius',
@@ -108,6 +114,7 @@ export default [
   },
   {
     name: 'Cruel Thrust',
+    title: 'SwordCriticalTrait',
     type: 'hammer',
     exclude: [ ...stygius_exclusions, 'World Splitter', 'Flurry Slash' ],
     weapon: 'Stygius',
@@ -123,6 +130,7 @@ export default [
   },
   {
     name: 'Cursed Slash',
+    title: 'SwordCursedLifeStealTrait',
     type: 'hammer',
     exclude: stygius_exclusions,
     weapon: 'Stygius',
@@ -146,6 +154,7 @@ export default [
   },
   {
     name: 'Dash Nova',
+    title: 'sword_seeking_14',
     type: 'hammer',
     exclude: stygius_exclusions,
     weapon: 'Stygius',
@@ -174,6 +183,7 @@ export default [
   },
   {
     name: 'Double Edge',
+    title: 'SwordDoubleDashAttackTrait',
     type: 'hammer',
     exclude: stygius_exclusions,
     weapon: 'Stygius',
@@ -188,6 +198,7 @@ export default [
   },
   {
     name: 'Double Nova',
+    title: 'SwordSecondaryDoubleAttackTrait',
     type: 'hammer',
     exclude: stygius_exclusions,
     weapon: 'Stygius',
@@ -202,6 +213,7 @@ export default [
   },
   {
     name: 'Flurry Slash',
+    title: 'SwordConsecutiveFirstStrikeTrait',
     type: 'hammer',
     exclude: [ ...stygius_exclusions, 'World Splitter', 'Cruel Thrust' ],
     weapon: 'Stygius',
@@ -220,6 +232,7 @@ export default [
   },
   {
     name: 'Hoarding Slash',
+    title: 'SwordGoldDamageTrait',
     type: 'hammer',
     exclude: stygius_exclusions,
     weapon: 'Stygius',
@@ -239,6 +252,7 @@ export default [
   },
   {
     name: 'Piercing Wave',
+    title: 'SwordThrustWaveTrait',
     type: 'hammer',
     exclude: stygius_exclusions,
     weapon: 'Stygius',
@@ -257,6 +271,7 @@ export default [
   },
   {
     name: 'Shadow Slash',
+    title: 'SwordBackstabTrait',
     type: 'hammer',
     exclude: stygius_exclusions,
     weapon: 'Stygius',
@@ -275,6 +290,7 @@ export default [
   },
   {
     name: 'Super Nova',
+    title: 'SwordSecondaryAreaDamageTrait',
     type: 'hammer',
     exclude: stygius_exclusions,
     weapon: 'Stygius',
@@ -293,6 +309,7 @@ export default [
   },
   {
     name: 'World Splitter',
+    title: 'SwordHeavySecondStrikeTrait',
     type: 'hammer',
     exclude: [ ...stygius_exclusions, 'Flurry Slash', 'Cruel Thrust' ],
     weapon: 'Stygius',
@@ -311,6 +328,7 @@ export default [
   },
   {
     name: 'Greater Consecration',
+    title: 'SwordConsecrationBoostTrait',
     type: 'hammer',
     exclude: stygius_exclusions,
     weapon: 'Stygius',

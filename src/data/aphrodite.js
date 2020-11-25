@@ -18,6 +18,7 @@ export default [
   },
   {
     name: 'Heartbreak Strike',
+    title: 'AphroditeWeaponTrait',
     description: (stats) =>
       '<div>Your<b>Attack</b>deals more damage and inflicts<b>Weak.</b></div>' +
       `<div>▶ Attack Damage:<div><span>${fp(stats.mult_min, stats.mult_max)}%</span></div></div>`,
@@ -37,6 +38,7 @@ export default [
   },
   {
     name: 'Heartbreak Flourish',
+    title: 'AphroditeSecondaryTrait',
     type: 'special',
     icon: 'assets/traits/Aphrodite_secondary_attack.png',
     god: 'Aphrodite',
@@ -56,6 +58,7 @@ export default [
   },
   {
     name: 'Crush Shot',
+    title: 'AphroditeRangedTrait',
     type: 'cast',
     icon: 'assets/traits/Aphrodite_02_Large.png',
     god: 'Aphrodite',
@@ -76,6 +79,7 @@ export default [
   },
   {
     name: 'Passion Flare',
+    title: 'ShieldLoadAmmo_AphroditeRangedTrait',
     type: 'cast',
     icon: 'assets/traits/Aphrodite_02_Large.png',
     god: 'Aphrodite',
@@ -98,6 +102,7 @@ export default [
   },
   {
     name: 'Passion Dash',
+    title: 'AphroditeRushTrait',
     type: 'dash',
     icon: 'assets/traits/Aphrodite_03_Large.png',
     god: 'Aphrodite',
@@ -117,6 +122,7 @@ export default [
   },
   {
     name: "Aphrodite's Aid",
+    title: 'AphroditeShoutTrait',
     type: 'call',
     icon: 'assets/traits/Aphrodite_04_Large.png',
     god: 'Aphrodite',
@@ -133,6 +139,7 @@ export default [
   },
   {
     name: "Dying Lament",
+    title: 'AphroditeDeathTrait',
     type: 'secondary',
     icon: 'assets/traits/Aphrodite_08_Large.png',
     god: 'Aphrodite',
@@ -148,6 +155,7 @@ export default [
   },
   {
     name: "Wave of Despair",
+    title: 'AphroditeRetaliateTrait',
     type: 'secondary',
     icon: 'assets/traits/Aphrodite_09_Large.png',
     god: 'Aphrodite',
@@ -163,6 +171,7 @@ export default [
   },
   {
     name: "Different League",
+    title: 'ProximityArmorTrait',
     type: 'secondary',
     icon: 'assets/traits/Aphrodite_07_Large.png',
     god: 'Aphrodite',
@@ -182,6 +191,7 @@ export default [
   },
   {
     name: "Life Affirmation",
+    title: 'HealthRewardBonusTrait',
     type: 'secondary',
     icon: 'assets/traits/Aphrodite_11_Large.png',
     god: 'Aphrodite',
@@ -200,6 +210,7 @@ export default [
   },
   {
     name: 'Empty Inside',
+    title: 'AphroditeDurationTrait',
     type: 'secondary',
     icon: 'assets/traits/Aphrodite_05_Large.png',
     god: 'Aphrodite',
@@ -214,6 +225,7 @@ export default [
   },
   {
     name: 'Sweet Surrender',
+    title: 'AphroditeWeakenTrait',
     type: 'secondary',
     icon: 'assets/traits/Aphrodite_06_Large.png',
     god: 'Aphrodite',
@@ -231,6 +243,7 @@ export default [
   },
   {
     name: 'Broken Resolve',
+    title: 'AphroditePotencyTrait',
     type: 'secondary',
     icon: 'assets/traits/Aphrodite_12_Large.png',
     god: 'Aphrodite',
@@ -257,6 +270,7 @@ export default [
   },
   {
     name: 'Blown Kiss',
+    title: 'AphroditeRangedBonusTrait',
     type: 'secondary',
     icon: 'assets/traits/Aphrodite_13_Large.png',
     god: 'Aphrodite',
@@ -281,6 +295,7 @@ export default [
   },
   {
     name: 'Unhealthy Fixation',
+    title: 'CharmTrait',
     type: 'secondary',
     icon: 'assets/traits/Aphrodite_10_Large.png',
     god: 'Aphrodite',

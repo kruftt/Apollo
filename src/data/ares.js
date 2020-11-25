@@ -10,6 +10,7 @@ export default [
   },
   {
     name: 'Curse of Agony',
+    title: 'AresWeaponTrait',
     type: 'attack',
     icon: 'assets/traits/Ares_01_Large.png',
     god: 'Ares',
@@ -31,6 +32,7 @@ export default [
   },
   {
     name: 'Curse of Pain',
+    title: 'AresSecondaryTrait',
     type: 'special',
     icon: 'assets/traits/Ares_secondary_attack.png',
     god: 'Ares',
@@ -50,6 +52,7 @@ export default [
   },
   {
     name: 'Slicing Shot',
+    title: 'AresRangedTrait',
     type: 'cast',
     icon: 'assets/traits/Ares_02_Large.png',
     god: 'Ares',
@@ -77,6 +80,7 @@ export default [
   },
   {
     name: 'Slicing Flare',
+    title: 'ShieldLoadAmmo_AresRangedTrait',
     type: 'cast',
     icon: 'assets/traits/Ares_02_Large.png',
     god: 'Ares',
@@ -104,6 +108,7 @@ export default [
   },
   {
     name: 'Blade Dash',
+    title: 'AresRushTrait',
     type: 'dash',
     icon: 'assets/traits/Ares_03_Large.png',
     god: 'Ares',
@@ -130,6 +135,7 @@ export default [
   },
   {
     name: "Ares' Aid",
+    title: 'AresShoutTrait',
     type: 'call',
     icon: 'assets/traits/Ares_04_Large.png',
     god: 'Ares',
@@ -168,6 +174,7 @@ export default [
   },
   {
     name: 'Curse of Vengeance',
+    title: 'AresRetaliateTrait',
     type: 'secondary',
     icon: 'assets/traits/Ares_05_Large.png',
     god: 'Ares',
@@ -187,6 +194,7 @@ export default [
   },
   {
     name: 'Urge to Kill',
+    title: 'IncreasedDamageTrait',
     type: 'secondary',
     icon: 'assets/traits/Ares_06_Large.png',
     god: 'Ares',
@@ -214,6 +222,7 @@ export default [
   },
   {
     name: 'Battle Rage',
+    title: 'Boon_Ares_12',
     type: 'secondary',
     icon: 'assets/traits/Ares_12_Large.png',
     god: 'Ares',
@@ -235,6 +244,7 @@ export default [
   },
   {
     name: 'Blood Frenzy',
+    title: 'LastStandDamageBonusTrait',
     type: 'secondary',
     icon: 'assets/traits/Ares_14_Large.png',
     god: 'Ares',
@@ -256,6 +266,7 @@ export default [
   },
   {
     name: 'Black Metal',
+    title: 'AresAoETrait',
     type: 'secondary',
     icon: 'assets/traits/Ares_07_Large.png',
     god: 'Ares',
@@ -275,6 +286,7 @@ export default [
   },
   {
     name: 'Engulfing Vortex',
+    title: 'AresDragTrait',
     type: 'secondary',
     icon: 'assets/traits/Ares_08_Large.png',
     god: 'Ares',
@@ -293,6 +305,7 @@ export default [
   },
   {
     name: 'Dire Misfortune',
+    title: 'AresLoadCurseTrait',
     type: 'secondary',
     icon: 'assets/traits/Ares_11_Large.png',
     god: 'Ares',
@@ -320,6 +333,7 @@ export default [
   },
   {
     name: 'Impending Doom',
+    title: 'AresLongCurseTrait',
     type: 'secondary',
     icon: 'assets/traits/Ares_13_Large.png',
     god: 'Ares',
@@ -339,6 +353,7 @@ export default [
   },
   {
     name: 'Vicious Cycle',
+    title: 'AresCursedRiftTrait',
     type: 'secondary',
     icon: 'assets/traits/Ares_09_Large.png',
     god: 'Ares',

@@ -8,6 +8,7 @@ export default [
   },
   {
     name: 'Deadly Strike',
+    title: 'ArtemisWeaponTrait',
     type: 'attack',
     icon: 'assets/traits/Artemis_01_Large.png',
     god: 'Artemis',
@@ -26,6 +27,7 @@ export default [
   },
   {
     name: 'Deadly Flourish',
+    title: 'ArtemisSecondaryTrait',
     description: (stats) =>
       '<div>Your<b>Special</b>has a<span>20%</span>chance to do <b>critical</b> damage.</div>' +
       `<div>▶ Special Damage:<div><span>+${fp(stats.mult_min, stats.mult_max)}%<span></div></div>`,
@@ -48,6 +50,7 @@ export default [
   },
   {
     name: 'True Shot',
+    title: 'ArtemisRangedTrait',
     type: 'cast',
     icon: 'assets/traits/Artemis_02_Large.png',
     god: 'Artemis',
@@ -67,6 +70,7 @@ export default [
   },
   {
     name: "Hunter's Flare",
+    title: 'ShieldLoadAmmo_ArtemisRangedTrait',
     type: 'cast',
     icon: 'assets/traits/Artemis_02_Large.png',
     god: 'Artemis',
@@ -86,6 +90,7 @@ export default [
   },
   {
     name: 'Hunter Dash',
+    title: 'ArtemisRushTrait',
     type: 'dash',
     icon: 'assets/traits/Artemis_03_Large.png',
     god: 'Artemis',
@@ -104,6 +109,7 @@ export default [
   },
   {
     name: "Artemis' Aid",
+    title: 'ArtemisShoutTrait',
     type: 'call',
     icon: 'assets/traits/Artemis_04_Large.png',
     god: 'Artemis',
@@ -131,6 +137,7 @@ export default [
   },
   {
     name: 'Pressure Points',
+    title: 'CritBonusTrait',
     type: 'secondary',
     icon: 'assets/traits/Artemis_08_Large.png',
     god: 'Artemis',
@@ -149,6 +156,7 @@ export default [
   },
   {
     name: 'Exit Wounds',
+    title: 'ArtemisAmmoExitTrait',
     type: 'secondary',
     icon: 'assets/traits/Artemis_10_Large.png',
     god: 'Artemis',
@@ -168,6 +176,7 @@ export default [
   },
   {
     name: 'Hide Breaker',
+    title: 'CriticalBufferMultiplierTrait',
     type: 'secondary',
     icon: 'assets/traits/Artemis_09_Large.png',
     god: 'Artemis',
@@ -188,6 +197,7 @@ export default [
   },
   {
     name: 'Clean Kill',
+    title: 'ArtemisCriticalTrait',
     type: 'secondary',
     icon: 'assets/traits/Artemis_05_Large.png',
     god: 'Artemis',
@@ -207,6 +217,7 @@ export default [
   },
   {
     name: 'Hunter Instinct',
+    title: 'CriticalSuperGenerationTrait',
     type: 'secondary',
     icon: 'assets/traits/Artemis_13_Large.png',
     god: 'Artemis',
@@ -226,6 +237,7 @@ export default [
   },
   {
     name: "Hunter's Mark",
+    title: 'CritVulnerabilityTrait',
     type: 'secondary',
     icon: 'assets/traits/Artemis_14_Large.png',
     god: 'Artemis',
@@ -248,6 +260,7 @@ export default [
   },
   {
     name: 'Support Fire',
+    title: 'ArtemisSupportingFireTrait',
     type: 'secondary',
     icon: 'assets/traits/Artemis_12_Large.png',
     god: 'Artemis',
@@ -266,6 +279,7 @@ export default [
   },
   {
     name: 'Fully Loaded',
+    title: 'MoreAmmoTrait',
     type: 'secondary',
     icon: 'assets/traits/Artemis_07_Large.png',
     god: 'Artemis',

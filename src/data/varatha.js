@@ -5,6 +5,7 @@ const varatha_exclusions = [ 'Stygius', 'Aegis', 'Coronacht', 'Exagryph', 'Malph
 export default [
   {
     name: 'Varatha',
+    title: 'SpearWeapon',
     description: 'The Eternal Spear.',
     icon: 'assets/weapons/spear_base_icon.png',
     type: 'weapon',
@@ -24,6 +25,7 @@ export default [
   },
   {
     name: 'Varatha - Aspect of Zagreus',
+    title: 'SpearBaseUpgradeTrait',
     type: 'aspect',
     weapon: 'Varatha',
     icon: 'assets/weapons/spear_base_icon.png',
@@ -47,6 +49,7 @@ export default [
   },
   {
     name: 'Varatha - Aspect of Achilles',
+    title: 'SpearTeleportTrait',
     type: 'aspect',
     weapon: 'Varatha',
     icon: 'assets/weapons/spear_enchantment_1.png',
@@ -65,6 +68,7 @@ export default [
   },
   {
     name: 'Varatha - Aspect of Hades',
+    title: 'SpearWeaveTrait',
     type: 'aspect',
     weapon: 'Varatha',
     icon: 'assets/weapons/spear_enchantment_2.png',
@@ -111,6 +115,7 @@ export default [
   },
   {
     name: 'Varatha - Aspect of Guan Yu',
+    title: 'SpearSpinTravel',
     type: 'aspect',
     weapon: 'Varatha',
     icon: 'assets/weapons/spear_enchantment_2.png',
@@ -139,6 +144,7 @@ export default [
   },
   {
     name: 'Extending Jab',
+    title: 'SpearReachAttack',
     type: 'hammer',
     icon: 'assets/weapons/spear_extended_thrust_03.png',
     god: 'Daedalus',
@@ -156,6 +162,7 @@ export default [
   },
   {
     name: 'Chain Skewer',
+    title: 'SpearThrowBounce',
     type: 'hammer',
     icon: 'assets/weapons/spear_trick_throw_04.png',
     god: 'Daedalus',
@@ -173,6 +180,7 @@ export default [
   },
   {
     name: 'Breaching Skewer',
+    title: 'SpearThrowPenetrate',
     type: 'hammer',
     icon: 'assets/weapons/spear_mighty_throw_05.png',
     god: 'Daedalus',
@@ -190,6 +198,7 @@ export default [
   },
   {
     name: 'Vicious Skewer',
+    title: 'SpearThrowCritical',
     type: 'hammer',
     icon: 'assets/weapons/spear_absorbing_throw_06.png',
     god: 'Daedalus',
@@ -214,6 +223,7 @@ export default [
   },
   {
     name: 'Exploding Launcher',
+    title: 'SpearThrowExplode',
     type: 'hammer',
     icon: 'assets/weapons/spear_explosive_throw_09.png',
     god: 'Daedalus',
@@ -230,6 +240,7 @@ export default [
   },
   {
     name: 'Massive Spin',
+    title: 'SpearSpinDamageRadius',
     type: 'hammer',
     icon: 'assets/weapons/spear_massive_spin_07.png',
     god: 'Daedalus',
@@ -246,6 +257,7 @@ export default [
   },
   {
     name: 'Quick Spin',
+    title: 'SpearSpinChargeLevelTime',
     type: 'hammer',
     icon: 'assets/weapons/spear_deft_spin_08.png',
     god: 'Daedalus',
@@ -262,6 +274,7 @@ export default [
   },
   {
     name: 'Flurry Jab',
+    title: 'SpearAutoAttack',
     type: 'hammer',
     icon: 'assets/weapons/spear_flurry_thrust_01.png',
     god: 'Daedalus',
@@ -276,6 +289,7 @@ export default [
   },
   {
     name: 'Charged Skewer',
+    title: 'SpearThrowElectiveCharge',
     type: 'hammer',
     icon: 'assets/weapons/spear_long_throw_02.png',
     god: 'Daedalus',
@@ -292,6 +306,7 @@ export default [
   },
   {
     name: 'Serrated Point',
+    title: 'SpearDashMultiStrike',
     type: 'hammer',
     icon: 'assets/weapons/spear_dash_multistrike_10.png',
     god: 'Daedalus',
@@ -309,6 +324,7 @@ export default [
   },
   {
     name: 'Flaring Spin',
+    title: 'SpearSpinChargeAreaDamageTrait',
     type: 'hammer',
     icon: 'assets/weapons/spear_flare_11.png',
     god: 'Daedalus',
@@ -340,6 +356,7 @@ export default [
   },
   {
     name: 'Triple Jab',
+    title: 'SpearMultiAttack',
     type: 'hammer',
     icon: 'assets/weapons/spear_triple_13.png',
     god: 'Daedalus',
@@ -357,6 +374,7 @@ export default [
   },
   {
     name: 'Winged Serpent',
+    title: 'SpearSpinTravelRadiusDamageTrait',
     type: 'hammer',
     icon: 'assets/weapons/spear_guanyu.png',
     god: 'Daedalus',

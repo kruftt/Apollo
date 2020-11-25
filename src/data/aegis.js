@@ -21,6 +21,7 @@ export default [
   },
   {
     name: 'Aegis - Aspect of Zagreus',
+    title: 'ShieldBaseUpgradeTrait',
     type: 'aspect',
     weapon: 'Aegis',
     icon: 'assets/weapons/shield_base_icon.png',
@@ -36,6 +37,7 @@ export default [
   },
   {
     name: 'Aegis - Aspect of Chaos',
+    title: 'ShieldTwoShieldTrait',
     type: 'aspect',
     weapon: 'Aegis',
     icon: 'assets/weapons/shield_enchantment_2.png',
@@ -54,6 +56,7 @@ export default [
   },
   {
     name: 'Aegis - Aspect of Zeus',
+    title: 'ShieldRushBonusProjectileTrait', // ShieldBounceEmpowerTrait
     type: 'aspect',
     weapon: 'Aegis',
     icon: 'assets/weapons/shield_enchantment_1.png',
@@ -69,6 +72,7 @@ export default [
   },
   {
     name: 'Aegis - Aspect of Beowolf',
+    title: 'ShieldLoadAmmoTrait',
     type: 'aspect',
     weapon: 'Aegis',
     icon: 'assets/weapons/shield_enchantment_3.png',
@@ -94,6 +98,7 @@ export default [
   },
   {
     name: 'Dread Flight',
+    title: 'ShieldBounceEmpowerTrait',
     type: 'hammer',
     icon: 'assets/weapons/shield_deadly_return_04.png',
     god: 'Daedalus',
@@ -110,6 +115,7 @@ export default [
   },
   {
     name: 'Sudden Rush',
+    title: 'ShieldChargeSpeedTrait',
     type: 'hammer',
     icon: 'assets/weapons/shield_swift_rush_05.png',
     god: 'Daedalus',
@@ -126,6 +132,7 @@ export default [
   },
   {
     name: 'Pulverizing Blow',
+    title: 'ShieldBashDamageTrait',
     type: 'hammer',
     icon: 'assets/weapons/shield_shatter_strike_06.png',
     god: 'Daedalus',
@@ -143,6 +150,7 @@ export default [
   },
   {
     name: 'Dashing Wallop',
+    title: 'ShieldDashAOETrait',
     type: 'hammer',
     icon: 'assets/weapons/shield_iron_skin_01.png',
     god: 'Daedalus',
@@ -159,6 +167,7 @@ export default [
   },
   {
     name: 'Explosive Return',
+    title: 'ShieldThrowCatchExplode',
     type: 'hammer',
     icon: 'assets/weapons/shield_superior_retaliation_07.png',
     god: 'Daedalus',
@@ -175,6 +184,7 @@ export default [
   },
   {
     name: 'Minotaur Rush',
+    title: 'ShieldPerfectRushTrait',
     type: 'hammer',
     icon: 'assets/weapons/shield_minotaur_rush_08.png',
     god: 'Daedalus',
@@ -190,6 +200,7 @@ export default [
   },
   {
     name: 'Breaching Rush',
+    title: 'ShieldChargeHealthBufferTrait',
     type: 'hammer',
     icon: 'assets/weapons/shield_divine_immunity_02.png',
     god: 'Daedalus',
@@ -210,6 +221,7 @@ export default [
   // { name: 'Dragon Rush', type: 'dragon', trigger: 'chargeAttack', stats: { min: 50, defend: true, backstab: true } },
   {
     name: 'Charged Shot',
+    title: 'ShieldRushProjectileTrait',
     type: 'hammer',
     icon: 'assets/weapons/shield_vicious_throw_09.png',
     god: 'Daedalus',
@@ -227,6 +239,7 @@ export default [
   },
   {
     name: 'Charged Flight',
+    title: 'ShieldThrowElectiveCharge',
     type: 'hammer',
     icon: 'assets/weapons/shield_throw_elective_charge_12.png',
     god: 'Daedalus',
@@ -245,6 +258,7 @@ export default [
   },
   {
     name: 'Empowering Flight',
+    title: 'ShieldThrowEmpowerTrait',
     type: 'hammer',
     icon: 'assets/weapons/shield_empower_throw_13.png',
     god: 'Daedalus',
@@ -263,6 +277,7 @@ export default [
   },
   {
     name: 'Dashing Flight',
+    title: 'ShieldRushPunchTrait',
     type: 'hammer',
     icon: 'assets/weapons/shield_dash_throw_16.png',
     god: 'Daedalus',
@@ -280,6 +295,7 @@ export default [
   },
   {
     name: 'Ferocious Guard',
+    title: 'ShieldBlockEmpowerTrait',
     type: 'hammer',
     icon: 'assets/weapons/shield_empower_block_14.png',
     god: 'Daedalus',
@@ -297,6 +313,7 @@ export default [
   },
   {
     name: 'Unyielding Defense',
+    title: 'ShieldLoadAmmoBoostTrait',
     type: 'hammer',
     icon: 'assets/weapons/shield_beowulf.png',
     god: 'Daedalus',

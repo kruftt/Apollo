@@ -3,6 +3,7 @@ import { chill } from './demeter'
 export default [
   {
     name: 'Curse of Longing',
+    title: 'CurseSickTrait',
     type: 'secondary',
     icon: 'assets/traits/Ares_Aphrodite_01.png',
     god: ['Ares', 'Aphrodite'],
@@ -23,6 +24,7 @@ export default [
   },
   {
     name: 'Deadly Reversal',
+    title: 'ArtemisReflectBuffTrait',
     type: 'secondary',
     icon: 'assets/traits/Artemis_Athena_01.png',
     god: ['Artemis', 'Athena'],
@@ -49,6 +51,7 @@ export default [
   },
   {
     name: 'Exclusive Access',
+    title: 'RaritySuperBoost',
     type: 'secondary',
     icon: 'assets/traits/Dionysus_Poseidon_01.png',
     god: ['Dionysus', 'Poseidon'],
@@ -65,6 +68,7 @@ export default [
   },
   {
     name: 'Heart Rend',
+    title: 'HeartsickCritDamageTrait',
     type: 'secondary',
     icon: 'assets/traits/Artemis_Aphrodite_01.png',
     god: ['Artemis', 'Aphrodite'],
@@ -86,6 +90,7 @@ export default [
   },
   {
     name: 'Hunting Blades',
+    title: 'AresHomingTrait',
     type: 'secondary',
     icon: 'assets/traits/Artemis_Ares_01.png',
     god: ['Ares', 'Artemis'],
@@ -107,6 +112,7 @@ export default [
   },
   {
     name: 'Lightning Rod',
+    title: 'AmmoBoltTrait',
     type: 'secondary',
     icon: 'assets/traits/Artemis_Zeus_01.png',
     god: ['Artemis', 'Zeus'],
@@ -127,6 +133,7 @@ export default [
   },
   {
     name: 'Lightning Phalanx',
+    title: 'ReboundingAthenaCastTrait',
     type: 'secondary',
     icon: 'assets/traits/Athena_Zeus_01.png',
     god: ['Zeus', 'Athena'],
@@ -156,6 +163,7 @@ export default [
   },
   {
     name: 'Low Tolerance',
+    title: 'DionysusAphroditeStackIncreaseTrait',
     type: 'secondary',
     icon: 'assets/traits/Dionysus_Aphrodite_01.png',
     god: ['Dionysus', 'Aphrodite'],
@@ -180,6 +188,7 @@ export default [
   },
   {
     name: 'Merciful End',
+    title: 'TriggerCurseTrait',
     type: 'secondary',
     icon: 'assets/traits/Athena_Ares_01.png',
     god: ['Ares', 'Athena'],
@@ -201,6 +210,7 @@ export default [
   },
   {
     name: 'Scintillating Feast',
+    title: 'LightningCloudTrait',
     type: 'secondary',
     icon: 'assets/traits/Zeus_Dionysus_01.png',
     god: ['Dionysus', 'Zeus'],
@@ -221,6 +231,7 @@ export default [
   },
   {
     name: 'Parting Shot',
+    title: 'CastBackstabTrait',
     type: 'secondary',
     icon: 'assets/traits/Aphrodite_Athena_01.png',
     god: ['Aphrodite', 'Athena'],
@@ -241,6 +252,7 @@ export default [
   },
   {
     name: 'Sweet Nectar',
+    title: 'ImprovedPomTrait',
     type: 'secondary',
     icon: 'assets/traits/Aphrodite_Poseidon_01.png',
     god: ['Aphrodite', 'Poseidon'],
@@ -257,6 +269,7 @@ export default [
   },
   {
     name: 'Sea Storm',
+    title: 'ImpactBoltTrait',
     type: 'secondary',
     icon: 'assets/traits/Poseidon_Zeus_01.png',
     god: ['Poseidon', 'Zeus'],
@@ -277,6 +290,7 @@ export default [
   },
   {
     name: 'Vengeful Mood',
+    title: 'AutoRetaliateTrait',
     type: 'secondary',
     icon: 'assets/traits/Zeus_Ares_01.png',
     god: ['Ares', 'Zeus'],
@@ -292,6 +306,7 @@ export default [
   },
   {
     name: 'Ice Wine',
+    title: 'IceStrikeArrayTrait',
     type: 'secondary',
     icon: 'assets/traits/Demeter_Dionysus_01.png',
     god: ['Demeter', 'Dionysus'],
@@ -313,6 +328,7 @@ export default [
   },
   {
     name: 'Crystal Clarity',
+    title: 'HomingLaserTrait',
     type: 'secondary',
     icon: 'assets/traits/Demeter_Artemis_01.png',
     god: ['Demeter', 'Artemis'],
@@ -337,6 +353,7 @@ export default [
   },
   {
     name: 'Blizzard Shot',
+    title: 'BlizzardOrbTrait',
     type: 'secondary',
     icon: 'assets/traits/Poseidon_Demeter_01.png',
     god: ['Poseidon', 'Demeter'],
@@ -363,6 +380,7 @@ export default [
   },
   {
     name: 'Cold Fusion',
+    title: 'JoltDurationTrait',
     type: 'secondary',
     icon: 'assets/traits/Demeter_Zeus_01.png',
     god: ['Demeter', 'Zeus'],
@@ -379,6 +397,7 @@ export default [
   },
   {
     name: 'Unshakable Mettle',
+    title: 'StatusImmunityTrait',
     type: 'secondary',
     icon: 'assets/traits/Poseidon_Athena_01.png',
     god: ['Poseidon', 'Athena'],
@@ -402,6 +421,7 @@ export default [
   },
   {
     name: 'Mirage Shot',
+    title: 'ArtemisBonusProjectileTrait',
     type: 'secondary',
     icon: 'assets/traits/Poseidon_Artemis_01.png',
     god: ['Poseidon', 'Artemis'],
@@ -421,6 +441,7 @@ export default [
   },
   {
     name: 'Curse of Drowning',
+    title: 'PoseidonAresProjectileTrait',
     type: 'secondary',
     icon: 'assets/traits/Poseidon_Ares_01.png',
     god: ['Poseidon', 'Ares'],
@@ -450,6 +471,7 @@ export default [
   },
   {
     name: 'Stubborn Roots',
+    title: 'NoLastStandRegenerationTrait',
     type: 'secondary',
     icon: 'assets/traits/Demeter_Athena_01.png',
     god: ['Demeter', 'Athena'],
@@ -466,6 +488,7 @@ export default [
   },
   {
     name: 'Cold Embrace',
+    title: 'SelfLaserTrait',
     type: 'secondary',
     icon: 'assets/traits/Aphrodite_Demeter_01.png',
     god: ['Aphrodite', 'Demeter'],
@@ -488,6 +511,7 @@ export default [
   },
   {
     name: 'Smoldering Air',
+    title: 'RegeneratingCappedSuperTrait',
     type: 'secondary',
     icon: 'assets/traits/Zeus_Aphrodite_01.png',
     god: ['Aphrodite', 'Zeus'],
@@ -507,6 +531,7 @@ export default [
   },
   {
     name: 'Curse of Nausea',
+    title: 'PoisonTickRateTrait',
     type: 'secondary',
     icon: 'assets/traits/Dionysus_Ares_01.png',
     god: ['Dionysus', 'Ares'],
@@ -527,6 +552,7 @@ export default [
   },
   {
     name: 'Calculated Risk',
+    title: 'SlowProjectileTrait',
     type: 'secondary',
     icon: 'assets/traits/Dionysus_Athena_01.png',
     god: ['Athena', 'Dionysus'],
@@ -549,6 +575,7 @@ export default [
   },
   {
     name: 'Freezing Vortex',
+    title: 'StationaryRiftTrait',
     type: 'secondary',
     icon: 'assets/traits/Ares_Demeter_01.png',
     god: ['Ares', 'Demeter'],
@@ -571,8 +598,9 @@ export default [
   },
   {
     name: 'Splitting Headache',
+    title: 'PoisonCritVulnerabilityTrait',
     type: 'secondary',
-    icon: 'assets/traits/Dionyuss_Artemis_01.png',
+    icon: 'assets/traits/Dionysus_Artemis_01.png',
     god: ['Dionysus', 'Artemis'],
     rarity: 5,
     prereqs: {

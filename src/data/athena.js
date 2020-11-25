@@ -23,6 +23,7 @@ export default [
   },
   {
     name: 'Divine Strike',
+    title: 'AthenaWeaponTrait',
     type: 'attack',
     icon: 'assets/traits/Athena_01_Large.png',
     god: 'Athena',
@@ -42,6 +43,7 @@ export default [
   },
   {
     name: 'Divine Flourish',
+    title: 'AthenaSecondaryTrait',
     type: 'special',
     icon: 'assets/traits/Athena_secondary_attack.png',
     god: 'Athena',
@@ -61,6 +63,7 @@ export default [
   },
   {
     name: 'Phalanx Shot',
+    title: 'AthenaRangedTrait',
     type: 'cast',
     icon: 'assets/traits/Athena_02_Large.png',
     god: 'Athena',
@@ -81,6 +84,7 @@ export default [
   },
   {
     name: 'Phalanx Flare',
+    title: 'ShieldLoadAmmo_AthenaRangedTrait',
     type: 'cast',
     icon: 'assets/traits/Athena_02_Large.png',
     god: 'Athena',
@@ -103,6 +107,7 @@ export default [
   },
   {
     name: 'Divine Dash',
+    title: 'AthenaRushTrait',
     type: 'dash',
     icon: 'assets/traits/Athena_03_Large.png',
     god: 'Athena',
@@ -122,6 +127,7 @@ export default [
   },
   {
     name: "Athena's Aid",
+    title: 'AthenaShoutTrait',
     type: 'call',
     icon: 'assets/traits/Athena_04_Large.png',
     god: 'Athena',
@@ -153,6 +159,7 @@ export default [
   },
   {
     name: 'Holy Shield',
+    title: 'AthenaRetaliateTrait',
     type: 'secondary',
     icon: 'assets/traits/Athena_08_Large.png',
     god: 'Athena',
@@ -174,6 +181,7 @@ export default [
   },
   {
     name: 'Bronze Skin',
+    title: 'EnemyDamageTrait',
     type: 'secondary',
     icon: 'assets/traits/Athena_06_Large.png',
     god: 'Athena',
@@ -192,6 +200,7 @@ export default [
   },
   {
     name: 'Sure Footing',
+    title: 'TrapDamageTrait',
     type: 'secondary',
     icon: 'assets/traits/Athena_07_Large.png',
     god: 'Athena',
@@ -210,6 +219,7 @@ export default [
   },
   {
     name: 'Proud Bearing',
+    title: 'PreloadSuperGenerationTrait',
     type: 'secondary',
     icon: 'assets/traits/Athena_13_Large.png',
     god: 'Athena',
@@ -226,6 +236,7 @@ export default [
   },
   {
     name: 'Blinding Flash',
+    title: 'AthenaBackstabDebuffTrait',
     type: 'secondary',
     icon: 'assets/traits/Athena_14_Large.png',
     god: 'Athena',
@@ -248,6 +259,7 @@ export default [
   },
   {
     name: 'Brilliant Riposte',
+    title: 'AthenaShieldTrait',
     type: 'secondary',
     icon: 'assets/traits/Athena_05_Large.png',
     god: 'Athena',
@@ -268,6 +280,7 @@ export default [
   },
   {
     name: 'Deathless Stand',
+    title: 'LastStandDurationTrait',
     type: 'secondary',
     icon: 'assets/traits/Athena_11_Large.png',
     god: 'Athena',
@@ -287,6 +300,7 @@ export default [
   },
   {
     name: 'Last Stand',
+    title: 'LastStandHealTrait',
     type: 'secondary',
     icon: 'assets/traits/Athena_12_Large.png',
     god: 'Athena',
@@ -304,6 +318,7 @@ export default [
   },
   {
     name: 'Divine Protection',
+    title: 'ShieldHitTrait',
     type: 'secondary',
     icon: 'assets/traits/Athena_10_Large.png',
     god: 'Athena',

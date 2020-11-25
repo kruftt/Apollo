@@ -128,6 +128,7 @@ export default {
 
     function selectTrait(trait) {
       document.getElementsByClassName('trait_selector__panel')[0].scrollTop = 0
+
       switch(trait.type) {
         case 'aspect':
           store.weapon = selection.weapon
@@ -139,7 +140,6 @@ export default {
         case 'call':
         case 'primary':
         case 'secondary':
-          trait.sum = computed(() => trait.level + trait.rarity)
           const idx = store.traits.indexOf(store.selected)
           if (idx === -1) store.traits.push(trait)
           else store.traits[idx] = trait

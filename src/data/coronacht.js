@@ -15,6 +15,7 @@ function volley(max_stacks) {
 export default [
   {
     name: 'Coronacht',
+    title: 'BowWeapon',
     description: 'The Heart-Seeking Bow.',
     icon: 'assets/weapons/bow_base_icon.png',
     type: 'weapon',
@@ -22,14 +23,15 @@ export default [
     rarity: -4,
     abilities: [
       { name: 'Fire', type: 'shot', trigger: 'attack', stats: {min: 20, max: 60, backstab: true, pierce: true} },
-      { name: 'Power Shot', type: 'shot', trigger: 'chargeAttack', stats: {duration: 1, min: 70, backstab: true, pierce: true} },
+      { name: 'Power Shot', type: 'shot', trigger: 'chargeAttack', stats: {charge: 1, min: 70, backstab: true, pierce: true} },
       { name: 'Dash Attack', type: 'shot', trigger: 'dashAttack', stats: {min: 20, max: 40, backstab: true, pierce: true} },
-      { name: 'Dash - Power Shot', type: 'shot', trigger: 'dashAttack', stats: {duration: 1, min: 50, backstab: true, pierce: true} },
+      { name: 'Dash - Power Shot', type: 'shot', trigger: 'dashAttack', stats: {charge: 1, min: 50, backstab: true, pierce: true} },
       { name: 'Volley Fire', type: 'volley', trigger: 'special', stats: {min: 10, backstab: true} },
     ],
   },
   {
     name: 'Coronacht - Aspect of Zagreus',
+    title: 'BowBaseUpgradeTrait',
     type: 'aspect',
     weapon: 'Coronacht',
     icon: 'assets/weapons/bow_base_icon.png',
@@ -52,6 +54,7 @@ export default [
   },
   {
     name: 'Coronacht - Aspect of Chiron',
+    title: 'BowMarkHomingTrait', // BowHomingShotTrait
     type: 'aspect',
     weapon: 'Coronacht',
     icon: 'assets/weapons/bow_echantment_1.png',
@@ -67,6 +70,7 @@ export default [
   },
   {
     name: 'Coronacht - Aspect of Hera',
+    title: 'BowLoadAmmoTrait',
     type: 'aspect',
     weapon: 'Coronacht',
     icon: 'assets/weapons/bow_echantment_2.png',
@@ -97,6 +101,7 @@ export default [
   },
   {
     name: 'Coronacht - Aspect of Rama',
+    title: 'BowBondTrait',
     type: 'aspect',
     weapon: 'Coronacht',
     icon: 'assets/weapons/bow_enchantment_3.png',
@@ -113,14 +118,15 @@ export default [
       { name: 'Fire', type: 'shot', trigger: 'attack', stats: {min: 25, max: 120, pierce: true, backstab: true } },
       { name: 'Dash Strike', type: 'shot', trigger: 'dashAttack', stats: { min: 25, max: 80, pierce: true, backstab: true } },
       { name: 'Volley Fire', type: 'volley', trigger: 'special', stats: {min: 5, backstab: true} },
-      { name: 'Power Shot', type: 'shot', trigger: 'chargeAttack', stats: {duration: 2, min: 175, pierce: true, backstab: true} },
-      { name: 'Power Shot - Dash', type: 'shot', trigger: 'chargeAttack', stats: {duration: 2, min: 125, pierce: true, backstab: true} },
+      { name: 'Power Shot', type: 'shot', trigger: 'chargeAttack', stats: {charge: 2, min: 175, pierce: true, backstab: true} },
+      { name: 'Power Shot - Dash', type: 'shot', trigger: 'chargeAttack', stats: {charge: 2, min: 125, pierce: true, backstab: true} },
     ],
     effects: [{ name: 'Shared Suffering', type: 'shared', trigger: 'volley', stats: { shared: [0.30, 0.38, 0.45, 0.53, 0.60] }}],
     mods: [volley(3)],
   },
   {
     name: 'Twin Shot',
+    title: 'BowDoubleShotTrait',
     type: 'hammer',
     icon: 'assets/weapons/bow_double_shot_08.png',
     god: 'Daedalus',
@@ -146,6 +152,7 @@ export default [
   },
   {
     name: 'Sniper Shot',
+    title: 'BowLongRangeDamageTrait',
     type: 'hammer',
     icon: 'assets/weapons/bow_sniper_shot_02.png',
     god: 'Daedalus',
@@ -162,6 +169,7 @@ export default [
   },
   {
     name: 'Explosive Shot',
+    title: 'BowSlowChargeDamageTrait',
     type: 'hammer',
     icon: 'assets/weapons/bow_heavy_charge_03.png',
     god: 'Daedalus',
@@ -178,6 +186,7 @@ export default [
   },
   {
     name: 'Flurry Shot',
+    title: 'BowTapFireTrait',
     type: 'hammer',
     icon: 'assets/weapons/bow_second_shot_15.png',
     god: 'Daedalus',
@@ -193,6 +202,7 @@ export default [
   },
   {
     name: 'Piercing Volley',
+    title: 'BowPenetrationTrait',
     type: 'hammer',
     icon: 'assets/weapons/bow_penetrating_shot_05.png',
     god: 'Daedalus',
@@ -218,6 +228,7 @@ export default [
   },
   {
     name: 'Perfect Shot',
+    title: 'BowPowerShotTrait',
     type: 'hammer',
     icon: 'assets/weapons/bow_perfect_shot_06.png',
     god: 'Daedalus',
@@ -234,6 +245,7 @@ export default [
   },
   {
     name: 'Relentless Volley',
+    title: 'BowSecondaryBarrageTrait',
     type: 'hammer',
     icon: 'assets/weapons/bow_arrow_storm_07.png',
     god: 'Daedalus',
@@ -250,6 +262,7 @@ export default [
   },
   {
     name: 'Triple Shot',
+    title: 'BowTripleShotTrait',
     type: 'hammer',
     icon: 'assets/weapons/bow_fan_shot_09.png',
     god: 'Daedalus',
@@ -267,6 +280,7 @@ export default [
   },
   {
     name: 'Charged Volley',
+    title: 'BowSecondaryChargeTrait',
     type: 'hammer',
     icon: 'assets/weapons/bow_secondary_charge_trait_11.png',
     god: 'Daedalus',
@@ -283,6 +297,7 @@ export default [
   },
   {
     name: 'Chain Shot',
+    title: 'BowChainShotTrait',
     type: 'hammer',
     icon: 'assets/weapons/bow_chain_shot_trait_10.png',
     god: 'Daedalus',
@@ -300,6 +315,7 @@ export default [
   },
   {
     name: 'Point-Blank Shot',
+    title: 'BowCloseAttackTrait',
     type: 'hammer',
     icon: 'assets/weapons/bow_point_blank_16.png',
     god: 'Daedalus',
@@ -317,6 +333,7 @@ export default [
   },
   {
     name: 'Concentrated Volley',
+    title: 'BowConsecutiveBarrageTrait', // BowSecondaryFocusedFireTrait
     type: 'hammer',
     icon: 'assets/weapons/bow_consecutive_barrage_13.png',
     god: 'Daedalus',
@@ -343,6 +360,7 @@ export default [
   },
   {
     name: 'Repulse Shot',
+    title: 'BowBondBoostTrait',
     type: 'hammer',
     icon: 'assets/weapons/bow_rama_14.png',
     god: 'Daedalus',

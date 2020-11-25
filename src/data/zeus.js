@@ -9,10 +9,11 @@ export default [
 
   {
     name: 'Lightning Strike',
+    type: 'attack',
+    title: 'ZeusWeaponTrait',
     description: (stats) =>
       '<div>Your<b>Attack</b>emits chain-lightning when you damage a foe.</div>' +
       `<div>Lightning Damage:<div><span>${fv(stats.min)}</span></div></div>`,
-    type: 'attack',
     god: 'Zeus',
     icon: 'assets/traits/Zeus_04_Large.png',
     rarity: 0,
@@ -29,6 +30,7 @@ export default [
   },
   {
     name: 'Thunder Flourish',
+    title: 'ZeusSecondaryTrait',
     type: 'special',
     icon: 'assets/traits/Zeus_secondary_attack.png',
     god: 'Zeus',
@@ -47,6 +49,7 @@ export default [
   },
   {
     name: 'Electric Shot',
+    title: 'ZeusRangedTrait',
     type: 'cast',
     icon: 'assets/traits/Zeus_05_Large.png',
     god: 'Zeus',
@@ -73,6 +76,7 @@ export default [
   },
   {
     name: 'Thunder Flare',
+    title: 'ShieldLoadAmmo_ZeusRangedTrait',
     type: 'cast',
     icon: 'assets/traits/Zeus_05_Large.png',
     god: 'Zeus',
@@ -92,6 +96,7 @@ export default [
   },
   {
     name: 'Thunder Dash',
+    title: 'ZeusRushTrait',
     type: 'dash',
     icon: 'assets/traits/Zeus_06_Large.png',
     god: 'Zeus',
@@ -110,6 +115,7 @@ export default [
   },
   {
     name: "Zeus' Aid",
+    title: 'ZeusShoutTrait',
     type: 'call',
     icon: 'assets/traits/Zeus_07_Large.png',
     god: 'Zeus',
@@ -137,6 +143,7 @@ export default [
   },
   {
     name: "Heaven's Vengeance",
+    title: 'RetaliateWeaponTrait',
     type: 'secondary',
     icon: 'assets/traits/Zeus_01_Large.png',
     god: 'Zeus',
@@ -155,6 +162,7 @@ export default [
   },
   {
     name: 'Lightning Reflexes',
+    title: 'PerfectDashBoltTrait',
     type: 'secondary',
     icon: 'assets/traits/Zeus_15_Large.png',
     god: 'Zeus',
@@ -173,6 +181,7 @@ export default [
   },
   {
     name: 'Storm Lightning',
+    title: 'ZeusBonusBounceTrait',
     type: 'secondary',
     icon: 'assets/traits/Zeus_03_Large.png',
     god: 'Zeus',
@@ -190,6 +199,7 @@ export default [
   },
   {
     name: 'High Voltage',
+    title: 'ZeusBoltAoETrait',
     type: 'secondary',
     icon: 'assets/traits/Zeus_10_Large.png',
     god: 'Zeus',
@@ -209,6 +219,7 @@ export default [
   },
   {
     name: 'Static Discharge',
+    title: 'ZeusLightningDebuff',
     type: 'secondary',
     icon: 'assets/traits/Zeus_12_Large.png',
     god: 'Zeus',
@@ -235,6 +246,7 @@ export default [
   },
   {
     name: 'Clouded Judgment',
+    title: 'SuperGenerationTrait',
     type: 'secondary',
     icon: 'assets/traits/Zeus_09_Large.png',
     god: 'Zeus',
@@ -256,6 +268,7 @@ export default [
   },
   {
     name: 'Billowing Strength',
+    title: 'OnWrathDamageBuffTrait',
     type: 'secondary',
     icon: 'assets/traits/Zeus_13_Large.png',
     god: 'Zeus',
@@ -275,7 +288,38 @@ export default [
     }],
   },
   {
+    name: 'Double Strike',
+    title: 'ZeusBonusBoltTrait',
+    type: 'secondary',
+    icon: 'assets/traits/Zeus_11_Large.png',
+    god: 'Zeus',
+    rarity: 0,
+    prereqs: { Zeus: ['Thunder Dash', 'Thunder Flourish', "Zeus' Aid"] },
+    description: (stats) =>
+      `<div>Your lightning bolt effects have a chance to strike twice.</div>` +
+      `<div>▶ Strike Chance:<div><span>${ fv(stats.chance) }</span></div></div>`,
+    effects: [
+      {
+        name: 'Double Strike',
+        type: 'doublestrike',
+        trigger: 'bolt',
+        stats: { chance: [0.25, 0.3, 0.35, 0.4] },
+        pom: pom_4,
+      },
+    ],
+    mods: [
+      {
+        name: 'Double Strike',
+        type: 'effect',
+        target: 'bolt',
+        stats: { count: 1 },
+        status: { target: 'foe', name: 'Double Strike', max_stacks: 2 },
+      }
+    ],
+  },
+  {
     name: 'Splitting Bolt',
+    title: 'ZeusChargedBoltTrait',
     type: 'secondary',
     icon: 'assets/traits/Zeus_02_Large.png',
     god: 'Zeus',

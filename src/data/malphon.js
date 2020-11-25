@@ -5,24 +5,26 @@ const malphon_exclusions = [ 'Stygius', 'Aegis', 'Varatha', 'Exagryph', 'Coronac
 export default [
   {
     name: 'Malphon',
+    title: 'FistWeapon',
     description: 'The Twin Fists of Malphon.',
     icon: 'assets/weapons/fist_base_icon.png',
     type: 'weapon',
     exclude: beowolf_traits,
     rarity: -4,
     abilities: [
-      { name: 'Pummel', type: 'damage', trigger: 'attack', stats: {min: 15, backstab: true } },
+      { name: 'Pummel', type: 'damage', trigger: 'attack', stats: { min: 15, backstab: true } },
       { name: 'Dash Strike', type: 'damage', trigger: 'dashAttack', stats: { min: 25, backstab: true } },
-      { name: 'Rising Cutter', type: 'damage', trigger: 'special', stats: {min: 30, max: 30, backstab: true} },
+      { name: 'Rising Cutter', type: 'damage', trigger: 'special', stats: { min: 30, max: 30, backstab: true} },
       { name: 'Dash Upper', type: 'damage', trigger: 'dashSpecial', stats: { min: 40, backstab: true } },
     ],
     mods: [
       { name: 'Combo', type: 'effect', target: ['Pummel', 'Swipe', 'Heavy Knuckle'], stats: { count: 1 }, status: { name: 'Combo', target: 'foe', min_stacks: 1, max_stacks: 5 } },
-      { name: 'Rising Cutter Stacks', type: 'effect', target: ['Rising Cutter', 'Magnetic Cutter'], stats: { count: 1 }, status: { name: 'Cutter Hits', target: 'foe', min_stacks: 1, max_stacks: 2 } },
+      { name: 'Rising Cutter Stacks', type: 'effect', target: ['Rising Cutter', 'Magnetic Cutter', 'Flying Cutter'], stats: { count: 1 }, status: { name: 'Cutter Hits', target: 'foe', min_stacks: 1, max_stacks: 2 } },
     ],
   },
   {
     name: 'Malphon - Aspect of Zagreus',
+    title: 'FistBaseUpgradeTrait',
     type: 'aspect',
     weapon: 'Malphon',
     icon: 'assets/weapons/fist_base_icon.png',
@@ -42,6 +44,7 @@ export default [
   },
   {
     name: 'Malphon - Aspect of Talos',
+    title: 'FistVacuumTrait',
     type: 'aspect',
     weapon: 'Malphon',
     icon: 'assets/weapons/fist_enchantment_2.png',
@@ -73,6 +76,7 @@ export default [
   },
   {
     name: 'Malphon - Aspect of Demeter',
+    title: 'FistWeaveTrait',
     type: 'aspect',
     weapon: 'Malphon',
     icon: 'assets/weapons/fist_enchantment_1.png',
@@ -84,11 +88,12 @@ export default [
       `<div><div>Bonus Special Hits:</div><div><span>${ fv(stats.max_stacks) }</span></div></div>`,
     mods: [
       { name: 'Aspect of Demeter', type: 'effect', target: 'Kinetic Launcher', stats: { count: 1 } },
-      { name: 'Aspect of Demeter', type: 'effect', target: ['Rising Cutter', 'Kinetic Launcher'], stats: {count: 1}, status: {target: 'foe', name: 'Giga Cutter', max_stacks: [1, 2, 3, 4, 5]}},
+      { name: 'Aspect of Demeter', type: 'effect', target: ['Rising Cutter', 'Kinetic Launcher', 'Flying Cutter'], stats: {count: 1}, status: {target: 'foe', name: 'Giga Cutter', max_stacks: [1, 2, 3, 4, 5]}},
     ],
   },
   {
     name: 'Malphon - Aspect of Gilgamesh',
+    title: 'FistDetonateTrait',
     type: 'aspect',
     weapon: 'Malphon',
     icon: 'assets/weapons/fist_enchantment_3.png',
@@ -116,6 +121,7 @@ export default [
   },
   {
     name: 'Breaching Cross',
+    title: 'FistDashAttackHealthBufferTrait',
     type: 'hammer',
     icon: 'assets/weapons/fist_armor_break_01.png',
     god: 'Daedalus',
@@ -141,6 +147,7 @@ export default [
   },
   {
     name: 'Rolling Knuckle',
+    title: 'FistAttackFinisherTrait',
     type: 'hammer',
     icon: 'assets/weapons/fist_reaching_punch_08.png',
     god: 'Daedalus',
@@ -159,6 +166,7 @@ export default [
   },
   {
     name: 'Long Knuckle',
+    title: 'FistReachAttackTrait',
     type: 'hammer',
     icon: 'assets/weapons/fist_light_punch_07.png',
     god: 'Daedalus',
@@ -177,6 +185,7 @@ export default [
   },
   {
     name: 'Draining Cutter',
+    title: 'FistKillTrait',
     type: 'hammer',
     icon: 'assets/weapons/fist_killing_nova_06.png',
     god: 'Daedalus',
@@ -188,6 +197,7 @@ export default [
   },
   {
     name: 'Concentrated Knuckle',
+    title: 'FistConsecutiveAttackTrait',
     type: 'hammer',
     icon: 'assets/weapons/fist_teleport_special_09.png',
     god: 'Daedalus',
@@ -214,6 +224,7 @@ export default [
   },
   {
     name: 'Explosive Upper',
+    title: 'FistDoubleDashSpecialTrait',
     type: 'hammer',
     icon: 'assets/weapons/fist_double_special_03.png',
     god: 'Daedalus',
@@ -232,6 +243,7 @@ export default [
   },
   {
     name: 'Flying Cutter',
+    title: 'FistChargeSpecialTrait',
     type: 'hammer',
     icon: 'assets/weapons/fist_uppercut_special_11.png',
     god: 'Daedalus',
@@ -245,6 +257,7 @@ export default [
   },
   {
     name: 'Rush Kick',
+    title: 'FistTeleportSpecialTrait',
     type: 'hammer',
     icon: 'assets/weapons/fist_kicking_special_05.png',
     god: 'Daedalus',
@@ -259,6 +272,7 @@ export default [
   },
   {
     name: 'Quake Cutter',
+    title: 'FistSpecialLandTrait',
     type: 'hammer',
     icon: 'assets/weapons/fist_vacuum_special_12.png',
     god: 'Daedalus',
@@ -273,6 +287,7 @@ export default [
   },
   {
     name: 'Kinetic Launcher',
+    title: 'FistSpecialFireballTrait',
     type: 'hammer',
     icon: 'assets/weapons/fist_throwing_special_10.png',
     god: 'Daedalus',
@@ -289,6 +304,7 @@ export default [
   },
   {
     name: 'Heavy Knuckle',
+    title: 'FistHeavyAttackTrait',
     type: 'hammer',
     icon: 'assets/weapons/fist_knuckle_13.png',
     god: 'Daedalus',
@@ -305,6 +321,7 @@ export default [
   },
   {
     name: 'Colossus Knuckle',
+    title: 'FistAttackDefenseTrait',
     type: 'hammer',
     icon: 'assets/weapons/fist_armor_knuckle_14.png',
     god: 'Daedalus',
@@ -329,6 +346,7 @@ export default [
   },
   {
     name: 'Rending Claws',
+    title: 'FistDetonateBoostTrait',
     type: 'hammer',
     icon: 'assets/weapons/fist_gilgamesh_02.png',
     god: 'Daedalus',
@@ -354,4 +372,4 @@ export default [
       },
     ],
   },
-]
+]//FistAttackFinisherTrait

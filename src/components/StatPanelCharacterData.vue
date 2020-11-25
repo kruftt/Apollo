@@ -137,7 +137,7 @@ export default {
     const character = props.character
     const stepDown = (status_key) => character.status[status_key] -= (character.status[status_key] > (character[`min_${status_key}`] || 0)) ? 1 : 0
     const stepUp = (status_key) => character.status[status_key] += (character.status[status_key] < character[`max_${status_key}`]) ? 1 : 0
-    const mirror_active = ref(true)
+    const mirror_active = ref(false)
     function scrollStacks(e, status_key) {
       if (e.wheelDelta > 0) stepUp(status_key)
       else stepDown(status_key)

@@ -19,6 +19,7 @@ export default [
   },
   {
     name: 'Drunken Strike',
+    title: 'DionysusWeaponTrait',
     type: 'attack',
     icon: 'assets/traits/Dionysus_01_Large.png',
     god: 'Dionysus',
@@ -31,6 +32,7 @@ export default [
   },
   {
     name: 'Drunken Flourish',
+    title: 'DionysusSecondaryTrait',
     type: 'special',
     icon: 'assets/traits/Dionysus_secondary_attack.png',
     god: 'Dionysus',
@@ -43,6 +45,7 @@ export default [
   },
   {
     name: 'Trippy Shot',
+    title: 'DionysusRangedTrait',
     type: 'cast',
     icon: 'assets/traits/Dionysus_02_Large.png',
     god: 'Dionysus',
@@ -68,6 +71,7 @@ export default [
   },
   {
     name: 'Trippy Flare',
+    title: 'ShieldLoadAmmo_DionysusRangedTrait',
     type: 'cast',
     icon: 'assets/traits/Dionysus_02_Large.png',
     god: 'Dionysus',
@@ -94,6 +98,7 @@ export default [
   },
   {
     name: 'Drunken Dash',
+    title: 'DionysusRushTrait',
     type: 'dash',
     icon: 'assets/traits/Dionysus_03_Large.png',
     god: 'Dionysus',
@@ -111,6 +116,7 @@ export default [
   },
   {
     name: "Dionysus' Aid",
+    title: 'DionysusShoutTrait',
     type: 'call',
     icon: 'assets/traits/Dionysus_04_Large.png',
     god: 'Dionysus',
@@ -137,6 +143,7 @@ export default [
   },
   {
     name: 'After Party',
+    title: 'DoorHealTrait',
     type: 'secondary',
     icon: 'assets/traits/Dionysus_10_Large.png',
     god: 'Dionysus',
@@ -155,6 +162,7 @@ export default [
   },
   {
     name: 'Positive Outlook',
+    title: 'LowHealthDefenseTrait',
     type: 'secondary',
     icon: 'assets/traits/Dionysus_12_Large.png',
     god: 'Dionysus',
@@ -174,6 +182,7 @@ export default [
   },
   {
     name: 'Premium Vintage',
+    title: 'GiftHealthTrait',
     type: 'secondary',
     icon: 'assets/traits/Dionysus_05_Large.png',
     god: 'Dionysus',
@@ -193,6 +202,7 @@ export default [
   },
   {
     name: 'Strong Drink',
+    title: 'FountainDamageBonusTrait',
     type: 'secondary',
     icon: 'assets/traits/Dionysus_13_Large.png',
     god: 'Dionysus',
@@ -214,6 +224,7 @@ export default [
   },
   {
     name: 'Bad Influence',
+    title: 'DionysusPoisonPowerTrait',
     type: 'secondary',
     icon: 'assets/traits/Dionysus_09_Large.png',
     god: 'Dionysus',
@@ -235,6 +246,7 @@ export default [
   },
   {
     name: 'Numbing Sensation',
+    title: 'DionysusSlowTrait',
     type: 'secondary',
     icon: 'assets/traits/Dionysus_06_Large.png',
     god: 'Dionysus',
@@ -255,6 +267,7 @@ export default [
   },
   {
     name: 'Peer Pressure',
+    title: 'DionysusSpreadTrait',
     type: 'secondary',
     icon: 'assets/traits/Dionysus_07_Large.png',
     god: 'Dionysus',
@@ -274,6 +287,7 @@ export default [
   },
   {
     name: 'High Tolerance',
+    title: 'DionysusDefenseTrait',
     type: 'secondary',
     icon: 'assets/traits/Dionysus_11_Large.png',
     god: 'Dionysus',
@@ -294,6 +308,7 @@ export default [
   },
   {
     name: 'Black Out',
+    title: 'DionysusComboVulnerability',
     type: 'secondary',
     icon: 'assets/traits/Dionysus_08_Large.png',
     god: 'Dionysus',

@@ -50,13 +50,13 @@ export default {
       slicedTraits: computed(() => {
         const result = []
         let index = 0
-        let offset = 6
+        let offset = 5
         while (index < store.traits.length) {
+          offset == 6 ? offset = 5 : offset = 6
           result.push(store.traits.slice(index, index + offset))
           index = index + offset
-          offset == 6 ? offset = 5 : offset = 6
         }
-        if (store.traits.length % 5.5 < 1) result.push([])
+        if ((store.traits.length  % 5.5) < 1) result.push([])
         return result
       })
     }

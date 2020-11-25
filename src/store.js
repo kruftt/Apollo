@@ -1,4 +1,4 @@
-import { reactive, watch, ref, computed } from 'vue'
+import { reactive, watch, ref, computed, nextTick } from 'vue'
 import { data, copyEffect } from './data/index.js'
 
 const status_curses = 'JoltedHangoverWeakMarkedExposedChillRuptureDoom'
@@ -16,11 +16,13 @@ const watchPrereqs = (prereqs) =>
   }, {})
 
 const traits_by_id = {}
+const traits_by_title = {}
 // Make trait data reactive and add inclusion/exlusion properties
 const trait_data = data.traits.map((t, i) => {
   const trait = reactive(t)
   trait.id = formatId(i)
   traits_by_id[trait.id] = trait
+  trait.title && (traits_by_title[trait.title] = trait)
   const prereqs = t.prereqs
   trait.prereqs = (prereqs)
     ? Object.keys(prereqs).reduce((p, k) => {
@@ -134,27 +136,49 @@ const mirror = reactive({
   privilege: { selection: 0, rank: 1 },
 })
 
-const traits = reactive([
-  selectTrait({ name: 'base', type: 'attack' }),
-  selectTrait({ name: 'base', type: 'special' }),
-  selectTrait({ name: 'base', type: 'cast' }),
-  selectTrait({ name: 'base', type: 'dash' }),
-  selectTrait({ name: 'base', type: 'call' }),
-  selectTrait({ name: 'base', type: 'keepsake' }),
-  selectTrait({ weapon: 'Stygius', name: 'Stygius - Aspect of Zagreus' }),
-])
-
 const store = reactive({
   placeholder: data.placeholder,
   hover: null,
   selected: null,
   mirror,
-  traits,
   weapon: selectTrait({ name: 'Stygius' }),
   player,
   foe,
 })
 
+function resetTraits(store) {
+  store.weapon = selectTrait({ name: 'Stygius' })
+  store.traits = [
+    selectTrait({ name: 'base', type: 'attack' }),
+    selectTrait({ name: 'base', type: 'special' }),
+    selectTrait({ name: 'base', type: 'cast' }),
+    selectTrait({ name: 'base', type: 'dash' }),
+    selectTrait({ name: 'base', type: 'call' }),
+    selectTrait({ name: 'base', type: 'keepsake' }),
+    selectTrait({ weapon: 'Stygius', name: 'Stygius - Aspect of Zagreus' }),
+  ]
+}
+
+function addTrait(store, trait) {
+  // weapon, aspect, hammer, attack, special, dash, cast, call, secondary
+  const _traits = store.traits
+  switch (trait.type) {
+    // case 'weapon': store.weapon = trait; break
+    case 'attack': _traits.splice(0, 1, trait); break
+    case 'special': _traits.splice(1, 1, trait); break
+    case 'cast': _traits.splice(2, 1, trait); break
+    case 'dash': _traits.splice(3, 1, trait); break
+    case 'call': _traits.splice(4, 1, trait); break
+    case 'keepsake': _traits.splice(5, 1, trait); break
+    case 'aspect':
+      store.weapon = selectTrait({ name: trait.weapon })
+      _traits.splice(_traits.indexOf(filterObjects(_traits, { type: 'aspect' })[0]), 1, trait)
+      break
+    case 'hammer':
+    case 'secondary': _traits.push(trait); break
+    default: console.warn('Unhandled addTrait:', trait); break
+  }
+}
 
 function extractTraitData(build, trait_data, build_data, god, rarity, level, overwrite) {
   if (trait_data === undefined) return  // trait_data = abilties[] / effects[] / mods[]
@@ -247,7 +271,7 @@ function applyStatus(build, effect_or_mod) {
   const target = status.target
   const build_char = build[target]
   const stats = effect_or_mod.stats
-  build_char.status[name] = null  // signal to initialize to 0 or maintain current value
+  build_char.status[name] = null  // signal to initialize or maintain current value
 
   // max_[key] for interface if you get max_stacks...
   const max_stacks = (status.max_stacks === undefined)
@@ -257,7 +281,6 @@ function applyStatus(build, effect_or_mod) {
   if (!isNaN(max_stacks)) {
     const key = `max_${name}`
     build_char[key] = Math.max((build_char[key] || 0), (max_stacks || 0))
-
     if (!status.max_stacks) status.max_stacks = max_stacks // (passthrough if 0)
   }
   const min_stacks = status.min_stacks
@@ -269,6 +292,7 @@ function applyStatus(build, effect_or_mod) {
 
   let status_value = (store[target].status[name] || 0) // undefined, boolean, number, ref?
   if (status_value < min_stacks) status_value = store[target].status[name] = min_stacks
+  // if (status_value < min_stacks) status_value = store[target].status[name] = max_stacks
 
   return !!status_value
 }
@@ -638,6 +662,7 @@ function computeDamageValues(build, effect) {
   }
 }
 
+
 // e.g. target: store.player, source: build.player
 function syncObjectChanges(target, source) {
   let key
@@ -649,7 +674,7 @@ function syncObjectChanges(target, source) {
     if (typeof tvalue === 'object') {
       syncObjectChanges(tvalue, svalue)
     } else if (svalue === null) {
-      if (tvalue === undefined) target[key] = 0
+      if (tvalue === undefined) target[key] = 0 // pull max_{NAME} instead
       else continue
     } else if (tvalue !== svalue) {
       target[key] = svalue
@@ -662,8 +687,26 @@ function syncObjectChanges(target, source) {
 }
 
 let stopWatch = () => null
+let resumeWatch = () => {
+  stopWatch = watch(
+    [store.mirror, store.traits, store.player.status, store.foe.status],
+    () => { compileBuild() },
+    { deep: true }
+  )
+}
+
+const sortable_traits = 'secondaryaspecthammer'
+const temp = 'Temporary'
+const trait_cmp = (a,b) => {
+  const a_priority = !!((sortable_traits.indexOf(a.type) === -1) || (a.title && (a.title.substr(0,9) === temp)))
+  const b_priority = !!((sortable_traits.indexOf(b.type) === -1) || (b.title && (b.title.substr(0,9) === temp)))
+  return b_priority - a_priority
+}
+
 function compileBuild() {
   stopWatch()
+  nextTick(resumeWatch)
+
   const _data = data
   const crit = Object.create(_data.crit)
   crit.stats = { ...crit.stats }
@@ -696,6 +739,7 @@ function compileBuild() {
     exclude: { base: true },
   }
 
+  const traits = store.traits.sort(trait_cmp)
   for (const trait_list of [
     [ store.weapon ],
     filterObjects(traits, { type: 'cast' }),
@@ -802,17 +846,16 @@ function compileBuild() {
   // Update dynamic character stats
   build.player.stats.dodge += (build.coefficients.dodge + build.foe.dodge + build.player.dodge)
   build.player.stats.reduction += (build.coefficients.reduction + build.foe.reduction + build.player.dodge)
+  // syncStatusChanges(foe.status, build.foe.status, build.foe)
   syncObjectChanges(player, build.player)
   syncObjectChanges(foe, build.foe)
 
   // Set max casts to ammo
   // foe['max_Casts'] = build.player.stats.ammo
 
+  store.build = build
   window.location.hash = genHash(store)
-  stopWatch = watch([store.mirror, store.traits, store.player.status, store.foe.status],
-    () => { store.build = compileBuild() },
-    { deep: true }
-  )
+  // console.log('finished compilebuild')
   return build
 }
 
@@ -846,7 +889,7 @@ function genHash(store) {
     const ability = mirror[k]
     out.push(formatValue((ability.selection) ? (18 * (ability.selection - 1)) + ability.rank : 0))
   }
-  out.push(store.weapon.id)
+  // out.push(store.weapon.id)
   for (const trait of traits) {
     out.push(trait.id)
     if (typeof trait.level === 'number') out.push(Math.min(35, trait.level).toString(36))
@@ -855,7 +898,9 @@ function genHash(store) {
   return out.join('')
 }
 
-function applyHash(store, selectTrait) {
+function applyHash() {
+  const _store = store
+  resetTraits(_store)
   const hash = window.location.hash.substr(1)
   if (!hash) return
 
@@ -868,16 +913,9 @@ function applyHash(store, selectTrait) {
     ability.rank = Math.max(1, (input % 18))
   }
 
-  // store.weapon = selectTrait({ id: hash.slice(i,(i+=2)) })
-  store.weapon = wrapTrait(traits_by_id[hash.slice(i,(i+=2))])
-
-  // const _traits = []
-  const _traits = traits
-  _traits.length = 0
   let t, l, r
   while (i < hash.length) {
     // two characters for trait
-    // t = selectTrait({ id: hash.slice(i,(i+=2)) })
     t = wrapTrait(traits_by_id[hash.slice(i,(i+=2))])
     l = r = null
     const lv = t.level
@@ -885,69 +923,144 @@ function applyHash(store, selectTrait) {
       t.level = parseInt(hash.slice(i++,i), 36)
     }
     const rv = t.rarity
-    if (rv > -1 && rv < 5) {
+    if (rv > -1) {
       t.rarity = parseInt(hash.slice(i++,i), 36)
     }
-    _traits.push(t)
+
+    addTrait(_store, t)
   }
-  // store.traits = traits
 }
 
 
 const socket = ref(null)
+window.socket = socket
 const connection_status = ref('disconnected')
+let apollo_live_callback = (payload) => console.log('ApolloLive:', payload)
 
 const search = function () {
-  connection_status.value = 'searching'
+  connection_status.value = 'scanning'
   const _socket = socket.value = new WebSocket("ws://localhost:55666", 'Apollo');
   _socket.addEventListener('message', message_cb)
   _socket.addEventListener('open', open_cb)
   _socket.addEventListener('close', close_cb)
+  _socket.addEventListener('error', error_cb)
 }
 
 let searching = false
-const open_cb = function () {
-  connection_status.value = 'connected'
-  console.log('connected to ApolloLive')
-}
-const close_cb = function () {
-  connection_status.value = 'disconnected';
-  console.log('diconnected from ApolloLive')
-  if (searching) {
-    search()
-  }
-}
-
-const message_cb = function (event) {
-  console.log('ApolloLive: ', JSON.parse(event.data).nil);
-}
-
 function toggle_connection () {
   searching = !searching
   if (searching) {
     search()
   } else {
+    connection_status.value = 'disconnecting';
     socket.value.close()
   }
-
-
-  // let _socket = socket.value
-  // if (!_socket || _socket.readyState === 3) {
-  //   attempt_connection()
-  // } else if (_socket.readyState === 1) {
-  //   _socket.close()
-  // }
 }
 
-window.store = store
+const open_cb = function () {
+  connection_status.value = 'connected';
+  // searching = true
+}
+const close_cb = function () {
+  connection_status.value = 'disconnected';
+  if (searching) {
+    search()
+  }
+}
+const error_cb = function (e) {}
 
-applyHash(store, selectTrait)
-store.build = compileBuild()
+const message_cb = function (event) {
+  const data = JSON.parse(event.data).nil;
+  if (!data) return
+  if (data.type !== 'apollo') return apollo_live_callback(data.payload)
+  // apollo_live_callback(data.payload)
+  const build_data = data.payload
+  const store_mirror = mirror
+  const build_mirror = build_data.mirror
+  let key, value
+  for (key in build_mirror) {
+    value = build_mirror[key]
+    switch (key) {
+      case 'Ammo': store_mirror.soul = { selection: 1, rank: value }; break
+      case 'Backstab': store_mirror.presence = { selection: 1, rank: value }; break
+      // case 'DoorHeal': store_mirror.soul = { selection: 1, rank: value }; break
+      // case 'EpicBoonDrop': store_mirror.soul = { selection: 1, rank: value }; break
+      // case 'ExtraChance': store_mirror.soul = { selection: 1, rank: value }; break
+      case 'Health': store_mirror.skin = { selection: 1, rank: value }; break
+      // case 'Money': store_mirror.soul = { selection: 1, rank: value }; break
+      // case 'RareBoonDrop': store_mirror.soul = { selection: 1, rank: value }; break
+      // case 'Reroll': store_mirror.soul = { selection: 1, rank: value }; break store_mirror.soul = { selection: 1, rank: value }; break
+      case 'Stamina': store_mirror.reflex = { selection: 1, rank: value }; break
+      case 'StoredAmmoVulnerability': store_mirror.blood = { selection: 1, rank: value }; break
+      case 'VulnerabilityEffectBonus': store_mirror.privilege = { selection: 1, rank: value }; break
+      // case 'DarknessHeal': store_mirror.privilege = { selection: 2, rank: value }; break
+      // case 'DuoRarityBoonDrop': store_mirror.privilege = { selection: 2, rank: value }; break
+      // case 'ExtraChanceReplenish': store_mirror.privilege = { selection: 2, rank: value }; break
+      case 'FirstStrike': store_mirror.presence = { selection: 2, rank: value }; break
+      case 'GodEnhancement': store_mirror.privilege = { selection: 2, rank: value }; break
+      case 'HighHealthDamage': store_mirror.skin = { selection: 2, rank: value }; break
+      // case 'Interest': store_mirror.privilege = { selection: 2, rank: value }; break
+      case 'PerfectDash': store_mirror.reflex = { selection: 2, rank: value }; break
+      case 'ReloadAmmo': store_mirror.soul = { selection: 2, rank: value }; break
+      // case 'RerollPanel': store_mirror.privilege = { selection: 2, rank: value }; break
+      // case 'RunProgressReward': store_mirror.privilege = { selection: 2, rank: value }; break
+      case 'StoredAmmoSlow': store_mirror.blood = { selection: 2, rank: value }; break
+      default: break
+    }
+  }
+
+  resetTraits(store)
+  const traits_data = build_data.traits
+  const tbt = traits_by_title
+  let trait_data, title
+  for (let i = 0; (trait_data = traits_data[i]); i++) {  // for (key in traits_data)
+
+    title = (trait_data.title.substr(0,5) === 'Chaos')
+      ? /^(.+?)\d+$/.exec(trait_data.title)[1]
+      : trait_data.title
+
+    let trait = tbt[title]
+    if (!trait) continue
+    trait = wrapTrait(trait)
+
+    if (trait_data.level) {
+      if (typeof trait.level === 'number') {
+        trait.level = trait_data.level
+      } else {
+        if (trait.title.substr(0,9) === 'Temporary') {
+          for (let i = 1; i < trait_data.level; i++)
+            addTrait(store, trait)
+        }
+      }
+    }
+
+    if (trait_data.rarity) {
+      switch (trait_data.rarity) {
+        case 'Common': trait.rarity = 0; break
+        case 'Rare': trait.rarity = 1; break
+        case 'Epic': trait.rarity = 2; break
+        case 'Heroic': trait.rarity = 3; break
+        case 'Legendary': trait.rarity = 4; break
+        case 'Duo': trait.rarity = 5; break // Correct name?
+        default: console.warn('unhandled rarity:', trait_data.rarity); break
+      }
+    }
+    addTrait(store, trait)
+  }
+
+  compileBuild()
+  player.stats.health = build_data.maxHealth
+}
+
+applyHash()
+compileBuild()
 store.genHash = genHash
 store.selectTrait = selectTrait
 store.filterTraits = filterTraits
 store.toggle_connection = toggle_connection
 store.connection_status = connection_status
-
+window.addEventListener('hashchange', applyHash)
+window.store = store
+window.ApolloLive = { setListener: (cb) => (typeof cb === 'function') ? (apollo_live_callback = cb) : 0 }
 export const useStore = () => store
 export default useStore

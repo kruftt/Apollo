@@ -8,6 +8,7 @@ export default [
   },
   {
     name: 'Tempest Strike',
+    title: 'PoseidonWeaponTrait',
     type: 'attack',
     icon: 'assets/traits/Poseidon_01_Large.png',
     god: 'Poseidon',
@@ -26,6 +27,7 @@ export default [
   },
   {
     name: 'Tempest Flourish',
+    title: 'PoseidonSecondaryTrait',
     type: 'special',
     icon: 'assets/traits/Poseidon_secondary_attack.png',
     god: 'Poseidon',
@@ -44,6 +46,7 @@ export default [
   },
   {
     name: 'Flood Shot',
+    title: 'PoseidonRangedTrait',
     type: 'cast',
     icon: 'assets/traits/Poseidon_02_Large.png',
     god: 'Poseidon',
@@ -57,6 +60,7 @@ export default [
   },
   {
     name: 'Flood Flare',
+    title: 'ShieldLoadAmmo_PoseidonRangedTrait',
     type: 'cast',
     icon: 'assets/traits/Poseidon_02_Large.png',
     god: 'Poseidon',
@@ -70,6 +74,7 @@ export default [
   },
   {
     name: 'Tidal Dash',
+    title: 'PoseidonRushTrait',
     type: 'dash',
     icon: 'assets/traits/Poseidon_03_Large.png',
     god: 'Poseidon',
@@ -88,6 +93,7 @@ export default [
   },
   {
     name: "Poseidon's Aid",
+    title: 'PoseidonShoutTrait',
     type: 'call',
     icon: 'assets/traits/Poseidon_04_Large.png',
     god: 'Poseidon',
@@ -115,6 +121,7 @@ export default [
   },
   {
     name: "Typhoon's Fury",
+    title: 'BonusCollisionTrait',
     type: 'secondary',
     icon: 'assets/traits/Poseidon_05_Large.png',
     god: 'Poseidon',
@@ -134,6 +141,7 @@ export default [
   },
   {
     name: 'Hydraulic Might',
+    title: 'EncounterStartOffenseBuffTrait',
     type: 'secondary',
     icon: 'assets/traits/Poseidon_14_Large.png',
     god: 'Poseidon',
@@ -153,6 +161,7 @@ export default [
   },
   {
     name: "Ocean's Bounty",
+    title: 'RoomRewardBonusTrait',
     type: 'secondary',
     icon: 'assets/traits/Poseidon_09_Large.png',
     god: 'Poseidon',
@@ -173,6 +182,7 @@ export default [
   },
   {
     name: 'Sunken Treasure',
+    title: 'PoseidonPickedUpMinorLootTrait',
     type: 'secondary',
     icon: 'assets/traits/Poseidon_06_Large.png',
     god: 'Poseidon',
@@ -182,6 +192,7 @@ export default [
   },
   {
     name: 'Razor Shoals',
+    title: 'SlipperyTrait',
     type: 'secondary',
     icon: 'assets/traits/Poseidon_11_Large.png',
     god: 'Poseidon',
@@ -203,6 +214,7 @@ export default [
   },
   {
     name: 'Boiling Point',
+    title: 'DefensiveSuperGenerationTrait',
     type: 'secondary',
     icon: 'assets/traits/Poseidon_10_Large.png',
     god: 'Poseidon',
@@ -224,6 +236,7 @@ export default [
   },
   {
     name: 'Breaking Wave',
+    title: 'SlamExplosionTrait',
     type: 'secondary',
     icon: 'assets/traits/Poseidon_08_Large.png',
     god: 'Poseidon',
@@ -243,6 +256,7 @@ export default [
   },
   {
     name: 'Wave Pounding',
+    title: 'BossDamageTrait',
     type: 'secondary',
     icon: 'assets/traits/Poseidon_12_Large.png',
     god: 'Poseidon',
@@ -265,6 +279,7 @@ export default [
   },
   {
     name: 'Rip Current',
+    title: 'PoseidonShoutDurationTrait',
     type: 'secondary',
     icon: 'assets/traits/Poseidon_15_Large.png',
     god: 'Poseidon',
@@ -286,6 +301,7 @@ export default [
   },
   {
     name: 'Huge Catch',
+    title: 'FishingTrait',
     type: 'secondary',
     icon: 'assets/traits/Poseidon_13_Large.png',
     god: 'Poseidon',
@@ -306,6 +322,7 @@ export default [
   },
   {
     name: 'Second Wave',
+    title: 'DoubleCollisionTrait',
     type: 'secondary',
     icon: 'assets/traits/Poseidon_07_Large.png',
     god: 'Poseidon',
