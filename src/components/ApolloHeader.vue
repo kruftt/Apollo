@@ -2,7 +2,7 @@
   <div id="header_bar">
     <img id="header_bar__image" src="/assets/gods/Apollo.png" />
     <div id="header_bar__title" class="noselect">
-      <h2 id="header_bar__name">Apollo <span class="alpha">&nbsp;alpha&nbsp;</h2>
+      <h2 id="header_bar__name">Apollo <span class="alpha">&nbsp;alpha&nbsp;</span></h2>
       <div id="apollo_live" @click="store.toggle_connection">
         <div id="apollo_live__dot" :class="'apollo_live__dot--' + store.connection_status" />
         <div id="apollo_live__label">&nbsp;Live</div>
