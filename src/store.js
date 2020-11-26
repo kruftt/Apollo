@@ -854,7 +854,9 @@ function compileBuild() {
   // foe['max_Casts'] = build.player.stats.ammo
 
   store.build = build
+  // window.removeEventListener('hashchange', applyHash)
   window.location.hash = genHash(store)
+  // window.addEventListener('hashchange', applyHash)
   // console.log('finished compilebuild')
   return build
 }
@@ -1059,7 +1061,7 @@ store.selectTrait = selectTrait
 store.filterTraits = filterTraits
 store.toggle_connection = toggle_connection
 store.connection_status = connection_status
-window.addEventListener('hashchange', applyHash)
+// window.addEventListener('hashchange', applyHash)
 window.store = store
 window.ApolloLive = { setListener: (cb) => (typeof cb === 'function') ? (apollo_live_callback = cb) : 0 }
 export const useStore = () => store
